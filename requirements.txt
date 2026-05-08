@@ -1,0 +1,18 @@
+# Extração de texto/OCR
+PyMuPDF>=1.27.0
+pytesseract>=0.3.13
+Pillow>=12.0.0
+
+# Upload Supabase / HTTP
+requests>=2.33.0
+
+# Utilitários
+python-dotenv>=1.2.0
+
+# Nota: Tesseract-OCR deve estar instalado separadamente
+# Download: https://github.com/UB-Mannheim/tesseract/wiki
+# tessdata (por.traineddata): https://github.com/tesseract-ocr/tessdata
+#
+# Variáveis necessárias no .env ou diretamente no script:
+#   SUPABASE_URL=https://<projeto>.supabase.co
+#   SUPABASE_SERVICE_ROLE_KEY=<service_role_key>

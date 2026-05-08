@@ -1,0 +1,36 @@
+# Arquivos sensiveis - NUNCA commitar
+HENRYJR_CREDENCIAIS.txt
+chaves-projeto.txt
+*.key
+*.secret
+.env
+.env.*
+
+# Dados grandes - ficam no Supabase Storage
+dados/PROVAS/
+dados/imagens/
+dados/texto_bruto/
+
+# Arquivos temporarios/debug
+debug_*.txt
+*.output
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Debug e temporarios
+debug_*.jpg
+texto_bruto_amostra.json
+DADOS/
+.claude/

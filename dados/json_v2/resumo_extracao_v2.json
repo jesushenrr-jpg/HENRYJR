@@ -1,0 +1,110 @@
+{
+  "total_geral": 2700,
+  "por_ano": [
+    {
+      "ano": "2009",
+      "total": 180,
+      "completas": 179,
+      "com_gabarito": 180,
+      "com_imagem": 115
+    },
+    {
+      "ano": "2011",
+      "total": 180,
+      "completas": 173,
+      "com_gabarito": 180,
+      "com_imagem": 121
+    },
+    {
+      "ano": "2012",
+      "total": 180,
+      "completas": 180,
+      "com_gabarito": 180,
+      "com_imagem": 70
+    },
+    {
+      "ano": "2013",
+      "total": 180,
+      "completas": 179,
+      "com_gabarito": 180,
+      "com_imagem": 69
+    },
+    {
+      "ano": "2014",
+      "total": 180,
+      "completas": 180,
+      "com_gabarito": 180,
+      "com_imagem": 75
+    },
+    {
+      "ano": "2015",
+      "total": 180,
+      "completas": 180,
+      "com_gabarito": 180,
+      "com_imagem": 57
+    },
+    {
+      "ano": "2016",
+      "total": 180,
+      "completas": 178,
+      "com_gabarito": 180,
+      "com_imagem": 72
+    },
+    {
+      "ano": "2017",
+      "total": 180,
+      "completas": 178,
+      "com_gabarito": 180,
+      "com_imagem": 51
+    },
+    {
+      "ano": "2018",
+      "total": 180,
+      "completas": 179,
+      "com_gabarito": 179,
+      "com_imagem": 88
+    },
+    {
+      "ano": "2019",
+      "total": 180,
+      "completas": 179,
+      "com_gabarito": 180,
+      "com_imagem": 53
+    },
+    {
+      "ano": "2020",
+      "total": 180,
+      "completas": 174,
+      "com_gabarito": 178,
+      "com_imagem": 53
+    },
+    {
+      "ano": "2021",
+      "total": 180,
+      "completas": 174,
+      "com_gabarito": 179,
+      "com_imagem": 43
+    },
+    {
+      "ano": "2022",
+      "total": 180,
+      "completas": 179,
+      "com_gabarito": 179,
+      "com_imagem": 55
+    },
+    {
+      "ano": "2023",
+      "total": 180,
+      "completas": 177,
+      "com_gabarito": 179,
+      "com_imagem": 44
+    },
+    {
+      "ano": "2024",
+      "total": 180,
+      "completas": 179,
+      "com_gabarito": 179,
+      "com_imagem": 180
+    }
+  ]
+}

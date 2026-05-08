@@ -1,0 +1,3411 @@
+[
+  {
+    "numero": 1,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Charge anônima. BURKE, P.",
+    "alternativas": {
+      "A": "a humanidade do rei, pois retrata um homem comum, sem os adornos próprios à vestimenta real.",
+      "B": "a unidade entre o público e o privado, pois a figura do rei com a vestimenta real representa o público e sem a vestimenta real, o privado.",
+      "C": "o vínculo entre monarquia e povo, pois leva ao conhecimento do público a figura de um rei despretensioso e distante do poder político.",
+      "D": "o gosto estético refinado do rei, pois evidencia a elegância dos trajes reais em relação aos de outros membros da corte.",
+      "E": "a importância da vestimenta para a constituição simbólica do rei, pois o corpo político adornado esconde os defeitos do corpo pessoal."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q001_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 2,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Esclarecimento é a saída do homem de sua menoridade, da qual ele próprio é culpado.",
+    "alternativas": {
+      "A": "a reivindicação de autonomia da capacidade racional como expressão da maioridade.",
+      "B": "o exercício da racionalidade como pressuposto menor diante das verdades eternas.",
+      "C": "a imposição de verdades matemáticas, com caráter objetivo, de forma heterônoma.",
+      "D": "a compreensão de verdades religiosas que libertam o homem da falta de entendimento.",
+      "E": "a emancipação da subjetividade humana de ideologias produzidas pela própria razão. *AZUL75SAB1* CH - 1º dia | Caderno 1 - AZUL - Página 2"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q002_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 3,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Texto I O que vemos no país é uma espécie de espraiamento e a manifestação da agressividade através da violência. Isso se desdobra de maneira evidente na criminalidade, que está presente em todos os redutos — seja nas áreas abandonadas pelo poder público, seja na política ou no futebol. O brasileiro não é mais violento do que outros povos, mas a fragilidade do exercício e do reconhecimento da cidadania e a ausência do Estado em vários territórios do país se impõem como um caldo de cultura no qual a agressividade e a violência fincam suas raízes. Entrevista com Joel Birman.",
+    "alternativas": {
+      "A": "incompatibilidade entre os modos democráticos de convívio social e a presença de aparatos de controle policial.",
+      "B": "manutenção de práticas repressivas herdadas dos períodos ditatoriais sob a forma de leis e atos administrativos.",
+      "C": "inabilidade das forças militares em conter a violência decorrente das ondas migratórias nas grandes cidades brasileiras.",
+      "D": "dificuldade histórica da sociedade brasileira em institucionalizar formas de controle social compatíveis com valores democráticos.",
+      "E": "incapacidade das instituições político-legislativas em formular mecanismos de controle social específicos à realidade social brasileira."
+    },
+    "gabarito": "D",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 4,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Disponível em: http://quadro-a-quadro.blog.br.",
+    "alternativas": {
+      "A": "a Tríplice Aliança, na Primeira Guerra Mundial.",
+      "B": "os regimes totalitários, na Segunda Guerra Mundial.",
+      "C": "o poder soviético, durante a Guerra Fria.",
+      "D": "o movimento comunista, na Guerra do Vietnã.",
+      "E": "o terrorismo internacional, após 11 de setembro de 2001. *AZUL75SAB2* CH - 1º dia | Caderno 1 - AZUL - Página 3"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q004_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 5,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Torna-se claro que quem descobriu a África no Brasil, muito antes dos europeus, foram os próprios africanos trazidos como escravos.",
+    "alternativas": {
+      "E": "resistência à incorporação de elementos culturais indígenas.",
+      "A": "formação de uma identidade cultural afro-brasileira.",
+      "B": "superação de aspectos culturais africanos por antigas tradições europeias.",
+      "C": "reprodução de conflitos entre grupos étnicos africanos.",
+      "D": "manutenção das características culturais específicas de cada etnia."
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 6,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Nós nos recusamos a acreditar que o banco da justiça é falível. Nós nos recusamos a acreditar que há capitais insuficientes de oportunidade nesta nação.",
+    "alternativas": {
+      "A": "a conquista de direitos civis para a população negra.",
+      "B": "o apoio aos atos violentos patrocinados pelos negros em espaço urbano.",
+      "C": "a supremacia das instituições religiosas em meio à comunidade negra sulista.",
+      "D": "a incorporação dos negros no mercado de trabalho.",
+      "E": "a aceitação da cultura negra como representante do modo de vida americano."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q006_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 7,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "É verdade que nas democracias o povo parece fazer o que quer; mas a liberdade política não consiste nisso. Deve-se ter sempre presente em mente o que é independência e o que é liberdade.",
+    "alternativas": {
+      "A": "ao status de cidadania que o indivíduo adquire ao tomar as decisões por si mesmo.",
+      "B": "ao condicionamento da liberdade dos cidadãos à conformidade às leis.",
+      "C": "à possibilidade de o cidadão participar no poder e, nesse caso, livre da submissão às leis.",
+      "D": "ao livre-arbítrio do cidadão em relação àquilo que é proibido, desde que ciente das consequências.",
+      "E": "ao direito do cidadão exercer sua vontade de acordo com seus valores pessoais."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q007_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 8,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Disponível em: www.gandhiserve.org.",
+    "alternativas": {
+      "A": "a ineficiência do sistema judiciário inglês no território indiano.",
+      "B": "o apoio da população hindu à prisão de Gandhi.",
+      "C": "o caráter violento das manifestações hindus frente à ação inglesa.",
+      "D": "a impossibilidade de deter o movimento liderado por Gandhi.",
+      "E": "a indiferença das autoridades britânicas frente ao apelo popular hindu. *AZUL75SAB3* CH - 1º dia | Caderno 1 - AZUL - Página 4"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia1/q008_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 9,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Na regulação de matérias culturalmente delicadas, como, por exemplo, a linguagem oficial, os currículos da educação pública, o status das Igrejas e das comunidades religiosas, as normas do direito penal (por exemplo, quanto ao aborto), mas também em assuntos menos chamativos, como, por exemplo, a posição da família e dos consórcios semelhantes ao matrimônio, a aceitação de normas de segurança ou a delimitação das esferas pública e privada — em tudo isso reflete-se amiúde apenas o autoentendimento ético-político de uma cultura majoritária, dominante por motivos históricos. Por causa de tais regras, implicitamente repressivas, mesmo dentro de uma comunidade republicana que garanta formalmente a igualdade de direitos para todos, pode eclodir um conflito cultural movido pelas minorias desprezadas contra a cultura da maioria. H",
+    "alternativas": {
+      "A": "a secessão, pela qual a minoria discriminada obteria a igualdade de direitos na condição da sua concentração espacial, num tipo de independência nacional.",
+      "B": "a reunificação da sociedade que se encontra fragmentada em grupos de diferentes comunidades étnicas, confissões religiosas e formas de vida, em torno da coesão de uma cultura política nacional.",
+      "C": "a coexistência das diferenças, considerando a possibilidade de os discursos de autoentendimento se submeterem ao debate público, cientes de que estarão vinculados à coerção do melhor argumento.",
+      "D": "a autonomia dos indivíduos que, ao chegarem à vida adulta, tenham condições de se libertar das tradições de suas origens em nome da harmonia da política nacional.",
+      "E": "o desaparecimento de quaisquer limitações, tais como linguagem política ou distintas convenções de comportamento, para compor a arena política a ser compartilhada."
+    },
+    "gabarito": "C",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 10,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Mas uma coisa ouso afirmar, porque há muitos testemunhos, e é que vi nesta terra de Veragua [Panamá] maiores indícios de ouro nos dois primeiros dias do que na Hispaniola em quatro anos, e que as terras da região não podem ser mais bonitas nem mais bem lavradas.",
+    "alternativas": {
+      "A": "expulsão dos indígenas para fortalecer o clero católico.",
+      "B": "promoção das guerras justas para conquistar o território.",
+      "C": "imposição da catequese para explorar o trabalho africano.",
+      "D": "opção pela policultura para garantir o povoamento ibérico.",
+      "E": "fundação de cidades para controlar a circulação de riquezas."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q010_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 11,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Que é ilegal a faculdade que se atribui à autoridade real para suspender as leis ou seu cumprimento. Que é ilegal toda cobrança de impostos para a Coroa sem o concurso do Parlamento, sob pretexto de prerrogativa, ou em época e modo diferentes dos designados por ele próprio. Que é indispensável convocar com frequência os Parlamentos para satisfazer os agravos, assim como para corrigir, afirmar e conservar leis. Declaração de Direitos. Disponível em: http://disciplinas.stoa.usp.br.",
+    "alternativas": {
+      "A": "Redução da influência do papa – Teocracia.",
+      "B": "Limitação do poder do soberano – Absolutismo.",
+      "C": "Ampliação da dominação da nobreza – República.",
+      "D": "Expansão da força do presidente – Parlamentarismo.",
+      "E": "Restrição da competência do congresso – Presidencialismo. *AZUL75SAB4* CH - 1º dia | Caderno 1 - AZUL - Página 5"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q011_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 12,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Cartaz da Revolução Constitucionalista. Disponível em: http://veja.abril.com.br.",
+    "alternativas": {
+      "A": "à experiência francesa, expressa no chamado à luta contra a ditadura.",
+      "B": "aos ideais republicanos, indicados no destaque à bandeira paulista.",
+      "C": "ao protagonismo das Forças Armadas, representadas pelo militar que empunha a bandeira.",
+      "D": "ao bandeirantismo, símbolo paulista apresentado em primeiro plano.",
+      "E": "ao papel figurativo de Vargas na política, enfatizado pela pequenez de sua figura no cartaz."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia1/q012_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 13,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "O que o projeto governamental tem em vista é poupar à Nação o prejuízo irreparável do perecimento e da evasão do que há de mais precioso no seu patrimônio. Grande parte das obras de arte até mais valiosas e dos bens de maior interesse histórico, de que a coletividade brasileira era depositária, têm desaparecido ou se arruinado irremediavelmente.",
+    "alternativas": {
+      "A": "submeter a memória e o patrimônio nacional ao controle dos órgãos públicos, de acordo com a tendência autoritária do Estado Novo.",
+      "B": "transferir para a iniciativa privada a responsabilidade de preservação do patrimônio nacional, por meio de leis de incentivo fiscal.",
+      "C": "definir os fatos e personagens históricos a serem cultuados pela sociedade brasileira, de acordo com o interesse público.",
+      "D": "resguardar da destruição as obras representativas da cultura nacional, por meio de políticas públicas preservacionistas.",
+      "E": "determinar as responsabilidades pela destruição do patrimônio nacional, de acordo com a legislação brasileira."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia1/q013_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 14,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "realocação das exportações para o modal aéreo em função da rapidez.",
+      "B": "dispersão dos serviços financeiros em função da busca de novos pontos de importação.",
+      "C": "redução da exportação de gêneros agrícolas em função da dificuldade para o escoamento.",
+      "D": "priorização do comércio com países vizinhos em função da existência de fronteiras terrestres.",
+      "E": "estagnação da indústria de alta tecnologia em função da concentração de investimentos na infraestrutura de circulação. *AZUL75SAB5* CH - 1º dia | Caderno 1 - AZUL - Página 6"
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia1/q014_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 15,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Diante dessas inconsistências e de outras que ainda preocupam a opinião pública, nós, jornalistas, estamos encaminhando este documento ao Sindicato dos Jornalistas Profissionais no Estado de São Paulo, para que o entregue à Justiça; e da Justiça esperamos a realização de novas diligências capazes de levar à completa elucidação desses fatos e de outros que porventura vierem a ser levantados. Em nome da verdade. In: O Estado de São Paulo, 3 fev. 1976.",
+    "alternativas": {
+      "A": "certeza do cumprimento das leis.",
+      "B": "superação do governo de exceção.",
+      "C": "violência dos terroristas de esquerda.",
+      "D": "punição dos torturadores da polícia.",
+      "E": "expectativa da investigação dos culpados."
+    },
+    "gabarito": "E",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 16,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Disponível em: www.metmuseum.org.",
+    "alternativas": {
+      "A": "Cruzadismo – conquista da terra santa.",
+      "B": "Patriotismo – exaltação da cultura local.",
+      "C": "Helenismo – apropriação da estética grega.",
+      "D": "Imperialismo – selvageria dos povos dominados.",
+      "E": "Expansionismo – diversidade dos territórios conquistados."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q016_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 17,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "estímulos ao racismo.",
+      "B": "apoio ao xenofobismo.",
+      "C": "críticas ao federalismo.",
+      "D": "repúdio ao republicanismo.",
+      "E": "questionamentos ao autoritarismo."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q017_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 18,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Portadora de memória, a paisagem ajuda a construir os sentimentos de pertencimento; ela cria uma atmosfera que convém aos momentos fortes da vida, às festas, às comemorações. CL",
+    "alternativas": {
+      "A": "política de apropriação efetiva do espaço.",
+      "B": "econômica de uso de recursos do espaço.",
+      "C": "privada de limitação sobre a utilização do espaço.",
+      "D": "natural de composição por elementos físicos do espaço.",
+      "E": "simbólica de relação subjetiva do indivíduo com o espaço. *AZUL75SAB6* CH - 1º dia | Caderno 1 - AZUL - Página 7"
+    },
+    "gabarito": "E",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 19,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Disponível em: http://primeira-serie.blogspot.com.br.",
+    "alternativas": {
+      "A": "autonomia do produtor direto.",
+      "B": "adoção da divisão sexual do trabalho.",
+      "C": "exploração do trabalho repetitivo.",
+      "D": "utilização de empregados qualificados.",
+      "E": "incentivo à criatividade dos funcionários."
+    },
+    "gabarito": "C",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 20,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "Exploração do campesinato pela elite proprietária – Domínio das instituições fundiárias pelo poder público.",
+      "B": "Adoção de práticas discriminatórias de acesso à terra – Controle do uso especulativo da propriedade fundiária.",
+      "C": "Desorganização da economia rural de subsistência – Crescimento do consumo interno de alimentos pelas famílias camponesas.",
+      "D": "Crescimento dos assentamentos rurais com mão de obra familiar – Avanço crescente das áreas rurais sobre as regiões urbanas.",
+      "E": "Concentração das áreas cultiváveis no setor agroexportador – Aumento da ocupação da população pobre em territórios agrícolas marginais."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q020_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 21,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Texto I",
+    "alternativas": {
+      "A": "o crash da Bolsa em 1929 adveio do envolvimento dos EU",
+      "B": "a crise de 1929 ocorreu devido a um quadro de superprodução industrial nos EU",
+      "C": "a crise de 1929 foi o resultado da concorrência dos países europeus reconstruídos após a I Guerra e a atual crise se associa à emergência dos BRICS como novos concorrentes econômicos.",
+      "D": "o crash da Bolsa em 1929 resultou do excesso de proteções ao setor produtivo estadunidense e a atual crise tem origem na internacionalização das empresas e no avanço da política de livre mercado.",
+      "E": "a crise de 1929 decorreu da política intervencionista norte-americana sobre o sistema de comércio mundial e a atual crise resultou do excesso de regulação do governo desse país sobre o sistema monetário. *AZUL75SAB7* CH - 1º dia | Caderno 1 - AZUL - Página 8"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q021_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 22,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Texto do Cartaz: “",
+    "alternativas": {
+      "A": "à contestação da crise econômica europeia, que fora provocada pela manutenção das guerras coloniais.",
+      "B": "à organização partidária da juventude comunista, visando o estabelecimento da ditadura do proletariado.",
+      "C": "à unificação das noções de libertação social e libertação individual, fornecendo um significado político ao uso do corpo.",
+      "D": "à defesa do amor cristão e monogâmico, com fins à reprodução, que era tomado como solução para os conflitos sociais.",
+      "E": "ao reconhecimento da cultura das gerações passadas, que conviveram com a emergência do rock e outras mudanças nos costumes."
+    },
+    "gabarito": "C",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 23,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Nossa cultura lipofóbica muito contribui para a distorção da imagem corporal, gerando gordos que se veem magros e magros que se veem gordos, numa quase unanimidade de que todos se sentem ou se veem “distorcidos”. Engordamos quando somos gulosos. É pecado da gula que controla a relação do homem com a balança. Todo obeso declarou, um dia, guerra à balança. Para emagrecer é preciso fazer as pazes com a dita cuja, visando adequar-se às necessidades para as quais ela aponta. FREIRE, D. S. Obesidade não pode ser pré-requisito. Disponível em: http//gnt.globo.com.",
+    "alternativas": {
+      "A": "a ampliação dos tratamentos médicos alternativos, reduzindo os gastos com remédios.",
+      "B": "a democratização do padrão de beleza, tornando-o acessível pelo esforço individual.",
+      "C": "o controle do consumo, impulsionando uma crise econômica na indústria de alimentos.",
+      "D": "a culpabilização individual, associando obesidade à fraqueza de caráter.",
+      "E": "o aumento da longevidade, resultando no crescimento populacional. *AZUL75SAB8* CH - 1º dia | Caderno 1 - AZUL - Página 9"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia1/q023_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 24,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "100 95 90 85 80 75 70 65 60 55 50 45 40 45 30 25 20 15 10 5 0 8,0 6,0 4,0 2,0 0,0 2,0 4,0 6,0 8,0 % 1991 2010 Composição da população residente urbana por sexo, segundo os grupos de idade - Brasil - 1991/2010 Fonte: IBGE, Censo Demográfico 1991/2010 Homens Mulheres 100 95 90 85 80 75 70 65 60 55 50 45 40 45 30 25 20 15 10 5 0 8,0 6,0 4,0 2,0 0,0 2,0 4,0 6,0 8,0 % 1991 2010 Composição da população residente rural por sexo, segundo os grupos de idade - Brasil - 1991/2010 Homens Fonte: IBGE, Censo Demográfico 1991/2010 Mulheres BR",
+    "alternativas": {
+      "A": "menor proporção de fecundidade na área urbana.",
+      "B": "menor proporção de homens na área rural.",
+      "C": "aumento da proporção de fecundidade na área rural.",
+      "D": "queda da longevidade na área rural.",
+      "E": "queda do número de idosos na área urbana."
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 25,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Para Platão, o que havia de verdadeiro em Parmênides era que o objeto de conhecimento é um objeto de razão e não de sensação, e era preciso estabelecer uma relação entre objeto racional e objeto sensível ou material que privilegiasse o primeiro em detrimento do segundo. Lenta, mas irresistivelmente, a Doutrina das Ideias formava-se em sua mente. ZING",
+    "alternativas": {
+      "A": "Estabelecendo um abismo intransponível entre as duas.",
+      "B": "Privilegiando os sentidos e subordinando o conhecimento a eles.",
+      "C": "Atendo-se à posição de Parmênides de que razão e sensação são inseparáveis.",
+      "D": "Afirmando que a razão é capaz de gerar conhecimento, mas a sensação não.",
+      "E": "Rejeitando a posição de Parmênides de que a sensação é superior à razão. *AZUL75SAB9* CH - 1º dia | Caderno 1 - AZUL - Página 10"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia1/q025_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 26,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "Aumento da poluição sonora – construção de barreiras acústicas.",
+      "B": "Incidência da chuva ácida – estatização da indústria automobilística.",
+      "C": "Derretimento das calotas polares – incentivo aos transportes de massa.",
+      "D": "Propagação de doenças respiratórias – distribuição de medicamentos gratuitos.",
+      "E": "Elevação das temperaturas médias – criminalização da emissão de gás carbônico."
+    },
+    "gabarito": "C",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 27,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "constante violência nos babaçuais na confluência de terras maranhenses, piauienses, paraenses e tocantinenses, região com elevado índice de homicídios.",
+      "B": "falta de identidade coletiva das trabalhadoras, migrantes das cidades e com pouco vínculo histórico com as áreas rurais do interior do Tocantins, Pará, Maranhão e Piauí.",
+      "C": "escassez de água nas regiões de veredas, ambientes naturais dos babaçus, causada pela construção de açudes particulares, impedindo o amplo acesso público aos recursos hídricos.",
+      "D": "progressiva devastação das matas dos cocais, em função do avanço da sojicultura nos chapadões do Meio-Norte brasileiro.",
+      "E": "dificuldade imposta pelos fazendeiros e posseiros no acesso aos babaçuais localizados no interior de suas propriedades. *AZUL75SAB10* CH - 1º dia | Caderno 1 - AZUL - Página 11"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q027_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 28,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Texto I",
+    "alternativas": {
+      "A": "eram baseadas nas ciências da natureza.",
+      "B": "refutavam as teorias de filósofos da religião.",
+      "C": "tinham origem nos mitos das civilizações antigas.",
+      "D": "postulavam um princípio originário para o mundo.",
+      "E": "defendiam que Deus é o princípio de todas as coisas."
+    },
+    "gabarito": "D",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 29,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "De repente, sente-se uma vibração que aumenta rapidamente; lustres balançam, objetos se movem sozinhos e somos invadidos pela estranha sensação de medo do imprevisto. Segundos parecem horas, poucos minutos são uma eternidade. Estamos sentindo os efeitos de um terremoto, um tipo de abalo sísmico.",
+    "alternativas": {
+      "A": "alívio da tensão geológica.",
+      "B": "desgaste da erosão superficial.",
+      "C": "atuação do intemperismo químico.",
+      "D": "formação de aquíferos profundos.",
+      "E": "acúmulo de depósitos sedimentares."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q029_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 30,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Texto I",
+    "alternativas": {
+      "E": "atribuem diferentes lugares ao papel dos sentidos no processo de obtenção do conhecimento.",
+      "A": "defendem os sentidos como critério originário para considerar um conhecimento legítimo.",
+      "B": "entendem que é desnecessário suspeitar do significado de uma ideia na reflexão filosófica e crítica.",
+      "C": "são legítimos representantes do criticismo quanto à gênese do conhecimento.",
+      "D": "concordam que conhecimento humano é impossível em relação às ideias e aos sentidos."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q030_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 31,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Não ignoro a opinião antiga e muito difundida de que o que acontece no mundo é decidido por Deus e pelo acaso. Essa opinião é muito aceita em nossos dias, devido às grandes transformações ocorridas, e que ocorrem diariamente, as quais escapam à conjectura humana. Não obstante, para não ignorar inteiramente o nosso livre-arbítrio, creio que se pode aceitar que a sorte decida metade dos nossos atos, mas [o livre-arbítrio] nos permite o controle sobre a outra metade. M",
+    "alternativas": {
+      "A": "valorizar a interferência divina nos acontecimentos definidores do seu tempo.",
+      "B": "rejeitar a intervenção do acaso nos processos políticos.",
+      "C": "afirmar a confiança na razão autônoma como fundamento da ação humana.",
+      "D": "romper com a tradição que valorizava o passado como fonte de aprendizagem.",
+      "E": "redefinir a ação política com base na unidade entre fé e razão. *AZUL75SAB11* CH - 1º dia | Caderno 1 - AZUL - Página 12"
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia1/q031_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 32,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "concentra suas atividades no setor primário.",
+      "B": "apresenta estoques elevados de alimentos.",
+      "C": "possui um sistema de transportes articulado.",
+      "D": "diversifica a matriz de geração de energia.",
+      "E": "introduz tecnologias à produção agrícola."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q032_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 33,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Uma mesma empresa pode ter sua sede administrativa onde os impostos são menores, as unidades de produção onde os salários são os mais baixos, os capitais onde os juros são os mais altos e seus executivos vivendo onde a qualidade de vida é mais elevada. SEVCENKO, N.",
+    "alternativas": {
+      "A": "o crescimento da carga tributária.",
+      "B": "o aumento da mobilidade ocupacional.",
+      "C": "a redução da competitividade entre as empresas.",
+      "D": "o direcionamento das vendas para os mercados regionais.",
+      "E": "a ampliação do poder de planejamento dos Estados nacionais."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q033_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 34,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "núcleos urbanos em áreas litorâneas.",
+      "B": "centros agrícolas modernos no interior.",
+      "C": "vias férreas entre espaços de mineração.",
+      "D": "faixas de povoamento ao longo das estradas.",
+      "E": "povoados interligados próximos a grandes rios."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q034_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 35,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "das constantes rebeliões indígenas contra os brancos colonizadores, que ameaçavam a produção de ouro nas regiões mineradoras.",
+      "B": "da propagação de doenças originadas do contato com os colonizadores, que dizimaram boa parte da população indígena.",
+      "C": "do empenho das ordens religiosas em proteger o indígena da exploração, o que garantiu a sua supremacia na administração colonial.",
+      "D": "da política racista da Coroa Portuguesa, contrária à miscigenação, que organizava a sociedade em uma hierarquia dominada pelos brancos.",
+      "E": "da necessidade de controle dos brancos sobre a população indígena, objetivando sua adaptação às exigências do trabalho regular."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q035_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 36,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "Obsolescência dos portos.",
+      "B": "Estatização de empresas.",
+      "C": "Eliminação de incentivos fiscais.",
+      "D": "Ampliação de políticas protecionistas.",
+      "E": "Desenvolvimento dos meios de comunicação. *AZUL75SAB12* CH - 1º dia | Caderno 1 - AZUL - Página 13"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q036_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 37,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "apresentarem áreas de intrusões graníticas, ricas em jazidas minerais (ferro, manganês).",
+      "B": "corresponderem ao principal evento geológico do Cenozoico no território brasileiro.",
+      "C": "apresentarem áreas arrasadas pela erosão, que originaram a maior planície do país.",
+      "D": "possuírem em sua extensão terrenos cristalinos ricos em reservas de petróleo e gás natural.",
+      "E": "serem esculpidas pela ação do intemperismo físico, decorrente da variação de temperatura."
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 38,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "redução do custo de produção.",
+      "B": "agravamento da poluição hídrica.",
+      "C": "compactação do material do solo.",
+      "D": "aceleração da fertilização natural.",
+      "E": "redirecionamento dos cursos fluviais."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q038_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 39,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Texto I",
+    "alternativas": {
+      "A": "induzem os jovens ao estudo nas grandes cidades, causando o êxodo rural, uma vez que formados, não retornam à sua região de origem.",
+      "B": "impulsionam as populações locais a buscar linhas de financiamento estatal com o objetivo de ampliar a agricultura familiar, garantindo sua fixação no campo.",
+      "C": "ampliam o protagonismo do Estado, possibilitando a grupos econômicos ruralistas produzir e impor políticas agrícolas, ampliando o controle que tinham dos mercados.",
+      "D": "aumentam a produção e a produtividade de determinadas culturas em função da intensificação da mecanização, do uso de agrotóxicos e cultivo de plantas transgênicas.",
+      "E": "desorganizam o modo tradicional de vida impelindo- as à busca por melhores condições no espaço urbano ou em outros países em situações muitas vezes precárias. *AZUL75SAB13* CH - 1º dia | Caderno 1 - AZUL - Página 14"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q039_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 40,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Em um engenho sois imitadores de Cristo crucificado porque padeceis em um modo muito semelhante o que o mesmo Senhor padeceu na sua cruz e em toda a sua paixão.",
+    "alternativas": {
+      "A": "a atividade dos comerciantes de açúcar nos portos brasileiros.",
+      "B": "a função dos mestres de açúcar durante a safra de cana.",
+      "C": "o sofrimento dos jesuítas na conversão dos ameríndios.",
+      "D": "o papel dos senhores na administração dos engenhos.",
+      "E": "o trabalho dos escravos na produção de açúcar."
+    },
+    "gabarito": "E",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 41,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Fugindo à luta de classes, a nossa organização sindical tem sido um instrumento de harmonia e de cooperação entre o capital e o trabalho. Não se limitou a um sindicalismo puramente “operário”, que conduziria certamente a luta contra o “patrão”, como aconteceu com outros povos. F",
+    "alternativas": {
+      "A": "elimina os conflitos no ambiente das fábricas.",
+      "B": "limita os direitos associativos do segmento patronal.",
+      "C": "orienta a busca do consenso entre trabalhadores e patrões.",
+      "D": "proíbe o registro de estrangeiros nas entidades profissionais do país.",
+      "E": "desobriga o Estado quanto aos direitos e deveres da classe trabalhadora."
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia1/q041_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 42,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "O uso da água aumenta de acordo com as necessidades da população no mundo. Porém, diferentemente do que se possa imaginar, o aumento do consumo de água superou em duas vezes o crescimento populacional durante o século XX. TEIXEIR",
+    "alternativas": {
+      "A": "ampliação de sistemas de reutilização hídrica.",
+      "B": "expansão da irrigação por aspersão das lavouras.",
+      "C": "intensificação do controle do desmatamento de florestas.",
+      "D": "adoção de técnicas tradicionais de produção.",
+      "E": "criação de incentivos fiscais para o cultivo de produtos orgânicos. *AZUL75SAB14* CH - 1º dia | Caderno 1 - AZUL - Página 15"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q042_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 43,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Minha vida é andar Por esse país Pra ver se um dia Descanso feliz Guardando as recordações Das terras onde passei Andando pelos sertões",
+    "alternativas": {
+      "E": "discriminação dos nordestinos nos grandes centros urbanos.",
+      "A": "valorização das características naturais do Sertão nordestino.",
+      "B": "denúncia da precariedade social provocada pela seca.",
+      "C": "experiência de deslocamento vivenciada pelo migrante.",
+      "D": "profunda desigualdade social entre as regiões brasileiras."
+    },
+    "gabarito": "C",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 44,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Próximo da Igreja dedicada a São Gonçalo nos deparamos com uma impressionante multidão que dançava ao som de suas violas. Tão logo viram o Vice- Rei, cercaram-no e o obrigaram a dançar e pular, exercício violento e pouco apropriado tanto para sua idade quanto posição. Tivemos nós mesmos que entrar na dança, por bem ou por mal, e não deixou de ser interessante ver numa igreja padres, mulheres, frades, cavalheiros e escravos a dançar e pular misturados, e a gritar a plenos pulmões “Viva São Gonçalo do",
+    "alternativas": {
+      "A": "seguia os preceitos advindos da hierarquia católica romana.",
+      "B": "demarcava a submissão do povo à autoridade constituída.",
+      "C": "definia o pertencimento dos padres às camadas populares.",
+      "D": "afirmava um sentido comunitário de partilha da devoção.",
+      "E": "harmonizava as relações sociais entre escravos e senhores."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia1/q044_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 45,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Linguagens, Codigos e suas Tecnologias",
+    "enunciado": "Disponível em: http://nutriteengv.blogspot.com.br.",
+    "alternativas": {
+      "A": "Expansão das terras agricultáveis, com manutenção de desigualdades sociais.",
+      "B": "Modernização técnica do território, com redução do nível de emprego formal.",
+      "C": "Valorização de atividades de subsistência, com redução da produtividade da terra.",
+      "D": "Desenvolvimento de núcleos policultores, com ampliação da concentração fundiária.",
+      "E": "SUAS TECNOLOGIAS Questões de 46 a 90"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q045_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 46,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Para diminuir o acúmulo de lixo e o desperdício de materiais de valor econômico e, assim, reduzir a exploração de recursos naturais, adotou-se, em escala internacional, a política dos três erres: Redução, Reutilização e Reciclagem. Um exemplo de reciclagem é a utilização de",
+    "alternativas": {
+      "A": "garrafas de vidro retornáveis para cerveja ou refrigerante.",
+      "B": "latas de alumínio como material para fabricação de lingotes.",
+      "C": "sacos plásticos de supermercado como acondicionantes de lixo caseiro.",
+      "D": "embalagens plásticas vazias e limpas para acondicionar outros alimentos.",
+      "E": "garrafas PET recortadas em tiras para fabricação de cerdas de vassouras."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q046_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 47,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Um dos problemas ambientais vivenciados pela agricultura hoje em dia é a compactação do solo, devida ao intenso tráfego de máquinas cada vez mais pesadas, reduzindo a produtividade das culturas. Uma das formas de prevenir o problema de compactação do solo é substituir os pneus dos tratores por pneus mais",
+    "alternativas": {
+      "A": "largos, reduzindo a pressão sobre o solo.",
+      "B": "estreitos, reduzindo a pressão sobre o solo.",
+      "C": "largos, aumentando a pressão sobre o solo.",
+      "D": "estreitos, aumentando a pressão sobre o solo.",
+      "E": "altos, reduzindo a pressão sobre o solo."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q047_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 48,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "O milho transgênico é produzido a partir da manipulação do milho original, com a transferência, para este, de um gene de interesse retirado de outro organismo de espécie diferente.",
+    "alternativas": {
+      "A": "do incremento do DN",
+      "B": "da transcrição do RN",
+      "C": "da expressão de proteínas sintetizadas a partir do DN",
+      "D": "da síntese de carboidratos a partir da ativação do DN",
+      "E": "da tradução do RN"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q048_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 49,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "Éter e éster.",
+      "B": "Cetona e éster.",
+      "C": "Álcool e cetona.",
+      "D": "Aldeído e cetona.",
+      "E": "Éter e ácido carboxílico. *AZUL75SAB16* CN - 1º dia | Caderno 1 - AZUL - Página 17"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q049_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 50,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Os carrinhos de brinquedo podem ser de vários tipos. Dentre eles, há os movidos a corda, em que uma mola em seu interior é comprimida quando a criança puxa o carrinho para trás.",
+    "alternativas": {
+      "A": "um dínamo.",
+      "B": "um freio de automóvel.",
+      "C": "um motor a combustão.",
+      "D": "uma usina hidroelétrica.",
+      "E": "uma atiradeira (estilingue)."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q050_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 51,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Pesticidas são contaminantes ambientais altamente tóxicos aos seres vivos e, geralmente, com grande persistência ambiental.",
+    "alternativas": {
+      "A": "transferir o contaminante do solo para a água.",
+      "B": "absorver o contaminante sem alterá-lo quimicamente.",
+      "C": "apresentar alta taxa de mutação ao longo das gerações.",
+      "D": "estimular o sistema imunológico do homem contra o contaminante.",
+      "E": "metabolizar o contaminante, liberando subprodutos menos tóxicos ou atóxicos."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q051_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 52,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Medidas de saneamento básico são fundamentais no processo de promoção de saúde e qualidade de vida da população. Muitas vezes, a falta de saneamento está relacionada com o aparecimento de várias doenças. Nesse contexto, um paciente dá entrada em um pronto atendimento relatando que há 30 dias teve contato com águas de enchente.",
+    "alternativas": {
+      "A": "difteria.",
+      "B": "botulismo.",
+      "C": "tuberculose.",
+      "D": "leptospirose.",
+      "E": "meningite meningocócica."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia1/q052_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 53,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "O rótulo de um desodorante aerossol informa ao consumidor que o produto possui em sua composição os gases isobutano, butano e propano, dentre outras substâncias.",
+    "alternativas": {
+      "A": "substituir o CFC, pois não reagem com o ozônio, servindo como gases propelentes em aerossóis.",
+      "B": "servir como propelentes, pois, como são muito reativos, capturam o Freon existente livre na atmosfera, impedindo a destruição do ozônio.",
+      "C": "reagir com o ar, pois se decompõem espontaneamente em dióxido de carbono (CO2) e água (H2O), que não atacam o ozônio.",
+      "D": "impedir a destruição do ozônio pelo CFC, pois os hidrocarbonetos gasosos reagem com a radiação UV, liberando hidrogênio (H2), que reage com o oxigênio do ar (O2), formando água (H2O).",
+      "E": "destruir o CFC, pois reagem com a radiação UV, liberando carbono (C), que reage com o oxigênio do ar (O2), formando dióxido de carbono (CO2), que é inofensivo para a camada de ozônio. *AZUL75SAB17* CN - 1º dia | Caderno 1 - AZUL - Página 18"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q053_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 54,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Em um dia de chuva muito forte, constatou-se uma goteira sobre o centro de uma piscina coberta, formando um padrão de ondas circulares. Nessa situação, observou-se que caíam duas gotas a cada segundo.",
+    "alternativas": {
+      "A": "maior que 25 cm e maior que 1,0 m/s.",
+      "B": "maior que 25 cm e igual a 1,0 m/s.",
+      "C": "menor que 25 cm e menor que 1,0 m/s.",
+      "D": "menor que 25 cm e igual a 1,0 m/s.",
+      "E": "igual a 25 cm e igual a 1,0 m/s."
+    },
+    "gabarito": "B",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 55,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "O mecanismo que permite articular uma porta (de um móvel ou de acesso) é a dobradiça. Normalmente, são necessárias duas ou mais dobradiças para que a porta seja fixada no móvel ou no portal, permanecendo em equilíbrio e podendo ser articulada com facilidade. No plano, o diagrama vetorial das forças que as dobradiças exercem na porta está representado em",
+    "alternativas": {
+      "A": "",
+      "B": "",
+      "E": "*AZUL75SAB18* CN - 1º dia | Caderno 1 - AZUL - Página 19"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia1/q055_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 56,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "herbivoria entre P1 e P2.",
+      "B": "polinização entre P1 e P2.",
+      "C": "P3 utilizada na alimentação de P1 e P2.",
+      "D": "P1 ou P2 utilizada na alimentação de P3.",
+      "E": "energia de P1 e de P2 que saem do sistema."
+    },
+    "gabarito": "D",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 57,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Muitas espécies de plantas lenhosas são encontradas no cerrado brasileiro. Para a sobrevivência nas condições de longos períodos de seca e queimadas periódicas, próprias desse ecossistema, essas plantas desenvolveram estruturas muito peculiares.",
+    "alternativas": {
+      "A": "Cascas finas e sem sulcos ou fendas.",
+      "B": "Caules estreitos e retilíneos.",
+      "C": "Folhas estreitas e membranosas.",
+      "D": "Gemas apicais com densa pilosidade.",
+      "E": "Raízes superficiais, em geral, aéreas."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia1/q057_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 58,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "ácido benzoico e etanol.",
+      "C": "ácido fenilacético e metanol.",
+      "B": "ácido propanoico e hexanol.",
+      "D": "ácido propiônico e cicloexanol.",
+      "E": "ácido acético e álcool benzílico."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q058_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 59,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "No Japão, um movimento nacional para a promoção da luta contra o aquecimento global leva o slogan: 1 pessoa, 1 dia, 1 kg de CO2 a menos!",
+    "alternativas": {
+      "A": "0,25 kg.",
+      "B": "0,33 kg.",
+      "C": "1,0 kg.",
+      "D": "1,3 kg.",
+      "E": "3,0 kg. *AZUL75SAB19* CN - 1º dia | Caderno 1 - AZUL - Página 20"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q059_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 60,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Para melhorar a mobilidade urbana na rede metroviária é necessário minimizar o tempo entre estações. Para isso a administração do metrô de uma grande cidade adotou o seguinte procedimento entre duas estações: a locomotiva parte do repouso com aceleração constante por um terço do tempo de percurso, mantém a velocidade constante por outro terço e reduz sua velocidade com desaceleração constante no trecho final, até parar. Qual é o gráfico de posição (eixo vertical) em função do tempo (eixo horizontal) que representa o movimento desse trem?",
+    "alternativas": {
+      "A": "tempo posição",
+      "D": "tempo posição",
+      "B": "tempo posição",
+      "E": "tempo posição",
+      "C": "tempo posição *AZUL75SAB20* CN - 1º dia | Caderno 1 - AZUL - Página 21"
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia1/q060_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 61,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "maior que a de uma lâmpada fluorescente de 8 W, que produz menor quantidade de luz.",
+      "B": "maior que a de uma lâmpada fluorescente de 40 W, que produz menor quantidade de luz.",
+      "C": "menor que a de uma lâmpada fluorescente de 8 W, que produz a mesma quantidade de luz.",
+      "D": "menor que a de uma lâmpada fluorescente de 40 W, pois consome maior quantidade de energia.",
+      "E": "igual a de uma lâmpada fluorescente de 40 W, que consome a mesma quantidade de energia."
+    },
+    "gabarito": "C",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 62,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Não é de hoje que o homem cria, artificialmente, variedades de peixes por meio da hibridação. Esta é uma técnica muito usada pelos cientistas e pelos piscicultores porque os híbridos resultantes, em geral, apresentam maior valor comercial do que a média de ambas as espécies parentais, além de reduzir a sobrepesca no ambiente natural. Terra da Gente, ano 4, n. 47, mar. 2008 (adaptado). Sem controle, esses animais podem invadir rios e lagos naturais, se reproduzir e",
+    "alternativas": {
+      "A": "originar uma nova espécie poliploide.",
+      "B": "substituir geneticamente a espécie natural.",
+      "C": "ocupar o primeiro nível trófico no hábitat aquático.",
+      "D": "impedir a interação biológica entre as espécies parentais.",
+      "E": "produzir descendentes com o código genético modificado."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q062_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 63,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Há milhares de anos o homem faz uso da biotecnologia para a produção de alimentos como pães, cervejas e vinhos. Na fabricação de pães, por exemplo, são usados fungos unicelulares, chamados de leveduras, que são comercializados como fermento biológico. Eles são usados para promover o crescimento da massa, deixando-a leve e macia. O crescimento da massa do pão pelo processo citado é resultante da",
+    "alternativas": {
+      "A": "liberação de gás carbônico.",
+      "B": "formação de ácido lático.",
+      "C": "formação de água.",
+      "D": "produção de ATP.",
+      "E": "liberação de calor. *AZUL75SAB21* CN - 1º dia | Caderno 1 - AZUL - Página 22"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q063_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 64,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "refletidos pelo peixe não descrevem uma trajetória retilínea no interior da água.",
+      "B": "emitidos pelos olhos do índio desviam sua trajetória quando passam do ar para a água.",
+      "C": "espalhados pelo peixe são refletidos pela superfície da água.",
+      "D": "emitidos pelos olhos do índio são espalhados pela superfície da água.",
+      "E": "refletidos pelo peixe desviam sua trajetória quando passam da água para o ar."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q064_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 65,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Os vegetais biossintetizam determinadas substâncias (por exemplo, alcaloides e flavonoides), cuja estrutura química e concentração variam num mesmo organismo em diferentes épocas do ano e estágios de desenvolvimento. Muitas dessas substâncias são produzidas para a adaptação do organismo às variações ambientais (radiação UV, temperatura, parasitas, herbívoros, estímulo a polinizadores etc.) ou fisiológicas (crescimento, envelhecimento etc.).",
+    "alternativas": {
+      "A": "sofre constantes recombinações para adaptar-se.",
+      "B": "muda ao longo do ano e em diferentes fases da vida.",
+      "C": "cria novos genes para biossíntese de substâncias específicas.",
+      "D": "altera a sequência de bases nitrogenadas para criar novas substâncias.",
+      "E": "possui genes transcritos diferentemente de acordo com cada necessidade."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q065_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 66,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "O benzeno é um hidrocarboneto aromático presente no petróleo, no carvão e em condensados de gás natural. Seus metabólitos são altamente tóxicos e se depositam na medula óssea e nos tecidos gordurosos. O limite de exposição pode causar anemia, câncer (leucemia) e distúrbios do comportamento. Em termos de reatividade química, quando um eletrófilo se liga ao benzeno, ocorre a formação de um intermediário, o carbocátion. Por fim, ocorre a adição ou substituição eletrofílica. Disponível em: www.sindipetro.org.br.",
+    "alternativas": {
+      "A": "Br Br Br Br H H + ; ;",
+      "B": "Br Br Br Br H H + ; ;",
+      "C": "Br Br Br Br H H + ; ;",
+      "D": "Br Br Br Br H H + ; ;",
+      "E": "Br Br Br Br H H + ; ; *AZUL75SAB22* CN - 1º dia | Caderno 1 - AZUL - Página 23"
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 67,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "O manual que acompanha uma ducha higiênica informa que a pressão mínima da água para o seu funcionamento apropriado é de 20 kPa.",
+    "alternativas": {
+      "A": "h1.",
+      "B": "h2.",
+      "C": "h3.",
+      "D": "h4.",
+      "E": "h5."
+    },
+    "gabarito": "C",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 68,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "O menor tamanduá do mundo é solitário e tem hábitos noturnos, passa o dia repousando, geralmente em um emaranhado de cipós, com o corpo curvado de tal maneira que forma uma bola. Quando em atividade, se locomove vagarosamente e emite som semelhante a um assobio.",
+    "alternativas": {
+      "A": "hábitat.",
+      "B": "biótopo.",
+      "C": "nível trófico.",
+      "D": "nicho ecológico.",
+      "E": "potencial biótico."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia1/q068_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 69,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Uma dona de casa acidentalmente deixou cair na geladeira a água proveniente do degelo de um peixe, o que deixou um cheiro forte e desagradável dentro do eletrodoméstico. Sabe-se que o odor característico de peixe se deve às aminas e que esses compostos se comportam como bases. Na tabela são listadas as concentrações hidrogeniônicas de alguns materiais encontrados na cozinha, que a dona de casa pensa em utilizar na limpeza da geladeira. Material Concentração de H3O+ (mol/L) Suco de limão 10–2 Leite 10–6 Vinagre 10–3 Álcool 10–8 Sabão 10–12 Carbonato de sódio/ barrilha 10–12 Dentre os materiais listados, quais são apropriados para amenizar esse odor?",
+    "alternativas": {
+      "A": "Álcool ou sabão.",
+      "B": "Suco de limão ou álcool.",
+      "C": "Suco de limão ou vinagre.",
+      "D": "Suco de limão, leite ou sabão.",
+      "E": "Sabão ou carbonato de sódio/barrilha."
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia1/q069_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 70,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Em uma planície, ocorreu um acidente ambiental em decorrência do derramamento de grande quantidade de um hidrocarboneto que se apresenta na forma pastosa à temperatura ambiente. Um químico ambiental utilizou uma quantidade apropriada de uma solução de para-dodecil-benzenossulfonato de sódio, um agente tensoativo sintético, para diminuir os impactos desse acidente. Essa intervenção produz resultados positivos para o ambiente porque",
+    "alternativas": {
+      "A": "promove uma reação de substituição no hidrocarboneto, tornando-o menos letal ao ambiente.",
+      "B": "a hidrólise do para-dodecil-benzenossulfonato de sódio produz energia térmica suficiente para vaporizar o hidrocarboneto.",
+      "C": "a mistura desses reagentes provoca a combustão do hidrocarboneto, o que diminui a quantidade dessa substância na natureza.",
+      "D": "a solução de para-dodecil-benzenossulfonato possibilita a solubilização do hidrocarboneto.",
+      "E": "o reagente adicionado provoca uma solidificação do hidrocarboneto, o que facilita sua retirada do ambiente. *AZUL75SAB23* CN - 1º dia | Caderno 1 - AZUL - Página 24"
+    },
+    "gabarito": "D",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 71,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Suponha que você seja um consultor e foi contratado para assessorar a implantação de uma matriz energética em um pequeno país com as seguintes características: região plana, chuvosa e com ventos constantes, dispondo de poucos recursos hídricos e sem reservatórios de combustíveis fósseis. De acordo com as características desse país, a matriz energética de menor impacto e risco ambientais é a baseada na energia",
+    "alternativas": {
+      "A": "dos biocombustíveis, pois tem menor impacto ambiental e maior disponibilidade.",
+      "B": "solar, pelo seu baixo custo e pelas características do país favoráveis à sua implantação.",
+      "C": "nuclear, por ter menor risco ambiental e ser adequada a locais com menor extensão territorial.",
+      "D": "hidráulica, devido ao relevo, à extensão territorial do país e aos recursos naturais disponíveis.",
+      "E": "eólica, pelas características do país e por não gerar gases do efeito estufa nem resíduos de operação."
+    },
+    "gabarito": "E",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 72,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Uma empresa de transportes precisa efetuar a entrega de uma encomenda o mais breve possível. Para tanto, a equipe de logística analisa o trajeto desde a empresa até o local da entrega. Ela verifica que o trajeto apresenta dois trechos de distâncias diferentes e velocidades máximas permitidas diferentes. No primeiro trecho, a velocidade máxima permitida é de 80 km/h e a distância a ser percorrida é de 80 km. No segundo trecho, cujo comprimento vale 60 km, a velocidade máxima permitida é 120 km/h. Supondo que as condições de trânsito sejam favoráveis para que o veículo da empresa ande continuamente na velocidade máxima permitida, qual será o tempo necessário, em horas, para a realização da entrega?",
+    "alternativas": {
+      "A": "0,7",
+      "B": "1,4",
+      "C": "1,5",
+      "D": "2,0",
+      "E": "3,0"
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia1/q072_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 73,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Para ligar ou desligar uma mesma lâmpada a partir de dois interruptores, conectam-se os interruptores para que a mudança de posição de um deles faça ligar ou desligar a lâmpada, não importando qual a posição do outro. Esta ligação é conhecida como interruptores paralelos. Este interruptor é uma chave de duas posições constituída por um polo e dois terminais, conforme mostrado nas figuras de um mesmo interruptor. Na Posição I a chave conecta o polo ao terminal superior, e na Posição II a chave o conecta ao terminal inferior. O circuito que cumpre a finalidade de funcionamento descrita no texto é:",
+    "alternativas": {
+      "A": "",
+      "B": "",
+      "E": "*AZUL75SAB24* CN - 1º dia | Caderno 1 - AZUL - Página 25"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q073_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 74,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "proximidade de Marte com Júpiter, em algumas épocas do ano, faz com que a atração gravitacional de Júpiter interfira em seu movimento.",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 75,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Em certos locais, larvas de moscas, criadas em arroz cozido, são utilizadas como iscas para pesca.",
+    "alternativas": {
+      "A": "seres vivos podem ser criados em laboratório.",
+      "B": "a vida se originou no planeta a partir de microrganismos.",
+      "C": "o ser vivo é oriundo da reprodução de outro ser vivo pré-existente.",
+      "D": "seres vermiformes e microrganismos são evolutivamente aparentados.",
+      "E": "vermes e microrganismos são gerados pela matéria existente nos cadáveres e nos caldos nutritivos, respectivamente."
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia1/q075_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 76,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Os tubos de PVC, material organoclorado sintético, são normalmente utilizados como encanamento na construção civil.",
+    "alternativas": {
+      "A": "água dura.",
+      "B": "água de cal.",
+      "C": "água salobra.",
+      "D": "água destilada.",
+      "E": "água desmineralizada. *AZUL75SAB25* CN - 1º dia | Caderno 1 - AZUL - Página 26"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q076_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 77,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Um consumidor desconfia que a balança do supermercado não está aferindo corretamente a massa dos produtos.",
+    "alternativas": {
+      "A": "0,073 kg.",
+      "B": "0,167 kg.",
+      "C": "0,250 kg.",
+      "D": "0,375 kg.",
+      "E": "0,750 kg."
+    },
+    "gabarito": "D",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 78,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Os freios",
+    "alternativas": {
+      "A": "fat fat",
+      "B": "fat fat",
+      "C": "fat fat",
+      "D": "fat fat",
+      "E": "fat fat *AZUL75SAB26* CN - 1º dia | Caderno 1 - AZUL - Página 27"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q078_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 79,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "O armazenamento de certas vitaminas no organismo apresenta grande dependência de sua solubilidade. Por exemplo, vitaminas hidrossolúveis devem ser incluídas na dieta diária, enquanto vitaminas lipossolúveis são armazenadas em quantidades suficientes para evitar doenças causadas pela sua carência.",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia1/q079_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 80,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "D",
+    "alternativas": {
+      "A": "anemia.",
+      "B": "beribéri.",
+      "C": "diabetes.",
+      "D": "escorbuto.",
+      "E": "fenilcetonúria. *AZUL75SAB27* CN - 1º dia | Caderno 1 - AZUL - Página 28"
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia1/q080_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 81,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Paleontólogos estudam fósseis e esqueletos de dinossauros para tentar explicar o desaparecimento desses animais. Esses estudos permitem afirmar que esses animais foram extintos há cerca de 65 milhões de anos. Uma teoria aceita atualmente é a de que um asteroide colidiu com a Terra, formando uma densa nuvem de poeira na atmosfera. De acordo com essa teoria, a extinção ocorreu em função de modificações no planeta que",
+    "alternativas": {
+      "A": "desestabilizaram o relógio biológico dos animais, causando alterações no código genético.",
+      "B": "reduziram a penetração da luz solar até a superfície da Terra, interferindo no fluxo energético das teias tróficas.",
+      "C": "causaram uma série de intoxicações nos animais, provocando a bioacumulação de partículas de poeira nos organismos.",
+      "D": "resultaram na sedimentação das partículas de poeira levantada com o impacto do meteoro, provocando o desaparecimento de rios e lagos.",
+      "E": "evitaram a precipitação de água até a superfície da Terra, causando uma grande seca que impediu a retroalimentação do ciclo hidrológico."
+    },
+    "gabarito": "B",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 82,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "O boato de que os lacres das latas de alumínio teriam um alto valor comercial levou muitas pessoas a juntarem esse material na expectativa de ganhar dinheiro com sua venda.",
+    "alternativas": {
+      "A": "Somente o lítio, pois ele possui o menor potencial de redução.",
+      "B": "Somente o cobre, pois ele possui o maior potencial de redução.",
+      "C": "Somente o potássio, pois ele possui potencial de redução mais próximo do magnésio.",
+      "D": "Somente o cobre e o zinco, pois eles sofrem oxidação mais facilmente que o alumínio.",
+      "E": "Somente o lítio e o potássio, pois seus potenciais de redução são menores do que o do alumínio. *AZUL75SAB28* CN - 1º dia | Caderno 1 - AZUL - Página 29"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q082_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 83,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "repetição contínua dos movimentos exige que parte da energia seja transferida ao próximo ciclo.",
+      "B": "um dos princípios da termodinâmica, segundo o qual o rendimento de uma máquina térmica nunca atinge o ideal.",
+      "C": "o funcionamento cíclico de todos os motores.",
+      "D": "as forças de atrito inevitável entre as peças. Tais forças provocam desgastes contínuos que com o tempo levam qualquer material à fadiga e ruptura.",
+      "E": "a temperatura em que eles trabalham. Para atingir o plasma, é necessária uma temperatura maior que a de fusão do aço com que se fazem os motores."
+    },
+    "gabarito": "B",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 84,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "o material é incapaz de acumular radiação, não se tornando radioativo por ter sido irradiado.",
+      "B": "a utilização de uma embalagem é suficiente para bloquear a radiação emitida pelo material.",
+      "C": "a contaminação radioativa do material não se prolifera da mesma forma que as infecções por microrganismos.",
+      "D": "o material irradiado emite radiação de intensidade abaixo daquela que ofereceria risco à saúde.",
+      "E": "o intervalo de tempo após a esterilização é suficiente para que o material não emita mais radiação."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia1/q084_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 85,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "As sementes aladas, que favorecem a dispersão aérea.",
+      "B": "Os arquegônios, que protegem o embrião multicelular.",
+      "C": "Os grãos de pólen, que garantem a polinização cruzada.",
+      "D": "Os frutos, que promovem uma maior eficiência reprodutiva.",
+      "E": "Os vasos condutores, que possibilitam o transporte da seiva bruta."
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia1/q085_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 86,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Osmose é um processo espontâneo que ocorre em todos os organismos vivos e é essencial à manutenção da vida. Uma solução 0,15 mol/L de NaCℓ (cloreto de sódio) possui a mesma pressão osmótica das soluções presentes nas células humanas.",
+    "alternativas": {
+      "A": "adsorção de íons Na+ sobre a superfície da célula.",
+      "B": "difusão rápida de íons Na+ para o interior da célula.",
+      "C": "diminuição da concentração das soluções presentes na célula.",
+      "D": "transferência de íons Na+ da célula para a solução.",
+      "E": "transferência de moléculas de água do interior da célula para a solução. *AZUL75SAB29* CN - 1º dia | Caderno 1 - AZUL - Página 30"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q086_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 87,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "o consumo de carnes de animais silvestres que são hospedeiros do vetor da doença.",
+      "B": "a utilização de adubos químicos na agricultura que aceleram o ciclo reprodutivo do barbeiro.",
+      "C": "a ausência de saneamento básico que favorece a proliferação do protozoário em regiões habitadas por humanos.",
+      "D": "a poluição dos rios e lagos com pesticidas que exterminam o predador das larvas do inseto transmissor da doença.",
+      "E": "o desmatamento que provoca a migração ou o desaparecimento dos animais silvestres dos quais o barbeiro se alimenta."
+    },
+    "gabarito": "E",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 88,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Nossa pele possui células que reagem à incidência de luz ultravioleta e produzem uma substância chamada melanina, responsável pela pigmentação da pele. Pensando em se bronzear, uma garota vestiu um biquíni, acendeu a luz de seu quarto e deitou-se exatamente abaixo da lâmpada incandescente.",
+    "alternativas": {
+      "A": "baixa intensidade.",
+      "B": "baixa frequência.",
+      "C": "um espectro contínuo.",
+      "D": "amplitude inadequada.",
+      "E": "curto comprimento de onda."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q088_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 89,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "Quando colocados em água, os fosfolipídeos tendem a formar lipossomos, estruturas formadas por uma bicamada lipídica, conforme mostrado na figura. Quando rompida, essa estrutura tende a se reorganizar em um novo lipossomo. Disponível em: http://course1.winona.edu.",
+    "alternativas": {
+      "A": "polar, ou seja, serem inteiramente solúveis em água.",
+      "B": "apolar, ou seja, não serem solúveis em solução aquosa.",
+      "C": "anfotérica, ou seja, podem comportar-se como ácidos e bases.",
+      "D": "insaturada, ou seja, possuírem duplas ligações em sua estrutura.",
+      "E": "anfifílica, ou seja, possuírem uma parte hidrofílica e outra hidrofóbica."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia1/q089_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 90,
+    "ano": 2012,
+    "dia": "dia1",
+    "area": "Ciencias Humanas e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "1,3 × 10–4.",
+      "B": "9,5 × 10–3.",
+      "C": "4 × 10–2.",
+      "D": "2,6.",
+      "E": "823. *AZUL75SAB30* CN - 1º dia | Caderno 1 - AZUL - Página 31 *AZUL75SAB31*"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia1/q090_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 91,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Quotes of the Day Friday, Sep. 02, 2011 “There probably was a shortage of not just respect and boundaries but also love. But you do need, when they cross the line and break the law, to be very tough.” British Prime Minister D",
+    "alternativas": {
+      "A": "enfatizar a discriminação contra os jovens britânicos e suas famílias.",
+      "B": "criticar as ações agressivas demonstradas nos tumultos pelos jovens.",
+      "C": "estabelecer relação entre a falta de limites dos jovens e o excesso de amor.",
+      "D": "reforçar a ideia de que os jovens precisam de amor, mas também de firmeza.",
+      "E": "descrever o tipo de amor que gera problemas às famílias de jovens britânicos."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q091_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 92,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "a paz tem o poder de aumentar o amor entre os homens.",
+      "B": "o amor pelo poder deve ser menor do que o poder do amor.",
+      "C": "o poder deve ser compartilhado entre aqueles que se amam.",
+      "D": "o amor pelo poder é capaz de desunir cada vez mais as pessoas.",
+      "E": "a paz será alcançada quando a busca pelo poder deixar de existir."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q092_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 93,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "DON",
+    "alternativas": {
+      "A": "predominância do uso da linguagem informal sobre a língua padrão.",
+      "B": "dificuldade de reconhecer a existência de diferentes usos da linguagem.",
+      "C": "aceitação dos regionalismos utilizados por pessoas de diferentes lugares.",
+      "D": "necessidade de estudo da língua inglesa por parte dos personagens.",
+      "E": "facilidade de compreensão entre falantes com sotaques distintos. *amar25dom2* L"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q093_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 94,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "I, too I, too, sing",
+    "alternativas": {
+      "A": "coragem, pela superação.",
+      "B": "vergonha, pelo retraimento.",
+      "C": "compreensão, pela aceitação.",
+      "D": "superioridade, pela arrogância.",
+      "E": "resignação, pela submissão."
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 95,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "23 February 2012 Last update at 16:53 GMT BBC World Service J. K. Rowling to pen first novel for adults",
+    "alternativas": {
+      "A": "informar que a famosa série Harry Potter será adaptada para o público adulto.",
+      "B": "divulgar a publicação do romance por J. K. Rowling inteiramente para adultos.",
+      "C": "promover a nova editora que irá publicar os próximos livros de J. K. Rowling.",
+      "D": "informar que a autora de Harry Potter agora pretende escrever para adultos.",
+      "E": "SUAS TECNOLOGIAS Questões de 91 a 135 Questões de 91 a 95 (opção espanhol)"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q095_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 91,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Excavarán plaza ceremonial del frontis norte de huaca de la Luna Trujillo, feb. 25 (",
+    "alternativas": {
+      "A": "a pirâmide huaca de la Luna foi construída durante o período colonial peruano.",
+      "B": "o sítio arqueológico contém um altar semicircular bastante deteriorado.",
+      "C": "a pirâmide huaca de la Luna foi construída com cerâmica.",
+      "D": "o sítio arqueológico possui um pátio que foi palco de rituais.",
+      "E": "o sítio arqueológico mantém escombros deixados pela civilização moche."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q091_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 92,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Nuestra comarca del mundo, que hoy llamamos",
+    "alternativas": {
+      "A": "suas relações com as nações exploradoras sempre se caracterizaram por uma rede de dependências.",
+      "B": "seus países sempre foram explorados pelas mesmas nações desde o início do processo de colonização.",
+      "C": "sua sociedade sempre resistiu à aceitação do capitalismo imposto pelo capital estrangeiro.",
+      "D": "suas riquezas sempre foram acumuladas longe dos centros de poder.",
+      "E": "suas riquezas nunca serviram ao enriquecimento das elites locais."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q092_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 93,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Obituario* Lo enterraron en el corazón de un bosque de pinos y sin embargo el ataúd de pino fue importado de Ohio; lo enterraron al borde de una mina de hierro y sin embargo los clavos de su ataúd y el hierro de la pala fueron importados de Pittsburg; lo enterraron junto al mejor pasto de ovejas del mundo y sin embargo las lanas de los festones del ataúd eran de California. Lo enterraron con un traje de New York, un par de zapatos de Boston, una camisa de Cincinatti y unos calcetines de Chicago. Guatemala no facilitó nada al funeral, excepto el cadáver. * Paráfrasis de un famoso texto norteamericano. NOGUER",
+    "alternativas": {
+      "A": "à dependência de produtos estrangeiros por uma nação.",
+      "B": "ao comércio desigual entre Guatemala e Estados Unidos.",
+      "C": "à má qualidade das mercadorias guatemaltecas.",
+      "D": "às dificuldades para a realização de um funeral.",
+      "E": "à ausência de recursos naturais na Guatemala. *amar25dom4* L"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q093_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 94,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "ME REVIENT",
+    "alternativas": {
+      "A": "falta de feminilidade das mulheres que não se dedicam às tarefas domésticas.",
+      "B": "valorização das mulheres que realizam todas as tarefas domésticas.",
+      "C": "inferioridade das mulheres que praticam as tarefas domésticas.",
+      "D": "relevância social das mulheres que possuem empregados para realizar as tarefas domésticas.",
+      "E": "independência das mulheres que não se prendem apenas às tarefas domésticas."
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 95,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Las Malvinas son nuestras Sí, las islas son nuestras. Esta afirmación no se basa en sentimientos nacionalistas, sino en normas y principios del derecho internacional que, si bien pueden suscitar interpretaciones en contrario por parte de los británicos, tienen la fuerza suficiente para imponerse. Los británicos optaron por sostener el derecho de autodeterminación de los habitantes de las islas, invocando la resolución 1514 de las Naciones Unidas, que acordó a los pueblos coloniales el derecho de independizarse de los Estados colonialistas. Pero esta tesitura es también indefendible. La citada resolución se aplica a los casos de pueblos sojuzgados por una potencia extranjera, que no es el caso de Malvinas, donde Gran Bretaña procedió a expulsar a los argentinos que residían en las islas, reemplazándolos por súbditos de la corona que pasaron a ser kelpers y luego ciudadanos británicos.",
+    "alternativas": {
+      "A": "a descolonização das ilhas em disputa está contemplada na lei comum britânica.",
+      "B": "as Nações Unidas estão desacreditadas devido à ambiguidade das suas resoluções.",
+      "C": "o princípio de autodeterminação carece de aplicabilidade no caso das Ilhas Malvinas.",
+      "D": "a população inglesa compreende a reivindicação nacionalista da administração argentina.",
+      "E": "os cidadãos de origem britânica assentados nas ilhas seriam repatriados para a Inglaterra. *amar25dom5* L"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q095_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 96,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Disponível em: www.ivancabral.com.",
+    "alternativas": {
+      "A": "polissemia, ou seja, aos múltiplos sentidos da expressão “rede social” para transmitir a ideia que pretende veicular.",
+      "B": "ironia para conferir um novo significado ao termo “outra coisa”.",
+      "C": "homonímia para opor, a partir do advérbio de lugar, o espaço da população pobre e o espaço da população rica.",
+      "D": "personificação para opor o mundo real pobre ao mundo virtual rico.",
+      "E": "antonímia para comparar a rede mundial de computadores com a rede caseira de descanso da família."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q096_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 97,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Com o texto eletrônico, enfim, parece estar ao alcance de nossos olhos e de nossas mãos um sonho muito antigo da humanidade, que se poderia resumir em duas palavras, universalidade e interatividade.",
+    "alternativas": {
+      "A": "propiciar o livre e imediato acesso às informações e ao intercâmbio de julgamentos.",
+      "B": "globalizar a rede de informações e democratizar o acesso aos saberes.",
+      "C": "expandir as relações interpessoais e dar visibilidade aos interesses pessoais.",
+      "D": "propiciar entretenimento e acesso a produtos e serviços.",
+      "E": "expandir os canais de publicidade e o espaço mercadológico."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q097_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 98,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "O senhor Carta a uma jovem que, estando em uma roda em que dava aos presentes o tratamento de você, se dirigiu ao autor chamando-o “o senhor”: Senhora:",
+    "alternativas": {
+      "A": "única nobreza do plebeu está em não querer esconder a sua condição.”",
+      "B": "“",
+      "C": "“Só poderíeis ter encontrado essa senhoria nas rugas de minha testa.”",
+      "D": "“O território onde eu mando é no país do tempo que foi.”",
+      "E": "“Não é de muito, eu juro, que acontece essa tristeza; mas também não era a vez primeira.” *amar25dom6* L"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q098_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 99,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "L",
+    "alternativas": {
+      "A": "Prova concreta, ao expor o produto ao consumidor.",
+      "B": "Consenso, ao sugerir que todo vendedor tem técnica.",
+      "C": "Raciocínio lógico, ao relacionar uma fruta com um produto eletrônico.",
+      "D": "Comparação, ao enfatizar que os produtos apresentados anteriormente são inferiores.",
+      "E": "Indução, ao elaborar o discurso de acordo com os anseios do consumidor."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q099_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 100,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Não somos tão especiais Todas as características tidas como exclusivas dos humanos são compartilhadas por outros animais, ainda que em menor grau. INTELIGÊNCI",
+    "alternativas": {
+      "A": "definição e hierarquia.",
+      "B": "exemplificação e comparação.",
+      "C": "causa e consequência.",
+      "D": "finalidade e meios.",
+      "E": "autoridade e modelo. *amar25dom7* L"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q100_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 101,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Das irmãs os meus irmãos sujando-se na lama e eis-me aqui cercada de alvura e enxovais eles se provocando e provando do fogo e eu aqui fechada provendo a comida eles se lambuzando e arrotando na mesa e eu a temperada servindo, contida os meus irmãos jogando-se na cama e eis-me afiançada por dote e marido QUEIROZ, S. O sacro ofício. Belo Horizonte: Comunicação, 1980. O poema de Sonia Queiroz apresenta uma voz lírica feminina que contrapõe o estilo de vida do homem ao modelo reservado à mulher. Nessa contraposição, ela conclui que",
+    "alternativas": {
+      "A": "a mulher deve conservar uma assepsia que a distingue de homens, que podem se jogar na lama.",
+      "B": "a palavra “fogo” é uma metáfora que remete ao ato de cozinhar, tarefa destinada às mulheres.",
+      "C": "a luta pela igualdade entre os gêneros depende da ascensão financeira e social das mulheres.",
+      "D": "a cama, como sua “alvura e enxovais”, é um símbolo da fragilidade feminina no espaço doméstico.",
+      "E": "os papéis sociais destinados aos gêneros produzem efeitos e graus de autorrealização desiguais."
+    },
+    "gabarito": "E",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 102,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "O sedutor médio Vamos juntar Nossas rendas e expectativas de vida querida, o que me dizes? Ter 2, 3 filhos e ser meio felizes? VERISSIMO, L. F. Poesia numa hora dessas?! Rio de Janeiro: Objetiva, 2002. No poema O sedutor médio, é possível reconhecer a presença de posições críticas",
+    "alternativas": {
+      "A": "nos três primeiros versos, em que “juntar expectativas de vida” significa que, juntos, os cônjuges poderiam viver mais, o que faz do casamento uma convenção benéfica.",
+      "B": "na mensagem veiculada pelo poema, em que os valores da sociedade são ironizados, o que é acentuado pelo uso do adjetivo “médio” no título e do advérbio “meio” no verso final.",
+      "C": "no verso “e ser meio felizes?”, em que “meio” é sinônimo de metade, ou seja, no casamento, apenas um dos cônjuges se sentiria realizado.",
+      "D": "nos dois primeiros versos, em que “juntar rendas” indica que o sujeito poético passa por dificuldades financeiras e almeja os rendimentos da mulher.",
+      "E": "no título, em que o adjetivo “médio” qualifica o sujeito poético como desinteressante ao sexo oposto e inábil em termos de conquistas amorosas."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q102_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 103,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Nós, brasileiros, estamos acostumados a ver juras de amor, feitas diante de Deus, serem quebradas por traição, interesses financeiros e sexuais. Casais se separam como inimigos, quando poderiam ser bons amigos, sem traumas. Bastante interessante a reportagem sobre separação. Mas acho que os advogados consultados, por sua competência, estão acostumados a tratar de grandes separações. Será que a maioria dos leitores da revista tem obras de arte que precisam ser fotografadas antes da separação? Não seria mais útil dar conselhos mais básicos? Não seria interessante mostrar que a separação amigável não interfere no modo de partilha dos bens? Que, seja qual for o tipo de separação, ela não vai prejudicar o direito à pensão dos filhos? Que acordo amigável deve ser assinado com atenção, pois é bastante complicado mudar suas cláusulas?",
+    "alternativas": {
+      "A": "faz uma síntese do que foi abordado na reportagem.",
+      "B": "discute problemas conjugais que conduzem à separação.",
+      "C": "aborda a importância dos advogados em processos de separação.",
+      "D": "oferece dicas para orientar as pessoas em processos de separação.",
+      "E": "rebate o enfoque dado ao tema pela reportagem, lançando novas ideias."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q103_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 104,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "E-mail com hora programada Redação INFO, 28 de agosto de 2007.",
+    "alternativas": {
+      "A": "eliminar os entraves no envio de mensagens via e-mail.",
+      "B": "viabilizar a aquisição de conhecimento especializado pelo usuário.",
+      "C": "permitir a seleção dos destinatários dos textos enviados.",
+      "D": "controlar a quantidade de informações constantes do corpo do texto.",
+      "E": "divulgar um produto ampliador da funcionalidade de um recurso comunicativo. *amar25dom8* L"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q104_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 105,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Lugar de mulher também é na oficina. Pelo menos nas oficinas dos cursos da área automotiva fornecidos pela Prefeitura, a presença feminina tem aumentado ano a ano. De cinco mulheres matriculadas em 2005, a quantidade saltou para 79 alunas inscritas neste ano nos cursos de mecânica automotiva, eletricidade veicular, injeção eletrônica, repintura e funilaria.",
+    "alternativas": {
+      "A": "demonstrar que a situação das mulheres mudou na sociedade contemporânea.",
+      "B": "defender a participação da mulher na sociedade atual.",
+      "C": "comparar esse enunciado com outro: “lugar de mulher é na cozinha”.",
+      "D": "criticar a presença de mulheres nas oficinas dos cursos da área automotiva.",
+      "E": "distorcer o sentido da frase “lugar de mulher é na cozinha”."
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 106,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Disponível em: www.portaldapropaganda.com.br.",
+    "alternativas": {
+      "A": "assumir uma atitude reflexiva diante dos fenômenos naturais.",
+      "B": "evitar o consumo excessivo de produtos reutilizáveis.",
+      "C": "aderir à onda sustentável, evitando o consumo excessivo.",
+      "D": "abraçar a campanha, desenvolvendo projetos sustentáveis.",
+      "E": "consumir produtos de modo responsável e ecológico."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q106_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 107,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "metaforização do sentido literal do verbo “beber”.",
+      "B": "aproximação exagerada da estética abstracionista.",
+      "C": "apresentação gradativa da coloquialidade da linguagem.",
+      "D": "exploração hiperbólica da expressão “inúmeras coroas”.",
+      "E": "citação aleatória de nomes de diferentes artistas."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q107_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 108,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "O trovador Sentimentos em mim do asperamente dos homens das primeiras eras...",
+    "alternativas": {
+      "A": "abordado subliminarmente, por meio de expressões como “coração arlequinal” que, evocando o carnaval, remete à brasilidade.",
+      "B": "verificado já no título, que remete aos repentistas nordestinos, estudados por Mário de Andrade em suas viagens e pesquisas folclóricas.",
+      "C": "lamentado pelo eu lírico, tanto no uso de expressões como “Sentimentos em mim do asperamente” (v. 1), “frio” (v. 6), “alma doente” (v. 7), como pelo som triste do alaúde “Dlorom” (v. 9).",
+      "D": "problematizado na oposição tupi (selvagem) x alaúde (civilizado), apontando a síntese nacional que seria proposta no Manifesto Antropófago, de Oswald de Andrade.",
+      "E": "exaltado pelo eu lírico, que evoca os “sentimentos dos homens das primeiras eras” para mostrar o orgulho brasileiro por suas raízes indígenas. *amar25dom9* L"
+    },
+    "gabarito": "D",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 109,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Verbo ser QU",
+    "alternativas": {
+      "E": "na certeza da exclusão, revelada pela indiferença de seus pares.",
+      "A": "no conflito do padrão corporal imposto contra as convicções de ser autêntico e singular.",
+      "B": "na aceitação das imposições da sociedade seguindo a influência de outros.",
+      "C": "na confiança no futuro, ofuscada pelas tradições e culturas familiares.",
+      "D": "no anseio de divulgar hábitos enraizados, negligenciados por seus antepassados."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q109_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 110,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "E": "no falso elogio à originalidade atribuída a esse personagem, responsável por seu sucesso no aprendizado das regras de linguagem da sociedade.",
+      "A": "na imagem do títere ou fantoche em que o personagem acaba por se transformar, acreditando dominar os jogos de poder na linguagem.",
+      "B": "na alusão à falta de articulações e reflexos do personagem, dando a entender que ele não possui o manejo dos jogos discursivos em todas as situações.",
+      "C": "no comentário, feito em tom de censura pelo autor, sobre as frases obscenas que o personagem emite em determinados ambientes sociais.",
+      "D": "nas expressões que mostram tons opostos nos discursos empregados aleatoriamente pelo personagem em conversas com interlocutores variados."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q110_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 111,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Labaredas nas trevas Fragmentos do diário secreto de Teodor Konrad Nalecz Korzeniowski 20 D",
+    "alternativas": {
+      "E": "finalidade, segundo a qual se articulam duas partes de um texto em que uma apresenta o meio, por exemplo, para uma ação e a outra, o desfecho da mesma. *amar25dom10* L",
+      "A": "causalidade, segundo a qual se relacionam as partes de um texto, em que uma contém a causa e a outra, a consequência.",
+      "B": "temporalidade, segundo a qual se articulam as partes de um texto, situando no tempo o que é relatado nas partes em questão.",
+      "C": "condicionalidade, segundo a qual se combinam duas partes de um texto, em que uma resulta ou depende de circunstâncias apresentadas na outra.",
+      "D": "adversidade, segundo a qual se articulam duas partes de um texto em que uma apresenta uma orientação argumentativa distinta e oposta à outra."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q111_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 112,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Cartaz afixado nas bibliotecas centrais e setoriais da Universidade Federal de Goiás (UFG), 2011. Considerando-se a finalidade comunicativa comum do gênero e o contexto específico do Sistema de Biblioteca da UFG, esse cartaz tem função predominantemente",
+    "alternativas": {
+      "A": "socializadora, contribuindo para a popularização da arte.",
+      "B": "sedutora, considerando a leitura como uma obra de arte.",
+      "C": "estética, propiciando uma apreciação despretensiosa da obra.",
+      "D": "educativa, orientando o comportamento de usuários de um serviço.",
+      "E": "contemplativa, evidenciando a importância de artistas internacionais."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q112_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 113,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "reforçar a relação entre o esporte futebol e o samba.",
+      "E": "ser associado ao desenvolvimento do país.",
+      "B": "ser apresentado como uma atividade de lazer.",
+      "C": "ser identificado com a alegria da população brasileira.",
+      "D": "promover a reflexão sobre a alienação provocada pelo futebol."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q113_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 114,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "LXXVIII (Camões, 1525?-1580) Leda serenidade deleitosa, Que representa em terra um paraíso;",
+    "alternativas": {
+      "E": "apresentarem um retrato ideal de mulher marcado pela emotividade e o conflito interior, evidenciados pela expressão da moça e pelos adjetivos do poema. *amar25dom11* L",
+      "A": "apresentarem um retrato realista, evidenciado pelo unicórnio presente na pintura e pelos adjetivos usados no poema.",
+      "B": "valorizarem o excesso de enfeites na apresentação pessoal e na variação de atitudes da mulher, evidenciadas pelos adjetivos do poema.",
+      "C": "apresentarem um retrato ideal de mulher marcado pela sobriedade e o equilíbrio, evidenciados pela postura, expressão e vestimenta da moça e os adjetivos usados no poema.",
+      "D": "desprezarem o conceito medieval da idealização da mulher como base da produção artística, evidenciado pelos adjetivos usados no poema."
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia2/q114_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 115,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "TEXTO I",
+    "alternativas": {
+      "A": "a língua portuguesa de antigamente carecia de termos para se referir a fatos e coisas do cotidiano.",
+      "B": "o português brasileiro se constitui evitando a ampliação do léxico proveniente do português europeu.",
+      "C": "a heterogeneidade do português leva a uma estabilidade do seu léxico no eixo temporal.",
+      "D": "o português brasileiro apoia-se no léxico inglês para ser reconhecido como língua independente.",
+      "E": "o léxico do português representa uma realidade linguística variável e diversificada."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q115_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 116,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "H",
+    "alternativas": {
+      "A": "conformidade, pois as condições meteorológicas evidenciam um acontecimento ruim.",
+      "B": "reflexibilidade, pois o personagem se refere aos tubarões usando um pronome reflexivo.",
+      "C": "condicionalidade, pois a atenção dos personagens é a condição necessária para a sua sobrevivência.",
+      "D": "possibilidade, pois a proximidade dos tubarões leva à suposição do perigo iminente para os homens.",
+      "E": "impessoalidade, pois o personagem usa a terceira pessoa para expressar o distanciamento dos fatos."
+    },
+    "gabarito": "D",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 117,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Cabeludinho Quando a Vó me recebeu nas férias, ela me apresentou aos amigos:",
+    "alternativas": {
+      "E": "a valorização da dimensão lúdica e poética presente nos usos coloquiais da linguagem. *amar25dom12* L",
+      "A": "os desvios linguísticos cometidos pelos personagens do texto.",
+      "B": "a importância de certos fenômenos gramaticais para o conhecimento da língua portuguesa.",
+      "C": "a distinção clara entre a norma culta e as outras variedades linguísticas.",
+      "D": "o relato fiel de episódios vividos por Cabeludinho durante as suas férias."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q117_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 118,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Desde dezoito anos que o tal patriotismo lhe absorvia e por ele fizera a tolice de estudar inutilidades. Que lhe importavam os rios?",
+    "alternativas": {
+      "E": "a certeza da fertilidade da terra e da produção agrícola incondicional faz parte de um projeto ideológico salvacionista, tal como foi difundido na época do autor.",
+      "A": "a dedicação de Policarpo Quaresma ao conhecimento da natureza brasileira levou-o a estudar inutilidades, mas possibilitou-lhe uma visão mais ampla do país.",
+      "B": "a curiosidade em relação aos heróis da pátria levou-o ao ideal de prosperidade e democracia que o personagem encontra no contexto republicano.",
+      "C": "a construção de uma pátria a partir de elementos míticos, como a cordialidade do povo, a riqueza do solo e a pureza linguística, conduz à frustração ideológica.",
+      "D": "a propensão do brasileiro ao riso, ao escárnio, justifica a reação de decepção e desistência de Policarpo Quaresma, que prefere resguardar-se em seu gabinete."
+    },
+    "gabarito": "C",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 119,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "o jornalista seleciona as informações mais importantes antes de publicá-las.",
+      "B": "o ser humano precisa de muito mais conhecimento do que a tecnologia pode dar.",
+      "C": "o problema da sociedade moderna é a abundância de informações e de liberdade de escolha.",
+      "D": "a oferta é incoerente com o tempo que as pessoas têm para digerir a quantidade de informação disponível.",
+      "E": "a utilização dos meios de informação acontece de maneira desorganizada e sem controle efetivo. *amar25dom13* L"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q119_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 120,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "TEXTO I",
+    "alternativas": {
+      "A": "estilo simples e marcado pela interlocução com o receptor, típico da comunicação radiofônica.",
+      "E": "objetividade na linguagem caracterizada pela ocorrência rara de adjetivos, de modo a diminuir as marcas de subjetividade do locutor.",
+      "B": "lirismo na abordagem do problema, o que o afasta de uma possível situação real de comunicação radiofônica.",
+      "C": "marcação rítmica dos versos, o que evidencia o fato de o texto pertencer a uma modalidade de comunicação diferente da radiofônica.",
+      "D": "direcionamento do texto a um ouvinte específico, divergindo da finalidade de comunicação do rádio, que é atingir as massas."
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 121,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "força e a resistência humanas superam os danos provocados pelo poder corrosivo das palavras.",
+      "E": "Como produto da criatividade humana, a linguagem tem seu alcance limitado pelas intenções e gestos.",
+      "B": "As relações humanas, em suas múltiplas esferas, têm seu equilíbrio vinculado ao significado das palavras.",
+      "C": "O significado dos nomes não expressa de forma justa e completa a grandeza da luta do homem pela vida.",
+      "D": "Renovando o significado das palavras, o tempo permite às gerações perpetuar seus valores e suas crenças."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q121_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 122,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Pote Cru é meu pastor. Ele me guiará. Ele está comprometido de monge. De tarde deambula no azedal entre torsos de cachorro, trampas, trapos, panos de regra, couros, de rato ao podre, vísceras de piranhas, baratas albinas, dálias secas, vergalhos de lagartos, linguetas de sapatos, aranhas dependuradas em gotas de orvalho etc. etc. Pote Cru, ele dormia nas ruínas de um convento Foi encontrado em osso. Ele tinha uma voz de oratórios perdidos. B",
+    "alternativas": {
+      "A": "entende a necessidade de todo poeta ter voz de oratórios perdidos.",
+      "B": "elege-o como pastor a fim de ser guiado para a salvação divina.",
+      "C": "valoriza nos percursos do pastor a conexão entre as ruínas e a tradição.",
+      "D": "necessita de um guia para a descoberta das coisas da natureza.",
+      "E": "acompanha-o na opção pela insignificância das coisas. *amar25dom14* L"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q122_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 123,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Picasso, P. Les Demoiselles d’",
+    "alternativas": {
+      "A": "pintura de modelos em planos irregulares.",
+      "B": "mulher como temática central da obra.",
+      "C": "cena representada por vários modelos.",
+      "D": "oposição entre tons claros e escuros.",
+      "E": "nudez explorada como objeto de arte."
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 124,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Capa do LP Os Mutantes, 1968. Disponível em: http://mutantes.com.",
+    "alternativas": {
+      "A": "letras e melodias com características amargas e depressivas.",
+      "B": "arranjos baseados em ritmos e melodias nordestinos.",
+      "C": "sonoridades experimentais e confluência de elementos populares e eruditos.",
+      "D": "temas que refletem situações domésticas ligadas à tradição popular.",
+      "E": "ritmos contidos e reservados em oposição aos modelos estrangeiros."
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia2/q124_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 125,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Sou feliz pelos amigos que tenho. Um deles muito sofre pelo meu descuido com o vernáculo. Por alguns anos ele sistematicamente me enviava missivas eruditas com precisas informações sobre as regras da gramática, que eu não respeitava, e sobre a grafia correta dos vocábulos, que eu ignorava. Fi-lo sofrer pelo uso errado que fiz de uma palavra num desses meus badulaques. Acontece que eu, acostumado a conversar com a gente das Minas Gerais, falei em “varreção” — do verbo “varrer”. De fato, trata-se de um equívoco que, num vestibular, poderia me valer uma reprovação. Pois o meu amigo, paladino da língua portuguesa, se deu ao trabalho de fazer um xerox da página 827 do dicionário, aquela que tem, no topo, a fotografia de uma “varroa”(sic!) (você não sabe o que é uma “varroa”?) para corrigir-me do meu erro.",
+    "alternativas": {
+      "E": "a necessidade do dicionário como guia de adequação linguística em contextos informais privados. *amar25dom15* L",
+      "A": "a supremacia das formas da língua em relação ao seu conteúdo.",
+      "B": "a necessidade da norma padrão em situações formais de comunicação escrita.",
+      "C": "a obrigatoriedade da norma culta da língua, para a garantia de uma comunicação efetiva.",
+      "D": "a importância da variedade culta da língua, para a preservação da identidade cultural de um povo."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q125_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 126,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Logia e mitologia Meu coração de mil e novecentos e setenta e dois já não palpita fagueiro sabe que há morcegos de pesadas olheiras que há cabras malignas que há cardumes de hienas infiltradas no vão da unha na alma um porco belicoso de radar e que sangra e ri e que sangra e ri a vida anoitece provisória centuriões sentinelas do Oiapoque ao Chuí. C",
+    "alternativas": {
+      "A": "o poeta utiliza uma série de metáforas zoológicas com significado impreciso.",
+      "B": "“morcegos”, “cabras” e “hienas” metaforizam as vítimas do regime militar vigente.",
+      "C": "o “porco”, animal difícil de domesticar, representa os movimentos de resistência.",
+      "D": "o poeta caracteriza o momento de opressão através de alegorias de forte poder de impacto.",
+      "E": "“centuriões” e “sentinelas” simbolizam os agentes que garantem a paz social experimentada."
+    },
+    "gabarito": "D",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 127,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Desabafo Desculpem-me, mas não dá pra fazer uma cronicazinha divertida hoje. Simplesmente não dá. Não tem como disfarçar: esta é uma típica manhã de segunda- feira.",
+    "alternativas": {
+      "A": "o discurso do enunciador tem como foco o próprio código.",
+      "B": "a atitude do enunciador se sobrepõe àquilo que está sendo dito.",
+      "C": "o interlocutor é o foco do enunciador na construção da mensagem.",
+      "D": "o referente é o elemento que se sobressai em detrimento dos demais.",
+      "E": "o enunciador tem como objetivo principal a manutenção da comunicação."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q127_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 128,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "E": "defende que a quantidade de falantes do português brasileiro ainda é insuficiente para acabar com a hegemonia do antigo colonizador. *amar25dom16* L",
+      "A": "adapta o nível de linguagem à situação comunicativa, uma vez que o gênero entrevista requer o uso da norma padrão.",
+      "B": "apresenta argumentos carentes de comprovação científica e, por isso, defende um ponto de vista difícil de ser verificado na materialidade do texto.",
+      "C": "propõe que o padrão normativo deve ser usado por falantes escolarizados como ele, enquanto a norma coloquial deve ser usada por falantes não escolarizados.",
+      "D": "acredita que a língua genuinamente brasileira está em construção, o que o obriga a incorporar em seu cotidiano a gramática normativa do português europeu."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q128_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 129,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "O léxico e a cultura Potencialmente, todas as línguas de todos os tempos podem candidatar-se a expressar qualquer conteúdo.",
+    "alternativas": {
+      "A": "a inexistência de conteúdo comum a todas as línguas, pois o léxico contempla visão de mundo particular específica de uma cultura.",
+      "B": "a existência de línguas limitadas por não permitirem ao falante nativo se comunicar perfeitamente a respeito de qualquer conteúdo.",
+      "C": "a tendência a serem mais restritos o vocabulário e a gramática de línguas indígenas, se comparados com outras línguas de origem europeia.",
+      "D": "a existência de diferenças vocabulares entre os idiomas, especificidades relacionadas à própria cultura dos falantes de uma comunidade.",
+      "E": "a atribuição de maior importância sociocultural às línguas contemporâneas, pois permitem que sejam abordadas quaisquer temáticas, sem dificuldades."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q129_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 130,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "o estabelecimento de uma norma prescinde de uma pesquisa histórica.",
+      "B": "os estudos clássicos de sintaxe histórica enfatizam a variação e a mudança na língua.",
+      "C": "a avaliação crítica e hierarquizante dos usos da língua fundamenta a definição da norma.",
+      "D": "a adoção de uma única norma revela uma atitude adequada para os estudos linguísticos.",
+      "E": "os comportamentos puristas são prejudiciais à compreensão da constituição linguística."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q130_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 131,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "B",
+    "alternativas": {
+      "A": "liberdade, representando a vida de mineiros à procura da salvação.",
+      "B": "credibilidade, atendendo a encomendas dos nobres de Minas Gerais.",
+      "C": "simplicidade, demonstrando compromisso com a contemplação do divino.",
+      "D": "personalidade, modelando uma imagem sacra com feições populares.",
+      "E": "singularidade, esculpindo personalidades do reinado nas obras divinas. *amar25dom17* L"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q131_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 132,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "NIEM",
+    "alternativas": {
+      "A": "Diminuição da frequência cardíaca em repouso e aumento da oxigenação do sangue.",
+      "B": "Diminuição da oxigenação do sangue e aumento da frequência cardíaca em repouso.",
+      "C": "Diminuição da frequência cardíaca em repouso e aumento da gordura corporal.",
+      "D": "Diminuição do tônus muscular e aumento do percentual de gordura corporal.",
+      "E": "Diminuição da gordura corporal e aumento da frequência cardíaca em repouso."
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 133,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "Disponível em: www.assine.abril.com.br.",
+    "alternativas": {
+      "A": "proporcionou mudanças no paradigma de consumo e oferta de revistas e livros.",
+      "B": "incentivou a desvalorização das revistas e livros impressos.",
+      "C": "viabilizou a aquisição de novos equipamentos digitais.",
+      "D": "aqueceu o mercado de venda de computadores.",
+      "E": "diminuiu os incentivos à compra de eletrônicos."
+    },
+    "gabarito": "A",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 134,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "“Ele era o inimigo do rei”, nas palavras de seu biógrafo, Lira Neto. Ou, ainda, “um romancista que colecionava desafetos, azucrinava D. Pedro II e acabou inventando o Brasil”.",
+    "alternativas": {
+      "A": "a digitalização dos textos é importante para que os leitores possam compreender seus romances.",
+      "B": "o conhecido autor de O guarani e Iracema foi importante porque deixou uma vasta obra literária com temática atemporal.",
+      "C": "a divulgação das obras de José de Alencar, por meio da digitalização, demonstra sua importância para a história do Brasil Imperial.",
+      "D": "a digitalização dos textos de José de Alencar terá importante papel na preservação da memória linguística e da identidade nacional.",
+      "E": "o grande romancista José de Alencar é importante porque se destacou por sua temática indianista."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q134_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 135,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Ciencias da Natureza e suas Tecnologias",
+    "enunciado": "eu gostava muito de passeá... saí com as minhas colegas... brincá na porta di casa di vôlei... andá de patins... bicicleta... quando eu levava um tombo ou outro... eu era a::... a palhaça da turma... ((risos))... eu acho que foi uma das fases mais... assim... gostosas da minha vida foi... essa fase de quinze... dos meus treze aos dezessete anos...",
+    "alternativas": {
+      "A": "predomínio de linguagem informal entrecortada por pausas.",
+      "B": "vocabulário regional desconhecido em outras variedades do português.",
+      "C": "realização do plural conforme as regras da tradição gramatical.",
+      "D": "ausência de elementos promotores de coesão entre os eventos narrados.",
+      "E": "SUAS TECNOLOGIAS Questões de 136 a 180"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q135_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 136,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "O diretor de uma escola convidou os 280 alunos de terceiro ano a participarem de uma brincadeira. Suponha que existem 5 objetos e 6 personagens numa casa de 9 cômodos; um dos personagens esconde um dos objetos em um dos cômodos da casa. O objetivo da brincadeira é adivinhar qual objeto foi escondido por qual personagem e em qual cômodo da casa o objeto foi escondido. Todos os alunos decidiram participar.",
+    "alternativas": {
+      "A": "10 alunos a mais do que possíveis respostas distintas.",
+      "B": "20 alunos a mais do que possíveis respostas distintas.",
+      "C": "119 alunos a mais do que possíveis respostas distintas.",
+      "D": "260 alunos a mais do que possíveis respostas distintas.",
+      "E": "270 alunos a mais do que possíveis respostas distintas."
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q136_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 137,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Um biólogo mediu a altura de cinco árvores distintas e representou-as em uma mesma malha quadriculada, utilizando escalas diferentes, conforme indicações na figura a seguir. I II III IV V 1:100 2:100 2:300 1:300 2:300 Qual é a árvore que apresenta a maior altura real?",
+    "alternativas": {
+      "A": "I",
+      "B": "II",
+      "C": "III",
+      "D": "IV",
+      "E": "V"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q137_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 138,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Em um jogo há duas urnas com 10 bolas de mesmo tamanho em cada urna.",
+    "alternativas": {
+      "A": "Azul.",
+      "B": "Amarela.",
+      "C": "Branca.",
+      "D": "Verde.",
+      "E": "Vermelha."
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q138_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 139,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Os hidrômetros são marcadores de consumo de água em residências e estabelecimentos comerciais. Existem vários modelos de mostradores de hidrômetros, sendo que alguns deles possuem uma combinação de um mostrador e dois relógios de ponteiro. O número formado pelos quatro primeiros algarismos do mostrador fornece o consumo em m3, e os dois últimos algarismos representam, respectivamente, as centenas e dezenas de litros de água consumidos. Um dos relógios de ponteiros indica a quantidade em litros, e o outro em décimos de litros, conforme ilustrados na figura a seguir. 1 000 Disponível em: www.aguasdearacoiaba.com.br (adaptado). Considerando as informações indicadas na figura, o consumo total de água registrado nesse hidrômetro, em litros, é igual a",
+    "alternativas": {
+      "A": "3 534,85.",
+      "B": "3 544,20.",
+      "C": "3 534 850,00.",
+      "D": "3 534 859,35.",
+      "E": "3 534 850,39. *amar25dom19* MT - 2º dia | Caderno 5 - AMARELO - Página 20"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q139_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 140,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "O dono de uma farmácia resolveu colocar à vista do público o gráfico mostrado a seguir, que apresenta a evolução do total de vendas (em Reais) de certo medicamento ao longo do ano de 2011. Jan Fev Mar",
+    "alternativas": {
+      "A": "março e abril.",
+      "B": "março e agosto.",
+      "C": "agosto e setembro.",
+      "D": "junho e setembro.",
+      "E": "junho e agosto."
+    },
+    "gabarito": "E",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 141,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Maria quer inovar em sua loja de embalagens e decidiu vender caixas com diferentes formatos. Nas imagens apresentadas estão as planificações dessas caixas. Quais serão os sólidos geométricos que Maria obterá a partir dessas planificações?",
+    "alternativas": {
+      "A": "Cilindro, prisma de base pentagonal e pirâmide.",
+      "B": "Cone, prisma de base pentagonal e pirâmide.",
+      "C": "Cone, tronco de pirâmide e pirâmide.",
+      "D": "Cilindro, tronco de pirâmide e prisma.",
+      "E": "Cilindro, prisma e tronco de cone. ,"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q141_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 142,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Jogar baralho é uma atividade que estimula o raciocínio. Um jogo tradicional é a Paciência, que utiliza 52 cartas. Inicialmente são formadas sete colunas com as cartas.",
+    "alternativas": {
+      "A": "21.",
+      "B": "24.",
+      "C": "26.",
+      "D": "28.",
+      "E": "31."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q142_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 143,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "O gráfico mostra a variação da extensão média de gelo marítimo, em milhões de quilômetros quadrados, comparando dados dos anos 1995, 1998, 2000, 2005 e 2007. Os dados correspondem aos meses de junho a setembro. O Ártico começa a recobrar o gelo quando termina o verão, em meados de setembro. O gelo do mar atua como o sistema de resfriamento da Terra, refletindo quase toda a luz solar de volta ao espaço. Águas de oceanos escuros, por sua vez, absorvem a luz solar e reforçam o aquecimento do Ártico, ocasionando derretimento crescente do gelo. Extensão de gelo marítimo 15 12 9 6 3 Junho Julho",
+    "alternativas": {
+      "A": "1995.",
+      "B": "1998.",
+      "C": "2000.",
+      "D": "2005.",
+      "E": "2007. *amar25dom20* MT - 2º dia | Caderno 5 - AMARELO - Página 21"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q143_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 144,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Uma pesquisa realizada por estudantes da Faculdade de Estatística mostra, em horas por dia, como os jovens entre 12 e 18 anos gastam seu tempo, tanto durante a semana (de segunda-feira a sexta-feira), como no fim de semana (sábado e domingo).",
+    "alternativas": {
+      "A": "20",
+      "B": "21",
+      "C": "24",
+      "D": "25",
+      "E": "27"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q144_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 145,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Certo vendedor tem seu salário mensal calculado da seguinte maneira: ele ganha um valor fixo de R$ 750,00, mais uma comissão de R$ 3,00 para cada produto vendido. Caso ele venda mais de 100 produtos, sua comissão passa a ser de R$ 9,00 para cada produto vendido, a partir do 101º produto vendido. Com essas informações, o gráfico que melhor representa a relação entre salário e o número de produtos vendidos é",
+    "alternativas": {
+      "A": "Salário em R$ Produtos vendidos 0 25 50 75 100 125 150 175 200 225 2 250 2 000 1 750 1 500 1 250 1 000 750 500 250 0",
+      "B": "Salário em R$ Produtos vendidos 0 25 50 75 100 125 150 175 200 225 2 250 2 000 1 750 1 500 1 250 1 000 750 500 250 0",
+      "C": "Salário em R$ Produtos vendidos 0 25 50 75 100 125 150 175 200 225 2 250 2 000 1 750 1 500 1 250 1 000 750 500 250 0",
+      "D": "Salário em R$ Produtos vendidos 0 25 50 75 100 125 150 175 200 225 2 250 2 000 1 750 1 500 1 250 1 000 750 500 250 0",
+      "E": "Salário em R$ Produtos vendidos 0 25 50 75 100 125 150 175 200 225 2 250 2 000 1 750 1 500 1 250 1 000 750 500 250 0 *amar25dom21* MT - 2º dia | Caderno 5 - AMARELO - Página 22"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q145_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 146,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Um maquinista de trem ganha R$ 100,00 por viagem e só pode viajar a cada 4 dias. Ele ganha somente se fizer a viagem e sabe que estará de férias de 1º a 10 de junho, quando não poderá viajar. Sua primeira viagem ocorreu no dia primeiro de janeiro. Considere que o ano tem 365 dias. Se o maquinista quiser ganhar o máximo possível, quantas viagens precisará fazer?",
+    "alternativas": {
+      "A": "37",
+      "B": "51",
+      "C": "88",
+      "D": "89",
+      "E": "91"
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia2/q146_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 147,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "O nível subiria 0,2 cm, fazendo a água ficar com 20,2 cm de altura.",
+      "B": "O nível subiria 1 cm, fazendo a água ficar com 21 cm de altura.",
+      "C": "O nível subiria 2 cm, fazendo a água ficar com 22 cm de altura.",
+      "D": "O nível subiria 8 cm, fazendo a água transbordar.",
+      "E": "O nível subiria 20 cm, fazendo a água transbordar."
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia2/q147_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 148,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Jorge quer instalar aquecedores no seu salão de beleza para melhorar o conforto dos seus clientes no inverno. Ele estuda a compra de unidades de dois tipos de aquecedores: modelo",
+    "alternativas": {
+      "A": "e quatro unidades do tipo B.",
+      "B": "três unidades do tipo",
+      "C": "duas unidades do tipo",
+      "D": "uma unidade do tipo",
+      "E": "nenhuma unidade do tipo"
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia2/q148_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 149,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Para decorar a fachada de um edifício, um arquiteto projetou a colocação de vitrais compostos de quadrados de lado medindo 1 m, conforme a figura a seguir. A B C",
+    "alternativas": {
+      "D": "R$ 42,50",
+      "C": "R$ 40,00",
+      "A": "R$ 22,50",
+      "B": "R$ 35,00",
+      "E": "R$ 45,00 *amar25dom22* MT - 2º dia | Caderno 5 - AMARELO - Página 23"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q149_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 150,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "1.",
+      "B": "2.",
+      "C": "3.",
+      "D": "4.",
+      "E": "5."
+    },
+    "gabarito": "D",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 151,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Um forro retangular de tecido traz em sua etiqueta a informação de que encolherá após a primeira lavagem mantendo, entretanto, seu formato.",
+    "alternativas": {
+      "A": "2xy",
+      "B": "15 − 3x",
+      "C": "15 − 5y",
+      "D": "−5y − 3x",
+      "E": "5y + 3x − xy"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q151_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 152,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "12 000.",
+      "B": "12 600.",
+      "C": "13 200.",
+      "D": "13 800.",
+      "E": "15 000."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q152_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 153,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "s = k.b.d2 x2",
+      "B": "s = k.b.d x2",
+      "C": "s = k.b.d2 x",
+      "D": "s = k.b2.d x",
+      "E": "s = k.b.2d 2x *amar25dom23* MT - 2º dia | Caderno 5 - AMARELO - Página 24"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q153_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 154,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "João propôs um desafio a Bruno, seu colega de classe: ele iria descrever um deslocamento pela pirâmide a seguir e Bruno deveria desenhar a projeção desse deslocamento no plano da base da pirâmide. O deslocamento descrito por João foi: mova-se pela pirâmide, sempre em linha reta, do ponto",
+    "alternativas": {
+      "A": "ao ponto E, a seguir do ponto",
+      "E": "ao ponto M, e depois de M a C. O desenho que Bruno deve fazer é",
+      "B": ""
+    },
+    "gabarito": "C",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 155,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "5",
+      "B": "11",
+      "C": "13",
+      "D": "23",
+      "E": "33"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q155_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 156,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Nos shopping centers costumam existir parques com vários brinquedos e jogos. Os usuários colocam créditos em um cartão, que são descontados por cada período de tempo de uso dos jogos. Dependendo da pontuação da criança no jogo, ela recebe um certo número de tíquetes para trocar por produtos nas lojas dos parques. Suponha que o período de uso de um brinquedo em certo shopping custa R$ 3,00 e que uma bicicleta custa 9 200 tíquetes. Para uma criança que recebe 20 tíquetes por período de tempo que joga, o valor, em reais, gasto com créditos para obter a quantidade de tíquetes para trocar pela bicicleta é",
+    "alternativas": {
+      "A": "153.",
+      "B": "460.",
+      "C": "1 218.",
+      "D": "1 380.",
+      "E": "3 066. *amar25dom24* MT - 2º dia | Caderno 5 - AMARELO - Página 25"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q156_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 157,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "João decidiu contratar os serviços de uma empresa por telefone através do S",
+    "alternativas": {
+      "A": "centena.",
+      "B": "dezena de milhar.",
+      "C": "centena de milhar.",
+      "D": "milhão.",
+      "E": "centena de milhão."
+    },
+    "gabarito": "C",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 158,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "O gráfico fornece os valores das ações da empresa XPN, no período das 10 às 17 horas, num dia em que elas oscilaram acentuadamente em curtos intervalos de tempo. 460 380 330 280 200 150 100 10 11 12 13 14 15 16 17 Valor da",
+    "alternativas": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4",
+      "E": "5"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q158_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 159,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "segunda e na terça-feira.",
+      "B": "terça e na quarta-feira.",
+      "C": "terça e na quinta-feira.",
+      "D": "quinta-feira, no sábado e no domingo.",
+      "E": "segunda, na quinta e na sexta-feira."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q159_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 160,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Uma mãe recorreu à bula para verificar a dosagem de um remédio que precisava dar a seu filho. Na bula, recomendava-se a seguinte dosagem: 5 gotas para cada 2 kg de massa corporal a cada 8 horas. Se a mãe ministrou corretamente 30 gotas do remédio a seu filho a cada 8 horas, então a massa corporal dele é de",
+    "alternativas": {
+      "A": "12 kg.",
+      "B": "16 kg.",
+      "C": "24 kg.",
+      "D": "36 kg.",
+      "E": "75 kg. *amar25dom25* MT - 2º dia | Caderno 5 - AMARELO - Página 26"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q160_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 161,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "O esporte de alta competição da atualidade produziu uma questão ainda sem resposta: Qual é o limite do corpo humano? O maratonista original, o grego da lenda, morreu de fadiga por ter corrido 42 quilômetros. O americano Dean Karnazes, cruzando sozinho as planícies da Califórnia, conseguiu correr dez vezes mais em 75 horas. Um professor de Educação Física, ao discutir com a turma o texto sobre a capacidade do maratonista americano, desenhou na lousa uma pista reta de 60 centímetros, que representaria o percurso referido. Disponível em: http://veja.abril.com.br.",
+    "alternativas": {
+      "A": "1:700",
+      "B": "1:7 000",
+      "C": "1:70 000",
+      "D": "1:700 000",
+      "E": "1:7 000 000"
+    },
+    "gabarito": "D",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 162,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "O losango representado na Figura 1 foi formado pela união dos centros das quatro circunferências tangentes, de raios de mesma medida. Figura 1 Dobrando-se o raio de duas das circunferências centradas em vértices opostos do losango e ainda mantendo-se a configuração das tangências, obtém-se uma situação conforme ilustrada pela Figura 2. Figura 2 O perímetro do losango da Figura 2, quando comparado ao perímetro do losango da Figura 1, teve um aumento de",
+    "alternativas": {
+      "A": "300%.",
+      "B": "200%.",
+      "C": "150%.",
+      "D": "100%.",
+      "E": "50%."
+    },
+    "gabarito": "E",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 163,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "José, Carlos e Paulo devem transportar em suas bicicletas uma certa quantidade de laranjas. Decidiram dividir o trajeto a ser percorrido em duas partes, sendo que ao final da primeira parte eles redistribuiriam a quantidade de laranjas que cada um carregava dependendo do cansaço de cada um. Na primeira parte do trajeto José, Carlos e Paulo dividiram as laranjas na proporção 6 : 5 : 4, respectivamente. Na segunda parte do trajeto José, Carlos e Paulo dividiram as laranjas na proporção 4 : 4 : 2, respectivamente. Sabendo-se que um deles levou 50 laranjas a mais no segundo trajeto, qual a quantidade de laranjas que José, Carlos e Paulo, nessa ordem, transportaram na segunda parte do trajeto?",
+    "alternativas": {
+      "A": "600, 550, 350",
+      "B": "300, 300, 150",
+      "C": "300, 250, 200",
+      "D": "200, 200, 100",
+      "E": "100, 100, 50"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q163_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 164,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Em um blog de variedades, músicas, mantras e informações diversas, foram postados “Contos de Halloween”.",
+    "alternativas": {
+      "A": "0,09.",
+      "B": "0,12.",
+      "C": "0,14.",
+      "D": "0,15.",
+      "E": "0,18. *amar25dom26* MT - 2º dia | Caderno 5 - AMARELO - Página 27"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q164_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 165,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Em exposições de artes plásticas, é usual que estátuas sejam expostas sobre plataformas giratórias. Uma medida de segurança é que a base da escultura esteja integralmente apoiada sobre a plataforma. Para que se providencie o equipamento adequado, no caso de uma base quadrada que será fixada sobre uma plataforma circular, o auxiliar técnico do evento deve estimar a medida R do raio adequado para a plataforma em termos da medida L do lado da base da estátua. Qual relação entre R e L o auxiliar técnico deverá apresentar de modo que a exigência de segurança seja cumprida?",
+    "alternativas": {
+      "A": "R ≥ L / 2",
+      "B": "R ≥ 2L / π",
+      "C": "R ≥ L / π",
+      "D": "R ≥ L / 2",
+      "E": "R ≥ L / (2 2)"
+    },
+    "gabarito": "A",
+    "imagens": [
+      "2012/dia2/q165_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 166,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "O globo da morte é uma atração muito usada em circos. Ele consiste em uma espécie de jaula em forma de uma superfície esférica feita de aço, onde motoqueiros andam com suas motos por dentro.",
+    "alternativas": {
+      "A": "imagem do trajeto feito pelo motoqueiro no plano do chão é melhor representada por",
+      "B": ""
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q166_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 167,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Num projeto da parte elétrica de um edifício residencial a ser construído, consta que as tomadas deverão ser colocadas a 0,20 m acima do piso, enquanto os interruptores de luz deverão ser colocados a 1,47 m acima do piso. Um cadeirante, potencial comprador de um apartamento desse edifício, ao ver tais medidas, alerta para o fato de que elas não contemplarão suas necessidades. Os referenciais de alturas (em metros) para atividades que não exigem o uso de força são mostrados na figura seguinte. Uma proposta substitutiva, relativa às alturas de tomadas e interruptores, respectivamente, que atenderá àquele potencial comprador é",
+    "alternativas": {
+      "A": "0,20 m e 1,45 m.",
+      "B": "0,20 m e 1,40 m.",
+      "C": "0,25 m e 1,35 m.",
+      "D": "0,25 m e 1,30 m.",
+      "E": "0,45 m e 1,20 m. *amar25dom27* MT - 2º dia | Caderno 5 - AMARELO - Página 28"
+    },
+    "gabarito": "E",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 168,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "3,25 × 102 km.",
+      "B": "3,25 × 103 km.",
+      "C": "3,25 × 104 km.",
+      "D": "3,25 × 105 km.",
+      "E": "3,25 × 106 km."
+    },
+    "gabarito": "D",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 169,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Há, em virtude da demanda crescente de economia de água, equipamentos e utensílios como, por exemplo, as bacias sanitárias ecológicas, que utilizam 6 litros de água por descarga em vez dos 15 litros utilizados por bacias sanitárias não ecológicas, conforme dados da",
+    "alternativas": {
+      "A": "24 litros",
+      "B": "36 litros",
+      "C": "40 litros",
+      "D": "42 litros",
+      "E": "50 litros"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q169_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 170,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "Balas W e Pizzaria Y.",
+      "B": "Chocolates X e Tecelagem Z.",
+      "C": "Pizzaria Y e Alfinetes V.",
+      "D": "Pizzaria Y e Chocolates X.",
+      "E": "Tecelagem Z e Alfinetes V."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q170_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 171,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Um laboratório realiza exames em que é possível observar a taxa de glicose de uma pessoa. Os resultados são analisados de acordo com o quadro a seguir. Hipoglicemia taxa de glicose menor ou igual a 70 mg/dL Normal taxa de glicose maior que 70 mg/dL e menor ou igual a 100 mg/dL Pré-diabetes taxa de glicose maior que 100 mg/dL e menor ou igual a 125 mg/dL Diabetes Melito taxa de glicose maior que 125 mg/dL e menor ou igual a 250 mg/dL Hiperglicemia taxa de glicose maior que 250 mg/dL Um paciente fez um exame de glicose nesse laboratório e comprovou que estava com hiperglicemia. Sua taxa de glicose era de 300 mg/dL. Seu médico prescreveu um tratamento em duas etapas. Na primeira etapa ele conseguiu reduzir sua taxa em 30% e na segunda etapa em 10%.",
+    "alternativas": {
+      "A": "hipoglicemia.",
+      "B": "normal.",
+      "C": "pré-diabetes.",
+      "D": "diabetes melito.",
+      "E": "hiperglicemia. *amar25dom28* MT - 2º dia | Caderno 5 - AMARELO - Página 29"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q171_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 172,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Um produtor de café irrigado em Minas Gerais recebeu um relatório de consultoria estatística, constando, entre outras informações, o desvio padrão das produções de uma safra dos talhões de sua propriedade. Os talhões têm a mesma área de 30 000 m2 e o valor obtido para o desvio padrão foi de 90 kg/talhão. O produtor deve apresentar as informações sobre a produção e a variância dessas produções em sacas de 60 kg por hectare (10 000 m2).",
+    "alternativas": {
+      "A": "20,25.",
+      "B": "4,50.",
+      "C": "0,71.",
+      "D": "0,50.",
+      "E": "0,25."
+    },
+    "gabarito": "E",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 173,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "O designer português Miguel Neiva criou um sistema de símbolos que permite que pessoas daltônicas identifiquem cores. O sistema consiste na utilização de símbolos que identificam as cores primárias (azul, amarelo e vermelho).",
+    "alternativas": {
+      "A": "14",
+      "B": "18",
+      "C": "20",
+      "D": "21",
+      "E": "23"
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia2/q173_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 174,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "José, Paulo e",
+    "alternativas": {
+      "A": "Antônio, já que sua soma é a maior de todas as escolhidas.",
+      "B": "José e Antônio, já que há 6 possibilidades tanto para a escolha de José quanto para a escolha de Antônio, e há apenas 4 possibilidades para a escolha de Paulo.",
+      "C": "José e Antônio, já que há 3 possibilidades tanto para a escolha de José quanto para a escolha de Antônio, e há apenas 2 possibilidades para a escolha de Paulo.",
+      "D": "José, já que há 6 possibilidades para formar sua soma, 5 possibilidades para formar a soma de Antônio e apenas 3 possibilidades para formar a soma de Paulo.",
+      "E": "Paulo, já que sua soma é a menor de todas."
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q174_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 175,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "O gráfico apresenta o comportamento de emprego formal surgido, segundo o Caged, no período de janeiro de 2010 a outubro de 2010. M",
+    "alternativas": {
+      "A": "212 952.",
+      "B": "229 913.",
+      "C": "240 621.",
+      "D": "255 496.",
+      "E": "298 041."
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q175_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 176,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "",
+    "alternativas": {
+      "A": "20% menor que V, uma vez que o volume do cubo é diretamente proporcional ao comprimento de seu lado.",
+      "B": "36% menor que V, porque a área da base diminui de a2 para ((1 − 0,2)a)2.",
+      "C": "48,8% menor que V, porque o volume diminui de a3 para (0,8a)3.",
+      "D": "51,2% menor que V, porque cada lado diminui para 80% do comprimento original.",
+      "E": "60% menor que V, porque cada lado diminui 20%. *amar25dom29* MT - 2º dia | Caderno 5 - AMARELO - Página 30"
+    },
+    "gabarito": "C",
+    "imagens": [
+      "2012/dia2/q176_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 177,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Dentre outros objetos de pesquisa, a",
+    "alternativas": {
+      "A": "16 3",
+      "B": "4",
+      "C": "24",
+      "D": "8",
+      "E": "64"
+    },
+    "gabarito": "B",
+    "imagens": [],
+    "tem_imagem": false
+  },
+  {
+    "numero": 178,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Um aluno registrou as notas bimestrais de algumas de suas disciplinas numa tabela. Ele observou que as entradas numéricas da tabela formavam uma matriz 4x4, e que poderia calcular as médias anuais dessas disciplinas usando produto de matrizes. Todas as provas possuíam o mesmo peso, e a tabela que ele conseguiu é mostrada a seguir. 1º bimestre 2º bimestre 3º bimestre 4º bimestre Matemática 5,9 6,2 4,5 5,5 Português 6,6 7,1 6,5 8,4 Geografia 8,6 6,8 7,8 9,0 História 6,2 5,6 5,9 7,7 Para obter essas médias, ele multiplicou a matriz obtida a partir da tabela por",
+    "alternativas": {
+      "A": "1 2 1 2 1 2 1 2",
+      "D": "1 2 1 2 1 2 1 2",
+      "B": "1 4 1 4 1 4 1 4",
+      "E": "1 4 1 4 1 4 1 4",
+      "C": "1 1 1 1"
+    },
+    "gabarito": "E",
+    "imagens": [
+      "2012/dia2/q178_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 179,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Existem no mercado chuveiros elétricos de diferentes potências, que representam consumos e custos diversos.",
+    "alternativas": {
+      "A": "potência (P) de um chuveiro elétrico é dada pelo produto entre sua resistência elétrica (R) e o quadrado da corrente elétrica (i) que por ele circula. O consumo de energia elétrica (E), por sua vez, é diretamente proporcional à potência do aparelho. Considerando as características apresentadas, qual dos gráficos a seguir representa a relação entre a energia consumida (E) por um chuveiro elétrico e a corrente elétrica (i) que circula por ele?",
+      "E": "i 0"
+    },
+    "gabarito": "D",
+    "imagens": [
+      "2012/dia2/q179_1.jpg"
+    ],
+    "tem_imagem": true
+  },
+  {
+    "numero": 180,
+    "ano": 2012,
+    "dia": "dia2",
+    "area": "Matematica e suas Tecnologias",
+    "enunciado": "Em 20 de fevereiro de 2011 ocorreu a grande erupção do vulcão Bulusan nas Filipinas.",
+    "alternativas": {
+      "A": "124,02°.",
+      "B": "124,05°.",
+      "C": "124,20°.",
+      "D": "124,30°.",
+      "E": "124,50°. *amar25dom30* L"
+    },
+    "gabarito": "B",
+    "imagens": [
+      "2012/dia2/q180_1.jpg"
+    ],
+    "tem_imagem": true
+  }
+]

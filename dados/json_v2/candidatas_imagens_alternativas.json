@@ -1,0 +1,72 @@
+[
+  {
+    "ano": 2009,
+    "dia": "dia1",
+    "numero": 33
+  },
+  {
+    "ano": 2011,
+    "dia": "dia2",
+    "numero": 96
+  },
+  {
+    "ano": 2011,
+    "dia": "dia2",
+    "numero": 133
+  },
+  {
+    "ano": 2013,
+    "dia": "dia2",
+    "numero": 96
+  },
+  {
+    "ano": 2017,
+    "dia": "dia2",
+    "numero": 102
+  },
+  {
+    "ano": 2018,
+    "dia": "dia2",
+    "numero": 130
+  },
+  {
+    "ano": 2020,
+    "dia": "dia1",
+    "numero": 50
+  },
+  {
+    "ano": 2020,
+    "dia": "dia2",
+    "numero": 107
+  },
+  {
+    "ano": 2020,
+    "dia": "dia2",
+    "numero": 137
+  },
+  {
+    "ano": 2020,
+    "dia": "dia2",
+    "numero": 154
+  },
+  {
+    "ano": 2021,
+    "dia": "dia2",
+    "numero": 178
+  },
+  {
+    "ano": 2022,
+    "dia": "dia2",
+    "numero": 133
+  },
+  {
+    "ano": 2023,
+    "dia": "dia2",
+    "numero": 92
+  },
+  {
+    "ano": 2023,
+    "dia": "dia2",
+    "numero": 177
+  }
+]

@@ -32,5 +32,10 @@ desktop.ini
 # Debug e temporarios
 debug_*.jpg
 texto_bruto_amostra.json
-DADOS/
 .claude/
+
+# Subpastas grandes de dados (ficam no Supabase Storage)
+dados/PROVAS/
+dados/imagens/
+dados/texto_bruto/
+# Nota: dados/json/ e dados/json_v2/ SIM entram no git

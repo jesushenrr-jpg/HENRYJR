@@ -1,0 +1,101 @@
+{
+  "total_geral": 2955,
+  "por_ano": [
+    {
+      "ano": "2009",
+      "total": 180,
+      "com_gabarito": 180,
+      "com_imagem": 115
+    },
+    {
+      "ano": "2010",
+      "total": 185,
+      "com_gabarito": 22,
+      "com_imagem": 120
+    },
+    {
+      "ano": "2011",
+      "total": 185,
+      "com_gabarito": 185,
+      "com_imagem": 126
+    },
+    {
+      "ano": "2012",
+      "total": 185,
+      "com_gabarito": 185,
+      "com_imagem": 75
+    },
+    {
+      "ano": "2013",
+      "total": 185,
+      "com_gabarito": 185,
+      "com_imagem": 71
+    },
+    {
+      "ano": "2014",
+      "total": 185,
+      "com_gabarito": 185,
+      "com_imagem": 77
+    },
+    {
+      "ano": "2015",
+      "total": 185,
+      "com_gabarito": 185,
+      "com_imagem": 76
+    },
+    {
+      "ano": "2016",
+      "total": 185,
+      "com_gabarito": 185,
+      "com_imagem": 76
+    },
+    {
+      "ano": "2017",
+      "total": 185,
+      "com_gabarito": 185,
+      "com_imagem": 54
+    },
+    {
+      "ano": "2018",
+      "total": 185,
+      "com_gabarito": 184,
+      "com_imagem": 92
+    },
+    {
+      "ano": "2019",
+      "total": 185,
+      "com_gabarito": 185,
+      "com_imagem": 55
+    },
+    {
+      "ano": "2020",
+      "total": 185,
+      "com_gabarito": 183,
+      "com_imagem": 55
+    },
+    {
+      "ano": "2021",
+      "total": 185,
+      "com_gabarito": 184,
+      "com_imagem": 46
+    },
+    {
+      "ano": "2022",
+      "total": 185,
+      "com_gabarito": 184,
+      "com_imagem": 60
+    },
+    {
+      "ano": "2023",
+      "total": 185,
+      "com_gabarito": 184,
+      "com_imagem": 49
+    },
+    {
+      "ano": "2024",
+      "total": 185,
+      "com_gabarito": 184,
+      "com_imagem": 185
+    }
+  ]
+}

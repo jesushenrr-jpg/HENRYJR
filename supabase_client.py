@@ -60,9 +60,36 @@ def _h_storage(content_type: str = "image/jpeg") -> dict:
 
 # ── Questoes — operacoes unitarias ─────────────────────────────────────────────
 
-def _limpar(q: dict) -> dict:
-    """Remove campos gerenciados pelo banco antes do upsert."""
-    return {k: v for k, v in q.items() if k not in ("id", "created_at", "updated_at")}
+# Campos exatos da tabela com seus defaults (NOT NULL usa lista/dict/bool vazio)
+_CAMPO_DEFAULTS = {
+    "numero":               None,   # NOT NULL — sempre presente
+    "ano":                  None,   # NOT NULL — sempre presente
+    "dia":                  None,   # NOT NULL — sempre presente
+    "area":                 None,
+    "competencia":          None,
+    "enunciado":            [],     # NOT NULL DEFAULT '[]'
+    "comando":              None,
+    "alternativas":         {},     # NOT NULL DEFAULT '{}'
+    "gabarito":             None,
+    "confianca":            None,
+    "revisado":             False,  # NOT NULL DEFAULT FALSE
+    "anulada":              False,  # NOT NULL DEFAULT FALSE
+    "tem_imagem":           False,  # NOT NULL DEFAULT FALSE
+    "pagina_pdf":           None,
+    "imagens":              [],     # NOT NULL DEFAULT '[]'
+    "imagens_alternativas": None,
+}
+
+def _normalizar(q: dict) -> dict:
+    """
+    Mapeia a questao para exatamente os campos da tabela.
+    - Usa defaults corretos para campos NOT NULL (evita 23502)
+    - Garante chaves identicas em todo lote (evita PGRST102)
+    """
+    return {
+        k: q[k] if k in q and q[k] is not None else default
+        for k, default in _CAMPO_DEFAULTS.items()
+    }
 
 
 def upsert_questao(q: dict) -> bool:
@@ -70,11 +97,11 @@ def upsert_questao(q: dict) -> bool:
     Insere ou atualiza uma questao pelo UNIQUE(ano, dia, numero).
     Retorna True se sucesso, False caso contrario.
     """
-    url = f"{SUPABASE_URL}/rest/v1/{TABELA}"
+    url = f"{SUPABASE_URL}/rest/v1/{TABELA}?on_conflict=ano,dia,numero"
     try:
         r = requests.post(
             url,
-            json=[_limpar(q)],
+            json=[_normalizar(q)],
             headers=_h_json("resolution=merge-duplicates"),
             timeout=10,
         )
@@ -88,17 +115,29 @@ def upsert_questao(q: dict) -> bool:
 def upsert_lote(questoes: list, tamanho: int = 100) -> tuple:
     """
     Upsert em lotes. Seguro para re-execucao (idempotente).
+    - Normaliza chaves de cada lote (evita PGRST102)
+    - Prefer sem return=minimal (evita conflito com resolution)
     Retorna (total_ok, total_erros).
     """
-    url     = f"{SUPABASE_URL}/rest/v1/{TABELA}"
-    headers = _h_json("resolution=merge-duplicates")
+    url  = f"{SUPABASE_URL}/rest/v1/{TABELA}?on_conflict=ano,dia,numero"
+    hdrs = {
+        "apikey":        SUPABASE_SERVICE_KEY,
+        "Authorization": f"Bearer {SUPABASE_SERVICE_KEY}",
+        "Content-Type":  "application/json",
+        "Prefer":        "resolution=merge-duplicates",
+    }
     ok, erros = 0, 0
 
     for i in range(0, len(questoes), tamanho):
-        lote    = questoes[i : i + tamanho]
-        payload = [_limpar(q) for q in lote]
+        lote = questoes[i : i + tamanho]
+        # Deduplica dentro do lote por (ano, dia, numero) — mantém a ultima ocorrencia
+        seen: dict = {}
+        for q in lote:
+            key = (q.get("ano"), q.get("dia"), q.get("numero"))
+            seen[key] = q
+        payload = [_normalizar(q) for q in seen.values()]
         try:
-            r = requests.post(url, json=payload, headers=headers, timeout=30)
+            r = requests.post(url, json=payload, headers=hdrs, timeout=30)
             if r.status_code in (200, 201):
                 ok += len(lote)
             else:

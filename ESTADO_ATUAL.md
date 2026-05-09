@@ -2,7 +2,7 @@
 
 > Atualizar este arquivo ao final de cada sessão de trabalho.
 
-## Fase atual: **Fase 2 — Extração e Preparação de Dados**
+## Fase atual: **Fase 4 — Interface Next.js**
 
 ## Última sessão: 2026-05-08
 
@@ -37,20 +37,36 @@
 - **2021 dia2**: Q107, Q115, Q127, Q151, Q169, Q173 — não localizadas
 - **2010**: 17 questões sem imagem com fragmentos de alternativas — revisão manual necessária
 
+## Fase 3 concluída ✅
+
+| Item | Status |
+|------|--------|
+| Supabase Storage `provas-pdf` (64 PDFs) | ✅ |
+| Supabase Storage `imagens-questoes` (569 imgs) | ✅ |
+| Tabela `questoes` (2.890 questões importadas) | ✅ |
+| Tabelas de usuário (7 tabelas + RLS + triggers) | ✅ |
+| Auth email + Google OAuth | ✅ |
+
+## Mobilidade configurada ✅
+
+- ✅ GitHub: `https://github.com/jesushenrr-jpg/HENRYJR` (scripts + JSONs)
+- ✅ Supabase Storage `provas-pdf`: 64 PDFs (todos os anos/dias)
+- ✅ Supabase Storage `imagens-questoes`: 569 imagens
+- ✅ JSONs v2: campo `supabase_url` em todas as 761 imagens
+- ✅ `setup_novo_computador.bat` e `requirements.txt` criados
+
 ## Próximos passos imediatos
 
-- [ ] Obter **service role key** do Supabase (Settings → API → service_role)
-- [ ] Upload de PDFs → Supabase Storage bucket `provas-pdf`
-- [ ] Upload de imagens → Supabase Storage bucket `imagens-questoes`
-- [ ] Modificar `gerenciar_imagens.py` para auto-upload ao adicionar imagens
-- [ ] Revisão manual das questões 2010 problemáticas via gerenciador
-- [ ] Revisão manual das questões 2021 não localizadas
+### Opção A — Avançar para Fase 3 (banco de dados) 🔜 RECOMENDADO
+- [ ] Criar tabelas no Supabase: `questoes`, `usuarios`, `simulados`, etc.
+- [ ] Importar os 2.865 questões dos JSONs v2 para a tabela `questoes`
+- [ ] Configurar Auth (email + Google)
 
-## Após mobilidade configurada (próximas sessões)
-- Continuar validação manual via gerenciador (revisado=True)
-- Extrair `pagina_pdf` para todos os anos
-- Classificar competências H01-H30 via Groq
-- Marcar questões anuladas (lista no CLAUDE.md)
+### Opção B — Completar Fase 2 antes
+- [ ] Extrair `pagina_pdf` para todos os anos (`extrair_paginas_pdf.py`)
+- [ ] Classificar competências H01-H30 via Groq (`classificar_competencias.py`)
+- [ ] Marcar questões anuladas (lista no CLAUDE.md)
+- [ ] Revisão manual das questões 2010/2021 problemáticas via gerenciador
 
 ## Configuração de outro computador
 

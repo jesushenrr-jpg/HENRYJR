@@ -43,7 +43,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q002_1.jpg"
+      {
+        "path": "2017/dia1/q002_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q002_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -67,7 +70,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q003_1.jpg"
+      {
+        "path": "2017/dia1/q003_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q003_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -354,7 +360,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q015_1.jpg"
+      {
+        "path": "2017/dia1/q015_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q015_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -383,7 +392,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q016_1.jpg"
+      {
+        "path": "2017/dia1/q016_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q016_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -506,7 +518,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q021_1.jpg"
+      {
+        "path": "2017/dia1/q021_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q021_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -680,7 +695,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q028_1.jpg"
+      {
+        "path": "2017/dia1/q028_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q028_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -733,7 +751,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q030_1.jpg"
+      {
+        "path": "2017/dia1/q030_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q030_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -832,7 +853,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q034_1.jpg"
+      {
+        "path": "2017/dia1/q034_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q034_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -856,7 +880,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q035_1.jpg"
+      {
+        "path": "2017/dia1/q035_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q035_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -881,7 +908,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q036_1.jpg"
+      {
+        "path": "2017/dia1/q036_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q036_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -949,7 +979,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q039_1.jpg"
+      {
+        "path": "2017/dia1/q039_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q039_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -995,7 +1028,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q041_1.jpg"
+      {
+        "path": "2017/dia1/q041_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q041_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -1045,7 +1081,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q043_1.jpg"
+      {
+        "path": "2017/dia1/q043_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q043_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -1089,7 +1128,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q045_1.jpg"
+      {
+        "path": "2017/dia1/q045_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q045_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -1251,7 +1293,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q052_1.jpg"
+      {
+        "path": "2017/dia1/q052_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q052_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -1276,7 +1321,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q053_1.jpg"
+      {
+        "path": "2017/dia1/q053_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q053_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -1704,7 +1752,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q071_1.jpg"
+      {
+        "path": "2017/dia1/q071_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q071_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -2158,7 +2209,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia1/q090_1.jpg"
+      {
+        "path": "2017/dia1/q090_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia1/q090_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -3364,7 +3418,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia2/q139_1.jpg"
+      {
+        "path": "2017/dia2/q139_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia2/q139_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -3728,7 +3785,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia2/q154_1.jpg"
+      {
+        "path": "2017/dia2/q154_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia2/q154_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -3753,7 +3813,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia2/q155_1.jpg"
+      {
+        "path": "2017/dia2/q155_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia2/q155_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -3837,7 +3900,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia2/q158_1.jpg"
+      {
+        "path": "2017/dia2/q158_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia2/q158_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -4004,7 +4070,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia2/q164_1.jpg"
+      {
+        "path": "2017/dia2/q164_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia2/q164_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -4081,7 +4150,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia2/q167_1.jpg"
+      {
+        "path": "2017/dia2/q167_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia2/q167_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -4298,7 +4370,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia2/q175_1.jpg"
+      {
+        "path": "2017/dia2/q175_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia2/q175_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -4323,7 +4398,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2017/dia2/q176_1.jpg"
+      {
+        "path": "2017/dia2/q176_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2017/dia2/q176_1.jpg"
+      }
     ],
     "tem_imagem": true
   },

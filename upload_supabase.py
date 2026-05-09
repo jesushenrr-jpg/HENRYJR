@@ -15,19 +15,31 @@ Buckets criados automaticamente se nao existirem:
     imagens-questoes  (acesso publico)
 """
 
-import os, sys, json, time
+import os, sys, json, socket
 from pathlib import Path
 
 import requests
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-# ── Credenciais ───────────────────────────────────────────────────────────────
-SUPABASE_URL          = "https://bmhudlpihwxvaelokugh.supabase.co"
-SUPABASE_SERVICE_KEY  = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")   # definir abaixo apos obter a chave
+# ── Fix DNS local (nao resolve *.supabase.co pelo DNS padrao) ─────────────────
+_SUPABASE_HOST = "bmhudlpihwxvaelokugh.supabase.co"
+_SUPABASE_IP   = "172.64.149.246"
+_orig_getaddrinfo = socket.getaddrinfo
+def _patched_getaddrinfo(host, port, *args, **kwargs):
+    if host == _SUPABASE_HOST:
+        host = _SUPABASE_IP
+    return _orig_getaddrinfo(host, port, *args, **kwargs)
+socket.getaddrinfo = _patched_getaddrinfo
 
-# Cole aqui a service role key (Settings → API → service_role no painel Supabase):
-# SUPABASE_SERVICE_KEY = "eyJhbGci..."
+# ── Credenciais ───────────────────────────────────────────────────────────────
+SUPABASE_URL         = f"https://{_SUPABASE_HOST}"
+SUPABASE_SERVICE_KEY = (
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+    ".eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJtaHVkbHBpaHd4dmFlbG9rdWdoIiwicm9sZSI6"
+    "InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjMwNDAzOSwiZXhwIjoyMDkxODgwMDM5fQ"
+    ".KucpbBiIhjPKQCEBIdV8sGuDw_F5CZdXWlZy39h-I7M"
+)
 
 PASTA_PROVAS  = Path(r"C:\PROJETOS\HENRYJR\dados\PROVAS")
 PASTA_IMAGENS = Path(r"C:\PROJETOS\HENRYJR\dados\imagens")
@@ -139,7 +151,9 @@ def upload_imagens() -> None:
 # ── Atualizar JSONs com supabase_url ─────────────────────────────────────────
 
 def atualizar_json_com_urls() -> None:
-    """Adiciona supabase_url ao campo imagens de cada questao."""
+    """Adiciona supabase_url ao campo imagens de cada questao.
+    Suporta imagens como string ('2023/dia1/q001_1.jpg') ou dict ({'path': ..., 'posicao': ...}).
+    """
     print("\n=== Atualizando JSONs com URLs do Supabase ===")
     total_q, total_img = 0, 0
 
@@ -149,12 +163,20 @@ def atualizar_json_com_urls() -> None:
 
         modificado = False
         for q in questoes:
-            for img in q.get("imagens") or []:
+            imagens_raw = q.get("imagens") or []
+            novas_imagens = []
+            for img in imagens_raw:
+                # Normaliza: string vira dict
+                if isinstance(img, str):
+                    img = {"path": img}
+                    modificado = True
                 path = img.get("path", "")
                 if path and "supabase_url" not in img:
                     img["supabase_url"] = url_publica(BUCKET_IMAGENS, path)
                     modificado = True
                     total_img += 1
+                novas_imagens.append(img)
+            q["imagens"] = novas_imagens
 
         if modificado:
             with open(jp, "w", encoding="utf-8") as f:
@@ -167,12 +189,6 @@ def atualizar_json_com_urls() -> None:
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    if not SUPABASE_SERVICE_KEY:
-        print("[ERRO] SUPABASE_SERVICE_ROLE_KEY nao definida.")
-        print("       Abra este script e defina a variavel SUPABASE_SERVICE_KEY.")
-        print("       Obtenha em: Supabase → Settings → API → service_role")
-        sys.exit(1)
-
     fazer_pdfs    = "--pdfs"    in sys.argv or len(sys.argv) == 1
     fazer_imagens = "--imagens" in sys.argv or len(sys.argv) == 1
 

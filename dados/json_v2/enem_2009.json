@@ -44,7 +44,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q002_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q002_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -275,11 +276,13 @@
     "imagens": [
       {
         "path": "2009/dia1/q012_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q012_1.jpg"
       },
       {
         "path": "2009/dia1/q012_2.jpg",
-        "posicao": "entre_2_3"
+        "posicao": "entre_2_3",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q012_2.jpg"
       }
     ],
     "tem_imagem": true
@@ -331,7 +334,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q014_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q014_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -359,7 +363,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q015_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q015_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -384,7 +389,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2009/dia1/q016_1.jpg"
+      {
+        "path": "2009/dia1/q016_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q016_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -435,7 +443,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q018_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q018_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -466,11 +475,13 @@
     "imagens": [
       {
         "path": "2009/dia1/q019_1.jpg",
-        "posicao": "entre_2_3"
+        "posicao": "entre_2_3",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q019_1.jpg"
       },
       {
         "path": "2009/dia1/q019_2.jpg",
-        "posicao": "entre_4_5"
+        "posicao": "entre_4_5",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q019_2.jpg"
       }
     ],
     "tem_imagem": true
@@ -496,7 +507,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2009/dia1/q020_1.jpg"
+      {
+        "path": "2009/dia1/q020_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q020_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -546,7 +560,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q022_2.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q022_2.jpg"
       }
     ],
     "tem_imagem": true,
@@ -597,7 +612,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q024_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q024_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -625,7 +641,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q025_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q025_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -674,7 +691,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q027_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q027_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -701,7 +719,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q028_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q028_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -729,7 +748,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q029_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q029_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -802,7 +822,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q032_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q032_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -830,7 +851,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q033_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q033_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -880,7 +902,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q035_2.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q035_2.jpg"
       }
     ],
     "tem_imagem": true,
@@ -976,7 +999,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q039_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q039_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -1072,7 +1096,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q043_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q043_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -1121,7 +1146,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q045_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q045_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -1764,7 +1790,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q073_1.jpg",
-        "posicao": "antes_1"
+        "posicao": "antes_1",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q073_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -1862,7 +1889,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q077_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q077_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -1891,7 +1919,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q078_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q078_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2010,7 +2039,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q083_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q083_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2037,7 +2067,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q084_1.jpg",
-        "posicao": "antes_1"
+        "posicao": "antes_1",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q084_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2088,11 +2119,13 @@
     "imagens": [
       {
         "path": "2009/dia1/q086_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q086_1.jpg"
       },
       {
         "path": "2009/dia1/q086_2.jpg",
-        "posicao": "antes_1"
+        "posicao": "antes_1",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q086_2.jpg"
       }
     ],
     "tem_imagem": true
@@ -2120,7 +2153,8 @@
     "imagens": [
       {
         "path": "2009/dia1/q087_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia1/q087_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2216,7 +2250,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q091_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q091_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2315,7 +2350,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q095_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q095_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -2344,7 +2380,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q096_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q096_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -2373,7 +2410,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q097_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q097_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2401,7 +2439,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q098_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q098_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2476,7 +2515,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q101_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q101_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2504,7 +2544,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q102_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q102_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2601,7 +2642,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q106_1.jpg",
-        "posicao": "antes_1"
+        "posicao": "antes_1",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q106_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2684,7 +2726,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q109_1.jpg",
-        "posicao": "antes_1"
+        "posicao": "antes_1",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q109_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2785,7 +2828,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q113_1.jpg",
-        "posicao": "antes_1"
+        "posicao": "antes_1",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q113_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -2813,7 +2857,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q114_1.jpg",
-        "posicao": "antes_1"
+        "posicao": "antes_1",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q114_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3079,7 +3124,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q125_1.jpg",
-        "posicao": "antes_1"
+        "posicao": "antes_1",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q125_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3106,7 +3152,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q126_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q126_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3133,7 +3180,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q127_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q127_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -3161,7 +3209,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q128_1.jpg",
-        "posicao": "antes_1"
+        "posicao": "antes_1",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q128_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -3238,7 +3287,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q131_1.jpg",
-        "posicao": "antes_1"
+        "posicao": "antes_1",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q131_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3372,7 +3422,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q136_1.jpg",
-        "posicao": "antes_1"
+        "posicao": "antes_1",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q136_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3401,7 +3452,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q137_1.jpg",
-        "posicao": "entre_2_3"
+        "posicao": "entre_2_3",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q137_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -3425,7 +3477,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q138_1.jpg",
-        "posicao": "entre_2_3"
+        "posicao": "entre_2_3",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q138_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -3460,7 +3513,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q139_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q139_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -3511,7 +3565,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q141_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q141_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3539,7 +3594,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q142_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q142_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3567,7 +3623,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q143_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q143_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3595,7 +3652,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q144_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q144_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3623,7 +3681,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q145_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q145_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -3674,7 +3733,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q147_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q147_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3701,7 +3761,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q148_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q148_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -3724,7 +3785,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q149_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q149_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -3759,7 +3821,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q150_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q150_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3787,7 +3850,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q151_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q151_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -3883,7 +3947,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q155_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q155_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -3978,11 +4043,13 @@
     "imagens": [
       {
         "path": "2009/dia2/q159_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q159_1.jpg"
       },
       {
         "path": "2009/dia2/q159_2.jpg",
-        "posicao": "entre_2_3"
+        "posicao": "entre_2_3",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q159_2.jpg"
       }
     ],
     "tem_imagem": true
@@ -4098,7 +4165,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q164_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q164_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -4127,7 +4195,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q165_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q165_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -4178,7 +4247,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q167_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q167_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -4207,7 +4277,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q168_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q168_1.jpg"
       }
     ],
     "tem_imagem": true,
@@ -4236,7 +4307,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q169_1.jpg",
-        "posicao": "entre_1_2"
+        "posicao": "entre_1_2",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q169_1.jpg"
       }
     ],
     "tem_imagem": true
@@ -4261,7 +4333,10 @@
     "confianca": 1.0,
     "revisado": false,
     "imagens": [
-      "2009/dia2/q170_1.jpg"
+      {
+        "path": "2009/dia2/q170_1.jpg",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q170_1.jpg"
+      }
     ],
     "tem_imagem": true
   },
@@ -4355,7 +4430,8 @@
     "imagens": [
       {
         "path": "2009/dia2/q174_1.jpg",
-        "posicao": "apos_ultimo"
+        "posicao": "apos_ultimo",
+        "supabase_url": "https://bmhudlpihwxvaelokugh.supabase.co/storage/v1/object/public/imagens-questoes/2009/dia2/q174_1.jpg"
       }
     ],
     "tem_imagem": true

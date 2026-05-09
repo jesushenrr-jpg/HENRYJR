@@ -20,12 +20,20 @@ Imagens de alternativas continuam em "imagens_alternativas":
 
 import json
 import sys
+import threading
 import tkinter as tk
 from io import BytesIO
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
 from PIL import Image, ImageTk
+
+# Supabase write-through (opcional — funciona sem internet)
+try:
+    import supabase_client as _sb
+    _SUPABASE_OK = True
+except Exception:
+    _SUPABASE_OK = False
 
 try:
     import matplotlib
@@ -621,6 +629,13 @@ class App(tk.Tk):
                  bg=C.ACC, fg="#fff", font=("Segoe UI", 13, "bold")).pack(
                  side="left", pady=8)
 
+        # Indicador de sincronizacao com Supabase
+        sb_texto = "● Supabase: OK" if _SUPABASE_OK else "● Supabase: offline"
+        sb_cor   = "#a6e3a1"        if _SUPABASE_OK else "#585b70"
+        self._lbl_sync = tk.Label(hdr, text=sb_texto, bg=C.ACC, fg=sb_cor,
+                                  font=("Segoe UI", 8))
+        self._lbl_sync.pack(side="right", padx=14)
+
         body = tk.Frame(self, bg=C.BG)
         body.pack(fill="both", expand=True, padx=10, pady=10)
 
@@ -1017,7 +1032,7 @@ class App(tk.Tk):
         gab = self._gab_var.get()
         q["gabarito"] = gab if gab in LETRAS else None
 
-        salvar_questao(ano, dia, num, q)
+        self._salvar_questao(ano, dia, num, q)
         self._colorir_gabarito()
         n = len(alts)
         self.lbl_alts_status.config(text=f"✓ {n} alternativa(s) salva(s)")
@@ -1164,7 +1179,7 @@ class App(tk.Tk):
                 item["posicao"] = nova_pos
                 break
         q["imagens"] = imgs
-        salvar_questao(ano, dia, num, q)
+        self._salvar_questao(ano, dia, num, q)
         self.lbl_status.config(text=f"✓ Posição atualizada: {label}")
         self._atualizar_imgs_salvas(q)
 
@@ -1220,7 +1235,7 @@ class App(tk.Tk):
         cmd = self.ent_cmd.get().strip()
         q["comando"] = cmd or None
 
-        salvar_questao(ano, dia, num, q)
+        self._salvar_questao(ano, dia, num, q)
         self.lbl_enun_status.config(
             text=f"✓ Salvo — {len(paragrafos)} parágrafo(s)")
         self._atualizar_posicoes()
@@ -1326,6 +1341,7 @@ class App(tk.Tk):
             rel  = f"{ano}/{dia}/{nome}"
             Image.open(self._arquivo_sel).convert("RGB").save(
                 str(pasta_dest / nome), "JPEG", quality=JPEG_Q)
+            self._sync_supabase_imagem(pasta_dest / nome, rel)
 
             novo_item = {"path": rel, "posicao": posicao_val}
 
@@ -1353,6 +1369,7 @@ class App(tk.Tk):
 
             Image.open(self._arquivo_sel).convert("RGB").save(
                 str(pasta_dest / nome), "JPEG", quality=JPEG_Q)
+            self._sync_supabase_imagem(pasta_dest / nome, rel)
 
             alts[letra] = rel
             q["imagens_alternativas"] = alts
@@ -1360,7 +1377,7 @@ class App(tk.Tk):
 
             msg = f"✓ Alt {letra} salva!\n{rel}"
 
-        salvar_questao(ano, dia, num, q)
+        self._salvar_questao(ano, dia, num, q)
         self.lbl_status.config(text=msg)
         self._atualizar_imgs_salvas(q)
         self._arquivo_sel = None
@@ -1401,7 +1418,7 @@ class App(tk.Tk):
         if not imgs and not alts:
             q["tem_imagem"] = False
 
-        salvar_questao(ano, dia, num, q)
+        self._salvar_questao(ano, dia, num, q)
         self.lbl_status.config(text="✓ Referência removida.")
         self._atualizar_imgs_salvas(q)
 
@@ -1429,7 +1446,7 @@ class App(tk.Tk):
         if not imgs and not alts:
             q["tem_imagem"] = False
 
-        salvar_questao(ano, dia, num, q)
+        self._salvar_questao(ano, dia, num, q)
 
         fp = PASTA_IMG / rel
         if fp.exists():
@@ -1635,6 +1652,52 @@ class App(tk.Tk):
             self.cb_ano.set(str(ANOS[idx - 1]))
             self.cb_dia.set("dia2")
         self._load_ano_dia()
+
+    # ── Salvar com write-through para o Supabase ──────────────────────────────
+    def _salvar_questao(self, ano: int, dia: str, num: int, q: dict):
+        """Salva localmente (JSON) e dispara sync assincrono para o Supabase."""
+        salvar_questao(ano, dia, num, q)          # local: imediato, sem falha
+        self._sync_supabase_questao(q)            # supabase: background thread
+
+    def _sync_supabase_questao(self, q: dict):
+        """Dispara upsert no Supabase em thread daemon (nao bloqueia a UI)."""
+        if not _SUPABASE_OK:
+            return
+        self._lbl_sync.config(text="● syncing…", fg=self.WARN)
+        threading.Thread(
+            target=self.__thread_upsert_questao,
+            args=(q,),
+            daemon=True,
+        ).start()
+
+    def __thread_upsert_questao(self, q: dict):
+        try:
+            ok = _sb.upsert_questao(q)
+            msg, cor = ("● Supabase: OK", self.OK) if ok \
+                  else ("● erro upsert",  self.DANGER)
+        except Exception:
+            msg, cor = ("● Supabase: offline", "#585b70")
+        self.after(0, lambda: self._lbl_sync.config(text=msg, fg=cor))
+
+    def _sync_supabase_imagem(self, fp_local: Path, caminho_remoto: str):
+        """Faz upload da imagem para o Storage em thread daemon."""
+        if not _SUPABASE_OK:
+            return
+        self._lbl_sync.config(text="● upload img…", fg=self.WARN)
+        threading.Thread(
+            target=self.__thread_upload_imagem,
+            args=(fp_local, caminho_remoto),
+            daemon=True,
+        ).start()
+
+    def __thread_upload_imagem(self, fp_local: Path, caminho_remoto: str):
+        try:
+            ok = _sb.upload_imagem(fp_local, caminho_remoto)
+            msg, cor = ("● img: OK",   self.OK) if ok \
+                  else ("● img: erro", self.DANGER)
+        except Exception:
+            msg, cor = ("● Supabase: offline", "#585b70")
+        self.after(0, lambda: self._lbl_sync.config(text=msg, fg=cor))
 
 
 if __name__ == "__main__":

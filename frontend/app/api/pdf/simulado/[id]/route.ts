@@ -17,10 +17,11 @@ interface Params { params: Promise<{ id: string }> }
 
 export async function GET(req: NextRequest, { params }: Params) {
   const { id } = await params
-  const simId  = parseInt(id, 10)
-  if (isNaN(simId)) {
+  if (!id) {
     return NextResponse.json({ error: 'ID inválido' }, { status: 400 })
   }
+  // Suporta tanto UUID (string) quanto integer
+  const simId: string | number = /^\d+$/.test(id) ? parseInt(id, 10) : id
 
   const supabase = await createClient()
 
@@ -42,7 +43,7 @@ export async function GET(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: 'Simulado não encontrado' }, { status: 404 })
   }
 
-  // Busca questões do simulado (via respostas_simulado → questoes)
+  // Tenta buscar questões via respostas_simulado (simulado já respondido)
   const { data: respostas } = await supabase
     .from('respostas_simulado')
     .select(`
@@ -56,13 +57,36 @@ export async function GET(req: NextRequest, { params }: Params) {
     .eq('simulado_id', simId)
     .order('questao_id', { ascending: true })
 
-  if (!respostas?.length) {
-    return NextResponse.json({ error: 'Sem questões no simulado' }, { status: 404 })
-  }
-
-  const questoes: QuestaoSimulado[] = respostas
+  let questoes: QuestaoSimulado[] = (respostas ?? [])
     .map(r => r.questoes as unknown as QuestaoSimulado)
     .filter(Boolean)
+
+  // Fallback: simulado recém-criado (ainda sem respostas) → busca via questoes_ids
+  if (questoes.length === 0) {
+    const { data: simFull } = await supabase
+      .from('simulados')
+      .select('questoes_ids')
+      .eq('id', simId)
+      .single()
+
+    const ids: number[] = simFull?.questoes_ids ?? []
+    if (ids.length === 0) {
+      return NextResponse.json({ error: 'Sem questões no simulado' }, { status: 404 })
+    }
+
+    const { data: qs } = await supabase
+      .from('questoes')
+      .select('id, numero, ano, dia, area, competencia, enunciado, comando, alternativas, gabarito, tem_imagem, imagens, anulada')
+      .in('id', ids)
+      .order('ano', { ascending: true })
+      .order('numero', { ascending: true })
+
+    questoes = (qs ?? []) as unknown as QuestaoSimulado[]
+  }
+
+  if (questoes.length === 0) {
+    return NextResponse.json({ error: 'Sem questões no simulado' }, { status: 404 })
+  }
 
   const incluirGabarito = req.nextUrl.searchParams.get('gabarito') === 'true'
 

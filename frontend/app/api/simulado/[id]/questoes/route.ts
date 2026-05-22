@@ -34,8 +34,9 @@ export async function GET(_req: NextRequest, { params }: Params) {
     .eq('simulado_id', id)
     .order('questao_id', { ascending: true })
 
-  let questoes = (respostas ?? [])
-    .map(r => r.questoes)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let questoes: any[] = (respostas ?? [])
+    .map(r => r.questoes as unknown)
     .filter(Boolean)
 
   // Fallback: busca direto pelos IDs do simulado

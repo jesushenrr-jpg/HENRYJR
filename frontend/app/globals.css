@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+/* ── Impressão: oculta toda a interface do site ── */
+@media print {
+  nav, header, footer,
+  [data-print="hidden"] {
+    display: none !important;
+  }
+}
+
+/* ── Tailwind v4 theme extensions ── */
+@theme {
+  --font-sans:    var(--font-dm-sans), system-ui, sans-serif;
+  --font-serif:   var(--font-source-serif), Georgia, serif;
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Paleta quente */
+  --color-bg:       #0E0D0B;
+  --color-surface:  #161411;
+  --color-surface2: #1E1B17;
+  --color-border:   #2C2820;
+  --color-border-h: #4A3F2F;
+  --color-cream:    #F2EDE4;
+  --color-muted:    #9E9589;
+  --color-faint:    #635D56;
+  --color-gold:     #D4A853;
+  --color-gold-d:   #B8882A;
+  --color-enem:     #3B82F6;
+  --color-enem-d:   #1D4ED8;
+  --color-exato:    #F59E0B;
+  --color-exato-d:  #B45309;
+}
+
+/* ── Design tokens ── */
+:root {
+  --bg:       #0E0D0B;
+  --surface:  #161411;
+  --surface2: #1E1B17;
+  --border:   #2C2820;
+  --border-h: #4A3F2F;
+  --cream:    #F2EDE4;
+  --muted:    #9E9589;
+  --faint:    #635D56;
+  --gold:     #D4A853;
+  --gold-d:   #B8882A;
+  --enem:     #3B82F6;
+  --enem-d:   #1D4ED8;
+  --exato:    #F59E0B;
+  --exato-d:  #B45309;
+}
+
+/* ── Scrollbar quente ── */
+::-webkit-scrollbar          { width: 6px; height: 6px; }
+::-webkit-scrollbar-track    { background: transparent; }
+::-webkit-scrollbar-thumb    { background: var(--border-h); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--faint); }
+
+/* ── Keyframes ── */
+@keyframes fadeIn    { from { opacity: 0; transform: translateY(8px); }  to { opacity: 1; transform: none; } }
+@keyframes slideUp   { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes pulse-glow { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+@keyframes shimmer   {
+  0%   { background-position: -1000px 0; }
+  100% { background-position:  1000px 0; }
+}
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%       { transform: translate(-2%, -3%); }
+  20%       { transform: translate(3%, 1%); }
+  30%       { transform: translate(-1%, 4%); }
+  40%       { transform: translate(2%, -2%); }
+  50%       { transform: translate(-3%, 2%); }
+  60%       { transform: translate(1%, -4%); }
+  70%       { transform: translate(-2%, 3%); }
+  80%       { transform: translate(3%, -1%); }
+  90%       { transform: translate(-1%, -2%); }
+}
+
+/* ── Utility classes ── */
+.anim-fade  { animation: fadeIn  0.32s cubic-bezier(.4,0,.2,1); }
+.anim-slide { animation: slideUp 0.40s cubic-bezier(.4,0,.2,1); }
+.pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+.typing-cursor::after {
+  content: '▊';
+  color: var(--gold);
+  animation: pulse-glow 1s infinite;
+  margin-left: 2px;
+}
+.font-display { font-family: var(--font-display); }
+
+/* Underline animado para nav links */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.2s ease;
+}
+.nav-underline:hover::after,
+.nav-underline[data-active="true"]::after {
+  width: 100%;
+}
+
+/* ── Base ── */
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grain sutil no body */
+body::before {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(10) infinite;
+}

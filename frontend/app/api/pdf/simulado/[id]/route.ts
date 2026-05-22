@@ -40,7 +40,10 @@ export async function GET(req: NextRequest, { params }: Params) {
     .single()
 
   if (simErr || !sim) {
-    return NextResponse.json({ error: 'Simulado não encontrado' }, { status: 404 })
+    return NextResponse.json({
+      error: 'Simulado não encontrado',
+      _debug: { simId, userId: user.id, supabaseError: simErr?.message ?? null }
+    }, { status: 404 })
   }
 
   // Tenta buscar questões via respostas_simulado (simulado já respondido)

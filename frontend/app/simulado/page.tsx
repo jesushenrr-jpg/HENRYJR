@@ -3,19 +3,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
-
-// Nunca renderizar no servidor — @react-pdf usa APIs do browser
-const BaixarPDFSimulado = dynamic(() => import('./BaixarPDFSimulado'), {
-  ssr: false,
-  loading: () => (
-    <div className="flex flex-col items-center gap-2 rounded-xl border border-[#2C2820] bg-[#1E1B17] p-5 opacity-50">
-      <span className="text-3xl">🖨️</span>
-      <span className="font-bold text-white/85">Imprimir e resolver</span>
-      <span className="text-xs text-white/40">Carregando...</span>
-    </div>
-  ),
-})
 
 const PROVAS = [
   {
@@ -110,8 +97,17 @@ export default function SimuladoConfig() {
               <span className="text-xs text-white/40">Cronômetro + correção automática</span>
             </button>
 
-            {/* Baixar PDF para impressão — gerado no browser */}
-            <BaixarPDFSimulado simuladoId={simuladoId} />
+            {/* Imprimir — abre página dedicada com window.print() */}
+            <Link
+              href={`/simulado/${simuladoId}/imprimir`}
+              target="_blank"
+              rel="noreferrer"
+              className="flex flex-col items-center gap-2 rounded-xl border border-[#2C2820] bg-[#1E1B17] hover:bg-[#252118] p-5 transition"
+            >
+              <span className="text-3xl">🖨️</span>
+              <span className="font-bold text-white/85">Imprimir e resolver</span>
+              <span className="text-xs text-white/40">Abre página de impressão · salvar como PDF</span>
+            </Link>
           </div>
 
           <button

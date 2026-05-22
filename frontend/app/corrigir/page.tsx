@@ -52,9 +52,9 @@ export default async function CorrigirPage({ searchParams }: Props) {
   // Busca simulados recentes para seleção rápida
   const { data: recentes } = await supabase
     .from('simulados')
-    .select('id, tipo, total_questoes, criado_em, status')
+    .select('id, tipo, total_questoes, iniciado_em, status')
     .eq('usuario_id', user.id)
-    .order('criado_em', { ascending: false })
+    .order('iniciado_em', { ascending: false })
     .limit(5)
 
   return (

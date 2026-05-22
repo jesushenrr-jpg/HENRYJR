@@ -34,16 +34,13 @@ export async function GET(req: NextRequest, { params }: Params) {
   // Busca metadados do simulado
   const { data: sim, error: simErr } = await supabase
     .from('simulados')
-    .select('id, tipo, total_questoes, criado_em, status')
+    .select('id, tipo, total_questoes, status, iniciado_em')
     .eq('id', simId)
     .eq('usuario_id', user.id)
     .single()
 
   if (simErr || !sim) {
-    return NextResponse.json({
-      error: 'Simulado não encontrado',
-      _debug: { simId, userId: user.id, supabaseError: simErr?.message ?? null }
-    }, { status: 404 })
+    return NextResponse.json({ error: 'Simulado não encontrado' }, { status: 404 })
   }
 
   // Tenta buscar questões via respostas_simulado (simulado já respondido)
@@ -103,7 +100,7 @@ export async function GET(req: NextRequest, { params }: Params) {
           id:        sim.id,
           tipo:      sim.tipo ?? 'simulado',
           total:     sim.total_questoes ?? questoes.length,
-          criado_em: sim.criado_em,
+          criado_em: sim.iniciado_em,
         },
         incluirGabarito,
       })

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import BaixarPDFSimulado from './BaixarPDFSimulado'
 
 const PROVAS = [
   {
@@ -97,17 +98,8 @@ export default function SimuladoConfig() {
               <span className="text-xs text-white/40">Cronômetro + correção automática</span>
             </button>
 
-            {/* Baixar PDF para impressão */}
-            <a
-              href={`/api/pdf/simulado/${simuladoId}`}
-              target="_blank"
-              rel="noreferrer"
-              className="flex flex-col items-center gap-2 rounded-xl border border-[#2C2820] bg-[#1E1B17] hover:bg-[#252118] p-5 transition"
-            >
-              <span className="text-3xl">🖨️</span>
-              <span className="font-bold text-white/85">Imprimir e resolver</span>
-              <span className="text-xs text-white/40">Baixar PDF · corrigir por foto depois</span>
-            </a>
+            {/* Baixar PDF para impressão — gerado no browser */}
+            <BaixarPDFSimulado simuladoId={simuladoId} />
           </div>
 
           <button

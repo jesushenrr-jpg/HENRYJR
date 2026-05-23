@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
-  serverExternalPackages: ['@react-pdf/renderer'],
+  serverExternalPackages: ['@react-pdf/renderer', 'puppeteer-core', '@sparticuz/chromium'],
   images: {
     remotePatterns: [
       {

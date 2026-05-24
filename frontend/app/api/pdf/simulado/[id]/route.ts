@@ -119,14 +119,15 @@ export async function GET(req: NextRequest, { params }: Params) {
       displayHeaderFooter: false,
     })
 
-    console.log(`[pdf] gerado — ${pdf.length} bytes`)
+    const buf = Buffer.from(pdf)
+    console.log(`[pdf] gerado — ${buf.length} bytes`)
 
-    return new NextResponse(pdf, {
+    return new NextResponse(buf, {
       status: 200,
       headers: {
         'Content-Type':        'application/pdf',
         'Content-Disposition': `attachment; filename="simulado-${id}.pdf"`,
-        'Content-Length':      pdf.length.toString(),
+        'Content-Length':      buf.length.toString(),
       },
     })
 

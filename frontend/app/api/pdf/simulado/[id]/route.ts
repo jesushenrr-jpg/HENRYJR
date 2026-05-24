@@ -110,12 +110,11 @@ export async function GET(req: NextRequest, { params }: Params) {
     const pdf = await page.pdf({
       format:          'A4',
       printBackground: true,
-      margin: {
-        top:    '14mm',
-        right:  '10mm',
-        bottom: '12mm',
-        left:   '10mm',
-      },
+      // NÃO passar margin aqui — o CSS @page { margin } já define as margens.
+      // Misturar os dois sistemas causa deslocamento de coordenadas que faz o
+      // position: fixed; top: -14mm cair sobre o conteúdo em vez de ficar
+      // na área de margem física. Com apenas o CSS @page as coordenadas
+      // ficam corretas tanto no Puppeteer quanto no window.print().
       displayHeaderFooter: false,
     })
 

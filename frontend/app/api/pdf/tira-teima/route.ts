@@ -79,7 +79,8 @@ export async function GET(req: NextRequest) {
     const pdf = await page.pdf({
       format: 'A4',
       printBackground: true,
-      margin: { top: '14mm', right: '10mm', bottom: '12mm', left: '10mm' },
+      // NÃO passar margin — o CSS @page { margin } já define as margens.
+      // Misturar os dois sistemas desloca as coordenadas do position: fixed.
       displayHeaderFooter: false,
     })
 

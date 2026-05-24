@@ -418,7 +418,8 @@ export default function ImprimirClient({ questoes, simulado }: Props) {
         @media print {
           * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
           .no-print { display: none !important; }
-          html, body { background: white !important; color: #111 !important; }
+          html, body { background: white !important; color: #111; }
+          /* Sem !important no color: inline styles (cores de área) precisam vencer. */
 
           /* ── CRÍTICO: remove o grain/ruído animado do globals.css ──
            * body::before tem position: fixed + inset: -50% + z-index: 9999.
@@ -498,15 +499,29 @@ export default function ImprimirClient({ questoes, simulado }: Props) {
             break-before: page !important;
           }
 
-          /* 2 colunas lado a lado */
+          /* 2 colunas lado a lado.
+           * break-before: avoid impede quebra de página ENTRE .area-head e
+           * .questoes-wrap. Sozinho o break-after: avoid em .area-head não é
+           * suficiente em Chrome/Puppeteer quando o bloco seguinte é um flex
+           * muito alto; a combinação dos dois elimina o cabeçalho órfão.      */
           .questoes-wrap {
             display: flex !important;
             flex-direction: row !important;
+            break-before: avoid !important;
+            page-break-before: avoid !important;
           }
 
           /* Texto das instruções: forçar preto */
           .ci-lista, .ci-lista li, .ci-lista li strong { color: #111 !important; }
           .ci-titulo { color: #111 !important; }
+
+          /* Garante que cores de área (azul, marrom, verde, roxo) chegam ao PDF.
+           * O -webkit-print-color-adjust: exact já ativa cores de background;
+           * aqui garantimos que o color do texto também não é suprimido.      */
+          .ah-nome, .q-num, .q-barra, .q-letra, .fg-num, .fg-b {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
         }
 
         /* ── Reset ── */

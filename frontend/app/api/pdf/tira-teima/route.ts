@@ -1,90 +1,105 @@
 /**
  * GET /api/pdf/tira-teima
- * Gera e retorna o PDF do Tira Teima do usuário logado.
- * Inclui as questões erradas (da tabela questoes_erradas) em layout ENEM.
+ * Gera e retorna o PDF do Tira Teima usando Puppeteer (mesmo padrão do simulado).
+ *
+ * Navega para /tira-teima/imprimir?view=1 com os cookies de sessão do usuário.
  *
  * Query params:
- *   ?gabarito=true  → inclui gabarito
- *   ?versao=1       → versão do tira-teima (padrão: 1)
+ *   ?versao=1   → versão do tira-teima (repassada como query param para a página)
+ *   ?gabarito=true
  */
 import { NextRequest, NextResponse } from 'next/server'
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const { renderToBuffer } = require('@react-pdf/renderer') as { renderToBuffer: (el: unknown) => Promise<Buffer> }
-import React                          from 'react'
-import { createClient }               from '@/lib/supabase/server'
-import { SimuladoPDF }                from '@/lib/pdf/SimuladoPDF'
-import type { QuestaoSimulado }       from '@/lib/pdf/SimuladoPDF'
+
+export const maxDuration = 60
+
+function getBaseUrl(): string {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '')
+  if (process.env.VERCEL_URL)           return `https://${process.env.VERCEL_URL}`
+  return 'http://localhost:3000'
+}
 
 export async function GET(req: NextRequest) {
-  const supabase = await createClient()
-
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) {
-    return NextResponse.json({ error: 'Não autenticado' }, { status: 401 })
-  }
-
-  const versao          = parseInt(req.nextUrl.searchParams.get('versao') ?? '1', 10)
+  const versao          = req.nextUrl.searchParams.get('versao') ?? '1'
   const incluirGabarito = req.nextUrl.searchParams.get('gabarito') === 'true'
+  const cookieHeader    = req.headers.get('cookie') ?? ''
 
-  // Busca questões erradas do usuário (sem acerto na última tentativa)
-  const { data: erradas } = await supabase
-    .from('questoes_erradas')
-    .select(`
-      questao_id, acertou,
-      questoes (
-        id, numero, ano, dia, area, competencia,
-        enunciado, comando, alternativas, gabarito,
-        tem_imagem, imagens, anulada
-      )
-    `)
-    .eq('usuario_id', user.id)
-    .eq('acertou', false)
-    .order('questao_id', { ascending: true })
+  const baseUrl = getBaseUrl()
+  const params  = new URLSearchParams({ view: '1', versao, ...(incluirGabarito && { gabarito: 'true' }) })
+  const url     = `${baseUrl}/tira-teima/imprimir?${params}`
 
-  if (!erradas?.length) {
-    return NextResponse.json({ error: 'Nenhuma questão errada encontrada' }, { status: 404 })
-  }
+  console.log('[pdf/tira-teima] iniciando →', url)
 
-  // Remove duplicatas (mantém a mais recente por questão)
-  const vistas = new Set<number>()
-  const questoes: QuestaoSimulado[] = []
-  for (const r of erradas) {
-    const q = r.questoes as unknown as QuestaoSimulado
-    if (q && !vistas.has(q.id)) {
-      vistas.add(q.id)
-      questoes.push(q)
-    }
-  }
-
-  const agora = new Date().toISOString()
-
-  let buffer: Buffer
+  let browser: import('puppeteer-core').Browser | undefined
   try {
-    buffer = await renderToBuffer(
-      React.createElement(SimuladoPDF, {
-        questoes,
-        simulado: {
-          id:        versao,
-          tipo:      'tira-teima',
-          total:     questoes.length,
-          criado_em: agora,
-        },
-        incluirGabarito,
+    const isDev = process.env.NODE_ENV === 'development'
+    let executablePath: string
+    let launchArgs: string[]
+
+    if (isDev) {
+      executablePath =
+        process.env.LOCAL_CHROME_PATH ||
+        (process.platform === 'win32'
+          ? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+          : process.platform === 'darwin'
+          ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+          : '/usr/bin/google-chrome')
+      launchArgs = []
+    } else {
+      const chromium = (await import('@sparticuz/chromium')).default
+      executablePath = await chromium.executablePath()
+      launchArgs     = chromium.args
+    }
+
+    const puppeteer = (await import('puppeteer-core')).default
+
+    browser = await puppeteer.launch({
+      executablePath,
+      args: [...launchArgs, '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
+      headless: true,
+    })
+
+    const page = await browser.newPage()
+
+    if (cookieHeader) {
+      const cookies = cookieHeader.split(';').flatMap(pair => {
+        const eq = pair.indexOf('=')
+        if (eq === -1) return []
+        const name  = pair.slice(0, eq).trim()
+        const value = pair.slice(eq + 1).trim()
+        return name ? [{ name, value, url: baseUrl }] : []
       })
-    )
+      if (cookies.length > 0) await page.setCookie(...cookies)
+    }
+
+    await page.goto(url, { waitUntil: 'networkidle0', timeout: 40_000 })
+    await page.waitForSelector('.area-bloco, .sem-questoes, .nao-implementado', { timeout: 12_000 }).catch(() => {})
+    await new Promise(r => setTimeout(r, 600))
+    await page.emulateMediaType('print')
+
+    const pdf = await page.pdf({
+      format: 'A4',
+      printBackground: true,
+      margin: { top: '14mm', right: '10mm', bottom: '12mm', left: '10mm' },
+      displayHeaderFooter: false,
+    })
+
+    const buf = Buffer.from(pdf)
+    console.log(`[pdf/tira-teima] gerado — ${buf.length} bytes`)
+
+    return new NextResponse(buf, {
+      status: 200,
+      headers: {
+        'Content-Type':        'application/pdf',
+        'Content-Disposition': `attachment; filename="tira-teima-v${versao}.pdf"`,
+        'Content-Length':      buf.length.toString(),
+      },
+    })
+
   } catch (err) {
-    console.error('[PDF Tira Teima] Erro:', err)
-    return NextResponse.json({ error: 'Falha ao gerar PDF' }, { status: 500 })
+    const msg = err instanceof Error ? err.message : String(err)
+    console.error('[pdf/tira-teima] erro:', msg)
+    return NextResponse.json({ error: 'Falha ao gerar PDF do Tira Teima', detail: msg }, { status: 500 })
+  } finally {
+    if (browser) await browser.close().catch(() => {})
   }
-
-  const filename = `tira-teima-v${versao}.pdf`
-
-  return new NextResponse(new Uint8Array(buffer), {
-    status: 200,
-    headers: {
-      'Content-Type':        'application/pdf',
-      'Content-Disposition': `attachment; filename="${filename}"`,
-      'Content-Length':      buffer.length.toString(),
-    },
-  })
 }

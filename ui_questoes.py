@@ -1013,20 +1013,31 @@ class QuestoesFrame(ttk.Frame):
             self.lbl_q_title.config(text="Nenhuma questão encontrada")
             return
 
-        q     = self._questoes[self._q_idx]
-        total = len(self._questoes)
+        resumo = self._questoes[self._q_idx]
+        total  = len(self._questoes)
 
         cat = self._cat_atual
         f1  = self._var_f1.get()
         f2  = self._var_f2.get()
 
-        self.lbl_q_title.config(
-            text=f"Questão {q['numero']:03d}  —  {cat} {f1} / {f2}")
-        self.lbl_area.config(text=q.get("area", ""))
-
         self.lbl_count.config(text=f"  ◆  {self._q_idx + 1} de {total}  ")
+        self.lbl_q_title.config(
+            text=f"Questão {resumo['numero']:03d}  —  {cat} {f1} / {f2}")
+        self.lbl_area.config(text=resumo.get("area", ""))
         self.ent_num.delete(0, "end")
-        self.ent_num.insert(0, str(q["numero"]))
+        self.ent_num.insert(0, str(resumo["numero"]))
+        self.lbl_enun_status.config(text="carregando…", fg=self.WARN)
+        self.update_idletasks()
+
+        # Busca dados completos (enunciado, alternativas, imagens, etc.)
+        q_full = dl.buscar_questao(resumo["id"])
+        if q_full:
+            # Atualiza o item na lista local com dados completos (cache)
+            self._questoes[self._q_idx] = q_full
+            q = q_full
+        else:
+            q = resumo
+            self.lbl_enun_status.config(text="⚠ falha ao buscar dados completos", fg=self.DANGER)
 
         # Enunciado
         enun = q.get("enunciado") or []
@@ -1038,7 +1049,7 @@ class QuestoesFrame(ttk.Frame):
         self.ent_cmd.delete(0, "end")
         self.ent_cmd.insert(0, q.get("comando") or "")
 
-        # Alternativas (preencher widgets editáveis)
+        # Alternativas
         alts = q.get("alternativas") or {}
         gab  = q.get("gabarito", "") or ""
         for letra in LETRAS:

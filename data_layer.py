@@ -110,7 +110,7 @@ def listar_filtros(categoria: str) -> dict:
 
 def buscar_questoes(fonte: str, filtros: dict) -> list[dict]:
     """
-    Retorna lista de questões (id, numero, area, competencia, tem_imagem).
+    Retorna lista leve de questões (sem enunciado/alternativas) para navegação.
     filtros para ENEM:  {"ano": 2023, "dia": "dia1"}
     filtros para EXATO: {"evento": "CICLO_ZERO", "turno": "MANHA"}
     """

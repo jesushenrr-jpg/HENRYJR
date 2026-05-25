@@ -32,17 +32,17 @@ class TelaConfig(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("CORRETOR - HenryJr — Configuração")
-        self.geometry("460x260")
+        self.geometry("460x340")
         self.configure(bg=BG)
-        self.resizable(False, False)
+        self.resizable(False, True)
         self._ok = False
         self._build_ui()
 
     def _build_ui(self):
         tk.Label(self, text="CORRETOR - HenryJr", bg=BG, fg=ACC,
-                 font=("Segoe UI", 16, "bold")).pack(pady=(24, 4))
+                 font=("Segoe UI", 16, "bold")).pack(pady=(16, 2))
         tk.Label(self, text="Configure as credenciais do Supabase para começar.",
-                 bg=BG, fg=FG2, font=("Segoe UI", 9)).pack(pady=(0, 16))
+                 bg=BG, fg=FG2, font=("Segoe UI", 9)).pack(pady=(0, 10))
 
         frame = tk.Frame(self, bg=BG)
         frame.pack(fill="x", padx=40)
@@ -67,7 +67,7 @@ class TelaConfig(tk.Tk):
 
         tk.Button(self, text="Conectar", bg=ACC, fg="#0E0D0B", relief="flat",
                   cursor="hand2", font=("Segoe UI", 11, "bold"),
-                  command=self._conectar).pack(pady=14)
+                  command=self._conectar).pack(pady=12, ipadx=12, ipady=4)
 
     def _conectar(self):
         url = self._ent_url.get().strip()

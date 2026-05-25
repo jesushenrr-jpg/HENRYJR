@@ -374,14 +374,36 @@ C:\Projetos\henryjr\
   - Criados: `frontend/app/tira-teima/imprimir/page.tsx` (Server Component) + `TiraTeimaPrint.tsx` (Client)
   - Layout: capa + questões por área + gabarito opcional (query param `?gabarito=true`)
   - A rota `/api/pdf/tira-teima` já existia e aponta para `/tira-teima/imprimir?view=1`
+- **Item 13 (ciclo Tira Teima V1→V2→V3) — CONCLUÍDO** (2025-05):
+  - API `POST /api/tira-teima/nova-versao`: marca questões zeradas e incrementa versao_tt
+  - `tira-teima/page.tsx`: exibe badges V1, V2, V3... com a versão atual destacada
+  - SQL migration `002_tira_teima_versoes.sql`: adiciona `versao_tt` e `zerada` em `questoes_erradas`
+  - **Pendente**: executar a migration no painel Supabase SQL Editor
+- **Item 14 (página /tira-teima/imprimir) — CONCLUÍDO** (2025-05): ver acima
 - **Item 17 (Google OAuth) — CÓDIGO PRONTO**: frontend já implementado (`signInWithOAuth({ provider: 'google' })`)
   - Credenciais já em `chaves-projeto.txt`; falta configurar no painel Supabase (Authentication → Providers)
+- **Item 18 (modo --revisao) — CONCLUÍDO** (2025-05):
+  - `gerenciar_imagens.py` agora aceita `--revisao` via argparse
+  - Ao passar `--revisao`, carrega `relatorio_erros.json`, filtra `status: pendente` e navega para a primeira pendente
+  - Título da janela mostra "MODO REVISAO (N pendentes)"
 
 ### Em andamento 🔄
 - Fase 2: extração v2, imagens (concluídas), novos campos JSON
 
 ### Próxima tarefa imediata
-**Item 3** — Extração v2 completa das alternativas para todos os anos. Padrão confirmado:
+Executar a **SQL migration 002** no painel Supabase para ativar o ciclo de versões do Tira Teima:
+`frontend/supabase/migrations/002_tira_teima_versoes.sql`
+
+Configurar **Google OAuth no painel Supabase** (Autenticação → Providers → Google):
+- Client ID: ver `chaves-projeto.txt`
+- Client Secret: ver `chaves-projeto.txt`
+- Authorized redirect URIs no Google Console: `https://bmhudlpihwxvaelokugh.supabase.co/auth/v1/callback`
+
+**Pendente de revisão manual** (alternativas extraídas como imagem, não texto):
+- 2009 Q93, 2010 Q108, 2016 Q85 (3 alts), 2020 Q137
+- 2021: Q2, Q11, Q16, Q43, Q54, Q69, Q107, Q127, Q151, Q169, Q170 (OCR não extraiu alts)
+
+Depois: **Item 3** — Extração v2 completa das alternativas para todos os anos. Padrão confirmado:
 
 ```
 Span: 'A\t'  — x≈37, negrito (flags=4 ou 16), tamanho 10

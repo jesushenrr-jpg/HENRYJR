@@ -1,0 +1,63 @@
+# Arquivos sensiveis - NUNCA commitar
+HENRYJR_CREDENCIAIS.txt
+chaves-projeto.txt
+*.key
+*.secret
+.env
+.env.*
+
+# Dados grandes - ficam no Supabase Storage
+dados/PROVAS/
+dados/imagens/
+dados/texto_bruto/
+
+# Arquivos temporarios/debug
+debug_*.txt
+*.output
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Debug e temporarios
+debug_*.jpg
+texto_bruto_amostra.json
+.claude/
+
+# Subpastas grandes de dados (ficam no Supabase Storage)
+dados/provas/
+dados/PROVAS/
+dados/imagens/
+dados/imagens_teste*/
+dados/imagens_teste_v*/
+dados/texto_bruto/
+dados/*.bak*
+# Nota: dados/json/ e dados/json_v2/ SIM entram no git
+
+# Frontend — build e dependências
+frontend/.next/
+frontend/node_modules/
+frontend/.env.local
+frontend/.env*.local
+
+# Arquivos de migração com credenciais embutidas
+migrar_questoes_erradas.py
+
+# Logs
+logs_classificacao.txt
+*.log
+
+# PyInstaller — build artifacts (NÃO commitar o .exe)
+dist/
+build/
+*.spec.bak

@@ -28,7 +28,8 @@ try:
 except ImportError:
     _MATPLOTLIB_OK = False
 
-sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if sys.stdout is not None:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 JPEG_Q      = 92
 PREVIEW_MAX = (440, 280)

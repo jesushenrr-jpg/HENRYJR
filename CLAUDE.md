@@ -480,6 +480,7 @@ Estrutura do caderno:
 
 ## Convenções do Projeto
 
+- **OBRIGATÓRIO**: A cada mudança feita (código, configuração, dados, docs), atualizar este CLAUDE.md em paralelo — registrar o que foi feito, o estado atual e os próximos passos na seção "Estado Atual do Projeto". Isso é feito junto com a mudança, não depois.
 - Sempre preservar o JSON do 2010 ao re-extrair
 - Questões anuladas: `gabarito: null` e `anulada: true`
 - Imagens salvas em `dados/imagens/{ano}/{dia}/q{numero:03d}_1.jpg`

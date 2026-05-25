@@ -149,21 +149,28 @@ export default function ImprimirClient({ questoes, simulado }: Props) {
           <strong>Simulado #{simulado.id}</strong>&nbsp;·&nbsp;{qs.length} questões
         </div>
         <div className="ctrl-tip">
-          ⚠️ No diálogo de impressão: desative <em>Cabeçalhos e rodapés</em> do navegador
+          👁️ Visualização do simulado — download e impressão disponíveis em breve
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-          {erroDown && (
-            <span style={{ fontSize: 11, color: '#f87171' }}>{erroDown}</span>
-          )}
+          <span style={{ fontSize: 11, color: '#D4A853', background: 'rgba(212,168,83,0.12)', border: '1px solid rgba(212,168,83,0.3)', borderRadius: 6, padding: '3px 10px' }}>
+            🚧 Download e impressão em PDF disponíveis em breve
+          </span>
           <button
             className="btn-dl"
-            onClick={baixarPDF}
-            disabled={baixando}
-            title="Gera o PDF no servidor (sem diálogo do navegador)"
+            disabled
+            title="Disponível em breve"
+            style={{ opacity: 0.4, cursor: 'not-allowed' }}
           >
-            {baixando ? '⏳ Gerando…' : '⬇️ Baixar PDF'}
+            ⬇️ Baixar PDF
           </button>
-          <button className="btn-imp" onClick={() => window.print()}>🖨️ Imprimir / Salvar PDF</button>
+          <button
+            className="btn-imp"
+            disabled
+            title="Disponível em breve"
+            style={{ opacity: 0.4, cursor: 'not-allowed' }}
+          >
+            🖨️ Imprimir / Salvar PDF
+          </button>
           <button className="btn-fch" onClick={() => window.close()}>✕ Fechar</button>
         </div>
       </div>

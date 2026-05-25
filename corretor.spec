@@ -1,6 +1,6 @@
 # corretor.spec
 # -*- mode: python ; coding: utf-8 -*-
-import os, sys
+import os, sys, site
 
 block_cipher = None
 
@@ -8,32 +8,31 @@ block_cipher = None
 _TCL = os.path.join(sys.prefix, 'tcl', 'tcl8.6')
 _TK  = os.path.join(sys.prefix, 'tcl', 'tk8.6')
 
+# Coleta requests e dependências do user site-packages
+from PyInstaller.utils.hooks import collect_all, collect_submodules
+
+_req_d, _req_b, _req_h   = collect_all('requests')
+_url_d, _url_b, _url_h   = collect_all('urllib3')
+_cer_d, _cer_b, _cer_h   = collect_all('certifi')
+_chr_d, _chr_b, _chr_h   = collect_all('charset_normalizer')
+_idn_d, _idn_b, _idn_h   = collect_all('idna')
+
+# Adiciona user site-packages ao path para PyInstaller encontrar os pacotes
+_user_site = site.getusersitepackages()
+
 a = Analysis(
     ['corretor.py'],
-    pathex=[],
-    binaries=[],
+    pathex=[_user_site],
+    binaries=[] + _req_b + _url_b + _cer_b + _chr_b + _idn_b,
     datas=[
         (_TCL, '_tcl_data'),
         (_TK,  '_tk_data'),
-    ],
+    ] + _req_d + _url_d + _cer_d + _chr_d + _idn_d,
     hiddenimports=[
         'PIL._tkinter_finder',
         'matplotlib.backends.backend_tkagg',
         'matplotlib.backends.backend_agg',
-        'requests',
-        'requests.adapters',
-        'requests.auth',
-        'requests.cookies',
-        'requests.exceptions',
-        'requests.models',
-        'requests.sessions',
-        'urllib3',
-        'urllib3.util',
-        'urllib3.util.retry',
-        'certifi',
-        'charset_normalizer',
-        'idna',
-    ],
+    ] + _req_h + _url_h + _cer_h + _chr_h + _idn_h,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

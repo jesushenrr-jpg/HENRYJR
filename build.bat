@@ -8,8 +8,8 @@ REM Limpar builds anteriores
 if exist dist\CORRETOR-HENRYJR rmdir /s /q dist\CORRETOR-HENRYJR
 if exist build rmdir /s /q build
 
-REM Gerar .exe
-pyinstaller corretor.spec --clean
+REM Gerar .exe (usa python -m para garantir o Python correto)
+python -m PyInstaller corretor.spec --clean -y
 
 echo.
 if exist dist\CORRETOR-HENRYJR\CORRETOR-HENRYJR.exe (

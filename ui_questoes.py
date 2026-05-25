@@ -572,57 +572,63 @@ class QuestoesFrame(ttk.Frame):
     def _build_ui(self):
         C = self
 
-        style = ttk.Style(self)
-        style.theme_use("clam")
-        style.configure("TCombobox",
-                        fieldbackground=C.ENTRY_BG, background=C.ENTRY_BG,
-                        foreground=C.FG, selectbackground=C.ACC, arrowcolor=C.FG)
-        style.configure("TRadiobutton", background=C.CARD, foreground=C.FG,
-                        focuscolor="none", font=("Segoe UI", 10))
-        style.map("TRadiobutton", background=[("active", C.CARD)])
+        # ── Cabeçalho escuro com filtros ──────────────────────────────────────
+        hdr = tk.Frame(self, bg=C.CARD)
+        hdr.pack(fill="x")
+        hdr_inner = tk.Frame(hdr, bg=C.CARD)
+        hdr_inner.pack(fill="x", padx=14, pady=10)
 
-        # ── Seletor de categoria em cascata ───────────────────────────────────
-        nav_top = tk.Frame(self, bg=C.BG)
-        nav_top.pack(fill="x", padx=8, pady=(8, 4))
+        # Título à esquerda
+        tk.Label(hdr_inner, text="QUESTÕES", bg=C.CARD, fg=C.ACC,
+                 font=("Segoe UI", 12, "bold")).pack(side="left", padx=(0, 20))
 
-        tk.Label(nav_top, text="Prova:", bg=C.BG, fg=C.FG2,
-                 font=("Segoe UI", 9)).pack(side="left", padx=(0, 4))
+        # Filtros em linha
+        def _filter_lbl(parent, text):
+            tk.Label(parent, text=text, bg=C.CARD, fg=C.FG2,
+                     font=("Segoe UI", 8, "bold")).pack(side="left", padx=(8, 3))
 
+        _filter_lbl(hdr_inner, "PROVA")
         self._var_cat = tk.StringVar(value="ENEM")
-        self._cb_cat  = ttk.Combobox(nav_top, textvariable=self._var_cat,
-                                     state="readonly", width=10)
-        self._cb_cat.pack(side="left", padx=(0, 8))
+        self._cb_cat  = ttk.Combobox(hdr_inner, textvariable=self._var_cat,
+                                     state="readonly", width=8,
+                                     font=("Segoe UI", 9))
+        self._cb_cat.pack(side="left", padx=(0, 6))
         self._cb_cat.bind("<<ComboboxSelected>>", self._ao_mudar_categoria)
 
-        self._lbl_f1 = tk.Label(nav_top, text="Ano:", bg=C.BG, fg=C.FG2,
-                                 font=("Segoe UI", 9))
-        self._lbl_f1.pack(side="left", padx=(0, 4))
+        # Separador vertical
+        tk.Label(hdr_inner, text="│", bg=C.CARD, fg=C.CARD[:-2]+"20",
+                 font=("Segoe UI", 14)).pack(side="left", padx=2)
+
+        self._lbl_f1 = tk.Label(hdr_inner, text="ANO", bg=C.CARD, fg=C.FG2,
+                                 font=("Segoe UI", 8, "bold"))
+        self._lbl_f1.pack(side="left", padx=(4, 3))
         self._var_f1 = tk.StringVar()
-        self._cb_f1  = ttk.Combobox(nav_top, textvariable=self._var_f1,
-                                     state="readonly", width=14)
-        self._cb_f1.pack(side="left", padx=(0, 8))
+        self._cb_f1  = ttk.Combobox(hdr_inner, textvariable=self._var_f1,
+                                     state="readonly", width=12,
+                                     font=("Segoe UI", 9))
+        self._cb_f1.pack(side="left", padx=(0, 6))
         self._cb_f1.bind("<<ComboboxSelected>>", self._ao_mudar_f1)
 
-        self._lbl_f2 = tk.Label(nav_top, text="Dia:", bg=C.BG, fg=C.FG2,
-                                 font=("Segoe UI", 9))
-        self._lbl_f2.pack(side="left", padx=(0, 4))
+        tk.Label(hdr_inner, text="│", bg=C.CARD, fg=C.CARD[:-2]+"20",
+                 font=("Segoe UI", 14)).pack(side="left", padx=2)
+
+        self._lbl_f2 = tk.Label(hdr_inner, text="DIA", bg=C.CARD, fg=C.FG2,
+                                 font=("Segoe UI", 8, "bold"))
+        self._lbl_f2.pack(side="left", padx=(4, 3))
         self._var_f2 = tk.StringVar()
-        self._cb_f2  = ttk.Combobox(nav_top, textvariable=self._var_f2,
-                                     state="readonly", width=10)
-        self._cb_f2.pack(side="left", padx=(0, 8))
+        self._cb_f2  = ttk.Combobox(hdr_inner, textvariable=self._var_f2,
+                                     state="readonly", width=8,
+                                     font=("Segoe UI", 9))
+        self._cb_f2.pack(side="left", padx=(0, 6))
         self._cb_f2.bind("<<ComboboxSelected>>", self._load_questoes)
 
-        self._lbl_sync = tk.Label(nav_top, text="", bg=C.BG, fg=C.FG2,
+        # Indicador de staging à direita
+        self._lbl_sync = tk.Label(hdr_inner, text="", bg=C.CARD, fg=C.FG2,
                                    font=("Segoe UI", 8))
-        self._lbl_sync.pack(side="right", padx=8)
+        self._lbl_sync.pack(side="right", padx=6)
 
-        # ── Cabeçalho ────────────────────────────────────────────────────────
-        hdr = tk.Frame(self, bg=C.ACC, height=46)
-        hdr.pack(fill="x")
-        hdr.pack_propagate(False)
-        tk.Label(hdr, text="  EDITOR DE QUESTÕES",
-                 bg=C.ACC, fg=C.BTN_FG, font=("Segoe UI", 13, "bold")).pack(
-                 side="left", pady=8)
+        # Linha divisória
+        tk.Frame(self, bg="#2C2820", height=1).pack(fill="x")
 
         body = tk.Frame(self, bg=C.BG)
         body.pack(fill="both", expand=True, padx=10, pady=10)
@@ -659,9 +665,12 @@ class QuestoesFrame(ttk.Frame):
                   relief="flat", font=("Segoe UI", 9), cursor="hand2",
                   command=self._proxima).pack(side="left", fill="x", expand=True)
 
-        self.lbl_count = tk.Label(left, text="", bg=C.CARD, fg=C.FG2,
-                                  font=("Segoe UI", 8))
-        self.lbl_count.pack(pady=(2, 6))
+        # Badge de contagem de questões
+        count_wrap = tk.Frame(left, bg="#1E1B17", bd=0)
+        count_wrap.pack(padx=10, pady=(2, 6), fill="x")
+        self.lbl_count = tk.Label(count_wrap, text="", bg="#1E1B17", fg=C.ACC,
+                                  font=("Segoe UI", 8, "bold"), pady=3)
+        self.lbl_count.pack(fill="x")
 
         tk.Frame(left, bg=C.ACC, height=1).pack(fill="x", padx=10, pady=4)
 
@@ -786,9 +795,9 @@ class QuestoesFrame(ttk.Frame):
 
         # Botão salvar alternativas
         tk.Button(center, text="💾  Salvar Alternativas",
-                  bg="#1e66f5", fg=C.BTN_FG, relief="flat",
+                  bg="#2d8b4e", fg=C.BTN_FG, relief="flat",
                   font=("Segoe UI", 9, "bold"), pady=5, cursor="hand2",
-                  activebackground="#1455cc",
+                  activebackground="#1f6436",
                   command=self._salvar_alternativas).pack(
                   fill="x", padx=16, pady=(4, 2))
         self.lbl_alts_status = tk.Label(center, text="", bg=C.CARD, fg=C.OK,
@@ -985,7 +994,7 @@ class QuestoesFrame(ttk.Frame):
         """Limpa a UI quando não há questões para mostrar."""
         self.lbl_q_title.config(text="Nenhuma questão encontrada")
         self.lbl_area.config(text="")
-        self.lbl_count.config(text="")
+        self.lbl_count.config(text="  ○  0 questões  ")
         try:
             self.txt_enun.delete("1.0", "end")
             self.ent_cmd.delete(0, "end")
@@ -1015,7 +1024,7 @@ class QuestoesFrame(ttk.Frame):
             text=f"Questão {q['numero']:03d}  —  {cat} {f1} / {f2}")
         self.lbl_area.config(text=q.get("area", ""))
 
-        self.lbl_count.config(text=f"{self._q_idx + 1} / {total}")
+        self.lbl_count.config(text=f"  ◆  {self._q_idx + 1} de {total}  ")
         self.ent_num.delete(0, "end")
         self.ent_num.insert(0, str(q["numero"]))
 

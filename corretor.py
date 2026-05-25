@@ -19,6 +19,7 @@ import staging
 
 BG      = "#0E0D0B"
 CARD    = "#161411"
+BORDER  = "#2C2820"
 SURFACE = "#1E1B17"
 FG      = "#F2EDE4"
 FG2     = "#A89880"
@@ -113,32 +114,113 @@ class Corretor(tk.Tk):
         self.config(menu=menubar)
 
         # ── Barra superior de status ──────────────────────────────────────────
-        self._barra = tk.Frame(self, bg=CARD, height=28)
+        # Linha de acento dourado no topo
+        tk.Frame(self, bg=ACC, height=2).pack(fill="x")
+
+        self._barra = tk.Frame(self, bg=CARD, height=32)
         self._barra.pack(fill="x")
         self._barra.pack_propagate(False)
 
+        # Ponto dourado + título
+        tk.Label(self._barra, text="◆", bg=CARD, fg=ACC,
+                 font=("Segoe UI", 8)).pack(side="left", padx=(10, 2))
         self._lbl_titulo = tk.Label(
-            self._barra, text="  CORRETOR - HenryJr",
-            bg=CARD, fg=ACC, font=("Segoe UI", 10, "bold"))
-        self._lbl_titulo.pack(side="left", padx=4)
+            self._barra, text="CORRETOR  ·  HenryJr",
+            bg=CARD, fg=FG, font=("Segoe UI", 9, "bold"))
+        self._lbl_titulo.pack(side="left", padx=(0, 4))
 
         self._lbl_pendentes = tk.Label(
             self._barra, text="", bg=CARD, fg=FG2, font=("Segoe UI", 9))
-        self._lbl_pendentes.pack(side="right", padx=12)
+        self._lbl_pendentes.pack(side="right", padx=14)
+
+        # Linha divisória sutil
+        tk.Frame(self, bg=BORDER, height=1).pack(fill="x")
 
         # ── Notebook ──────────────────────────────────────────────────────────
         style = ttk.Style(self)
         style.theme_use("clam")
-        style.configure("TNotebook",       background=BG, borderwidth=0)
-        style.configure("TNotebook.Tab",   background=SURFACE, foreground=FG2,
+
+        # Notebook
+        style.configure("TNotebook",     background=BG, borderwidth=0)
+        style.configure("TNotebook.Tab", background=SURFACE, foreground=FG2,
                          padding=[14, 6], font=("Segoe UI", 9))
         style.map("TNotebook.Tab",
                   background=[("selected", CARD)],
                   foreground=[("selected", ACC)])
-        style.configure("Dark.TFrame",     background=BG)
+
+        # Frame
+        style.configure("Dark.TFrame", background=BG)
+
+        # Treeview
+        style.configure("Treeview",
+                        background=CARD,
+                        foreground=FG,
+                        fieldbackground=CARD,
+                        rowheight=24,
+                        borderwidth=0,
+                        relief="flat")
+        style.configure("Treeview.Heading",
+                        background=SURFACE,
+                        foreground=FG2,
+                        font=("Segoe UI", 8, "bold"),
+                        relief="flat",
+                        borderwidth=0)
+        style.map("Treeview",
+                  background=[("selected", ACC)],
+                  foreground=[("selected", "#0E0D0B")])
+        style.map("Treeview.Heading",
+                  background=[("active", SURFACE)],
+                  relief=[("active", "flat")])
+
+        # Progressbar
+        style.configure("TProgressbar",
+                        troughcolor=SURFACE,
+                        background=ACC,
+                        borderwidth=0,
+                        thickness=6)
+
+        # Scrollbar
+        style.configure("TScrollbar",
+                        troughcolor=SURFACE,
+                        background=CARD,
+                        borderwidth=0,
+                        arrowsize=12,
+                        arrowcolor=FG2)
+        style.map("TScrollbar",
+                  background=[("active", FG2), ("!active", CARD)])
+
+        # Entry
+        style.configure("TEntry",
+                        fieldbackground=SURFACE,
+                        foreground=FG,
+                        insertcolor=FG,
+                        borderwidth=0,
+                        relief="flat")
+        style.map("TEntry",
+                  fieldbackground=[("focus", "#252118")])
+
+        # Combobox
         style.configure("TCombobox",
                         fieldbackground=SURFACE, background=SURFACE,
-                        foreground=FG, selectbackground=ACC, arrowcolor=FG)
+                        foreground=FG, selectbackground=ACC,
+                        arrowcolor=FG2, borderwidth=0, relief="flat")
+        style.map("TCombobox",
+                  fieldbackground=[("focus", "#252118")],
+                  foreground=[("focus", FG)])
+
+        # Radiobutton / Checkbutton
+        style.configure("TRadiobutton",
+                        background=BG, foreground=FG,
+                        font=("Segoe UI", 9))
+        style.map("TRadiobutton",
+                  background=[("active", BG)],
+                  foreground=[("active", ACC)])
+        style.configure("TCheckbutton",
+                        background=BG, foreground=FG,
+                        font=("Segoe UI", 9))
+        style.map("TCheckbutton",
+                  background=[("active", BG)],
+                  foreground=[("active", ACC)])
 
         nb = ttk.Notebook(self)
         nb.pack(fill="both", expand=True)

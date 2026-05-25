@@ -35,69 +35,108 @@ class FrasesFrame(ttk.Frame):
         self._carregar()
 
     def _build_ui(self):
-        self.configure(padding=12)
+        self.configure(padding=0)
 
-        # ── Topo: botões ──────────────────────────────────────────────────────
-        top = tk.Frame(self, bg=BG)
-        top.pack(fill="x", pady=(0, 8))
-        tk.Label(top, text="FRASES", bg=BG, fg=ACC,
-                 font=("Segoe UI", 11, "bold")).pack(side="left")
-        tk.Button(top, text="↻ Atualizar", bg=SURFACE, fg=FG, relief="flat",
-                  cursor="hand2", command=self._carregar).pack(side="right", padx=4)
-        tk.Button(top, text="🗑 Deletar", bg=SURFACE, fg=DANGER, relief="flat",
-                  cursor="hand2", command=self._deletar).pack(side="right", padx=4)
-        tk.Button(top, text="💾 Salvar", bg=ACC, fg="#0E0D0B", relief="flat",
-                  cursor="hand2", font=("Segoe UI", 9, "bold"),
+        # ── Cabeçalho ──────────────────────────────────────────────────────
+        header = tk.Frame(self, bg=CARD)
+        header.pack(fill="x")
+
+        inner_h = tk.Frame(header, bg=CARD)
+        inner_h.pack(fill="x", padx=16, pady=10)
+
+        tk.Label(inner_h, text="FRASES", bg=CARD, fg=ACC,
+                 font=("Segoe UI", 12, "bold")).pack(side="left")
+
+        # Botões à direita (ordem inversa do pack side=right)
+        tk.Button(inner_h, text="↻ Atualizar", bg=SURFACE, fg=FG2, relief="flat",
+                  cursor="hand2", font=("Segoe UI", 9), padx=10, pady=5,
+                  activebackground=SURFACE, activeforeground=FG,
+                  command=self._carregar).pack(side="right", padx=(4, 0))
+        tk.Button(inner_h, text="🗑 Deletar", bg=SURFACE, fg=DANGER, relief="flat",
+                  cursor="hand2", font=("Segoe UI", 9), padx=10, pady=5,
+                  activebackground=SURFACE, activeforeground=DANGER,
+                  command=self._deletar).pack(side="right", padx=4)
+        tk.Button(inner_h, text="💾 Salvar", bg=ACC, fg="#0E0D0B", relief="flat",
+                  cursor="hand2", font=("Segoe UI", 10, "bold"), padx=14, pady=5,
+                  activebackground=ACC_HOV, activeforeground="#0E0D0B",
                   command=self._salvar).pack(side="right", padx=4)
-        tk.Button(top, text="+ Nova", bg=SURFACE, fg=FG, relief="flat",
-                  cursor="hand2", command=self._nova).pack(side="right", padx=4)
+        tk.Button(inner_h, text="+ Nova frase", bg=SURFACE, fg=FG, relief="flat",
+                  cursor="hand2", font=("Segoe UI", 9), padx=10, pady=5,
+                  activebackground=SURFACE, activeforeground=ACC,
+                  command=self._nova).pack(side="right", padx=4)
 
-        # ── Lista à esquerda ──────────────────────────────────────────────────
+        tk.Frame(self, bg=BORDER, height=1).pack(fill="x")
+
+        # ── Corpo: lista + editor ──────────────────────────────────────────────
         pane = tk.Frame(self, bg=BG)
         pane.pack(fill="both", expand=True)
 
-        lista_frame = tk.Frame(pane, bg=CARD, bd=1, relief="flat")
-        lista_frame.pack(side="left", fill="y", padx=(0, 8))
+        # ── Lista à esquerda ──────────────────────────────────────────────────
+        lista_wrap = tk.Frame(pane, bg=CARD, width=240)
+        lista_wrap.pack(side="left", fill="y")
+        lista_wrap.pack_propagate(False)
 
-        sb = tk.Scrollbar(lista_frame, orient="vertical")
+        tk.Label(lista_wrap, text="FRASES CADASTRADAS", bg=CARD, fg=FG2,
+                 font=("Segoe UI", 7, "bold")).pack(fill="x", padx=10, pady=(8, 2))
+
+        tk.Frame(lista_wrap, bg=BORDER, height=1).pack(fill="x", padx=10)
+
+        sb_lista = tk.Scrollbar(lista_wrap, orient="vertical", bg=CARD,
+                                 troughcolor=CARD, relief="flat", bd=0)
         self._lista = tk.Listbox(
-            lista_frame, yscrollcommand=sb.set, width=32,
+            lista_wrap, yscrollcommand=sb_lista.set, width=28,
             bg=CARD, fg=FG, selectbackground=ACC, selectforeground="#0E0D0B",
             activestyle="none", borderwidth=0, highlightthickness=0,
-            font=("Segoe UI", 9),
+            font=("Segoe UI", 9), pady=2,
         )
-        sb.config(command=self._lista.yview)
-        sb.pack(side="right", fill="y")
-        self._lista.pack(side="left", fill="both", expand=True)
+        sb_lista.config(command=self._lista.yview)
+        sb_lista.pack(side="right", fill="y")
+        self._lista.pack(side="left", fill="both", expand=True, padx=(0, 0))
         self._lista.bind("<<ListboxSelect>>", self._ao_selecionar)
+
+        # Separador vertical
+        tk.Frame(pane, bg=BORDER, width=1).pack(side="left", fill="y")
 
         # ── Editor à direita ──────────────────────────────────────────────────
         editor = tk.Frame(pane, bg=BG)
-        editor.pack(side="left", fill="both", expand=True)
+        editor.pack(side="left", fill="both", expand=True, padx=16, pady=12)
 
         def lbl(texto):
             tk.Label(editor, text=texto, bg=BG, fg=FG2,
-                     font=("Segoe UI", 8, "bold"), anchor="w").pack(fill="x", pady=(6, 1))
+                     font=("Segoe UI", 7, "bold"), anchor="w").pack(fill="x", pady=(8, 2))
 
         lbl("TÍTULO")
         self._ent_titulo = tk.Entry(editor, bg=SURFACE, fg=FG, insertbackground=FG,
-                                    relief="flat", font=("Segoe UI", 10))
-        self._ent_titulo.pack(fill="x", ipady=4)
+                                    relief="flat", font=("Segoe UI", 10),
+                                    highlightthickness=1,
+                                    highlightbackground=BORDER,
+                                    highlightcolor=ACC)
+        self._ent_titulo.pack(fill="x", ipady=5)
 
         lbl("CATEGORIA")
         self._ent_cat = tk.Entry(editor, bg=SURFACE, fg=FG, insertbackground=FG,
-                                  relief="flat", font=("Segoe UI", 10))
-        self._ent_cat.pack(fill="x", ipady=4)
+                                  relief="flat", font=("Segoe UI", 10),
+                                  highlightthickness=1,
+                                  highlightbackground=BORDER,
+                                  highlightcolor=ACC)
+        self._ent_cat.pack(fill="x", ipady=5)
 
         lbl("TEXTO")
-        self._txt = tk.Text(editor, bg=SURFACE, fg=FG, insertbackground=FG,
+        txt_wrap = tk.Frame(editor, bg=BORDER, bd=1)
+        txt_wrap.pack(fill="both", expand=True, pady=(0, 0))
+        self._txt = tk.Text(txt_wrap, bg=SURFACE, fg=FG, insertbackground=FG,
                              relief="flat", font=("Source Serif 4", 11),
-                             wrap="word", height=12)
+                             wrap="word", height=12,
+                             padx=8, pady=8,
+                             highlightthickness=1,
+                             highlightbackground=BORDER,
+                             highlightcolor=ACC)
         self._txt.pack(fill="both", expand=True)
 
+        # Barra de status colorida
         self._lbl_status = tk.Label(editor, text="", bg=BG, fg=FG2,
                                     font=("Segoe UI", 8), anchor="w")
-        self._lbl_status.pack(fill="x", pady=(4, 0))
+        self._lbl_status.pack(fill="x", pady=(6, 0))
 
         self._frase_id: int | None = None  # id da frase em edição (None = nova)
 
@@ -105,8 +144,11 @@ class FrasesFrame(ttk.Frame):
         self._frases_cache = dl.listar_frases()
         self._lista.delete(0, "end")
         for f in self._frases_cache:
-            self._lista.insert("end", f.get("titulo", "—"))
-        self._lbl_status.config(text=f"{len(self._frases_cache)} frases carregadas", fg=FG2)
+            self._lista.insert("end", f"  {f.get('titulo', '—')}")
+        n = len(self._frases_cache)
+        self._lbl_status.config(
+            text=f"{'◆' if n else '○'}  {n} frase{'s' if n != 1 else ''} carregada{'s' if n != 1 else ''}",
+            fg=FG2)
 
     def _ao_selecionar(self, _=None):
         sel = self._lista.curselection()

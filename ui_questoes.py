@@ -692,10 +692,37 @@ class QuestoesFrame(ttk.Frame):
             lambda e: self._thumb_canvas.configure(
                 scrollregion=self._thumb_canvas.bbox("all")))
 
-        # ══ CENTRO — questão ══════════════════════════════════════════════════
-        center = tk.Frame(body, bg=C.CARD)
-        center.pack(side="left", fill="both", expand=True, padx=(0, 8))
+        # ══ CENTRO — questão (com scroll vertical) ═══════════════════════════
+        center_outer = tk.Frame(body, bg=C.CARD)
+        center_outer.pack(side="left", fill="both", expand=True, padx=(0, 8))
 
+        # Canvas + scrollbar para o painel central
+        _csc = tk.Scrollbar(center_outer, orient="vertical", relief="flat", width=8,
+                            bg=C.CARD, troughcolor=C.CARD)
+        _csc.pack(side="right", fill="y")
+        _cc = tk.Canvas(center_outer, bg=C.CARD, highlightthickness=0,
+                        yscrollcommand=_csc.set)
+        _cc.pack(side="left", fill="both", expand=True)
+        _csc.config(command=_cc.yview)
+
+        center = tk.Frame(_cc, bg=C.CARD)
+        _cc_win = _cc.create_window((0, 0), window=center, anchor="nw")
+
+        # Redimensiona o frame interno junto com o canvas
+        def _on_center_configure(e):
+            _cc.configure(scrollregion=_cc.bbox("all"))
+        def _on_canvas_resize(e):
+            _cc.itemconfig(_cc_win, width=e.width)
+        center.bind("<Configure>", _on_center_configure)
+        _cc.bind("<Configure>", _on_canvas_resize)
+
+        # Scroll com roda do mouse no painel central
+        def _center_scroll(e):
+            _cc.yview_scroll(int(-1 * (e.delta / 120)), "units")
+        _cc.bind("<MouseWheel>", _center_scroll)
+        center.bind("<MouseWheel>", _center_scroll)
+
+        # ── Cabeçalho da questão ──────────────────────────────────────────────
         tk.Label(center, text="QUESTÃO", bg=C.CARD, fg=C.ACC,
                  font=("Segoe UI", 9, "bold")).pack(anchor="w", padx=16, pady=(12, 2))
         self.lbl_q_title = tk.Label(center, text="", bg=C.CARD, fg=C.FG,
@@ -708,7 +735,7 @@ class QuestoesFrame(ttk.Frame):
 
         tk.Frame(center, bg=C.ENTRY_BG, height=1).pack(fill="x", padx=16, pady=2)
 
-        # Enunciado editável
+        # ── Enunciado editável ────────────────────────────────────────────────
         row_eh = tk.Frame(center, bg=C.CARD)
         row_eh.pack(fill="x", padx=16, pady=(6, 2))
         tk.Label(row_eh, text="Enunciado", bg=C.CARD, fg=C.FG2,
@@ -719,7 +746,7 @@ class QuestoesFrame(ttk.Frame):
                  font=("Segoe UI", 7, "italic")).pack(side="left")
 
         fe = tk.Frame(center, bg=C.CARD)
-        fe.pack(fill="both", expand=True, padx=16, pady=(0, 4))
+        fe.pack(fill="x", padx=16, pady=(0, 4))
         se = tk.Scrollbar(fe, bg=C.CARD, troughcolor=C.CARD, relief="flat", width=8)
         self.txt_enun = tk.Text(fe, bg=C.EDIT_BG, fg=C.FG, font=("Segoe UI", 9),
                                 wrap="word", relief="flat", height=7,
@@ -727,12 +754,13 @@ class QuestoesFrame(ttk.Frame):
                                 insertbackground=C.FG, selectbackground=C.ACC)
         se.config(command=self.txt_enun.yview)
         se.pack(side="right", fill="y")
-        self.txt_enun.pack(fill="both", expand=True)
-        # Atualiza opções de posição ao editar
+        self.txt_enun.pack(fill="x", expand=False)
         self.txt_enun.bind("<FocusOut>", lambda e: self._atualizar_posicoes())
         self.txt_enun.bind("<KeyRelease>", lambda e: self._atualizar_posicoes())
+        # propaga scroll para o canvas central
+        self.txt_enun.bind("<MouseWheel>", _center_scroll)
 
-        # Comando
+        # ── Comando ───────────────────────────────────────────────────────────
         row_cmd = tk.Frame(center, bg=C.CARD)
         row_cmd.pack(fill="x", padx=16, pady=(2, 4))
         tk.Label(row_cmd, text="Comando:", bg=C.CARD, fg=C.FG2,
@@ -771,17 +799,17 @@ class QuestoesFrame(ttk.Frame):
                                            bg=C.ENTRY_BG, fg=C.FG,
                                            font=("Segoe UI", 9, "bold"), width=2)
             self._lbl_alt_letra.pack(side="left", anchor="n", pady=3)
-            self._lbl_alt_letra._letra = letra   # tag para colorir gabarito
+            self._lbl_alt_letra._letra = letra
             txt = tk.Text(row, bg=C.EDIT_BG, fg=C.FG, font=("Segoe UI", 9),
                           wrap="word", relief="flat", height=2,
                           padx=6, pady=4,
                           insertbackground=C.FG, selectbackground=C.ACC)
             txt.pack(side="left", fill="x", expand=True)
+            txt.bind("<MouseWheel>", _center_scroll)
             self.ent_alts[letra] = txt
-            # guardar referência ao label para colorir o gabarito
             txt._lbl_letra = self._lbl_alt_letra
 
-        # Gabarito (editável)
+        # ── Gabarito ──────────────────────────────────────────────────────────
         row_gab = tk.Frame(center, bg=C.CARD)
         row_gab.pack(fill="x", padx=16, pady=(4, 2))
         tk.Label(row_gab, text="Gabarito:", bg=C.CARD, fg=C.FG2,
@@ -793,7 +821,7 @@ class QuestoesFrame(ttk.Frame):
         self.cb_gab.pack(side="left", padx=(6, 0))
         self.cb_gab.bind("<<ComboboxSelected>>", lambda e: self._colorir_gabarito())
 
-        # Botão salvar alternativas
+        # ── Botão salvar alternativas ─────────────────────────────────────────
         tk.Button(center, text="💾  Salvar Alternativas",
                   bg="#2d8b4e", fg=C.BTN_FG, relief="flat",
                   font=("Segoe UI", 9, "bold"), pady=5, cursor="hand2",
@@ -802,7 +830,7 @@ class QuestoesFrame(ttk.Frame):
                   fill="x", padx=16, pady=(4, 2))
         self.lbl_alts_status = tk.Label(center, text="", bg=C.CARD, fg=C.OK,
                                         font=("Segoe UI", 8, "italic"))
-        self.lbl_alts_status.pack(anchor="w", padx=16, pady=(0, 6))
+        self.lbl_alts_status.pack(anchor="w", padx=16, pady=(0, 12))
 
         # ══ DIREITA — adicionar imagem ════════════════════════════════════════
         right = tk.Frame(body, bg=C.CARD, width=290)

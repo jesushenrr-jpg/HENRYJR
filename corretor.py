@@ -229,6 +229,7 @@ class Corretor(tk.Tk):
         from ui_questoes import QuestoesFrame
         from ui_frases   import FrasesFrame
         from ui_upload   import UploadFrame
+        from ui_atalhos  import AtalhoFrame
 
         self._tab_q = QuestoesFrame(nb, on_staging_change=self._atualizar_barra,
                                      style="Dark.TFrame")
@@ -236,10 +237,12 @@ class Corretor(tk.Tk):
                                    style="Dark.TFrame")
         self._tab_u = UploadFrame(nb, on_staging_change=self._atualizar_barra,
                                    style="Dark.TFrame")
+        self._tab_a = AtalhoFrame(nb, style="Dark.TFrame")
 
         nb.add(self._tab_q, text="  Questões  ")
         nb.add(self._tab_f, text="  Frases  ")
         nb.add(self._tab_u, text="  Upload  ")
+        nb.add(self._tab_a, text="  Atalhos  ")
 
         nb.bind("<<NotebookTabChanged>>", self._ao_mudar_aba)
 

@@ -1,13 +1,21 @@
 # corretor.spec
 # -*- mode: python ; coding: utf-8 -*-
+import os, sys
 
 block_cipher = None
+
+# Inclui os dados Tcl/Tk que o PyInstaller às vezes não detecta automaticamente
+_TCL = os.path.join(sys.prefix, 'tcl', 'tcl8.6')
+_TK  = os.path.join(sys.prefix, 'tcl', 'tk8.6')
 
 a = Analysis(
     ['corretor.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[
+        (_TCL, '_tcl_data'),
+        (_TK,  '_tk_data'),
+    ],
     hiddenimports=[
         'PIL._tkinter_finder',
         'matplotlib.backends.backend_tkagg',

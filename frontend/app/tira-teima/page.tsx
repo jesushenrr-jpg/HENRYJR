@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect }     from 'next/navigation'
 import Link             from 'next/link'
+import TiraTeimaVersao  from './TiraTeimaVersao'
 
 const AREAS = [
   { nome: 'Linguagens, Codigos e suas Tecnologias',    label: 'Linguagens',  icon: '📖', text: 'text-sky-300',     bg: 'bg-sky-500/15',     border: 'border-sky-500/30'     },
@@ -39,6 +40,19 @@ export default async function TiraTeima() {
   if (!error && erradas) {
     lista = (erradas as unknown as RowNovo[]).filter(r => r.acertou === false || r.acertou === null)
   }
+
+  // Detectar versão máxima do Tira Teima (se coluna versao_tt existir)
+  let versaoAtual = 1
+  try {
+    const { data: vRow } = await supabase
+      .from('questoes_erradas')
+      .select('versao_tt')
+      .eq('usuario_id', user.id)
+      .order('versao_tt', { ascending: false })
+      .limit(1)
+      .single()
+    if (vRow?.versao_tt) versaoAtual = vRow.versao_tt
+  } catch { /* coluna pode não existir */ }
 
   // Agrupa por área
   const porArea: Record<string, RowNovo[]> = {}
@@ -110,6 +124,27 @@ export default async function TiraTeima() {
               </div>
             ))}
           </div>
+
+          {/* Versão atual + ciclo */}
+          {versaoAtual > 1 && (
+            <div className="flex items-center gap-2 mb-4 flex-wrap">
+              {Array.from({ length: versaoAtual }, (_, i) => i + 1).map(v => (
+                <span
+                  key={v}
+                  className={`text-xs px-2.5 py-1 rounded-full border font-semibold transition ${
+                    v === versaoAtual
+                      ? 'bg-[#D4A853]/15 border-[#D4A853]/40 text-[#D4A853]'
+                      : 'bg-white/[0.04] border-white/10 text-white/30'
+                  }`}
+                >
+                  V{v}
+                </span>
+              ))}
+              <span className="text-[11px] text-white/35 ml-1">
+                {versaoAtual === 1 ? 'Primeira revisão' : `${versaoAtual}ª revisão — continue até zerar!`}
+              </span>
+            </div>
+          )}
 
           {/* Botão iniciar + baixar PDF */}
           <div className="mb-7 flex flex-wrap gap-3">

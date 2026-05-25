@@ -344,12 +344,44 @@ C:\Projetos\henryjr\
 - Gabarito 2010: 185/185 questões
 - Diagnóstico: todos os 16 anos com 4 arquivos presentes
 - Fase 5 (PDF): infraestrutura completa implementada — pausada para retomar depois (ver seção abaixo)
+- **Imagens Item 1 — CONCLUÍDO** (2025-05):
+  - Corrigido campo `posicao` ausente em 214 questões (2016: 27, 2018: 38, 2021: 149) — `corrigir_posicao_imagens.py`
+  - Re-extraídas 82 imagens faltando do 2010 e 129 do 2021 via renderização de página PDF — `reextrair_imagens_2010_2021.py`
+  - Todas as 751 questões com imagem agora têm `posicao: "antes_1"` e arquivo em disco + Supabase Storage
+  - Sincronizado com Supabase: 214 + 133 + 149 questões atualizadas
+- **OCR 2021 Item 2 — CONCLUÍDO** (2025-05):
+  - 21 questões com placeholder "Enunciado não disponível" substituídas por texto OCR (Tesseract PT)
+  - Modelo `por.traineddata` instalado em `C:\Users\FACIMP\tessdata` + `TESSDATA_PREFIX` configurado
+  - Scripts: `ocr_2021.py` (OCR + parse) e `sync_ocr_2021.py` (sync Supabase)
+  - Alternativas parcialmente extraídas (layout 2 colunas dificulta) — enunciados OK, alts pendentes de revisão
+  - Campo `ocr: true` marcado nas 21 questões no JSON local (sinaliza necessidade de revisão)
+- **Item 3 (alternativas v2) — 214/214 verificadas**: 22 questões com alts faltando em 2009/2010/2016/2020/2021
+  - Script `recuperar_alternativas.py` rodando OCR para 2021 + extração PyMuPDF para outros anos
+  - Qualquer questão com < 3 alternativas extraídas marcada como INSUFICIENTE para revisão manual
+- **Item 6 (2024 caracteres estranhos) — VERIFICADO**: não há lixo real; "CAPS" são nomes próprios normais
+- **Item 7 (questões anuladas) — CONCLUÍDO** (2025-05):
+  - Marcadas 7 questões: 2018 Q150, 2020 Q114+Q141, 2021 Q178, 2022 Q175, 2023 Q177, 2024 Q129
+  - `anulada: true, gabarito: null` em todos os JSONs v2 e Supabase
+- **Item 8 (PDFs no Storage) — CONFIRMADO**: todos os 64 PDFs (2009-2024, 4 por ano) já estavam no bucket `provas-pdf`
+- **Item 9 (pagina_pdf) — CONCLUÍDO**: todas as 2880 questões já tinham `pagina_pdf` preenchido pelo extrair_v2.py
+  - Script `sincronizar_paginas_supabase.py` criado para sync (rodando em background)
+- **Item 10 (Gabarito comentado IA) — CONCLUÍDO** (2025-05):
+  - Chave Groq atualizada em `frontend/.env.local` (chave anterior era a exposta `gsk_iJb6...`)
+  - Criado `frontend/app/simulado/[id]/resultado/ExplicarBtn.tsx` — botão "Explicar com IA" com streaming
+  - `resultado/page.tsx` atualizado: importa `alternativas` na query Supabase e renderiza `ExplicarBtn`
+  - A rota `/api/explicar` já existia e está correta (streaming com Groq LLaMA 3.3 70B)
+- **Item 14 (página /tira-teima/imprimir) — CONCLUÍDO** (2025-05):
+  - Criados: `frontend/app/tira-teima/imprimir/page.tsx` (Server Component) + `TiraTeimaPrint.tsx` (Client)
+  - Layout: capa + questões por área + gabarito opcional (query param `?gabarito=true`)
+  - A rota `/api/pdf/tira-teima` já existia e aponta para `/tira-teima/imprimir?view=1`
+- **Item 17 (Google OAuth) — CÓDIGO PRONTO**: frontend já implementado (`signInWithOAuth({ provider: 'google' })`)
+  - Credenciais já em `chaves-projeto.txt`; falta configurar no painel Supabase (Authentication → Providers)
 
 ### Em andamento 🔄
-- Fase 2: extração v2, imagens, novos campos JSON
+- Fase 2: extração v2, imagens (concluídas), novos campos JSON
 
 ### Próxima tarefa imediata
-Concluir extração v2 (`extrair_v2.py`) com detecção correta de alternativas. Padrão confirmado:
+**Item 3** — Extração v2 completa das alternativas para todos os anos. Padrão confirmado:
 
 ```
 Span: 'A\t'  — x≈37, negrito (flags=4 ou 16), tamanho 10

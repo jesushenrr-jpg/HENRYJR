@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect }     from 'next/navigation'
 import Link             from 'next/link'
+import ExplicarBtn      from './ExplicarBtn'
 
 interface Props { params: Promise<{ id: string }> }
 
@@ -38,7 +39,7 @@ export default async function ResultadoPage({ params }: Props) {
   // Busca respostas com dados da questão
   const { data: resps } = await supabase
     .from('respostas_simulado')
-    .select('questao_id, resposta, correta, questoes(numero, ano, dia, area, gabarito, competencia, enunciado, comando)')
+    .select('questao_id, resposta, correta, questoes(numero, ano, dia, area, gabarito, competencia, enunciado, comando, alternativas)')
     .eq('simulado_id', id)
 
   const total   = resps?.length ?? 0
@@ -123,8 +124,10 @@ export default async function ResultadoPage({ params }: Props) {
           <div className="space-y-2 mb-7">
             {erradas.map(r => {
               const q = (r.questoes as unknown) as {
-                numero: number; ano: number; area: string;
-                gabarito: string; competencia: string | null; enunciado: string[]
+                numero: number; ano: number; dia: string; area: string;
+                gabarito: string; competencia: string | null;
+                enunciado: string[]; comando: string;
+                alternativas: Record<string, string>
               } | null
               if (!q) return null
               const info = AREAS[q.area] ?? { label: q.area, icon: '📚', text: 'text-white' }
@@ -156,6 +159,17 @@ export default async function ResultadoPage({ params }: Props) {
                     Ver →
                   </Link>
                 </div>
+                {q.alternativas && Object.keys(q.alternativas).length > 0 && (
+                  <ExplicarBtn
+                    questaoId={r.questao_id}
+                    enunciado={q.enunciado ?? []}
+                    comando={q.comando ?? ''}
+                    alternativas={q.alternativas}
+                    gabarito={q.gabarito}
+                    ano={q.ano}
+                    numero={q.numero}
+                  />
+                )}
               )
             })}
           </div>

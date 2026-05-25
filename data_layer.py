@@ -5,11 +5,22 @@ Usa requests diretamente (não supabase-py, que tem dependências quebradas).
 Inicialize com init() antes de usar qualquer função.
 """
 import io
+import os
 import sys
 import requests
 from typing import Any
 
 import config as _cfg
+
+# ── Fix SSL cert para execução empacotada (PyInstaller) ───────────────────────
+# Quando rodando como .exe, certifi pode não encontrar cacert.pem pelo caminho
+# padrão. Ajusta SSL_CERT_FILE para apontar para o arquivo dentro do bundle.
+if getattr(sys, "frozen", False):
+    _bundle = getattr(sys, "_MEIPASS", os.path.dirname(sys.executable))
+    _cacert = os.path.join(_bundle, "certifi", "cacert.pem")
+    if os.path.isfile(_cacert):
+        os.environ.setdefault("SSL_CERT_FILE", _cacert)
+        os.environ.setdefault("REQUESTS_CA_BUNDLE", _cacert)
 
 _URL: str = ""
 _KEY: str = ""

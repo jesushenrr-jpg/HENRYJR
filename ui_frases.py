@@ -87,7 +87,7 @@ class FrasesFrame(ttk.Frame):
             lista_wrap, yscrollcommand=sb_lista.set, width=28,
             bg=CARD, fg=FG, selectbackground=ACC, selectforeground="#0E0D0B",
             activestyle="none", borderwidth=0, highlightthickness=0,
-            font=("Segoe UI", 9), pady=2,
+            font=("Segoe UI", 9),
         )
         sb_lista.config(command=self._lista.yview)
         sb_lista.pack(side="right", fill="y")

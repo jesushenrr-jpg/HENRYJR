@@ -10,12 +10,17 @@ _TK  = os.path.join(sys.prefix, 'tcl', 'tk8.6')
 
 # Coleta requests e dependências do user site-packages
 from PyInstaller.utils.hooks import collect_all, collect_submodules
+import certifi as _certifi_mod
 
 _req_d, _req_b, _req_h   = collect_all('requests')
 _url_d, _url_b, _url_h   = collect_all('urllib3')
 _cer_d, _cer_b, _cer_h   = collect_all('certifi')
 _chr_d, _chr_b, _chr_h   = collect_all('charset_normalizer')
 _idn_d, _idn_b, _idn_h   = collect_all('idna')
+
+# Garante que cacert.pem seja sempre incluído (collect_all pode falhar em user site-packages)
+_cacert_pem = _certifi_mod.where()   # caminho absoluto do cacert.pem instalado
+_cer_d += [(_cacert_pem, 'certifi')]  # destino: _internal/certifi/cacert.pem
 
 # Adiciona user site-packages ao path para PyInstaller encontrar os pacotes
 _user_site = site.getusersitepackages()

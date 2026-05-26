@@ -147,7 +147,7 @@ export default function SimuladoConfig() {
       {/* Tipo de questão */}
       <div className="mb-6">
         <p className="text-[12px] font-bold uppercase tracking-wider text-[#635D56] mb-3">Tipo de questão</p>
-        <div className="inline-flex rounded-lg border border-[#2C2820] overflow-hidden bg-[#161411]">
+        <div className="flex w-full rounded-xl border border-[#2C2820] overflow-hidden bg-[#161411]">
           {([
             { label: 'Todos',     value: '' as const },
             { label: 'Provas',    value: 'PROVA' as const },
@@ -156,7 +156,7 @@ export default function SimuladoConfig() {
             <button
               key={value || 'todos'}
               onClick={() => setTipo(value)}
-              className={`px-4 py-2 text-[12px] font-semibold uppercase tracking-wider transition ${
+              className={`flex-1 px-3 py-2.5 text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition ${
                 tipo === value
                   ? 'bg-[#D4A853]/15 text-[#D4A853] border-b-2 border-[#D4A853]/50'
                   : 'text-[#635D56] hover:text-[#9E9589]'

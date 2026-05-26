@@ -78,11 +78,8 @@ export default function FiltroSidebar({
   return (
     <div className="space-y-3">
 
-      {/* Toggle Tipo — acima das tabs de fonte */}
-      <div className="flex items-center justify-between mb-1">
-        <span className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#635D56]">Tipo</span>
-        <TipoToggle />
-      </div>
+      {/* Toggle Tipo — full width, acima das tabs de fonte */}
+      <TipoToggle full />
 
       {/* Tabs de prova */}
       <div className="flex rounded-xl overflow-hidden border border-[#2C2820] bg-[#161411]">

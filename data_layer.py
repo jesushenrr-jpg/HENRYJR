@@ -108,11 +108,12 @@ def listar_filtros(categoria: str) -> dict:
         return {"eventos": eventos, "turnos": turnos}
 
 
-def buscar_questoes(fonte: str, filtros: dict) -> list[dict]:
+def buscar_questoes(fonte: str, filtros: dict, tipo: str | None = None) -> list[dict]:
     """
     Retorna lista leve de questões (sem enunciado/alternativas) para navegação.
     filtros para ENEM:  {"ano": 2023, "dia": "dia1"}
     filtros para EXATO: {"evento": "CICLO_ZERO", "turno": "MANHA"}
+    tipo: 'PROVA' | 'SIMULADO' | None (todos)
     """
     params: dict[str, Any] = {
         "select": "id,numero,area,competencia,tem_imagem,gabarito,anulada",
@@ -128,6 +129,9 @@ def buscar_questoes(fonte: str, filtros: dict) -> list[dict]:
             params["evento"] = f"eq.{filtros['evento']}"
         if filtros.get("turno"):
             params["turno"] = f"eq.{filtros['turno']}"
+
+    if tipo:
+        params["tipo"] = f"eq.{tipo}"
 
     r = requests.get(_rest("questoes"), headers=_headers(), params=params, timeout=15)
     return r.json() if r.ok else []

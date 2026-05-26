@@ -60,9 +60,8 @@ def _storage(path: str) -> str:
 # ── Categorias e filtros ──────────────────────────────────────────────────────
 
 def listar_categorias() -> list[str]:
-    """Retorna lista de fontes distintas: ['ENEM', 'EXATO', ...]"""
-    # Verifica cada fonte conhecida individualmente para evitar problema de paginação
-    fontes_conhecidas = ["ENEM", "EXATO"]
+    """Retorna lista de fontes distintas: ['ENEM', 'EXATO', 'UFT', ...]"""
+    fontes_conhecidas = ["ENEM", "EXATO", "UFT"]
     result = []
     for fonte in fontes_conhecidas:
         r = requests.get(
@@ -85,13 +84,14 @@ def listar_categorias() -> list[str]:
 def listar_filtros(categoria: str) -> dict:
     """
     Retorna filtros dinâmicos por categoria.
-    ENEM  → {"anos": [2009..2024], "dias": ["dia1","dia2"]}
+    ENEM  → {"anos": [2009..2024], "dias": ["dia1","dia2"], "provedores": [...]}
     EXATO → {"eventos": [...], "turnos": ["MANHA","TARDE"]}
+    UFT   → {"anos": [2018..2024], "turnos": [...], "edicoes": ["1_EDICAO","2_EDICAO"]}
     """
     r = requests.get(
         _rest("questoes"),
         headers=_headers(),
-        params={"select": "ano,dia,evento,turno", "fonte": f"eq.{categoria}", "limit": 1000},
+        params={"select": "ano,dia,evento,turno,provedor", "fonte": f"eq.{categoria}", "limit": 2000},
         timeout=10,
     )
     if not r.ok:
@@ -99,21 +99,30 @@ def listar_filtros(categoria: str) -> dict:
     dados = r.json()
 
     if categoria == "ENEM":
-        anos = sorted({d["ano"] for d in dados if d.get("ano")}, reverse=True)
-        dias = sorted({d["dia"] for d in dados if d.get("dia")})
-        return {"anos": anos, "dias": dias}
-    else:
+        anos      = sorted({d["ano"]      for d in dados if d.get("ano")}, reverse=True)
+        dias      = sorted({d["dia"]      for d in dados if d.get("dia")})
+        provedores = sorted({d["provedor"] for d in dados if d.get("provedor")})
+        return {"anos": anos, "dias": dias, "provedores": provedores}
+    elif categoria == "UFT":
+        anos   = sorted({d["ano"]    for d in dados if d.get("ano")}, reverse=True)
+        turnos = sorted({d["turno"]  for d in dados if d.get("turno")})
+        edicoes = sorted({d["evento"] for d in dados if d.get("evento")})
+        return {"anos": anos, "turnos": turnos, "edicoes": edicoes}
+    else:  # EXATO
         eventos = sorted({d["evento"] for d in dados if d.get("evento")})
         turnos  = sorted({d["turno"]  for d in dados if d.get("turno")})
         return {"eventos": eventos, "turnos": turnos}
 
 
-def buscar_questoes(fonte: str, filtros: dict, tipo: str | None = None) -> list[dict]:
+def buscar_questoes(fonte: str, filtros: dict, tipo: str | None = None,
+                    provedor: str | None = None) -> list[dict]:
     """
     Retorna lista leve de questões (sem enunciado/alternativas) para navegação.
     filtros para ENEM:  {"ano": 2023, "dia": "dia1"}
     filtros para EXATO: {"evento": "CICLO_ZERO", "turno": "MANHA"}
+    filtros para UFT:   {"ano": 2022, "turno": "MANHA", "evento": "1_EDICAO"}
     tipo: 'PROVA' | 'SIMULADO' | None (todos)
+    provedor: 'BERNOULLI' | 'SAS' | ... | None (apenas ENEM simulados)
     """
     params: dict[str, Any] = {
         "select": "id,numero,area,competencia,tem_imagem,gabarito,anulada",
@@ -122,9 +131,20 @@ def buscar_questoes(fonte: str, filtros: dict, tipo: str | None = None) -> list[
         "limit": 500,
     }
     if fonte == "ENEM":
-        params["ano"] = f"eq.{filtros.get('ano')}"
-        params["dia"] = f"eq.{filtros.get('dia')}"
-    else:
+        if filtros.get("ano"):
+            params["ano"] = f"eq.{filtros['ano']}"
+        if filtros.get("dia"):
+            params["dia"] = f"eq.{filtros['dia']}"
+        if provedor:
+            params["provedor"] = f"eq.{provedor}"
+    elif fonte == "UFT":
+        if filtros.get("ano"):
+            params["ano"] = f"eq.{filtros['ano']}"
+        if filtros.get("turno"):
+            params["turno"] = f"eq.{filtros['turno']}"
+        if filtros.get("evento"):   # edição (1_EDICAO / 2_EDICAO)
+            params["evento"] = f"eq.{filtros['evento']}"
+    else:  # EXATO
         if filtros.get("evento"):
             params["evento"] = f"eq.{filtros['evento']}"
         if filtros.get("turno"):

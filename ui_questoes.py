@@ -635,6 +635,19 @@ class QuestoesFrame(ttk.Frame):
         self._cb_tipo.pack(side="left", padx=(0, 6))
         self._cb_tipo.bind("<<ComboboxSelected>>", self._load_questoes)
 
+        # Provedor — visível só para ENEM
+        self._sep_provedor = tk.Label(hdr_inner, text="│", bg=C.CARD, fg="#2C2820",
+                                      font=("Segoe UI", 14))
+        self._lbl_provedor = tk.Label(hdr_inner, text="ELABORADOR", bg=C.CARD, fg=C.FG2,
+                                       font=("Segoe UI", 8, "bold"))
+        self._var_provedor = tk.StringVar(value="Todos")
+        self._cb_provedor  = ttk.Combobox(hdr_inner, textvariable=self._var_provedor,
+                                           state="readonly", width=11,
+                                           font=("Segoe UI", 9))
+        self._cb_provedor["values"] = ["Todos"]
+        self._cb_provedor.bind("<<ComboboxSelected>>", self._load_questoes)
+        # Inicialmente oculto; mostrado em _ao_mudar_categoria para ENEM
+
         # Indicador de staging à direita
         self._lbl_sync = tk.Label(hdr_inner, text="", bg=C.CARD, fg=C.FG2,
                                    font=("Segoe UI", 8))
@@ -990,7 +1003,31 @@ class QuestoesFrame(ttk.Frame):
             self._cb_f2["values"] = dias
             if dias:
                 self._var_f2.set(dias[0])
-        else:
+            # Mostra combo de elaborador
+            provedores = ["Todos"] + filtros.get("provedores", [])
+            self._cb_provedor["values"] = provedores
+            self._var_provedor.set("Todos")
+            self._sep_provedor.pack(side="left", padx=2)
+            self._lbl_provedor.pack(side="left", padx=(4, 3))
+            self._cb_provedor.pack(side="left", padx=(0, 6))
+
+        elif cat == "UFT":
+            self._lbl_f1.config(text="Ano:")
+            anos = [str(a) for a in filtros.get("anos", [])]
+            self._cb_f1["values"] = anos
+            if anos:
+                self._var_f1.set(anos[0])
+            self._lbl_f2.config(text="Turno:")
+            turnos = filtros.get("turnos", [])
+            self._cb_f2["values"] = turnos
+            if turnos:
+                self._var_f2.set(turnos[0])
+            # Oculta provedor
+            self._sep_provedor.pack_forget()
+            self._lbl_provedor.pack_forget()
+            self._cb_provedor.pack_forget()
+
+        else:  # EXATO
             self._lbl_f1.config(text="Evento:")
             eventos = filtros.get("eventos", [])
             self._cb_f1["values"] = eventos
@@ -1001,6 +1038,10 @@ class QuestoesFrame(ttk.Frame):
             self._cb_f2["values"] = turnos
             if turnos:
                 self._var_f2.set(turnos[0])
+            # Oculta provedor
+            self._sep_provedor.pack_forget()
+            self._lbl_provedor.pack_forget()
+            self._cb_provedor.pack_forget()
 
         self._load_questoes()
 
@@ -1011,21 +1052,31 @@ class QuestoesFrame(ttk.Frame):
         cat = self._cat_atual
         f1  = self._var_f1.get()
         f2  = self._var_f2.get()
+
         if cat == "ENEM":
             try:
                 filtros = {"ano": int(f1), "dia": f2}
             except ValueError:
                 return
-        else:
+        elif cat == "UFT":
+            try:
+                filtros = {"ano": int(f1), "turno": f2}
+            except ValueError:
+                return
+        else:  # EXATO
             filtros = {"evento": f1, "turno": f2}
 
         tipo_sel = self._var_tipo.get()
         tipo = None if tipo_sel == "Todos" else tipo_sel
 
+        # Provedor (só ENEM)
+        provedor_sel = self._var_provedor.get() if cat == "ENEM" else "Todos"
+        provedor = None if provedor_sel == "Todos" else provedor_sel
+
         self._lbl_sync.config(text="carregando…", fg=self.WARN)
         self.update_idletasks()
 
-        self._questoes = dl.buscar_questoes(cat, filtros, tipo=tipo)
+        self._questoes = dl.buscar_questoes(cat, filtros, tipo=tipo, provedor=provedor)
         self._q_idx = 0
         if self._questoes:
             self._lbl_sync.config(text=f"{len(self._questoes)} questões", fg=self.FG2)

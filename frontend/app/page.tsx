@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import { FRASES_CAPA } from '@/lib/frases-capa'
+import TipoToggle from '@/components/TipoToggle'
 
 const FEATURES = [
   {
@@ -71,21 +73,39 @@ const FEATURES = [
   },
 ]
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tipo?: string }>
+}) {
+  const { tipo } = await searchParams
   const supabase = await createClient()
   const frase = FRASES_CAPA[new Date().getFullYear() % FRASES_CAPA.length]
 
-  // Conta questões por fonte
+  // Conta questões por fonte com filtro de tipo opcional
+  function buildCount(fonte: string) {
+    let q = supabase
+      .from('questoes')
+      .select('*', { count: 'exact', head: true })
+      .eq('fonte', fonte)
+    if (tipo) q = q.eq('tipo', tipo)
+    return q
+  }
+
   const [
     { count: totalEnem },
     { count: totalExato },
   ] = await Promise.all([
-    supabase.from('questoes').select('*', { count: 'exact', head: true }).eq('fonte', 'ENEM'),
-    supabase.from('questoes').select('*', { count: 'exact', head: true }).eq('fonte', 'EXATO'),
+    buildCount('ENEM'),
+    buildCount('EXATO'),
   ])
 
-  const nEnem  = (totalEnem  ?? 3036).toLocaleString('pt-BR')
-  const nExato = (totalExato ?? 460).toLocaleString('pt-BR')
+  const nEnem  = (totalEnem  ?? 0).toLocaleString('pt-BR')
+  const nExato = (totalExato ?? 0).toLocaleString('pt-BR')
+
+  // Links dos cards incluem tipo quando ativo
+  const hrefEnem  = tipo ? `/questoes?fonte=ENEM&tipo=${tipo}`  : '/questoes?fonte=ENEM'
+  const hrefExato = tipo ? `/questoes?fonte=EXATO&tipo=${tipo}` : '/questoes?fonte=EXATO'
 
   return (
     <main className="anim-fade">
@@ -153,83 +173,93 @@ export default async function HomePage() {
         <div className="mb-8 text-center">
           <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#F2EDE4] mb-2">Escolha sua prova</h2>
           <p className="text-sm text-[#635D56]">Cada banco tem filtros, estilo e contexto próprios</p>
+          {/* Toggle de tipo */}
+          <div className="flex justify-center mt-4">
+            <Suspense fallback={null}>
+              <TipoToggle />
+            </Suspense>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
           {/* Card ENEM */}
-          <Link
-            href="/questoes?fonte=ENEM"
-            className="group relative overflow-hidden rounded-2xl border border-blue-500/20 bg-[#161411] hover:border-blue-500/40 p-7 transition-all hover:scale-[1.01] active:scale-[0.99]"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/8 to-blue-500/0 opacity-60 group-hover:opacity-100 transition pointer-events-none" />
-            <div className="relative">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-blue-500/15 border border-blue-500/25 text-blue-300 text-[11px] font-bold uppercase tracking-wider mb-4">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-                ENEM
-              </div>
+          {(totalEnem ?? 0) > 0 && (
+            <Link
+              href={hrefEnem}
+              className="group relative overflow-hidden rounded-2xl border border-blue-500/20 bg-[#161411] hover:border-blue-500/40 p-7 transition-all hover:scale-[1.01] active:scale-[0.99]"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/8 to-blue-500/0 opacity-60 group-hover:opacity-100 transition pointer-events-none" />
+              <div className="relative">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-blue-500/15 border border-blue-500/25 text-blue-300 text-[11px] font-bold uppercase tracking-wider mb-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                  ENEM
+                </div>
 
-              <h3 className="font-display text-xl font-bold text-[#F2EDE4] mb-1 leading-tight">
-                Exame Nacional<br />do Ensino Médio
-              </h3>
-              <p className="text-[13px] text-[#635D56] mb-5 leading-relaxed">
-                {nEnem} questões · 2009–2024 · 4 áreas · 30 competências
-              </p>
+                <h3 className="font-display text-xl font-bold text-[#F2EDE4] mb-1 leading-tight">
+                  Exame Nacional<br />do Ensino Médio
+                </h3>
+                <p className="text-[13px] text-[#635D56] mb-5 leading-relaxed">
+                  {nEnem} questões · 2009–2024 · 4 áreas · 30 competências
+                </p>
 
-              <div className="grid grid-cols-2 gap-2 mb-5">
-                {['Linguagens', 'Humanas', 'C. Natureza', 'Matemática'].map(a => (
-                  <div key={a} className="text-[11px] text-blue-300/70 bg-blue-500/8 rounded-md px-2.5 py-1.5 border border-blue-500/15">
-                    {a}
-                  </div>
-                ))}
-              </div>
+                <div className="grid grid-cols-2 gap-2 mb-5">
+                  {['Linguagens', 'Humanas', 'C. Natureza', 'Matemática'].map(a => (
+                    <div key={a} className="text-[11px] text-blue-300/70 bg-blue-500/8 rounded-md px-2.5 py-1.5 border border-blue-500/15">
+                      {a}
+                    </div>
+                  ))}
+                </div>
 
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-blue-300">Estudar ENEM</span>
-                <span className="w-7 h-7 rounded-lg bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-blue-300 group-hover:translate-x-0.5 transition">
-                  →
-                </span>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold text-blue-300">Estudar ENEM</span>
+                  <span className="w-7 h-7 rounded-lg bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-blue-300 group-hover:translate-x-0.5 transition">
+                    →
+                  </span>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          )}
 
           {/* Card EXATO */}
-          <Link
-            href="/questoes?fonte=EXATO"
-            className="group relative overflow-hidden rounded-2xl border border-amber-500/20 bg-[#161411] hover:border-amber-500/40 p-7 transition-all hover:scale-[1.01] active:scale-[0.99]"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/8 to-amber-500/0 opacity-60 group-hover:opacity-100 transition pointer-events-none" />
-            <div className="relative">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-amber-500/15 border border-amber-500/25 text-amber-300 text-[11px] font-bold uppercase tracking-wider mb-4">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                EXATO
-              </div>
+          {(totalExato ?? 0) > 0 && (
+            <Link
+              href={hrefExato}
+              className="group relative overflow-hidden rounded-2xl border border-amber-500/20 bg-[#161411] hover:border-amber-500/40 p-7 transition-all hover:scale-[1.01] active:scale-[0.99]"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/8 to-amber-500/0 opacity-60 group-hover:opacity-100 transition pointer-events-none" />
+              <div className="relative">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-amber-500/15 border border-amber-500/25 text-amber-300 text-[11px] font-bold uppercase tracking-wider mb-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                  EXATO
+                </div>
 
-              <h3 className="font-display text-xl font-bold text-[#F2EDE4] mb-1 leading-tight">
-                Simulados<br />TESSAT / EXATO
-              </h3>
-              <p className="text-[13px] text-[#635D56] mb-5 leading-relaxed">
-                {nExato} questões · 12 simulados · Ciclo Zero ao Abril 2026
-              </p>
+                <h3 className="font-display text-xl font-bold text-[#F2EDE4] mb-1 leading-tight">
+                  Simulados<br />TESSAT / EXATO
+                </h3>
+                <p className="text-[13px] text-[#635D56] mb-5 leading-relaxed">
+                  {nExato} questões · 12 simulados · Ciclo Zero ao Abril 2026
+                </p>
 
-              <div className="grid grid-cols-2 gap-2 mb-5">
-                {['Ciclo Zero', '1º Simulado', '2º Simulado', 'Outubro 2025'].map(e => (
-                  <div key={e} className="text-[11px] text-amber-300/70 bg-amber-500/8 rounded-md px-2.5 py-1.5 border border-amber-500/15">
-                    {e}
-                  </div>
-                ))}
-              </div>
+                <div className="grid grid-cols-2 gap-2 mb-5">
+                  {['Ciclo Zero', '1º Simulado', '2º Simulado', 'Outubro 2025'].map(e => (
+                    <div key={e} className="text-[11px] text-amber-300/70 bg-amber-500/8 rounded-md px-2.5 py-1.5 border border-amber-500/15">
+                      {e}
+                    </div>
+                  ))}
+                </div>
 
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-amber-300">Estudar EXATO</span>
-                <span className="w-7 h-7 rounded-lg bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-amber-300 group-hover:translate-x-0.5 transition">
-                  →
-                </span>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold text-amber-300">Estudar EXATO</span>
+                  <span className="w-7 h-7 rounded-lg bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-amber-300 group-hover:translate-x-0.5 transition">
+                    →
+                  </span>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          )}
         </div>
       </section>
 

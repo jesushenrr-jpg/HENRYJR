@@ -622,6 +622,19 @@ class QuestoesFrame(ttk.Frame):
         self._cb_f2.pack(side="left", padx=(0, 6))
         self._cb_f2.bind("<<ComboboxSelected>>", self._load_questoes)
 
+        tk.Label(hdr_inner, text="│", bg=C.CARD, fg="#2C2820",
+                 font=("Segoe UI", 14)).pack(side="left", padx=2)
+
+        tk.Label(hdr_inner, text="TIPO", bg=C.CARD, fg=C.FG2,
+                 font=("Segoe UI", 8, "bold")).pack(side="left", padx=(4, 3))
+        self._var_tipo = tk.StringVar(value="Todos")
+        self._cb_tipo  = ttk.Combobox(hdr_inner, textvariable=self._var_tipo,
+                                      state="readonly", width=10,
+                                      font=("Segoe UI", 9))
+        self._cb_tipo["values"] = ["Todos", "PROVA", "SIMULADO"]
+        self._cb_tipo.pack(side="left", padx=(0, 6))
+        self._cb_tipo.bind("<<ComboboxSelected>>", self._load_questoes)
+
         # Indicador de staging à direita
         self._lbl_sync = tk.Label(hdr_inner, text="", bg=C.CARD, fg=C.FG2,
                                    font=("Segoe UI", 8))
@@ -1006,10 +1019,13 @@ class QuestoesFrame(ttk.Frame):
         else:
             filtros = {"evento": f1, "turno": f2}
 
+        tipo_sel = self._var_tipo.get()
+        tipo = None if tipo_sel == "Todos" else tipo_sel
+
         self._lbl_sync.config(text="carregando…", fg=self.WARN)
         self.update_idletasks()
 
-        self._questoes = dl.buscar_questoes(cat, filtros)
+        self._questoes = dl.buscar_questoes(cat, filtros, tipo=tipo)
         self._q_idx = 0
         if self._questoes:
             self._lbl_sync.config(text=f"{len(self._questoes)} questões", fg=self.FG2)

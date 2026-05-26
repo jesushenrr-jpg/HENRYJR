@@ -26,7 +26,7 @@ Plataforma pública de estudos com questões do ENEM (2009–2024), simulados pr
 - **Groq API Key**: ver `HENRYJR_CREDENCIAIS.txt` (chave atual criada em 26/05/2026)
 - **Google OAuth Client ID/Secret**: ver `HENRYJR_CREDENCIAIS.txt`
 
-> ⚠️ Chaves Groq revogadas: `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` (22/05/2026) e `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` (26/05/2026 — exposta no arquivo de plano do git).
+> ⚠️ Duas chaves Groq já foram revogadas (22/05/2026 e 26/05/2026). A segunda foi exposta no arquivo de plano do git. Sempre criar chave nova após exposição.
 
 ## Estrutura de Pastas
 

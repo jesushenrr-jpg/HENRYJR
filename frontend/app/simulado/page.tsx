@@ -48,6 +48,7 @@ export default function SimuladoConfig() {
   const [quantidade,  setQtd]        = useState(20)
   const [loading,     setLoading]    = useState(false)
   const [erro,        setErro]       = useState('')
+  const [tipo,        setTipo]       = useState<'' | 'PROVA' | 'SIMULADO'>('')
   // Após criar: mostra opções de ação
   const [simuladoId,  setSimuladoId] = useState<number | null>(null)
 
@@ -63,6 +64,7 @@ export default function SimuladoConfig() {
           ano_inicio: anoInicio,
           ano_fim:    anoFim,
           quantidade,
+          tipo:       tipo || undefined,
         }),
       })
       const json = await res.json()
@@ -140,6 +142,30 @@ export default function SimuladoConfig() {
           </svg>
           Cancelar
         </Link>
+      </div>
+
+      {/* Tipo de questão */}
+      <div className="mb-6">
+        <p className="text-[12px] font-bold uppercase tracking-wider text-[#635D56] mb-3">Tipo de questão</p>
+        <div className="inline-flex rounded-lg border border-[#2C2820] overflow-hidden bg-[#161411]">
+          {([
+            { label: 'Todos',     value: '' as const },
+            { label: 'Provas',    value: 'PROVA' as const },
+            { label: 'Simulados', value: 'SIMULADO' as const },
+          ]).map(({ label, value }) => (
+            <button
+              key={value || 'todos'}
+              onClick={() => setTipo(value)}
+              className={`px-4 py-2 text-[12px] font-semibold uppercase tracking-wider transition ${
+                tipo === value
+                  ? 'bg-[#D4A853]/15 text-[#D4A853] border-b-2 border-[#D4A853]/50'
+                  : 'text-[#635D56] hover:text-[#9E9589]'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Seleção de prova */}

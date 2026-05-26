@@ -5,7 +5,7 @@ export const runtime = 'edge'
 
 export async function POST(req: NextRequest) {
   try {
-    const { area, ano_inicio, ano_fim, competencia, quantidade } = await req.json()
+    const { area, ano_inicio, ano_fim, competencia, quantidade, tipo } = await req.json()
 
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
     if (competencia) query = query.eq('competencia', competencia)
     if (ano_inicio)  query = query.gte('ano', Number(ano_inicio))
     if (ano_fim)     query = query.lte('ano', Number(ano_fim))
+    if (tipo)        query = query.eq('tipo', tipo)
 
     const { data: pool, error: poolErr } = await query
     if (poolErr) return NextResponse.json({ error: poolErr.message }, { status: 500 })
@@ -42,7 +43,7 @@ export async function POST(req: NextRequest) {
       .insert({
         usuario_id:     user.id,
         tipo:           'online',
-        filtros:        { area, ano_inicio, ano_fim, competencia },
+        filtros:        { area, ano_inicio, ano_fim, competencia, tipo_questao: tipo || null },
         questoes_ids:   ids,
         total_questoes: ids.length,
         status:         'em_andamento',

@@ -132,44 +132,46 @@ export default async function ResultadoPage({ params }: Props) {
               if (!q) return null
               const info = AREAS[q.area] ?? { label: q.area, icon: '📚', text: 'text-white' }
               return (
-                <div key={r.questao_id} className="rounded-xl bg-[#161411] border border-[#2C2820] px-4 py-3 flex items-start gap-3">
-                  <div className="w-7 h-7 rounded-lg bg-red-500/15 border border-red-500/30 flex items-center justify-center shrink-0 mt-0.5">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-red-400">
-                      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                      <span className="text-xs text-white/50">ENEM {q.ano} — Q.{q.numero}</span>
-                      {q.competencia && <span className="text-[10px] text-[#D4A853]/70">{q.competencia}</span>}
-                      <span className={`text-[10px] ${info.text}`}>{info.icon} {info.label}</span>
+                <div key={r.questao_id} className="flex flex-col gap-2">
+                  <div className="rounded-xl bg-[#161411] border border-[#2C2820] px-4 py-3 flex items-start gap-3">
+                    <div className="w-7 h-7 rounded-lg bg-red-500/15 border border-red-500/30 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-red-400">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                      </svg>
                     </div>
-                    <p className="text-[13px] text-white/60 line-clamp-2 font-serif">{q.enunciado?.[0]}</p>
-                    <div className="flex items-center gap-3 mt-1 text-[11px]">
-                      {r.resposta && (
-                        <span className="text-red-400">Sua resp.: <strong>{r.resposta}</strong></span>
-                      )}
-                      <span className="text-emerald-400">Gabarito: <strong>{q.gabarito}</strong></span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                        <span className="text-xs text-white/50">ENEM {q.ano} — Q.{q.numero}</span>
+                        {q.competencia && <span className="text-[10px] text-[#D4A853]/70">{q.competencia}</span>}
+                        <span className={`text-[10px] ${info.text}`}>{info.icon} {info.label}</span>
+                      </div>
+                      <p className="text-[13px] text-white/60 line-clamp-2 font-serif">{q.enunciado?.[0]}</p>
+                      <div className="flex items-center gap-3 mt-1 text-[11px]">
+                        {r.resposta && (
+                          <span className="text-red-400">Sua resp.: <strong>{r.resposta}</strong></span>
+                        )}
+                        <span className="text-emerald-400">Gabarito: <strong>{q.gabarito}</strong></span>
+                      </div>
                     </div>
+                    <Link
+                      href={`/questoes/${r.questao_id}`}
+                      className="shrink-0 text-[11px] text-[#D4A853] hover:text-amber-300 transition"
+                    >
+                      Ver →
+                    </Link>
                   </div>
-                  <Link
-                    href={`/questoes/${r.questao_id}`}
-                    className="shrink-0 text-[11px] text-[#D4A853] hover:text-amber-300 transition"
-                  >
-                    Ver →
-                  </Link>
+                  {q.alternativas && Object.keys(q.alternativas).length > 0 && (
+                    <ExplicarBtn
+                      questaoId={r.questao_id}
+                      enunciado={q.enunciado ?? []}
+                      comando={q.comando ?? ''}
+                      alternativas={q.alternativas}
+                      gabarito={q.gabarito}
+                      ano={q.ano}
+                      numero={q.numero}
+                    />
+                  )}
                 </div>
-                {q.alternativas && Object.keys(q.alternativas).length > 0 && (
-                  <ExplicarBtn
-                    questaoId={r.questao_id}
-                    enunciado={q.enunciado ?? []}
-                    comando={q.comando ?? ''}
-                    alternativas={q.alternativas}
-                    gabarito={q.gabarito}
-                    ano={q.ano}
-                    numero={q.numero}
-                  />
-                )}
               )
             })}
           </div>

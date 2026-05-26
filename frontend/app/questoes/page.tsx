@@ -16,6 +16,7 @@ interface SearchParams {
   fonte?: string
   evento?: string
   turno?: string
+  tipo?: string
 }
 
 const POR_PAGINA = 12
@@ -48,6 +49,7 @@ export default async function QuestoesPage({
   const competencia = params.competencia
   const evento      = params.evento
   const turno       = params.turno
+  const tipo        = params.tipo as 'PROVA' | 'SIMULADO' | undefined
   const buscaRaw    = params.busca?.trim()
   const isIA        = params.ia === '1'
   // busca pode ser comma-separated (IA) ou termo único (manual)
@@ -100,6 +102,9 @@ export default async function QuestoesPage({
   // Filtro de área (ambos)
   if (area) query = query.eq('area', area)
 
+  // Filtro de tipo (PROVA | SIMULADO)
+  if (tipo) query = query.eq('tipo', tipo)
+
   if (termosBusca.length > 0) {
     const orFilter = termosBusca
       .flatMap(t => [`enunciado.ilike.%${t}%`, `comando.ilike.%${t}%`])
@@ -126,6 +131,7 @@ export default async function QuestoesPage({
     if (area)          sp.set('area', area)
     if (buscaRaw)      sp.set('busca', buscaRaw)
     if (isIA)          sp.set('ia', '1')
+    if (tipo)          sp.set('tipo', tipo)
     if (p > 1)         sp.set('pagina', String(p))
     return `/questoes?${sp}`
   }
@@ -155,6 +161,7 @@ export default async function QuestoesPage({
             fonteAtiva={fonte}
             eventoAtivo={evento}
             turnoAtivo={turno}
+            tipoAtivo={tipo}
           />
         </aside>
 
@@ -191,6 +198,7 @@ export default async function QuestoesPage({
               {isExato  && evento      && <input type="hidden" name="evento"      value={evento} />}
               {isExato  && turno       && <input type="hidden" name="turno"       value={turno} />}
               {area && <input type="hidden" name="area" value={area} />}
+              {tipo && <input type="hidden" name="tipo" value={tipo} />}
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="absolute left-3 top-1/2 -translate-y-1/2 text-[#635D56] pointer-events-none">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
@@ -212,7 +220,7 @@ export default async function QuestoesPage({
               {isExato && <span className="ml-1.5 px-1.5 py-0.5 rounded text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20">EXATO</span>}
               {!isExato && <span className="ml-1.5 px-1.5 py-0.5 rounded text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20">ENEM</span>}
             </div>
-            {!isIA && (ano || dia || area || competencia || buscaRaw || evento || turno) && (
+            {!isIA && (ano || dia || area || competencia || buscaRaw || evento || turno || tipo) && (
               <Link href={`/questoes?fonte=${fonte}`} className="text-[11px] text-[#635D56] hover:text-[#F2EDE4] transition">
                 limpar filtros
               </Link>

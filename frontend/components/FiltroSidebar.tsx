@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { COMPETENCIAS, TODAS_HABILIDADES } from '@/lib/competencias'
 import { EVENTO_LABEL } from '@/lib/provas'
+import TipoToggle from '@/components/TipoToggle'
 
 interface Props {
   anos: number[]
@@ -16,6 +17,7 @@ interface Props {
   fonteAtiva?: string
   eventoAtivo?: string
   turnoAtivo?: string
+  tipoAtivo?: string
 }
 
 const AREA_META: Record<string, { label: string; bg: string; text: string; border: string }> = {
@@ -29,7 +31,7 @@ const EVENTOS_EXATO = ['CICLO_ZERO', '1_SIMULADO_TESSAT', '2_SIMULADO_TESSAT', '
 
 export default function FiltroSidebar({
   anos, areas, anoAtivo, diaAtivo, areaAtiva, competenciaAtiva,
-  fonteAtiva = 'ENEM', eventoAtivo, turnoAtivo,
+  fonteAtiva = 'ENEM', eventoAtivo, turnoAtivo, tipoAtivo,
 }: Props) {
   const [anosExpandido, setAnosExpandido] = useState(false)
   const [compExpandido,  setCompExpandido] = useState(false)
@@ -48,6 +50,7 @@ export default function FiltroSidebar({
     if (competenciaAtiva) p.competencia = competenciaAtiva
     if (eventoAtivo)      p.evento      = eventoAtivo
     if (turnoAtivo)       p.turno       = turnoAtivo
+    if (tipoAtivo)        p.tipo        = tipoAtivo
     for (const [k, v] of Object.entries(overrides)) {
       if (v === undefined) delete p[k]
       else p[k] = v
@@ -60,19 +63,26 @@ export default function FiltroSidebar({
   }
 
   function switchFonte(fonte: string) {
-    // Limpa todos os filtros ao trocar de prova
-    startTransition(() => router.push(`${pathname}?fonte=${fonte}`))
+    const params: Record<string, string> = { fonte }
+    if (tipoAtivo) params.tipo = tipoAtivo
+    startTransition(() => router.push(`${pathname}?${new URLSearchParams(params)}`))
   }
 
   const anosVisiveis = anosExpandido ? anos : anos.slice(0, 8)
   const habilidades  = compExpandido ? TODAS_HABILIDADES : TODAS_HABILIDADES.slice(0, 15)
 
   const hasFilter = isExato
-    ? (eventoAtivo || turnoAtivo || areaAtiva)
-    : (anoAtivo || diaAtivo || areaAtiva || competenciaAtiva)
+    ? (eventoAtivo || turnoAtivo || areaAtiva || tipoAtivo)
+    : (anoAtivo || diaAtivo || areaAtiva || competenciaAtiva || tipoAtivo)
 
   return (
     <div className="space-y-3">
+
+      {/* Toggle Tipo — acima das tabs de fonte */}
+      <div className="flex items-center justify-between mb-1">
+        <span className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#635D56]">Tipo</span>
+        <TipoToggle />
+      </div>
 
       {/* Tabs de prova */}
       <div className="flex rounded-xl overflow-hidden border border-[#2C2820] bg-[#161411]">

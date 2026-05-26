@@ -1,59 +1,243 @@
-# HenryJr — Banco de Questões ENEM
+# HenryJr — Banco de Questões ENEM + EXATO + UFT
 
 ## Visão Geral do Projeto
 
-Plataforma pública de estudos com todas as questões do ENEM (2009–2024), simulados personalizados, progresso por competência, explicações com IA, caderno de erros ("Tira Teima") e correção automática de simulados por foto. Stack 100% gratuita.
+Plataforma pública de estudos com questões do ENEM (2009–2024), simulados preditivos ENEM (Bernoulli, SAS, Poliedro, Farias Brito, Somos), provas do vestibular UFT (2018–2024) e simulados/provas do EXATO (TESSAT), com simulados personalizados, progresso por competência, explicações com IA, caderno de erros ("Tira Teima") e correção automática de simulados por foto. Stack 100% gratuita. URL em produção: **https://henryjr.vercel.app**
 
 ## Stack Tecnológica
 
 | Camada | Tecnologia | Status |
 |---|---|---|
-| Frontend | Next.js 14 + React + Tailwind CSS | Fase 4 (pendente) |
-| Banco de dados | Supabase (PostgreSQL + Auth + Storage) | Fase 3 (pendente) |
-| Hospedagem frontend | Vercel | Fase 7 (pendente) |
-| Hospedagem microserviço | Railway ou Render (gratuito) | Fase 5.5 (pendente) |
-| IA para explicações | Groq API (LLaMA 3, gratuito) | Fase 4 (pendente) |
-| Geração de PDF | react-pdf + Puppeteer | Fase 5 (pendente) |
-| Correção por foto | FastAPI + OpenCV (microserviço Python) | Fase 5.5 (pendente) |
-| Extração de dados | Python + PyMuPDF | Fase 2 (em finalização) |
+| Frontend | Next.js 14 + React + Tailwind CSS | ✅ Em produção (Vercel) |
+| Banco de dados | Supabase (PostgreSQL + Auth + Storage) | ✅ Ativo |
+| Hospedagem frontend | Vercel | ✅ Em produção |
+| Hospedagem microserviço | Railway ou Render (gratuito) | ⏳ Fase 5.5 (pendente) |
+| IA para explicações | Groq API (LLaMA 3, gratuito) | ✅ Ativo |
+| Geração de PDF | Puppeteer + @sparticuz/chromium | ✅ Implementado (pausado) |
+| Correção por foto | FastAPI + OpenCV (microserviço Python) | ⏳ Fase 5.5 (pendente) |
+| Extração de dados | Python + PyMuPDF + Groq Vision | ✅ Concluído para ENEM, EXATO, UFT, ENEM_SIMULADOS |
 
 ## Credenciais e Chaves (NUNCA commitar no GitHub)
 
-- **Supabase URL**: ver arquivo `chaves-projeto.txt`
-- **Supabase Anon Key**: ver arquivo `chaves-projeto.txt`
-- **Groq API Key**: ver arquivo `chaves-projeto.txt` (começa com `gsk_...`)
-- **Supabase DB Password**: ver arquivo `chaves-projeto.txt`
+- Todas as chaves estão em `C:\PROJETOS\HENRYJR\HENRYJR_CREDENCIAIS.txt`
+- **Supabase URL**: `https://bmhudlpihwxvaelokugh.supabase.co`
+- **Supabase Anon Key**: ver `HENRYJR_CREDENCIAIS.txt`
+- **Supabase Service Role Key**: ver `HENRYJR_CREDENCIAIS.txt`
+- **Groq API Key**: ver `HENRYJR_CREDENCIAIS.txt` (chave atual criada em 26/05/2026)
+- **Google OAuth Client ID/Secret**: ver `HENRYJR_CREDENCIAIS.txt`
+
+> ⚠️ Chaves Groq revogadas: `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` (22/05/2026) e `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` (26/05/2026 — exposta no arquivo de plano do git).
 
 ## Estrutura de Pastas
 
 ```
 C:\Projetos\henryjr\
 ├── dados\
-│   ├── provas\              # PDFs originais organizados por ano
+│   ├── provas\              # PDFs originais ENEM organizados por ano
 │   │   ├── 2009\           # dia1.pdf, dia2.pdf, gabarito_dia1.pdf, gabarito_dia2.pdf
 │   │   └── ...até 2024\
 │   ├── json\               # JSONs extraídos v1 (com gabaritos validados)
-│   ├── json_v2\            # JSONs extraídos v2 (extração melhorada — em andamento)
-│   ├── imagens\            # Imagens das questões por ano/dia
+│   ├── json_v2\            # JSONs extraídos v2 — 2880 questões ENEM completas
+│   ├── json_uft\           # JSONs extraídos UFT — uft_{ano}_{turno}[_{edicao}].json
+│   ├── json_exato_provas\  # JSONs extraídos EXATO provas — exato_prova_{ano}_{turno}[_{edicao}].json
+│   ├── json_enem_simulados\ # JSONs simulados ENEM — {provedor}_{ano}_{evento}_{dia}.json
+│   ├── UFT_PROVAS\         # PDFs do vestibular UFT (2018–2024, MANHÃ/TARDE/GAB por ano)
+│   ├── EXATO_PROVAS\       # PDFs das provas EXATO (2024, 2025 1ª e 2ª edição)
+│   ├── ENEM_SIMULADOS\     # PDFs simulados preditivos ENEM por provedor+ano
+│   ├── EXATO_SIMULADOS\    # PDFs dos simulados EXATO/TESSAT (antigo EXATO)
+│   ├── imagens\            # Imagens das questões por ano/dia (751 questões com imagem)
 │   ├── texto_bruto\        # Texto bruto extraído (intermediário)
-│   └── frases_capa.txt     # Frases motivacionais das capas (uma por linha) — Fase 2
+│   ├── EXATO_ORGANIZADO\   # PDFs e JSONs do EXATO organizados
+│   │   ├── simulados\      # 12 PDFs de simulado por evento
+│   │   ├── gabaritos\      # 10 PDFs de gabarito por evento
+│   │   ├── material_apoio\ # 8 PDFs (trilhas, listas, cartilha)
+│   │   ├── Duplicados\     # 35 cópias preservadas
+│   │   ├── Nao_Identificados\ # 1 PDF-imagem sem OCR
+│   │   ├── json_exato\     # 12 JSONs — 460 questões EXATO
+│   │   ├── relatorio_exato.json
+│   │   └── metadata_integracao.json
+│   └── frases_capa.txt     # Frases motivacionais das capas (pendente)
 ├── organizar.py                # Renomeia PDFs para o padrão correto
 ├── extrair.py                  # Extração v1 (texto + gabaritos dos PDFs)
-├── extrair_v2.py               # Extração v2 (melhorada, em andamento)
+├── extrair_v2.py               # Extração v2 (melhorada)
 ├── diagnostico.py              # Verifica integridade dos JSONs
 ├── aplicar_gabarito_2010.py    # Aplica gabaritos manuais do 2010
 ├── corrigir_imagens_v2.py      # Recorte de imagens por região de questão
 ├── ferramenta_recorte.py       # Ferramenta visual de recorte (Tkinter)
-├── gerenciar_imagens.py        # Gerenciador visual de questões/imagens (Tkinter)
-├── extrair_paginas_pdf.py      # Extrai campo pagina_pdf para todos os JSONs — Fase 2
-├── classificar_competencias.py # Auto-classifica H01–H30 via Groq — Fase 2
-├── upload_provas_supabase.py   # Faz upload dos PDFs para Supabase Storage — Fase 3
-├── relatorio_erros.json        # Questões reportadas (local até Supabase ativo) — Fase 2
-├── chaves-projeto.txt          # Chaves de API (NÃO commitar)
+├── gerenciar_imagens.py        # Gerenciador visual de questões/imagens (Tkinter) — aceita --revisao
+├── extrair_paginas_pdf.py      # Extrai campo pagina_pdf para todos os JSONs
+├── classificar_competencias.py # Auto-classifica H01–H30 via Groq
+├── upload_provas_supabase.py   # Upload dos PDFs para Supabase Storage
+├── upload_questoes_exato.py    # Upload das 460 questões EXATO para Supabase
+├── corrigir_posicao_imagens.py # Adiciona campo posicao nas imagens (concluído)
+├── reextrair_imagens_2010_2021.py # Re-extrai imagens faltando (concluído)
+├── ocr_2021.py                 # OCR Tesseract para questões 2021 corrompidas
+├── sync_ocr_2021.py            # Sincroniza questões OCR com Supabase
+├── marcar_anuladas.py          # Marca questões anuladas no JSON e Supabase
+├── recuperar_alternativas.py   # Tenta recuperar alternativas de questões com imagem
+├── sincronizar_paginas_supabase.py # Sincroniza pagina_pdf com Supabase
+├── lib_extrair.py              # Biblioteca compartilhada: PyMuPDF + Groq Vision fallback
+├── extrair_uft.py              # Extrai vestibulares UFT → DADOS/json_uft/
+├── extrair_exato_provas.py     # Extrai provas EXATO → DADOS/json_exato_provas/
+├── extrair_enem_simulados.py   # Extrai simulados ENEM → DADOS/json_enem_simulados/
+├── upload_novas_questoes.py    # Upload UFT/EXATO_P/ENEM_SIM para Supabase
+├── migracao_provedor.sql       # SQL: ADD COLUMN provedor TEXT NULL + índice ✅ Executada
+├── migracao_exato.sql          # SQL: adiciona colunas fonte/evento/turno na tabela questoes
+├── relatorio_erros.json        # Questões reportadas (local)
+├── HENRYJR_CREDENCIAIS.txt     # Chaves de API (NÃO commitar)
 └── CLAUDE.md                   # Este arquivo
+
+frontend/
+├── app/
+│   ├── page.tsx                # Home: cards ENEM e EXATO lado a lado
+│   ├── questoes/page.tsx       # Listagem com chips ENEM/EXATO/UFT + filtros por fonte
+│   ├── questoes/[id]/page.tsx  # Card de questão individual
+│   ├── simulado/page.tsx       # Criação de simulado (ENEM, EXATO ou UFT)
+│   ├── simulado/[id]/
+│   │   ├── page.tsx            # SimuladoPlayer com cronômetro
+│   │   └── resultado/
+│   │       ├── page.tsx        # Tela de resultado com ExplicarBtn por questão errada
+│   │       └── ExplicarBtn.tsx # Botão streaming de explicação IA
+│   ├── tira-teima/
+│   │   ├── page.tsx            # Caderno de erros com badges de versão V1/V2/V3
+│   │   ├── TiraTeimaVersao.tsx # Placeholder (lógica está em page.tsx)
+│   │   └── imprimir/
+│   │       ├── page.tsx        # Server Component — busca dados para PDF
+│   │       └── TiraTeimaPrint.tsx # Client — layout print completo
+│   ├── progresso/page.tsx      # Painel de progresso por área
+│   ├── auth/login/page.tsx     # Login email + Google OAuth
+│   ├── api/
+│   │   ├── explicar/route.ts   # POST → streaming Groq LLaMA 3.3 70B
+│   │   ├── busca-ia/route.ts   # POST → extração de termos com LLaMA 3.1 8B
+│   │   ├── reportar-erro/route.ts
+│   │   ├── pdf/simulado/[id]/route.ts  # GET → PDF via Puppeteer
+│   │   ├── pdf/tira-teima/route.ts     # GET → PDF via Puppeteer
+│   │   └── tira-teima/nova-versao/route.ts  # POST → ciclo de versões
+│   └── ...
+├── components/
+│   ├── CardQuestao.tsx         # Card completo: tesoura, revelar, explicar, ver PDF, reportar
+│   ├── FiltroSidebar.tsx       # Sidebar com chips ENEM/EXATO/UFT + filtros condicionais por fonte+tipo
+│   ├── BuscaIA.tsx             # Busca semântica com extração de termos
+│   ├── SimuladoPlayer.tsx      # Player do simulado online com cronômetro
+│   └── ModalReportarErro.tsx
+├── lib/
+│   ├── provas.ts               # Registro central de provas (ENEM, EXATO, UFT) + DIA_LABEL + PROVEDOR_LABEL
+│   └── supabase/
+├── supabase/migrations/
+│   ├── 001_questoes_erradas.sql
+│   └── 002_tira_teima_versoes.sql  # ✅ Executada
+└── ...
 ```
 
-## Estrutura do JSON de Questões (v2 — alvo)
+---
+
+## Banco de Dados — Estado Atual do Supabase
+
+### Totais
+- **2.880 questões ENEM reais** (2009–2024, `fonte='ENEM'`, `tipo='PROVA'`, `dia='dia1'|'dia2'`)
+- **460 questões EXATO simulados** (`fonte='EXATO'`, `tipo='SIMULADO'`, `dia='exato'`, `ano=NULL`)
+- **UFT** — em extração (`fonte='UFT'`, `tipo='PROVA'`, `dia='exato'`, 2018–2024)
+- **EXATO provas** — em extração (`fonte='EXATO'`, `tipo='PROVA'`, `dia='exato'`, 2024–2025)
+- **ENEM simulados** — em extração (`fonte='ENEM'`, `tipo='SIMULADO'`, `dia='simu_dia1'|'simu_dia2'`)
+
+### Tabela `questoes` — colunas relevantes
+
+| Coluna | Tipo | ENEM real | ENEM simulado | EXATO | UFT |
+|---|---|---|---|---|---|
+| `id` | int | auto | auto | auto | auto |
+| `fonte` | text | 'ENEM' | 'ENEM' | 'EXATO' | 'UFT' |
+| `tipo` | text | 'PROVA' | 'SIMULADO' | 'PROVA'\|'SIMULADO' | 'PROVA' |
+| `ano` | int\|null | 2009–2024 | 2023–2024 | **NULL** | 2018–2024 |
+| `dia` | text | 'dia1'\|'dia2' | 'simu_dia1'\|'simu_dia2' | 'exato' | 'exato' |
+| `numero` | int | Q1–Q45 por prova | Q1–Qn por prova | Q1–Q460 global | Q1–Qn por prova |
+| `area` | text | 4 áreas | 4 áreas | 4 áreas | 4 áreas |
+| `evento` | text\|null | null | 'SIM_00'…'SIM_08' | 'CICLO_ZERO' etc. | '1_EDICAO'\|null |
+| `turno` | text\|null | null | null | 'MANHA'\|'TARDE' | 'MANHA'\|'TARDE' |
+| `provedor` | text\|null | null | 'BERNOULLI' etc. | null | null |
+| `competencia` | text\|null | H01–H30 ✅ | H01–H30 (pós-classif.) | NULL | NULL |
+| `pagina_pdf` | int | preenchido ✅ | preenchido | preenchido | preenchido |
+| `enunciado` | jsonb | preenchido ✅ | via Groq Vision | 104/460 (PDFs imagem) | via Groq Vision |
+
+> **UNIQUE constraint**: `(ano, dia, numero, fonte)` — usar `dia='simu_dia1'/'simu_dia2'` para ENEM simulados evita colisão com questões reais do mesmo ano.
+
+### Migrations executadas
+- `001_questoes_erradas.sql` — tabela `questoes_erradas` com campos `acertou`, `respondido_em`
+- `002_tira_teima_versoes.sql` ✅ — adiciona `versao_tt` e `zerada` em `questoes_erradas`; cria tabela `tira_teima`
+- `migracao_exato.sql` ✅ — adiciona colunas `fonte`, `evento`, `turno` em `questoes`
+- `migracao_provedor.sql` ✅ — adiciona coluna `provedor TEXT NULL` + índice
+
+### Supabase Storage
+- Bucket `provas-pdf`: ✅ 64 PDFs ENEM (2009–2024, 4 por ano)
+- Bucket `imagens-questoes`: ✅ todas as 751 questões ENEM com imagem
+
+---
+
+## Questões EXATO — Detalhes
+
+### Estrutura dos simulados EXATO
+
+| Evento | Turno | Questões | Gabarito | Notas |
+|---|---|---|---|---|
+| CICLO_ZERO | MANHA | Q001–Q040 | 40/40 ✅ | — |
+| CICLO_ZERO | TARDE | Q041–Q080 | 38/40 ⚠️ | Q38/Q39 sem gabarito no PDF |
+| 1_SIMULADO_TESSAT | MANHA | Q081–Q120 | 39/40 | Q21 anulada |
+| 1_SIMULADO_TESSAT | TARDE | Q121–Q160 | 40/40 ✅ | — |
+| 2_SIMULADO_TESSAT | MANHA | Q161–Q200 | 40/40 ✅ | — |
+| 2_SIMULADO_TESSAT | TARDE | Q201–Q240 | 40/40 ✅ | — |
+| OUTUBRO_2025 | MANHA | Q241–Q280 | 40/40 ✅ | Gabarito revisado (Q2→A) |
+| OUTUBRO_2025 | TARDE | Q281–Q320 | 38/40 | Q15+Q39 anuladas |
+| ABRIL_2026 | MANHA | Q321–Q360 | 40/40 ✅ | — |
+| ABRIL_2026 | TARDE | Q361–Q400 | 39/40 ⚠️ | Q15 sem gabarito no PDF |
+| NATUREZAS_TESSAT | TARDE | Q401–Q420 | 20/20 ✅ | Apenas 20 questões |
+| TRADICIONAIS | MANHA | Q421–Q460 | 0/40 ❌ | Sem PDF de gabarito (enviado digitalmente) |
+
+**Total: 460 questões · 414 com gabarito (90%) · 456 com 5 alternativas (99,1%) · 3 anuladas**
+
+### Por que 356/460 não têm enunciado?
+Os PDFs do EXATO são majoritariamente digitalizados (PDF-imagem). O PyMuPDF não extrai texto de imagens — apenas 104 questões tinham texto extraível diretamente. As 356 restantes precisariam de OCR, mas os PDFs escaneados têm baixa qualidade que dificulta o Tesseract. **Não é um erro — é uma limitação conhecida.**
+
+### Filtros no frontend para EXATO
+O frontend usa `fonte='EXATO'` como ponto de entrada. Filtros disponíveis:
+- `evento`: CICLO_ZERO / 1_SIMULADO_TESSAT / 2_SIMULADO_TESSAT / OUTUBRO_2025 / ABRIL_2026 / NATUREZAS_TESSAT / TRADICIONAIS
+- `turno`: MANHA / TARDE
+- `area`: 4 áreas (mesmo sistema do ENEM)
+
+**Nunca filtrar por `ano` para o EXATO** — campo é `NULL` intencionalmente.
+
+---
+
+## Frontend — Identidade Visual "Biblioteca Cálida"
+
+### Paleta de cores
+| Token | Valor | Uso |
+|---|---|---|
+| Fundo | `#0E0D0B` | background geral |
+| Surface | `#161411` | cards, modais |
+| Surface elevada | `#1E1B17` | hover, inputs |
+| Borda | `#2C2820` | divisores, bordas de card |
+| Texto | `#F2EDE4` | texto principal |
+| Dourado (primário) | `#D4A853` | botões, ícones, destaques |
+| Dourado hover | `#B8882A` | hover dos botões |
+
+### Tipografia
+- **Playfair Display** — títulos e headings
+- **Source Serif 4** — enunciados das questões (leitura longa)
+- **DM Sans** — UI geral (labels, botões, chips)
+
+### Separação por prova
+- `lib/provas.ts` — registro central; adicionar nova prova = inserir um objeto no array `PROVAS`
+- `FiltroSidebar.tsx` — chips de fonte `[ENEM][EXATO][UFT]` substituíram as tabs; filtros condicionais por fonte+tipo:
+  - ENEM + PROVA: Área / Ano / Dia / Competência H01–H30
+  - ENEM + SIMULADO: Área / Elaborador / Ano / Dia
+  - EXATO: Evento / Turno / Área
+  - UFT: Área / Ano / Turno / Edição
+- `questoes/page.tsx`: suporta `?fonte=ENEM|EXATO|UFT` + `?provedor=BERNOULLI|...`
+- `simulado/page.tsx`: ENEM, EXATO e UFT disponíveis; Tipo apenas para ENEM; anos ocultos para EXATO
+- **Nunca filtrar por `ano` para EXATO** — campo é `NULL` intencionalmente
+
+---
+
+## Estrutura do JSON de Questões ENEM (v2)
 
 ```json
 {
@@ -84,25 +268,25 @@ C:\Projetos\henryjr\
 }
 ```
 
-### Campos do JSON
+### Campos do JSON ENEM
 
-| Campo | Tipo | Descrição | Fase |
-|---|---|---|---|
-| `numero` | int | Número da questão no caderno | v1 |
-| `ano` | int | Ano do ENEM | v1 |
-| `dia` | string | "dia1" ou "dia2" | v1 |
-| `area` | string | Área de conhecimento | v1 |
-| `competencia` | string | Competência H01–H30 (ex.: "H15") | Fase 2 |
-| `enunciado` | list[str] | Parágrafos do enunciado | v2 |
-| `comando` | string | Frase final antes das alternativas | v2 |
-| `alternativas` | dict | Chaves A–E com texto | v2 |
-| `gabarito` | string\|null | Letra correta; null = anulada | v1 |
-| `confianca` | float | Confiança da extração (0–1) | v2 |
-| `revisado` | bool | Revisado manualmente pelo gerenciador | v2 |
-| `anulada` | bool | Questão oficialmente anulada | Fase 2 |
-| `imagens` | list[dict] | path + posicao no layout | v2 |
-| `tem_imagem` | bool | Atalho para filtrar questões com imagem | v2 |
-| `pagina_pdf` | int | Página do PDF original (base 0) | Fase 2 |
+| Campo | Tipo | Descrição |
+|---|---|---|
+| `numero` | int | Número da questão no caderno |
+| `ano` | int | Ano do ENEM |
+| `dia` | string | "dia1" ou "dia2" |
+| `area` | string | Área de conhecimento |
+| `competencia` | string | Competência H01–H30 (ex.: "H15") — 100% preenchidas |
+| `enunciado` | list[str] | Parágrafos do enunciado |
+| `comando` | string | Frase final antes das alternativas |
+| `alternativas` | dict | Chaves A–E com texto |
+| `gabarito` | string\|null | Letra correta; null = anulada |
+| `confianca` | float | Confiança da extração (0–1) |
+| `revisado` | bool | Revisado manualmente pelo gerenciador |
+| `anulada` | bool | Questão oficialmente anulada |
+| `imagens` | list[dict] | path + posicao no layout |
+| `tem_imagem` | bool | Atalho para filtrar questões com imagem |
+| `pagina_pdf` | int | Página do PDF original (base 0) |
 
 ## Estrutura do relatorio_erros.json
 
@@ -135,12 +319,12 @@ C:\Projetos\henryjr\
 |---|---|---|
 | 2009 | Imagens em formato .jpx (fundo preto) | Renderização direta das páginas do PDF |
 | 2010 | Gabarito em formato visual (respostas circuladas em verde) | Preenchimento manual via Word + `aplicar_gabarito_2010.py` |
-| 2010 | Texto com encoding corrompido (fonte customizada) | Pendente — mesma abordagem do 2021 |
+| 2010 | Texto com encoding corrompido (fonte customizada) | OCR Tesseract — pendente |
 | 2015 | PDFs dia1 e gabarito_dia1 estavam com nomes trocados | Renomeados manualmente |
-| 2021 | Texto completamente corrompido (caracteres de controle) | Pendente — a resolver |
-| 2024 | Caracteres estranhos extraídos | Pendente — limpeza no pós-processamento |
+| 2021 | Texto completamente corrompido (caracteres de controle) | OCR aplicado nas 21 piores — alts ainda pendentes |
+| 2024 | Caracteres estranhos extraídos | Verificado: eram nomes próprios em CAPS, sem lixo real |
 
-## Questões Anuladas (sem gabarito — comportamento esperado)
+## Questões Anuladas (sem gabarito)
 
 - 2018: Q150
 - 2020: Q114, Q141
@@ -149,268 +333,75 @@ C:\Projetos\henryjr\
 - 2023: Q177
 - 2024: Q129
 
+Marcadas com `anulada: true, gabarito: null` em todos os JSONs v2 e no Supabase. ✅
+
 ## Proteção do 2010
 
-**IMPORTANTE**: O JSON do 2010 tem gabaritos inseridos manualmente. O script `extrair.py` tem proteção para não sobrescrever este arquivo. Se precisar re-extrair todos os anos, o 2010 é ignorado automaticamente. Caso o JSON do 2010 seja sobrescrito acidentalmente, rodar `aplicar_gabarito_2010.py` restaura os gabaritos a partir do Word preenchido.
-
----
-
-## Planejamento de Fases
-
----
-
-### Fase 1 — Ambiente e Ferramentas ✅ CONCLUÍDA
-
-- VS Code, Node.js, Git, GitHub, Supabase, Vercel, Groq configurados
-
----
-
-### Fase 2 — Extração e Preparação de Dados 🔄 EM ANDAMENTO
-
-**Extração de texto e gabaritos**
-- [x] Extração v1: 2.865 questões (2009–2024) com gabaritos
-- [x] Gabarito 2010: 185/185 questões (163 via preenchimento manual)
-- [x] Diagnóstico: todos os 16 anos com 4 arquivos presentes
-- [ ] Extração v2: detectar alternativas corretamente (padrão `'A\t'` + span seguinte)
-- [ ] Resolver encoding corrompido do 2021
-- [ ] Limpar caracteres estranhos do 2024
-
-**Imagens**
-- [ ] Concluir extração automática de imagens por questão
-- [ ] Validação semiautônoma das imagens extraídas
-
-**Novos campos no JSON**
-- [ ] `pagina_pdf`: script `extrair_paginas_pdf.py` percorre todos os PDFs com PyMuPDF
-      e registra a página de cada questão (reutiliza `mapear_questoes`)
-- [ ] `competencia` (H01–H30): script `classificar_competencias.py` envia cada questão
-      ao Groq/LLaMA 3 para classificação automática; gerenciar_imagens.py exibe a
-      sugestão para validação/correção manual
-- [ ] `anulada`: marcar as questões anuladas conhecidas com `anulada: true`
-
-**Ferramentas locais**
-- [ ] Modo `--revisao` no `gerenciar_imagens.py`: carrega `relatorio_erros.json` e
-      restringe a navegação apenas às questões com `status: "pendente"`, permitindo
-      corrigir uma a uma sem precisar procurá-las manualmente
-- [ ] Definir estrutura do `relatorio_erros.json` (já documentado acima)
-
-**Dados estáticos**
-- [ ] Receber e salvar `frases_capa.txt` com as frases motivacionais das capas de
-      cada prova (2009–2024), uma por linha, fornecido manualmente
-
----
-
-### Fase 3 — Banco de Dados Supabase ⏳ PENDENTE
-
-**Tabelas principais**
-- [ ] `questoes`: todas as questões dos JSONs v2
-- [ ] `usuarios`: perfis e progresso
-- [ ] `subscriptions`: estrutura para assinatura futura
-- [ ] `simulados`: registro de cada simulado gerado (tipo, questões, data)
-- [ ] `respostas_simulado`: resposta do aluno por questão em cada simulado
-- [ ] `questoes_erradas`: histórico de erros por usuário (avulsas e simulado)
-- [ ] `tira_teima`: versões do caderno de erros (v1, v2, v3...)
-- [ ] `relatorios_erros`: questões reportadas pelos usuários (migração do JSON local)
-- [ ] `competencias`: mapeamento H01–H30 com descrição e área
-
-**Supabase Storage**
-- [ ] Bucket `provas-pdf`: upload dos 190MB de PDFs via `upload_provas_supabase.py`
-      — URL de cada PDF salva como `pdf_url` referenciado por ano/dia
-- [ ] Bucket `imagens-questoes`: imagens das questões
-
-**Auth**
-- [ ] Login via email + Google (Supabase Auth)
-
----
-
-### Fase 4 — Interface Next.js ⏳ PENDENTE
-
-**Card de questão**
-- [ ] Exibir enunciado com renderização de LaTeX (KaTeX) e imagens posicionadas
-- [ ] Tesoura para eliminar alternativas
-- [ ] Revelar resposta: incorreta fica vermelha, gabarito fica verde
-- [ ] Botão "Explicar esta questão" via Groq API (streaming)
-- [ ] Botão "Ver PDF da prova" — abre Supabase Storage com `#page=N` usando `pagina_pdf`
-- [ ] Botão "Reportar Erro" — salva no Supabase (`relatorios_erros`) com tipo e descrição
-
-**Busca e filtros**
-- [ ] Busca por tema/conteúdo com IA semântica
-- [ ] Filtro por área, competência (H01–H30), ano, dificuldade
-- [ ] Dificuldade calculada pela taxa de acerto histórica
-
-**Tela inicial / motivação**
-- [ ] Exibir frase da capa do ENEM: rotação aleatória ou por ano
-      (carregadas do `frases_capa.txt` convertido para JSON estático)
-
-**Caderno de Erros — Tira Teima**
-- [ ] Seção dedicada separando erros avulsos de erros em simulado
-- [ ] Sugestão de conteúdos, área e competência a estudar com base nos erros
-- [ ] Exibir gabarito comentado pela IA (Groq) para cada questão errada
-
-**Login e progresso**
-- [ ] Autenticação Supabase (email + Google)
-- [ ] Painel de progresso por área e competência (H01–H30)
-
----
-
-### Fase 5 — PDF Imprimível Layout ENEM ⏳ PENDENTE
-
-**Simulado em PDF**
-- [ ] Layout padrão ENEM: 2 colunas, cabeçalho, numeração oficial
-- [ ] Renderização de LaTeX (KaTeX server-side ou imagens pré-geradas)
-- [ ] Imagens das questões posicionadas conforme campo `posicao`
-
-**Folha de respostas**
-- [ ] Bolinhas A–E para cada questão
-- [ ] **Marcadores de registro nos 4 cantos** (quadrados sólidos ou ArUco markers)
-      — co-projetados com o algoritmo de escaneamento da Fase 5.5
-- [ ] Campos para nome, data e identificação do simulado
-
-**Gabarito**
-- [ ] Tabela de gabarito padrão ENEM ao final do PDF
-
-**Tira Teima**
-- [ ] Mesmo layout do simulado, gerado a partir das questões erradas
-- [ ] Identificação da versão na capa (Tira Teima V1, V2, V3...)
-
----
-
-### Fase 5.5 — Microserviço de Correção por Foto ⏳ PENDENTE
-
-> Serviço Python independente hospedado no Railway ou Render (gratuito).
-> Chamado pelo Next.js via API REST após o aluno enviar a foto.
-
-**Tecnologias:** FastAPI + OpenCV + NumPy
-
-**Pipeline de correção:**
-1. Receber imagem (JPEG/PNG, foto de celular com leve torção)
-2. Detectar os 4 marcadores de registro nos cantos da folha
-3. Calcular e aplicar transformação de perspectiva (homografia via `cv2.findHomography`)
-4. Mapear posição de cada bolinha com base no layout fixo da folha
-5. Threshold de preenchimento por bolinha (distingue marcada de vazia)
-6. Retornar JSON `{"respostas": ["A","C","B",...], "total_questoes": 45}`
-
-**Integração com a plataforma:**
-- Next.js envia a foto para `/corrigir` do microserviço
-- Microserviço retorna as respostas detectadas
-- Plataforma compara com gabarito armazenado no Supabase
-- Exibe resultado: acertos, erros, nota e questões para o Tira Teima
-
----
-
-### Fase 6 — Simulado e Painel de Progresso ⏳ PENDENTE
-
-**Modo simulado online**
-- [ ] Cronômetro regressivo com estado salvo no localStorage
-- [ ] Seleção de questões por área, ano, competência ou aleatório
-- [ ] Correção automática ao final
-
-**Correção por foto (simulado físico)**
-- [ ] Upload da foto da folha de respostas pelo celular
-- [ ] Integração com microserviço da Fase 5.5
-- [ ] Exibição de resultado: acertos, erros, distribuição por área
-
-**Gabarito comentado com IA**
-- [ ] Após correção (física ou online), listar questões erradas
-- [ ] Para cada erro: enviar enunciado + alternativas + gabarito ao Groq (LLaMA 3)
-- [ ] Exibir explicação em streaming na plataforma
-
-**Tira Teima (caderno de erros ativo)**
-- [ ] Gerar PDF do Tira Teima a partir das questões erradas (reutiliza Fase 5)
-- [ ] Corrigir o Tira Teima (física ou online) → questões ainda erradas viram Tira Teima V2
-- [ ] Ciclo se repete: V2 → V3 → V4... até zerar os erros
-- [ ] Histórico de versões salvo no Supabase (`tira_teima`)
-
-**Painel de progresso**
-- [ ] Desempenho por área e competência (H01–H30)
-- [ ] Evolução temporal dos acertos
-- [ ] Filtro por dificuldade calculada pela taxa de acerto histórica
-
----
-
-### Fase 7 — Deploy ⏳ PENDENTE
-
-- [ ] Deploy do frontend Next.js no Vercel
-- [ ] Deploy do microserviço FastAPI + OpenCV no Railway ou Render
-- [ ] Variáveis de ambiente configuradas em ambos os serviços
-- [ ] Testes de integração end-to-end (frontend → Supabase → microserviço)
+**IMPORTANTE**: O JSON do 2010 tem gabaritos inseridos manualmente. O script `extrair.py` tem proteção para não sobrescrever este arquivo. Caso o JSON do 2010 seja sobrescrito acidentalmente, rodar `aplicar_gabarito_2010.py` restaura os gabaritos a partir do Word preenchido.
 
 ---
 
 ## Estado Atual do Projeto
 
 ### Concluído ✅
-- Fase 1: Ambiente e ferramentas
+
+**Dados e banco**
 - Extração v1: 2.865 questões (2009–2024) com gabaritos
-- Gabarito 2010: 185/185 questões
-- Diagnóstico: todos os 16 anos com 4 arquivos presentes
-- Fase 5 (PDF): infraestrutura completa implementada — pausada para retomar depois (ver seção abaixo)
-- **Imagens Item 1 — CONCLUÍDO** (2025-05):
-  - Corrigido campo `posicao` ausente em 214 questões (2016: 27, 2018: 38, 2021: 149) — `corrigir_posicao_imagens.py`
-  - Re-extraídas 82 imagens faltando do 2010 e 129 do 2021 via renderização de página PDF — `reextrair_imagens_2010_2021.py`
-  - Todas as 751 questões com imagem agora têm `posicao: "antes_1"` e arquivo em disco + Supabase Storage
-  - Sincronizado com Supabase: 214 + 133 + 149 questões atualizadas
-- **OCR 2021 Item 2 — CONCLUÍDO** (2025-05):
-  - 21 questões com placeholder "Enunciado não disponível" substituídas por texto OCR (Tesseract PT)
-  - Modelo `por.traineddata` instalado em `C:\Users\FACIMP\tessdata` + `TESSDATA_PREFIX` configurado
-  - Scripts: `ocr_2021.py` (OCR + parse) e `sync_ocr_2021.py` (sync Supabase)
-  - Alternativas parcialmente extraídas (layout 2 colunas dificulta) — enunciados OK, alts pendentes de revisão
-  - Campo `ocr: true` marcado nas 21 questões no JSON local (sinaliza necessidade de revisão)
-- **Item 3 (alternativas v2) — 214/214 verificadas**: 22 questões com alts faltando em 2009/2010/2016/2020/2021
-  - Script `recuperar_alternativas.py` rodando OCR para 2021 + extração PyMuPDF para outros anos
-  - Qualquer questão com < 3 alternativas extraídas marcada como INSUFICIENTE para revisão manual
-- **Item 6 (2024 caracteres estranhos) — VERIFICADO**: não há lixo real; "CAPS" são nomes próprios normais
-- **Item 7 (questões anuladas) — CONCLUÍDO** (2025-05):
-  - Marcadas 7 questões: 2018 Q150, 2020 Q114+Q141, 2021 Q178, 2022 Q175, 2023 Q177, 2024 Q129
-  - `anulada: true, gabarito: null` em todos os JSONs v2 e Supabase
-- **Item 8 (PDFs no Storage) — CONFIRMADO**: todos os 64 PDFs (2009-2024, 4 por ano) já estavam no bucket `provas-pdf`
-- **Item 9 (pagina_pdf) — CONCLUÍDO**: todas as 2880 questões já tinham `pagina_pdf` preenchido pelo extrair_v2.py
-  - Script `sincronizar_paginas_supabase.py` criado para sync (rodando em background)
-- **Item 10 (Gabarito comentado IA) — CONCLUÍDO** (2025-05):
-  - Chave Groq atualizada em `frontend/.env.local` (chave anterior era a exposta `gsk_iJb6...`)
-  - Criado `frontend/app/simulado/[id]/resultado/ExplicarBtn.tsx` — botão "Explicar com IA" com streaming
-  - `resultado/page.tsx` atualizado: importa `alternativas` na query Supabase e renderiza `ExplicarBtn`
-  - A rota `/api/explicar` já existia e está correta (streaming com Groq LLaMA 3.3 70B)
-- **Item 14 (página /tira-teima/imprimir) — CONCLUÍDO** (2025-05):
-  - Criados: `frontend/app/tira-teima/imprimir/page.tsx` (Server Component) + `TiraTeimaPrint.tsx` (Client)
-  - Layout: capa + questões por área + gabarito opcional (query param `?gabarito=true`)
-  - A rota `/api/pdf/tira-teima` já existia e aponta para `/tira-teima/imprimir?view=1`
-- **Item 13 (ciclo Tira Teima V1→V2→V3) — CONCLUÍDO** (2025-05):
-  - API `POST /api/tira-teima/nova-versao`: marca questões zeradas e incrementa versao_tt
-  - `tira-teima/page.tsx`: exibe badges V1, V2, V3... com a versão atual destacada
-  - SQL migration `002_tira_teima_versoes.sql`: adiciona `versao_tt` e `zerada` em `questoes_erradas`
-  - **Pendente**: executar a migration no painel Supabase SQL Editor
-- **Item 14 (página /tira-teima/imprimir) — CONCLUÍDO** (2025-05): ver acima
-- **Item 17 (Google OAuth) — CÓDIGO PRONTO**: frontend já implementado (`signInWithOAuth({ provider: 'google' })`)
-  - Credenciais já em `chaves-projeto.txt`; falta configurar no painel Supabase (Authentication → Providers)
-- **Item 18 (modo --revisao) — CONCLUÍDO** (2025-05):
-  - `gerenciar_imagens.py` agora aceita `--revisao` via argparse
-  - Ao passar `--revisao`, carrega `relatorio_erros.json`, filtra `status: pendente` e navega para a primeira pendente
-  - Título da janela mostra "MODO REVISAO (N pendentes)"
+- Extração v2: 2.880 questões ENEM completas nos JSONs `dados/json_v2/`
+- Gabarito 2010: 185/185 questões (preenchimento manual)
+- Competências H01–H30: 2.880/2.880 questões ENEM classificadas (local + Supabase)
+- Questões anuladas marcadas (7 questões)
+- `pagina_pdf` preenchido: 2.880/2.880 questões (local + Supabase via `sincronizar_paginas_supabase.py`)
+- Imagens: 751/751 questões com imagem têm `posicao: "antes_1"` + arquivo em disco + Supabase Storage
+- OCR 2021: 21 questões com enunciado ilegível recuperadas pelo Tesseract PT
+- Alternativas recuperadas: 8/22 questões com alternativas em imagem
+- PDFs no Storage: 64/64 PDFs ENEM no bucket `provas-pdf`
+- EXATO: 460/460 questões extraídas e uploadadas com `fonte`, `evento`, `turno`, numeração contínua Q001–Q460
 
-### Em andamento 🔄
-- Fase 2: extração v2, imagens (concluídas), novos campos JSON
+**Frontend**
+- Redesign completo "Biblioteca Cálida" (paleta quente, tipografia editorial)
+- `FiltroSidebar.tsx`: chips de fonte ENEM/EXATO/UFT (substituiu tabs); filtros condicionais por fonte+tipo; combo Elaborador para ENEM simulados
+- Card de questão: tesoura, revelar gabarito, Explicar com IA (streaming + Markdown), Ver PDF, Reportar Erro
+- Busca semântica com IA (extração de termos + inferência de área/competência)
+- Simulado online com cronômetro regressivo e auto-submit; ENEM/EXATO/UFT disponíveis
+- Tela de resultado com `ExplicarBtn.tsx` — explicação streaming por questão errada
+- Tira Teima: página com badges V1/V2/V3 e botão de download PDF
+- `/tira-teima/imprimir` — página de impressão completa (`page.tsx` + `TiraTeimaPrint.tsx`)
+- Painel de progresso por área
+- Login via email ✅ e Google OAuth ✅
 
-### Próxima tarefa imediata
-Executar a **SQL migration 002** no painel Supabase para ativar o ciclo de versões do Tira Teima:
-`frontend/supabase/migrations/002_tira_teima_versoes.sql`
+**Infraestrutura**
+- Supabase Auth: email + Google OAuth configurados ✅
+- Migrations executadas: `001_questoes_erradas.sql` + `002_tira_teima_versoes.sql` + `migracao_exato.sql` + `migracao_provedor.sql` ✅
+- API Tira Teima: `POST /api/tira-teima/nova-versao` — ciclo V1→V2→V3 implementado
+- PDF Puppeteer: infraestrutura funcional no Vercel (pausado para refinamento)
+- Deploy automático no Vercel via GitHub ✅
 
-Configurar **Google OAuth no painel Supabase** (Autenticação → Providers → Google):
-- Client ID: ver `chaves-projeto.txt`
-- Client Secret: ver `chaves-projeto.txt`
-- Authorized redirect URIs no Google Console: `https://bmhudlpihwxvaelokugh.supabase.co/auth/v1/callback`
+**Ferramentas locais**
+- `gerenciar_imagens.py --revisao`: modo de revisão de erros pendentes do `relatorio_erros.json`
+- `lib_extrair.py`: biblioteca Groq Vision para extração de qualquer fonte de PDF
+- `extrair_uft.py` / `extrair_exato_provas.py` / `extrair_enem_simulados.py`: extratores por fonte
+- `upload_novas_questoes.py`: upload em lotes para Supabase com retry por questão
 
-**Pendente de revisão manual** (alternativas extraídas como imagem, não texto):
-- 2009 Q93, 2010 Q108, 2016 Q85 (3 alts), 2020 Q137
-- 2021: Q2, Q11, Q16, Q43, Q54, Q69, Q107, Q127, Q151, Q169, Q170 (OCR não extraiu alts)
+### Pendente de revisão manual ⚠️
 
-Depois: **Item 3** — Extração v2 completa das alternativas para todos os anos. Padrão confirmado:
+Alternativas extraídas como imagem (não texto — não extraíveis automaticamente):
+- 2009 Q93, 2010 Q108, 2020 Q137 → 0 alternativas
+- 2016 Q85 → apenas 3/5 alternativas
+- 2021: Q2, Q11, Q16, Q43, Q54, Q69, Q107, Q127, Q151, Q169, Q170 → sem alternativas (OCR falhou no layout 2 colunas)
 
-```
-Span: 'A\t'  — x≈37, negrito (flags=4 ou 16), tamanho 10
-Span: 'texto da alternativa A'  — x≈54, não negrito, tamanho 10
-Span: 'continuacao se houver'  — x≈54, não negrito (mesma alternativa)
-Span: 'B\t'  — x≈37, negrito — nova alternativa
-```
+EXATO com enunciado vazio (questões em imagem):
+- 356/460 questões sem enunciado — limitação dos PDFs digitalizados
+
+### Próximos passos sugeridos
+
+1. **Classificar competências ENEM simulados** — rodar `classificar_competencias.py --fonte ENEM --tipo SIMULADO` após upload concluído
+2. **Verificar qualidade da extração UFT/EXATO_P/ENEM_SIM** — spot-check nos JSONs gerados; revisar manualmente questões com enunciado vazio
+3. **Fase 5 (PDF)** — retomar e verificar layout; habilitar botões na UI
+4. **Progresso por competência H01–H30** — página de progresso só mostra por área; adicionar breakdown por competência
+5. **Frases motivacionais das capas** — `frases_capa.txt` ainda não fornecido; `FRASES[]` em ImprimirClient.tsx usa placeholders
+6. **Enunciados EXATO simulados via OCR** — 356/460 questões sem enunciado (PDFs digitalizados)
+7. **Fase 5.5 (correção por foto)** — FastAPI + OpenCV; depende dos marcadores de registro na folha de respostas
 
 ---
 
@@ -437,9 +428,12 @@ frontend/
 │   ├── api/pdf/
 │   │   ├── simulado/[id]/route.ts    ← GET → navega /simulado/{id}/imprimir?view=1 e gera PDF
 │   │   └── tira-teima/route.ts       ← GET → navega /tira-teima/imprimir?view=1 e gera PDF
-│   └── simulado/[id]/imprimir/
-│       ├── page.tsx                  ← Server component que busca dados do Supabase
-│       └── ImprimirClient.tsx        ← Layout completo do caderno (capa + questões + folha de respostas)
+│   ├── simulado/[id]/imprimir/
+│   │   ├── page.tsx                  ← Server component que busca dados do Supabase
+│   │   └── ImprimirClient.tsx        ← Layout completo do caderno (capa + questões + folha de respostas)
+│   └── tira-teima/imprimir/
+│       ├── page.tsx                  ← Server Component — busca questões erradas do usuário
+│       └── TiraTeimaPrint.tsx        ← Client — layout de impressão completo
 └── next.config.ts                    ← serverExternalPackages + outputFileTracingIncludes
 ```
 
@@ -452,52 +446,18 @@ outputFileTracingIncludes: {
   '/api/pdf/tira-teima':    ['./node_modules/@sparticuz/chromium/**/*'],
 },
 ```
-Sem `outputFileTracingIncludes`, o Vercel exclui os binários do Chromium e a rota falha com:
-`"The input directory \"/var/task/.../chromium/bin\" does not exist"`
-
-### Variável de ambiente obrigatória no Vercel
-
-```
-NEXT_PUBLIC_SITE_URL = https://SEU-PROJETO.vercel.app
-```
-O Puppeteer precisa de URL absoluta para navegar. Sem ela, usa `VERCEL_URL` (injetado automaticamente).
 
 ### Padrão da rota de geração
 
 ```typescript
-// 1. Em dev: usa Chrome do sistema (LOCAL_CHROME_PATH ou path padrão por OS)
-// 2. Em produção: usa @sparticuz/chromium
-const chromium = (await import('@sparticuz/chromium')).default
-const puppeteer = (await import('puppeteer-core')).default
-
 browser = await puppeteer.launch({ executablePath, args: chromium.args, headless: true })
 const page = await browser.newPage()
-// Injeta cookies de sessão do Supabase Auth para renderizar página autenticada
-await page.setCookie(...cookies)
+await page.setCookie(...cookies) // injeta sessão Supabase Auth
 await page.goto(url, { waitUntil: 'networkidle0', timeout: 40_000 })
 await page.waitForSelector('.area-bloco, .sem-questoes', { timeout: 12_000 })
 await page.emulateMediaType('print')
 const pdf = await page.pdf({ format: 'A4', printBackground: true, displayHeaderFooter: false })
 // NÃO passar margin: {...} — conflita com @page CSS e desloca coordenadas do position:fixed
-```
-
-### Layout do ImprimirClient.tsx
-
-Estrutura do caderno:
-```
-.caderno
-  .capa              ← break-after: page (página inteira para capa)
-  .area-bloco[0]     ← Linguagens (começa na pág 2)
-    .area-head        ← break-after: avoid (impede órfão)
-    .questoes-wrap    ← break-before: avoid (dupla proteção contra órfão) + display:flex row
-      .coluna         ← col1: primeiras ceil(n/2) questões
-      .sep-v          ← divisor vertical
-      .coluna         ← col2: restantes
-  .area-bloco[1..N]  ← Humanas, Natureza, Matemática
-  .folha             ← break-before: page (folha de respostas em página própria)
-
-.pg-head (position:fixed, top:-14mm)   ← cabeçalho em todas as páginas
-.pg-foot (position:fixed, bottom:-12mm) ← rodapé em todas as páginas
 ```
 
 ### Bugs já corrigidos
@@ -514,34 +474,32 @@ Estrutura do caderno:
 
 ### O que ainda falta para o PDF ficar completo
 
-- [ ] **Verificar o layout** após os fixes de margem (commit `be00c54`) — testar com simulado real no Vercel
-- [ ] **Frases oficiais ENEM 2009–2024** — `FRASES[]` em ImprimirClient.tsx tem frases placeholder; substituir pelas frases reais das capas quando disponíveis (`frases_capa.txt`)
-- [ ] **Página `/tira-teima/imprimir`** — rota de API existe mas a página Next.js não foi criada ainda (necessária para o PDF do Tira Teima funcionar)
-- [ ] **Imagens nas questões** — campo `imagens[]` do JSON não é renderizado ainda; questões com imagem aparecem incompletas
-- [ ] **LaTeX/KaTeX** — fórmulas matemáticas armazenadas como `$formula$` não são renderizadas; aparecem como texto literal
-- [ ] **Marcadores de registro na folha de respostas** — necessários para a Fase 5.5 (correção por foto com OpenCV)
-- [ ] **Gabarito** — tabela de gabarito ao final do PDF (planejado mas não implementado)
-
-### Como retomar
-
-1. Habilitar botões em `ImprimirClient.tsx` (reverter "em breve" → botão funcional)
-2. Testar com URL: `https://SEU-PROJETO.vercel.app/simulado/{id}/imprimir?view=1`
-3. Clicar "⬇️ Baixar PDF" e abrir o PDF gerado
-4. Verificar: cabeçalho de área aparece? cores corretas? sem órfãos?
-5. Implementar os itens pendentes acima na ordem listada
+- [ ] **Verificar o layout** após os fixes de margem — testar com simulado real no Vercel
+- [ ] **Frases oficiais ENEM 2009–2024** — `FRASES[]` em ImprimirClient.tsx usa placeholders
+- [ ] **Imagens nas questões** — campo `imagens[]` do JSON não é renderizado ainda
+- [ ] **LaTeX/KaTeX** — fórmulas armazenadas como `$formula$` aparecem como texto literal
+- [ ] **Marcadores de registro na folha de respostas** — necessários para a Fase 5.5
+- [ ] **Gabarito** — tabela de gabarito ao final do PDF
 
 ---
 
 ## Convenções do Projeto
 
-- **OBRIGATÓRIO**: A cada mudança feita (código, configuração, dados, docs), atualizar este CLAUDE.md em paralelo — registrar o que foi feito, o estado atual e os próximos passos na seção "Estado Atual do Projeto". Isso é feito junto com a mudança, não depois.
+- **OBRIGATÓRIO**: A cada mudança feita (código, configuração, dados, docs), atualizar este CLAUDE.md em paralelo.
 - Sempre preservar o JSON do 2010 ao re-extrair
 - Questões anuladas: `gabarito: null` e `anulada: true`
-- Imagens salvas em `dados/imagens/{ano}/{dia}/q{numero:03d}_1.jpg`
-- JSONs em `dados/json/enem_{ano}.json` (v1) e `dados/json_v2/enem_{ano}.json` (v2)
+- Imagens ENEM salvas em `dados/imagens/{ano}/{dia}/q{numero:03d}_1.jpg`
+- JSONs ENEM em `dados/json/enem_{ano}.json` (v1) e `dados/json_v2/enem_{ano}.json` (v2)
+- JSONs EXATO em `dados/EXATO_ORGANIZADO/json_exato/exato_{evento}_{turno}.json`
 - Escala de renderização de imagens: 3 (≈216 DPI)
-- Backup automático antes de qualquer operação destrutiva no JSON do 2010
 - Fórmulas matemáticas armazenadas como `$formula$` (inline) ou `$$formula$$` (bloco) — renderizar com KaTeX no frontend
-- Subscritos/sobrescritos sem Unicode disponível armazenados como LaTeX inline: `$_{c}$`, `$^{2}$`
+- Subscritos/sobrescritos sem Unicode: `$_{c}$`, `$^{2}$`
 - `pagina_pdf` é base 0 (primeira página = 0), converter para base 1 no frontend
 - PDFs hospedados no Supabase Storage; URL montada por ano/dia, nunca depender de links do governo
+- **EXATO simulados**: filtrar por `fonte='EXATO'`; nunca por `ano` (é NULL); usar `evento` e `turno`
+- **ENEM simulados**: `dia='simu_dia1'/'simu_dia2'` (NÃO 'dia1'/'dia2') para evitar colisão UNIQUE com ENEM real
+- **UFT**: filtrar por `fonte='UFT'`; usar `ano`, `turno`, `evento` (edição: '1_EDICAO'/'2_EDICAO')
+- **Provedor**: só ENEM simulados; valores: BERNOULLI, SAS, POLIEDRO, FARIAS_BRITO, SOMOS
+- **Extratores novos**: usar `export GROQ_API_KEY=...` (bash) ou `$env:GROQ_API_KEY=...` (PowerShell) — NÃO `set` CMD
+- **Arquivo de credenciais**: `HENRYJR_CREDENCIAIS.txt` (não `chaves-projeto.txt`)
+- **Cores proibidas no frontend**: violeta `#7c6af7`, azul frio `#1a1a2e` — substituir sempre pelo dourado `#D4A853`

@@ -6,25 +6,22 @@ import Link from 'next/link'
 
 const PROVAS = [
   {
-    key:       'enem',
-    label:     'ENEM',
-    icon:      '📝',
-    desc:      '2009–2024 · 2.880 questões',
-    available: true,
+    key:   'ENEM' as const,
+    label: 'ENEM',
+    icon:  '📝',
+    desc:  '2009–2024 · 2.880+ questões',
   },
   {
-    key:       'exato',
-    label:     'EXATO',
-    icon:      '🎓',
-    desc:      'Em breve',
-    available: false,
+    key:   'EXATO' as const,
+    label: 'EXATO',
+    icon:  '🎓',
+    desc:  'Provas e simulados TESSAT',
   },
   {
-    key:       'fuvest',
-    label:     'Outras',
-    icon:      '📚',
-    desc:      'Em breve',
-    available: false,
+    key:   'UFT' as const,
+    label: 'UFT',
+    icon:  '🏛️',
+    desc:  'Vestibular 2018–2024',
   },
 ]
 
@@ -36,36 +33,58 @@ const AREAS = [
 ]
 
 const QTDS = [10, 20, 30, 45]
-const ANOS = Array.from({ length: 16 }, (_, i) => 2009 + i)
+
+const ANOS_ENEM = Array.from({ length: 16 }, (_, i) => 2009 + i)
+const ANOS_UFT  = Array.from({ length: 7  }, (_, i) => 2018 + i)
+
+type Fonte = 'ENEM' | 'EXATO' | 'UFT'
 
 export default function SimuladoConfig() {
   const router = useRouter()
 
-  const [prova,       setProva]      = useState('enem')
-  const [area,        setArea]       = useState('')
-  const [anoInicio,   setAnoInicio]  = useState(2009)
-  const [anoFim,      setAnoFim]     = useState(2024)
-  const [quantidade,  setQtd]        = useState(20)
-  const [loading,     setLoading]    = useState(false)
-  const [erro,        setErro]       = useState('')
-  const [tipo,        setTipo]       = useState<'' | 'PROVA' | 'SIMULADO'>('')
-  // Após criar: mostra opções de ação
-  const [simuladoId,  setSimuladoId] = useState<number | null>(null)
+  const [fonte,      setFonte]     = useState<Fonte>('ENEM')
+  const [area,       setArea]      = useState('')
+  const [anoInicio,  setAnoInicio] = useState(2009)
+  const [anoFim,     setAnoFim]    = useState(2024)
+  const [quantidade, setQtd]       = useState(20)
+  const [loading,    setLoading]   = useState(false)
+  const [erro,       setErro]      = useState('')
+  const [tipo,       setTipo]      = useState<'' | 'PROVA' | 'SIMULADO'>('')
+  const [simuladoId, setSimuladoId] = useState<number | null>(null)
+
+  const anosDisponiveis = fonte === 'UFT' ? ANOS_UFT : ANOS_ENEM
+  const mostraAnos = fonte !== 'EXATO'
+
+  function selectFonte(f: Fonte) {
+    setFonte(f)
+    if (f === 'UFT') {
+      setAnoInicio(2018)
+      setAnoFim(2024)
+    } else {
+      setAnoInicio(2009)
+      setAnoFim(2024)
+    }
+    setTipo('')
+  }
 
   async function criar() {
     setErro('')
     setLoading(true)
     try {
+      const body: Record<string, any> = {
+        fonte,
+        area:      area || undefined,
+        quantidade,
+        tipo:      tipo || undefined,
+      }
+      if (mostraAnos) {
+        body.ano_inicio = anoInicio
+        body.ano_fim    = anoFim
+      }
       const res = await fetch('/api/simulado/criar', {
-        method: 'POST',
+        method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          area:       area || undefined,
-          ano_inicio: anoInicio,
-          ano_fim:    anoFim,
-          quantidade,
-          tipo:       tipo || undefined,
-        }),
+        body:    JSON.stringify(body),
       })
       const json = await res.json()
       if (!res.ok) { setErro(json.error || 'Erro ao criar simulado'); setLoading(false); return }
@@ -89,7 +108,6 @@ export default function SimuladoConfig() {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
-            {/* Responder online */}
             <button
               onClick={() => router.push(`/simulado/${simuladoId}`)}
               className="flex flex-col items-center gap-2 rounded-xl border border-[#D4A853]/40 bg-[#D4A853]/10 hover:bg-[#D4A853]/20 p-5 transition"
@@ -99,7 +117,6 @@ export default function SimuladoConfig() {
               <span className="text-xs text-white/40">Cronômetro + correção automática</span>
             </button>
 
-            {/* Imprimir — abre página dedicada com window.print() */}
             <Link
               href={`/simulado/${simuladoId}/imprimir`}
               target="_blank"
@@ -127,7 +144,6 @@ export default function SimuladoConfig() {
   return (
     <main className="anim-fade max-w-2xl mx-auto px-4 sm:px-6 py-8">
 
-      {/* Cabeçalho com botão cancelar */}
       <div className="flex items-start justify-between mb-8">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight">Novo Simulado</h1>
@@ -144,43 +160,16 @@ export default function SimuladoConfig() {
         </Link>
       </div>
 
-      {/* Tipo de questão */}
-      <div className="mb-6">
-        <p className="text-[12px] font-bold uppercase tracking-wider text-[#635D56] mb-3">Tipo de questão</p>
-        <div className="flex w-full rounded-xl border border-[#2C2820] overflow-hidden bg-[#161411]">
-          {([
-            { label: 'Todos',     value: '' as const },
-            { label: 'Provas',    value: 'PROVA' as const },
-            { label: 'Simulados', value: 'SIMULADO' as const },
-          ]).map(({ label, value }) => (
-            <button
-              key={value || 'todos'}
-              onClick={() => setTipo(value)}
-              className={`flex-1 px-3 py-2.5 text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition ${
-                tipo === value
-                  ? 'bg-[#D4A853]/15 text-[#D4A853] border-b-2 border-[#D4A853]/50'
-                  : 'text-[#635D56] hover:text-[#9E9589]'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Seleção de prova */}
+      {/* Prova */}
       <section className="mb-7">
         <h2 className="text-[11px] uppercase tracking-wider text-white/45 mb-3">Prova</h2>
         <div className="grid grid-cols-3 gap-2">
           {PROVAS.map(p => (
             <button
               key={p.key}
-              onClick={() => p.available && setProva(p.key)}
-              disabled={!p.available}
+              onClick={() => selectFonte(p.key)}
               className={`rounded-xl border p-3 text-left transition ${
-                !p.available
-                  ? 'border-[#2C2820] bg-[#161411] opacity-40 cursor-not-allowed'
-                  : prova === p.key
+                fonte === p.key
                   ? 'border-[#D4A853] bg-[#D4A853]/15 text-amber-200'
                   : 'border-[#2C2820] bg-[#161411] text-white/60 hover:border-[#D4A853]/40'
               }`}
@@ -192,6 +181,32 @@ export default function SimuladoConfig() {
           ))}
         </div>
       </section>
+
+      {/* Tipo de questão — só ENEM tem PROVA vs SIMULADO */}
+      {fonte === 'ENEM' && (
+        <div className="mb-6">
+          <p className="text-[12px] font-bold uppercase tracking-wider text-[#635D56] mb-3">Tipo de questão</p>
+          <div className="flex w-full rounded-xl border border-[#2C2820] overflow-hidden bg-[#161411]">
+            {([
+              { label: 'Todos',     value: '' as const },
+              { label: 'Provas',    value: 'PROVA' as const },
+              { label: 'Simulados', value: 'SIMULADO' as const },
+            ]).map(({ label, value }) => (
+              <button
+                key={value || 'todos'}
+                onClick={() => setTipo(value)}
+                className={`flex-1 px-3 py-2.5 text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition ${
+                  tipo === value
+                    ? 'bg-[#D4A853]/15 text-[#D4A853] border-b-2 border-[#D4A853]/50'
+                    : 'text-[#635D56] hover:text-[#9E9589]'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Área */}
       <section className="mb-7">
@@ -225,33 +240,35 @@ export default function SimuladoConfig() {
         </div>
       </section>
 
-      {/* Anos */}
-      <section className="mb-7">
-        <h2 className="text-[11px] uppercase tracking-wider text-white/45 mb-3">Período</h2>
-        <div className="flex gap-3 items-center">
-          <div className="flex-1">
-            <label className="text-xs text-white/45 mb-1 block">De</label>
-            <select
-              value={anoInicio}
-              onChange={e => setAnoInicio(Number(e.target.value))}
-              className="w-full rounded-lg bg-[#161411] border border-[#2C2820] text-white text-sm px-3 py-2 focus:outline-none focus:border-[#D4A853]/60"
-            >
-              {ANOS.map(a => <option key={a} value={a}>{a}</option>)}
-            </select>
+      {/* Anos — só para ENEM e UFT */}
+      {mostraAnos && (
+        <section className="mb-7">
+          <h2 className="text-[11px] uppercase tracking-wider text-white/45 mb-3">Período</h2>
+          <div className="flex gap-3 items-center">
+            <div className="flex-1">
+              <label className="text-xs text-white/45 mb-1 block">De</label>
+              <select
+                value={anoInicio}
+                onChange={e => setAnoInicio(Number(e.target.value))}
+                className="w-full rounded-lg bg-[#161411] border border-[#2C2820] text-white text-sm px-3 py-2 focus:outline-none focus:border-[#D4A853]/60"
+              >
+                {anosDisponiveis.map(a => <option key={a} value={a}>{a}</option>)}
+              </select>
+            </div>
+            <span className="text-white/30 mt-5">—</span>
+            <div className="flex-1">
+              <label className="text-xs text-white/45 mb-1 block">Até</label>
+              <select
+                value={anoFim}
+                onChange={e => setAnoFim(Number(e.target.value))}
+                className="w-full rounded-lg bg-[#161411] border border-[#2C2820] text-white text-sm px-3 py-2 focus:outline-none focus:border-[#D4A853]/60"
+              >
+                {anosDisponiveis.filter(a => a >= anoInicio).map(a => <option key={a} value={a}>{a}</option>)}
+              </select>
+            </div>
           </div>
-          <span className="text-white/30 mt-5">—</span>
-          <div className="flex-1">
-            <label className="text-xs text-white/45 mb-1 block">Até</label>
-            <select
-              value={anoFim}
-              onChange={e => setAnoFim(Number(e.target.value))}
-              className="w-full rounded-lg bg-[#161411] border border-[#2C2820] text-white text-sm px-3 py-2 focus:outline-none focus:border-[#D4A853]/60"
-            >
-              {ANOS.filter(a => a >= anoInicio).map(a => <option key={a} value={a}>{a}</option>)}
-            </select>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Quantidade */}
       <section className="mb-8">
@@ -286,7 +303,7 @@ export default function SimuladoConfig() {
       {/* Botão criar */}
       <button
         onClick={criar}
-        disabled={loading || prova !== 'enem'}
+        disabled={loading}
         className="w-full py-3.5 rounded-xl bg-[#D4A853] hover:bg-[#B8882A] disabled:opacity-50 text-[#0E0D0B] font-bold text-sm shadow-lg shadow-[#D4A853]/25 transition flex items-center justify-center gap-2"
       >
         {loading ? (

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import FiltroSidebar from '@/components/FiltroSidebar'
 import BuscaIA from '@/components/BuscaIA'
 import type { Questao } from '@/lib/types'
-import { EVENTO_LABEL } from '@/lib/provas'
+import { EVENTO_LABEL, DIA_LABEL, PROVEDOR_LABEL } from '@/lib/provas'
 
 interface SearchParams {
   ano?: string
@@ -17,16 +17,30 @@ interface SearchParams {
   evento?: string
   turno?: string
   tipo?: string
+  provedor?: string
 }
 
 const POR_PAGINA = 12
 
-// Mapeamento de área para ícone/badge
 const AREA_INFO: Record<string, { label: string; bg: string; text: string; border: string }> = {
   'Linguagens, Codigos e suas Tecnologias':   { label: 'Linguagens',  bg: 'bg-sky-500/15',     text: 'text-sky-300',     border: 'border-sky-500/30' },
   'Ciencias Humanas e suas Tecnologias':      { label: 'Humanas',     bg: 'bg-amber-500/15',   text: 'text-amber-300',   border: 'border-amber-500/30' },
   'Ciencias da Natureza e suas Tecnologias':  { label: 'C. Natureza', bg: 'bg-emerald-500/15', text: 'text-emerald-300', border: 'border-emerald-500/30' },
   'Matematica e suas Tecnologias':            { label: 'Matemática',  bg: 'bg-violet-500/15',  text: 'text-violet-300',  border: 'border-violet-500/30' },
+}
+
+// Badge por fonte
+const FONTE_BADGE: Record<string, { bg: string; text: string; border: string }> = {
+  ENEM:  { bg: 'bg-blue-500/10',    text: 'text-blue-400',    border: 'border-blue-500/20' },
+  EXATO: { bg: 'bg-amber-500/10',   text: 'text-amber-400',   border: 'border-amber-500/20' },
+  UFT:   { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
+}
+
+// Cor de hover por fonte
+const FONTE_HOVER: Record<string, string> = {
+  ENEM:  'hover:border-blue-500/30',
+  EXATO: 'hover:border-amber-500/30',
+  UFT:   'hover:border-emerald-500/30',
 }
 
 const AREAS = Object.keys(AREA_INFO)
@@ -37,22 +51,24 @@ export default async function QuestoesPage({
 }: {
   searchParams: Promise<SearchParams>
 }) {
-  const params  = await searchParams
+  const params   = await searchParams
   const supabase = await createClient()
 
-  const fonte       = (params.fonte ?? 'ENEM') as 'ENEM' | 'EXATO'
-  const isExato     = fonte === 'EXATO'
+  const fonte    = (params.fonte ?? 'ENEM') as 'ENEM' | 'EXATO' | 'UFT'
+  const isExato  = fonte === 'EXATO'
+  const isUFT    = fonte === 'UFT'
+  const isEnem   = fonte === 'ENEM'
 
   const ano         = params.ano ? parseInt(params.ano) : undefined
-  const dia         = params.dia as 'dia1' | 'dia2' | undefined
+  const dia         = params.dia
   const area        = params.area
   const competencia = params.competencia
   const evento      = params.evento
   const turno       = params.turno
   const tipo        = params.tipo as 'PROVA' | 'SIMULADO' | undefined
+  const provedor    = params.provedor
   const buscaRaw    = params.busca?.trim()
   const isIA        = params.ia === '1'
-  // busca pode ser comma-separated (IA) ou termo único (manual)
   const termosBusca = buscaRaw ? buscaRaw.split(',').map(t => t.trim()).filter(Boolean) : []
   const pagina      = params.pagina ? parseInt(params.pagina) : 1
   const offset      = (pagina - 1) * POR_PAGINA
@@ -73,13 +89,15 @@ export default async function QuestoesPage({
   // Query principal
   let query = supabase
     .from('questoes')
-    .select('id, numero, ano, dia, area, competencia, enunciado, gabarito, tem_imagem, anulada, fonte, evento, turno', { count: 'exact' })
+    .select('id, numero, ano, dia, area, competencia, enunciado, gabarito, tem_imagem, anulada, fonte, evento, turno, provedor', { count: 'exact' })
     .eq('anulada', false)
     .eq('fonte', fonte)
 
   // Ordenação por fonte
   if (isExato) {
     query = query.order('numero', { ascending: true })
+  } else if (isUFT) {
+    query = query.order('ano', { ascending: false }).order('numero', { ascending: true })
   } else {
     query = query.order('ano', { ascending: false }).order('numero', { ascending: true })
   }
@@ -87,10 +105,11 @@ export default async function QuestoesPage({
   query = query.range(offset, offset + POR_PAGINA - 1)
 
   // Filtros ENEM
-  if (!isExato) {
+  if (isEnem) {
     if (ano)         query = query.eq('ano', ano)
     if (dia)         query = query.eq('dia', dia)
     if (competencia) query = query.eq('competencia', competencia)
+    if (provedor)    query = query.eq('provedor', provedor)
   }
 
   // Filtros EXATO
@@ -99,11 +118,16 @@ export default async function QuestoesPage({
     if (turno)  query = query.eq('turno', turno)
   }
 
-  // Filtro de área (ambos)
-  if (area) query = query.eq('area', area)
+  // Filtros UFT
+  if (isUFT) {
+    if (ano)    query = query.eq('ano', ano)
+    if (turno)  query = query.eq('turno', turno)
+    if (evento) query = query.eq('evento', evento)  // edição
+  }
 
-  // Filtro de tipo (PROVA | SIMULADO)
-  if (tipo) query = query.eq('tipo', tipo)
+  // Filtros comuns
+  if (area)  query = query.eq('area', area)
+  if (tipo)  query = query.eq('tipo', tipo)
 
   if (termosBusca.length > 0) {
     const orFilter = termosBusca
@@ -116,29 +140,37 @@ export default async function QuestoesPage({
   const total        = count ?? 0
   const totalPaginas = Math.ceil(total / POR_PAGINA)
 
-  // Monta params para paginação (mantém filtros)
   function paginaUrl(p: number) {
     const sp = new URLSearchParams()
     sp.set('fonte', fonte)
-    if (!isExato) {
+    if (isEnem) {
       if (ano)         sp.set('ano', String(ano))
       if (dia)         sp.set('dia', dia)
       if (competencia) sp.set('competencia', competencia)
-    } else {
+      if (provedor)    sp.set('provedor', provedor)
+    } else if (isExato) {
       if (evento) sp.set('evento', evento)
       if (turno)  sp.set('turno', turno)
+    } else if (isUFT) {
+      if (ano)    sp.set('ano', String(ano))
+      if (turno)  sp.set('turno', turno)
+      if (evento) sp.set('evento', evento)
     }
-    if (area)          sp.set('area', area)
-    if (buscaRaw)      sp.set('busca', buscaRaw)
-    if (isIA)          sp.set('ia', '1')
-    if (tipo)          sp.set('tipo', tipo)
-    if (p > 1)         sp.set('pagina', String(p))
+    if (area)     sp.set('area', area)
+    if (buscaRaw) sp.set('busca', buscaRaw)
+    if (isIA)     sp.set('ia', '1')
+    if (tipo)     sp.set('tipo', tipo)
+    if (p > 1)    sp.set('pagina', String(p))
     return `/questoes?${sp}`
   }
 
-  // Cor do badge de paginação ativa
-  const paginaActiveBg = isExato ? 'bg-[#F59E0B] shadow-[#F59E0B]/20' : 'bg-[#3B82F6] shadow-[#3B82F6]/20'
-  const hoverBorderColor = isExato ? 'hover:border-amber-500/30' : 'hover:border-blue-500/30'
+  const fonteBadge      = FONTE_BADGE[fonte] ?? FONTE_BADGE.ENEM
+  const fonteHoverColor = FONTE_HOVER[fonte] ?? FONTE_HOVER.ENEM
+  const paginaActiveBg  = fonte === 'EXATO'
+    ? 'bg-[#F59E0B] shadow-[#F59E0B]/20'
+    : fonte === 'UFT'
+    ? 'bg-[#10B981] shadow-[#10B981]/20'
+    : 'bg-[#3B82F6] shadow-[#3B82F6]/20'
 
   return (
     <main className="anim-fade max-w-6xl mx-auto px-4 sm:px-6 py-6">
@@ -162,6 +194,7 @@ export default async function QuestoesPage({
             eventoAtivo={evento}
             turnoAtivo={turno}
             tipoAtivo={tipo}
+            provedorAtivo={provedor}
           />
         </aside>
 
@@ -192,11 +225,15 @@ export default async function QuestoesPage({
           {!isIA && (
             <form method="get" action="/questoes" className="relative mb-4">
               <input type="hidden" name="fonte" value={fonte} />
-              {!isExato && ano         && <input type="hidden" name="ano"         value={ano} />}
-              {!isExato && dia         && <input type="hidden" name="dia"         value={dia} />}
-              {!isExato && competencia && <input type="hidden" name="competencia" value={competencia} />}
-              {isExato  && evento      && <input type="hidden" name="evento"      value={evento} />}
-              {isExato  && turno       && <input type="hidden" name="turno"       value={turno} />}
+              {isEnem && ano         && <input type="hidden" name="ano"         value={ano} />}
+              {isEnem && dia         && <input type="hidden" name="dia"         value={dia} />}
+              {isEnem && competencia && <input type="hidden" name="competencia" value={competencia} />}
+              {isEnem && provedor    && <input type="hidden" name="provedor"    value={provedor} />}
+              {isExato && evento     && <input type="hidden" name="evento"      value={evento} />}
+              {isExato && turno      && <input type="hidden" name="turno"       value={turno} />}
+              {isUFT && ano          && <input type="hidden" name="ano"         value={ano} />}
+              {isUFT && turno        && <input type="hidden" name="turno"       value={turno} />}
+              {isUFT && evento       && <input type="hidden" name="evento"      value={evento} />}
               {area && <input type="hidden" name="area" value={area} />}
               {tipo && <input type="hidden" name="tipo" value={tipo} />}
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="absolute left-3 top-1/2 -translate-y-1/2 text-[#635D56] pointer-events-none">
@@ -217,10 +254,11 @@ export default async function QuestoesPage({
             <div className="text-[12px] text-[#9E9589]">
               <span className="text-[#F2EDE4] font-semibold">{total.toLocaleString('pt-BR')}</span>{' '}
               {total === 1 ? 'questão' : 'questões'}
-              {isExato && <span className="ml-1.5 px-1.5 py-0.5 rounded text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20">EXATO</span>}
-              {!isExato && <span className="ml-1.5 px-1.5 py-0.5 rounded text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20">ENEM</span>}
+              <span className={`ml-1.5 px-1.5 py-0.5 rounded text-[10px] ${fonteBadge.bg} ${fonteBadge.text} border ${fonteBadge.border}`}>
+                {fonte}
+              </span>
             </div>
-            {!isIA && (ano || dia || area || competencia || buscaRaw || evento || turno || tipo) && (
+            {!isIA && (ano || dia || area || competencia || buscaRaw || evento || turno || tipo || provedor) && (
               <Link href={`/questoes?fonte=${fonte}`} className="text-[11px] text-[#635D56] hover:text-[#F2EDE4] transition">
                 limpar filtros
               </Link>
@@ -236,59 +274,62 @@ export default async function QuestoesPage({
             )}
 
             {questoes?.map((q: any) => {
-              const info = AREA_INFO[q.area]
-              const chave = `${q.ano}-${q.dia}-${q.numero}`
+              const info    = AREA_INFO[q.area]
+              const badge   = FONTE_BADGE[q.fonte] ?? FONTE_BADGE.ENEM
+              const chave   = `${q.ano}-${q.dia}-${q.numero}`
               const acertou = respostasMapa[chave]
               const respondeu = chave in respostasMapa
-              const isQExato = q.fonte === 'EXATO'
+
+              // Contexto da questão para exibição
+              function contextoQ() {
+                if (q.fonte === 'EXATO') {
+                  return (
+                    <>
+                      {q.evento && <span className="text-[11px] text-[#9E9589]">{EVENTO_LABEL[q.evento] ?? q.evento}</span>}
+                      {q.turno  && <><span className="text-[#2C2820]">·</span><span className="text-[11px] text-[#9E9589]">{q.turno === 'MANHA' ? 'Manhã' : 'Tarde'}</span></>}
+                      <span className="text-[#2C2820]">·</span>
+                      <span className="text-[11px] text-[#9E9589]">Q. {q.numero}</span>
+                    </>
+                  )
+                }
+                if (q.fonte === 'UFT') {
+                  return (
+                    <>
+                      <span className="text-[11px] text-[#9E9589]">{q.ano}</span>
+                      {q.evento && <><span className="text-[#2C2820]">·</span><span className="text-[11px] text-[#9E9589]">{EVENTO_LABEL[q.evento] ?? q.evento}</span></>}
+                      {q.turno  && <><span className="text-[#2C2820]">·</span><span className="text-[11px] text-[#9E9589]">{q.turno === 'MANHA' ? 'Manhã' : 'Tarde'}</span></>}
+                      <span className="text-[#2C2820]">·</span>
+                      <span className="text-[11px] text-[#9E9589]">Q. {q.numero}</span>
+                    </>
+                  )
+                }
+                // ENEM
+                return (
+                  <>
+                    <span className="text-[11px] text-[#9E9589]">
+                      {q.ano} · {DIA_LABEL[q.dia] ?? q.dia}
+                    </span>
+                    {q.provedor && <><span className="text-[#2C2820]">·</span><span className="text-[11px] text-[#9E9589]">{PROVEDOR_LABEL[q.provedor] ?? q.provedor}</span></>}
+                    <span className="text-[#2C2820]">·</span>
+                    <span className="text-[11px] text-[#9E9589]">Q. {q.numero}</span>
+                  </>
+                )
+              }
 
               return (
                 <Link
                   key={q.id}
                   href={`/questoes/${q.id}`}
-                  className={`group block rounded-xl bg-[#161411] border border-[#2C2820] ${hoverBorderColor} p-4 sm:p-5 transition anim-fade`}
+                  className={`group block rounded-xl bg-[#161411] border border-[#2C2820] ${fonteHoverColor} p-4 sm:p-5 transition anim-fade`}
                 >
-                  {/* Header do card */}
                   <div className="flex items-center gap-2 mb-2.5 flex-wrap">
                     {/* Badge fonte */}
-                    {isQExato ? (
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                        EXATO
-                      </span>
-                    ) : (
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">
-                        ENEM
-                      </span>
-                    )}
+                    <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider ${badge.bg} ${badge.text} border ${badge.border}`}>
+                      {q.fonte}
+                    </span>
 
-                    {/* Info contextual */}
-                    {isQExato ? (
-                      <>
-                        {q.evento && (
-                          <span className="text-[11px] text-[#9E9589]">
-                            {EVENTO_LABEL[q.evento] ?? q.evento}
-                          </span>
-                        )}
-                        {q.turno && (
-                          <>
-                            <span className="text-[#2C2820]">·</span>
-                            <span className="text-[11px] text-[#9E9589]">
-                              {q.turno === 'MANHA' ? 'Manhã' : 'Tarde'}
-                            </span>
-                          </>
-                        )}
-                        <span className="text-[#2C2820]">·</span>
-                        <span className="text-[11px] text-[#9E9589]">Q. {q.numero}</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-[11px] text-[#9E9589]">
-                          {q.ano} · {q.dia === 'dia1' ? '1º dia' : '2º dia'}
-                        </span>
-                        <span className="text-[#2C2820]">·</span>
-                        <span className="text-[11px] text-[#9E9589]">Q. {q.numero}</span>
-                      </>
-                    )}
+                    {/* Contexto */}
+                    {contextoQ()}
 
                     {/* Área */}
                     {info && (
@@ -317,7 +358,7 @@ export default async function QuestoesPage({
 
                   <div className="flex items-center justify-between text-[12px]">
                     <span className="text-[#635D56]">5 alternativas · clique para responder</span>
-                    <span className={`${isQExato ? 'text-amber-400' : 'text-blue-400'} group-hover:translate-x-1 transition`}>→</span>
+                    <span className={`${badge.text} group-hover:translate-x-1 transition`}>→</span>
                   </div>
                 </Link>
               )

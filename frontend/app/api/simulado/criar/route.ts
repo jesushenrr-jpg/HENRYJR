@@ -5,7 +5,7 @@ export const runtime = 'edge'
 
 export async function POST(req: NextRequest) {
   try {
-    const { area, ano_inicio, ano_fim, competencia, quantidade, tipo } = await req.json()
+    const { fonte, area, ano_inicio, ano_fim, competencia, quantidade, tipo } = await req.json()
 
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
@@ -14,17 +14,27 @@ export async function POST(req: NextRequest) {
     // Garante perfil do usuário
     await supabase.from('usuarios').upsert({ id: user.id }, { onConflict: 'id' })
 
+    // Fonte padrão: ENEM (compatibilidade retroativa)
+    const fonteAtiva = fonte ?? 'ENEM'
+
     // Monta query
     let query = supabase
       .from('questoes')
       .select('id')
       .eq('anulada', false)
+      .eq('fonte', fonteAtiva)
 
-    if (area)       query = query.eq('area', area)
+    if (area)        query = query.eq('area', area)
     if (competencia) query = query.eq('competencia', competencia)
-    if (ano_inicio)  query = query.gte('ano', Number(ano_inicio))
-    if (ano_fim)     query = query.lte('ano', Number(ano_fim))
-    if (tipo)        query = query.eq('tipo', tipo)
+
+    // Filtro de ano: apenas ENEM e UFT têm anos
+    if (fonteAtiva !== 'EXATO') {
+      if (ano_inicio) query = query.gte('ano', Number(ano_inicio))
+      if (ano_fim)    query = query.lte('ano', Number(ano_fim))
+    }
+
+    // Tipo PROVA/SIMULADO: só faz sentido para ENEM
+    if (tipo && fonteAtiva === 'ENEM') query = query.eq('tipo', tipo)
 
     const { data: pool, error: poolErr } = await query
     if (poolErr) return NextResponse.json({ error: poolErr.message }, { status: 500 })
@@ -43,7 +53,7 @@ export async function POST(req: NextRequest) {
       .insert({
         usuario_id:     user.id,
         tipo:           'online',
-        filtros:        { area, ano_inicio, ano_fim, competencia, tipo_questao: tipo || null },
+        filtros:        { fonte: fonteAtiva, area, ano_inicio, ano_fim, competencia, tipo_questao: tipo || null },
         questoes_ids:   ids,
         total_questoes: ids.length,
         status:         'em_andamento',

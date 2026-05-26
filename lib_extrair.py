@@ -60,7 +60,7 @@ def extrair_texto_pagina(doc: fitz.Document, page_num: int) -> str:
     return doc[page_num].get_text()
 
 
-def renderizar_pagina_base64(doc: fitz.Document, page_num: int, dpi: int = 200) -> str:
+def renderizar_pagina_base64(doc: fitz.Document, page_num: int, dpi: int = 72) -> str:
     """Renderiza uma página como PNG e retorna base64."""
     mat = fitz.Matrix(dpi / 72, dpi / 72)
     pix = doc[page_num].get_pixmap(matrix=mat)
@@ -69,37 +69,38 @@ def renderizar_pagina_base64(doc: fitz.Document, page_num: int, dpi: int = 200) 
 
 
 def _chamar_groq_json(messages: list, max_tokens: int = 4096, tentativas: int = 3) -> str | None:
-    """Chama a API Groq e retorna o texto da resposta."""
-    import urllib.request, urllib.error
-    payload = json.dumps({
+    """Chama a API Groq e retorna o texto da resposta.
+    Usa requests (não urllib) para enviar User-Agent correto e evitar bloqueio Cloudflare.
+    """
+    import requests as _req
+    payload = {
         "model": GROQ_VISION_MODEL,
         "messages": messages,
         "max_tokens": max_tokens,
         "temperature": 0,
-    }).encode()
+    }
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json",
+    }
     for t in range(tentativas):
         try:
-            req = urllib.request.Request(
+            r = _req.post(
                 "https://api.groq.com/openai/v1/chat/completions",
-                data=payload,
-                headers={
-                    "Authorization": f"Bearer {GROQ_API_KEY}",
-                    "Content-Type": "application/json",
-                },
-                method="POST",
+                headers=headers,
+                json=payload,
+                timeout=60,
             )
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                data = json.loads(resp.read())
-                return data["choices"][0]["message"]["content"].strip()
-        except urllib.error.HTTPError as e:
-            if e.code == 429:
+            if r.status_code == 200:
+                return r.json()["choices"][0]["message"]["content"].strip()
+            elif r.status_code == 429:
                 espera = 65 if t == 0 else 120
                 print(f"    ↩ Rate limit 429 — aguardando {espera}s...")
                 time.sleep(espera)
             elif t < tentativas - 1:
                 time.sleep(10 * (t + 1))
             else:
-                print(f"    ✗ Groq falhou após {tentativas} tentativas: HTTP {e.code}")
+                print(f"    ✗ Groq falhou após {tentativas} tentativas: HTTP {r.status_code}")
                 return None
         except Exception as e:
             if t < tentativas - 1:

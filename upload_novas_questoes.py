@@ -48,6 +48,7 @@ FONTES = {
     "UFT":      BASE / "json_uft",
     "EXATO_P":  BASE / "json_exato_provas",
     "ENEM_SIM": BASE / "json_enem_simulados",
+    "PAES":     BASE / "json_paes",
 }
 
 
@@ -142,7 +143,7 @@ def verificar_coluna_provedor() -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description="Upload questões para Supabase")
-    parser.add_argument("--fonte", choices=["UFT", "EXATO_P", "ENEM_SIM"],
+    parser.add_argument("--fonte", choices=["UFT", "EXATO_P", "ENEM_SIM", "PAES"],
                         help="Processar só esta fonte (padrão: todas)")
     parser.add_argument("--dry-run", action="store_true",
                         help="Mostra o que seria inserido sem inserir de verdade")

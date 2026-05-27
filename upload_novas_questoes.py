@@ -39,7 +39,7 @@ HDR = {
     "Authorization": f"Bearer {SERVICE_KEY}",
     "apikey": SERVICE_KEY,
     "Content-Type": "application/json",
-    "Prefer": "resolution=merge-duplicates,return=minimal",
+    "Prefer": "resolution=ignore-duplicates,return=minimal",
 }
 
 BASE = Path(r"C:\PROJETOS\HENRYJR\DADOS")

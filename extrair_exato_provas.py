@@ -80,7 +80,7 @@ def processar_pasta(pasta: Path) -> list[dict]:
                 turno=turno_val,
                 evento=None,      # EXATO provas não têm evento (diferente dos simulados)
                 provedor=None,
-                dia="exato",
+                dia=f"exato_{turno_val.lower()}",   # 'exato_manha' ou 'exato_tarde' — codifica turno para unicidade na constraint
                 gabarito_map=gabarito_map,
                 numero_global=numero_local,
             )

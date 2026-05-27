@@ -34,6 +34,7 @@ const FONTE_BADGE: Record<string, { bg: string; text: string; border: string }> 
   ENEM:  { bg: 'bg-blue-500/10',    text: 'text-blue-400',    border: 'border-blue-500/20' },
   EXATO: { bg: 'bg-amber-500/10',   text: 'text-amber-400',   border: 'border-amber-500/20' },
   UFT:   { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
+  PAES:  { bg: 'bg-rose-500/10',    text: 'text-rose-400',    border: 'border-rose-500/20' },
 }
 
 // Cor de hover por fonte
@@ -41,6 +42,7 @@ const FONTE_HOVER: Record<string, string> = {
   ENEM:  'hover:border-blue-500/30',
   EXATO: 'hover:border-amber-500/30',
   UFT:   'hover:border-emerald-500/30',
+  PAES:  'hover:border-rose-500/30',
 }
 
 const AREAS = Object.keys(AREA_INFO)
@@ -54,10 +56,11 @@ export default async function QuestoesPage({
   const params   = await searchParams
   const supabase = await createClient()
 
-  const fonte    = (params.fonte ?? 'ENEM') as 'ENEM' | 'EXATO' | 'UFT'
+  const fonte    = (params.fonte ?? 'ENEM') as 'ENEM' | 'EXATO' | 'UFT' | 'PAES'
   const isExato  = fonte === 'EXATO'
   const isUFT    = fonte === 'UFT'
   const isEnem   = fonte === 'ENEM'
+  const isPaes   = fonte === 'PAES'
 
   const ano         = params.ano ? parseInt(params.ano) : undefined
   const dia         = params.dia
@@ -125,6 +128,12 @@ export default async function QuestoesPage({
     if (evento) query = query.eq('evento', evento)  // edição
   }
 
+  // Filtros PAES
+  if (isPaes) {
+    if (ano) query = query.eq('ano', ano)
+    if (dia) query = query.eq('dia', dia)
+  }
+
   // Filtros comuns
   if (area)  query = query.eq('area', area)
   if (tipo)  query = query.eq('tipo', tipo)
@@ -155,6 +164,9 @@ export default async function QuestoesPage({
       if (ano)    sp.set('ano', String(ano))
       if (turno)  sp.set('turno', turno)
       if (evento) sp.set('evento', evento)
+    } else if (isPaes) {
+      if (ano) sp.set('ano', String(ano))
+      if (dia) sp.set('dia', dia)
     }
     if (area)     sp.set('area', area)
     if (buscaRaw) sp.set('busca', buscaRaw)
@@ -170,6 +182,8 @@ export default async function QuestoesPage({
     ? 'bg-[#F59E0B] shadow-[#F59E0B]/20'
     : fonte === 'UFT'
     ? 'bg-[#10B981] shadow-[#10B981]/20'
+    : fonte === 'PAES'
+    ? 'bg-[#F43F5E] shadow-[#F43F5E]/20'
     : 'bg-[#3B82F6] shadow-[#3B82F6]/20'
 
   return (
@@ -298,6 +312,16 @@ export default async function QuestoesPage({
                       <span className="text-[11px] text-[#9E9589]">{q.ano}</span>
                       {q.evento && <><span className="text-[#2C2820]">·</span><span className="text-[11px] text-[#9E9589]">{EVENTO_LABEL[q.evento] ?? q.evento}</span></>}
                       {q.turno  && <><span className="text-[#2C2820]">·</span><span className="text-[11px] text-[#9E9589]">{q.turno === 'MANHA' ? 'Manhã' : 'Tarde'}</span></>}
+                      <span className="text-[#2C2820]">·</span>
+                      <span className="text-[11px] text-[#9E9589]">Q. {q.numero}</span>
+                    </>
+                  )
+                }
+                if (q.fonte === 'PAES') {
+                  return (
+                    <>
+                      <span className="text-[11px] text-[#9E9589]">{q.ano}</span>
+                      {q.dia === 'dia2' && <><span className="text-[#2C2820]">·</span><span className="text-[11px] text-[#9E9589]">Dia 2</span></>}
                       <span className="text-[#2C2820]">·</span>
                       <span className="text-[11px] text-[#9E9589]">Q. {q.numero}</span>
                     </>

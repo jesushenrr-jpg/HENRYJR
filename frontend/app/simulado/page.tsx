@@ -23,6 +23,12 @@ const PROVAS = [
     icon:  '🏛️',
     desc:  'Vestibular 2018–2024',
   },
+  {
+    key:   'PAES' as const,
+    label: 'PAES',
+    icon:  '🎯',
+    desc:  'UEMA 2020–2025',
+  },
 ]
 
 const AREAS = [
@@ -36,8 +42,9 @@ const QTDS = [10, 20, 30, 45]
 
 const ANOS_ENEM = Array.from({ length: 16 }, (_, i) => 2009 + i)
 const ANOS_UFT  = Array.from({ length: 7  }, (_, i) => 2018 + i)
+const ANOS_PAES = [2020, 2021, 2022, 2023, 2024, 2025]
 
-type Fonte = 'ENEM' | 'EXATO' | 'UFT'
+type Fonte = 'ENEM' | 'EXATO' | 'UFT' | 'PAES'
 
 export default function SimuladoConfig() {
   const router = useRouter()
@@ -52,7 +59,11 @@ export default function SimuladoConfig() {
   const [tipo,       setTipo]      = useState<'' | 'PROVA' | 'SIMULADO'>('')
   const [simuladoId, setSimuladoId] = useState<number | null>(null)
 
-  const anosDisponiveis = fonte === 'UFT' ? ANOS_UFT : ANOS_ENEM
+  const anosDisponiveis = fonte === 'UFT'
+    ? ANOS_UFT
+    : fonte === 'PAES'
+    ? ANOS_PAES
+    : ANOS_ENEM
   const mostraAnos = fonte !== 'EXATO'
 
   function selectFonte(f: Fonte) {
@@ -60,6 +71,9 @@ export default function SimuladoConfig() {
     if (f === 'UFT') {
       setAnoInicio(2018)
       setAnoFim(2024)
+    } else if (f === 'PAES') {
+      setAnoInicio(2020)
+      setAnoFim(2025)
     } else {
       setAnoInicio(2009)
       setAnoFim(2024)
@@ -163,7 +177,7 @@ export default function SimuladoConfig() {
       {/* Prova */}
       <section className="mb-7">
         <h2 className="text-[11px] uppercase tracking-wider text-white/45 mb-3">Prova</h2>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-2">
           {PROVAS.map(p => (
             <button
               key={p.key}

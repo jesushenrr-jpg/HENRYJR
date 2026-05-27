@@ -45,6 +45,7 @@ export default function FiltroSidebar({
   const isExato    = fonteAtiva === 'EXATO'
   const isUFT      = fonteAtiva === 'UFT'
   const isEnem     = fonteAtiva === 'ENEM'
+  const isPaes     = fonteAtiva === 'PAES'
   const isSimulado = tipoAtivo === 'SIMULADO'
 
   function url(overrides: Record<string, string | undefined>) {
@@ -75,7 +76,11 @@ export default function FiltroSidebar({
     startTransition(() => router.push(`${pathname}?${new URLSearchParams(params)}`))
   }
 
-  const anosParaExibir = isUFT ? (PROVA_MAP['UFT']?.anos ?? []) : anos
+  const anosParaExibir = isUFT
+    ? (PROVA_MAP['UFT']?.anos ?? [])
+    : isPaes
+    ? (PROVA_MAP['PAES']?.anos ?? [])
+    : anos
   const anosVisiveis   = anosExpandido ? anosParaExibir : anosParaExibir.slice(0, 8)
   const habilidades    = compExpandido ? TODAS_HABILIDADES : TODAS_HABILIDADES.slice(0, 15)
 
@@ -83,6 +88,8 @@ export default function FiltroSidebar({
     ? (eventoAtivo || turnoAtivo || areaAtiva || tipoAtivo)
     : isUFT
     ? (anoAtivo || eventoAtivo || turnoAtivo || areaAtiva || tipoAtivo)
+    : isPaes
+    ? (anoAtivo || diaAtivo || areaAtiva)
     : (anoAtivo || diaAtivo || areaAtiva || competenciaAtiva || tipoAtivo || provedorAtivo)
 
   return (
@@ -95,7 +102,7 @@ export default function FiltroSidebar({
       <div className="rounded-xl bg-[#161411] border border-[#2C2820] p-3">
         <div className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#635D56] mb-2">Prova</div>
         <div className="flex flex-wrap gap-1.5">
-          {(['ENEM', 'EXATO', 'UFT'] as const).map(f => {
+          {(['ENEM', 'EXATO', 'UFT', 'PAES'] as const).map(f => {
             const prova = PROVA_MAP[f]
             const ativo = fonteAtiva === f
             return (
@@ -225,6 +232,54 @@ export default function FiltroSidebar({
                     {EVENTO_LABEL[e] ?? e}
                   </Chip>
                 ))}
+              </div>
+            </FilterGroup>
+          </>
+        )}
+
+        {/* ── Filtros PAES ── */}
+        {isPaes && (
+          <>
+            <FilterGroup title="Área">
+              <div className="flex flex-wrap gap-1.5">
+                <Chip active={!areaAtiva} onClick={() => nav(url({ area: undefined }))}>Todas</Chip>
+                {areas.map(a => {
+                  const m = AREA_META[a]
+                  const ativo = areaAtiva === a
+                  return (
+                    <Chip
+                      key={a}
+                      active={ativo}
+                      onClick={() => nav(url({ area: ativo ? undefined : a }))}
+                      colorClass={ativo && m ? `${m.bg} ${m.text} ${m.border}` : ''}
+                    >
+                      {m?.label ?? a}
+                    </Chip>
+                  )
+                })}
+              </div>
+            </FilterGroup>
+
+            <FilterGroup title="Ano">
+              <div className="flex flex-wrap gap-1.5">
+                <Chip active={!anoAtivo} onClick={() => nav(url({ ano: undefined }))}>Todos</Chip>
+                {anosVisiveis.map(y => (
+                  <Chip
+                    key={y}
+                    active={anoAtivo === y}
+                    onClick={() => nav(url({ ano: anoAtivo === y ? undefined : String(y) }))}
+                  >
+                    {y}
+                  </Chip>
+                ))}
+              </div>
+            </FilterGroup>
+
+            <FilterGroup title="Aplicação">
+              <div className="flex gap-1.5">
+                <Chip active={!diaAtivo}          onClick={() => nav(url({ dia: undefined }))}>Todas</Chip>
+                <Chip active={diaAtivo === 'dia1'} onClick={() => nav(url({ dia: diaAtivo === 'dia1' ? undefined : 'dia1' }))}>Prova</Chip>
+                <Chip active={diaAtivo === 'dia2'} onClick={() => nav(url({ dia: diaAtivo === 'dia2' ? undefined : 'dia2' }))}>2021 Dia 2</Chip>
               </div>
             </FilterGroup>
           </>

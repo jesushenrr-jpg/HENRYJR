@@ -1,5 +1,5 @@
 export interface Prova {
-  id: string          // 'ENEM' | 'EXATO' | 'UFT' | futuras
+  id: string          // 'ENEM' | 'EXATO' | 'UFT' | 'PAES' | futuras
   nome: string
   descricao: string
   cor: string         // CSS color
@@ -44,6 +44,17 @@ export const PROVAS: Prova[] = [
     text: 'text-emerald-300',
     border: 'border-emerald-500/30',
     anos: Array.from({ length: 7 }, (_, i) => 2018 + i),
+  },
+  {
+    id: 'PAES',
+    nome: 'PAES',
+    descricao: 'Vestibular da UEMA (2020–2025)',
+    cor: '#F43F5E',
+    corDark: '#BE123C',
+    bg: 'bg-rose-500/15',
+    text: 'text-rose-300',
+    border: 'border-rose-500/30',
+    anos: [2020, 2021, 2022, 2023, 2024, 2025],
   },
 ]
 

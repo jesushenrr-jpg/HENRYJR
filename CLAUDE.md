@@ -143,7 +143,7 @@ frontend/
 ### Totais
 - **2.880 questões ENEM reais** (2009–2024, `fonte='ENEM'`, `tipo='PROVA'`, `dia='dia1'|'dia2'`) ✅ no Supabase
 - **460 questões EXATO simulados** (`fonte='EXATO'`, `tipo='SIMULADO'`, `dia='exato'`, `ano=NULL`) ✅ no Supabase
-- **UFT** — 692 questões (`fonte='UFT'`, `tipo='PROVA'`, `dia='manha'|'tarde'`, 2018–2024) ✅ no Supabase
+- **UFT** — 702 questões (`fonte='UFT'`, `tipo='PROVA'`, `dia='manha'|'tarde'`, 2018–2024) ✅ no Supabase
 - **EXATO provas** — 222 questões (`fonte='EXATO'`, `tipo='PROVA'`, `dia='exato_manha'|'exato_tarde'`, 2024–2025) ✅ no Supabase
 - **ENEM simulados** — 7.127 questões (`fonte='ENEM'`, `tipo='SIMULADO'`, `dia='simu_dia1'|'simu_dia2'`) ✅ no Supabase
 - **PAES** — 384 questões (`fonte='PAES'`, `tipo='PROVA'`, `dia='dia1'|'dia2'`, 2020–2025) ✅ no Supabase
@@ -427,12 +427,12 @@ EXATO com enunciado vazio (questões em imagem):
 1. ✅ ~~Obter Gemini API Key~~ — obtida em 27/05/2026; `GEMINI_API_KEY` configurado
 2. ✅ ~~Finalizar extração ENEM simulados~~ — 7.127 questões em `json_enem_simulados/`
 3. ✅ ~~Rodar `extrair_exato_provas.py`~~ — 222 questões em `json_exato_provas/`
-4. ✅ ~~Re-rodar `extrair_uft.py` com Gemini~~ — 692 questões em `json_uft/` (2018–2024)
+4. ✅ ~~Re-rodar `extrair_uft.py` com Gemini~~ — 702 questões em `json_uft/` (2018–2024)
 5. ✅ ~~Executar `migracao_unique_fontes.sql`~~ — índice 6-col ativo
-6. ✅ ~~Upload UFT/EXATO_P/ENEM_SIM/PAES~~ — todas as fontes no Supabase
-7. **Frontend PAES** — adicionar `fonte='PAES'` em `FiltroSidebar.tsx`, `lib/provas.ts`, `questoes/page.tsx`, `simulado/page.tsx`
-8. **Classificar competências** — rodar `classificar_competencias.py --fonte ENEM --tipo SIMULADO` (ENEM simulados) e idealmente UFT/PAES também
-9. **Re-extração UFT 2021-2ª/2022-1ª** — `uft_2021_tarde_2_EDICAO` e `uft_2022_manha_1_EDICAO` ainda têm 2q; re-rodar com `--pasta "2021 - 2"` e `--pasta "2022 - 1"`, depois upload diferencial
+6. ✅ ~~Upload UFT/EXATO_P/ENEM_SIM/PAES~~ — todas as fontes no Supabase (702q UFT após re-extração)
+7. ✅ ~~Frontend PAES~~ — `FiltroSidebar.tsx`, `lib/provas.ts`, `questoes/page.tsx`, `simulado/page.tsx` atualizados
+8. ✅ ~~Re-extração UFT 2021-2ª/2022-1ª~~ — `uft_2021_tarde_2_EDICAO` (44q), `uft_2022_manha_1_EDICAO` (40q), `uft_2022_tarde_1_EDICAO` (44q) re-extraídos com Gemini Vision; upload diferencial concluído
+9. **Classificar competências** — rodar `classificar_competencias.py --fonte ENEM --tipo SIMULADO` (ENEM simulados) e idealmente UFT/PAES também
 10. **PAES 2019** — PDF escaneado (0q); processar com Vision futuramente
 11. **Fase 5 (PDF)** — retomar e verificar layout; habilitar botões na UI
 12. **Progresso por competência H01–H30** — adicionar breakdown por competência na página de progresso

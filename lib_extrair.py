@@ -242,8 +242,6 @@ def _parse_bloco_questao(numero: int, bloco: str, area: str | None) -> dict | No
     o que resolve falsos positivos onde "A " aparece no início de frases normais.
     Exige ao menos 4 alternativas para aceitar o resultado.
     """
-    linhas = bloco.split("\n")
-
     # Mapeamento de caracteres Unicode PUA usados por alguns provedores (ex.: SAS)
     # como substitutos das letras A–E em PDFs com fontes customizadas.
     PUA_MAP = {"": "A", "": "B", "": "C", "": "D", "": "E"}
@@ -253,6 +251,24 @@ def _parse_bloco_questao(numero: int, bloco: str, area: str | None) -> dict | No
         for pua, ascii_ch in PUA_MAP.items():
             linha = linha.replace(pua, ascii_ch)
         return linha
+
+    # Pré-processamento: mescla "A.\n<texto>" em "A. <texto>" para PDFs onde o
+    # marcador de alternativa (ex.: "A.") fica sozinho numa linha e o texto vem na próxima.
+    STANDALONE_ALT = re.compile(r"^([A-E])[.)]\s*$")
+    raw_linhas = bloco.split("\n")
+    merged: list[str] = []
+    i_raw = 0
+    while i_raw < len(raw_linhas):
+        linha_atual = raw_linhas[i_raw].strip()
+        if STANDALONE_ALT.match(linha_atual) and i_raw + 1 < len(raw_linhas):
+            proxima = raw_linhas[i_raw + 1].strip()
+            if proxima and not STANDALONE_ALT.match(proxima):
+                merged.append(f"{linha_atual[0]}. {proxima}")
+                i_raw += 2
+                continue
+        merged.append(linha_atual)
+        i_raw += 1
+    linhas = merged
 
     # Linha começa com letra A-E seguida de separador: espaço(s), tab, ) ou .
     # Com 1 espaço, falsos positivos ("A bolinha...") são resolvidos pela

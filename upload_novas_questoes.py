@@ -62,8 +62,21 @@ def _strip_nulls(obj):
     return obj
 
 
+def _ja_existe(r) -> bool:
+    """Retorna True se HTTP 409 com code 23505 (unique violation = já existe no banco)."""
+    if r.status_code != 409:
+        return False
+    try:
+        return r.json().get("code") == "23505"
+    except Exception:
+        return False
+
+
 def upsert_lote(questoes: list[dict], dry_run: bool = False) -> tuple[int, int]:
-    """Faz upsert em lotes de 50. Retorna (ok, erros)."""
+    """Faz upsert em lotes de 50. Retorna (ok, erros).
+    Nota: Supabase/PostgREST nesta instância ignora 'resolution=ignore-duplicates'
+    e retorna 409 para conflitos. Tratamos 409/23505 como 'já existe' (não é erro).
+    """
     if dry_run:
         print(f"    [dry-run] {len(questoes)} questões NÃO inseridas")
         return len(questoes), 0
@@ -80,7 +93,7 @@ def upsert_lote(questoes: list[dict], dry_run: bool = False) -> tuple[int, int]:
         if r.status_code in (200, 201):
             ok += len(lote)
         else:
-            # Tenta um a um para identificar o problema
+            # Batch falhou — tenta um a um para separar novos de duplicatas
             for q in lote:
                 r2 = requests.post(
                     f"{SUPABASE_URL}/rest/v1/questoes",
@@ -90,6 +103,8 @@ def upsert_lote(questoes: list[dict], dry_run: bool = False) -> tuple[int, int]:
                 )
                 if r2.status_code in (200, 201):
                     ok += 1
+                elif _ja_existe(r2):
+                    ok += 1  # 409/23505 = já existe no banco, não é erro
                 else:
                     erros += 1
                     print(f"    ✗ Q{q.get('numero')} {q.get('fonte')}/{q.get('provedor','')}: "

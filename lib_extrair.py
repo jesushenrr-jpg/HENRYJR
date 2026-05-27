@@ -393,13 +393,16 @@ def extrair_questoes_pagina_vision(doc: fitz.Document, page_num: int) -> list[di
         return []
 
 
-def extrair_questoes_pdf(pdf_path: Path) -> list[dict]:
+def extrair_questoes_pdf(pdf_path: Path, usar_vision: bool = True) -> list[dict]:
     """
     Extrai questões de um PDF.
     Ordem de tentativas por página:
       1. Parser de texto (sem API) — para PDFs digitais
-      2. Vision (Groq → Gemini) — para PDFs escaneados ou quando o parser falha
-    Retorna lista de questões brutas (sem gabarito).
+      2. Vision (Groq → Gemini) — apenas se usar_vision=True; para PDFs escaneados ou
+         quando o parser falha em página com marcador QUESTÃO
+
+    usar_vision=False é indicado para PDFs sabidamente digitais (ex.: ENEM simulados)
+    onde páginas sem texto são capas/decorativas, não questões.
     """
     if not pdf_path.exists():
         print(f"  ✗ PDF não encontrado: {pdf_path}")
@@ -430,6 +433,9 @@ def extrair_questoes_pdf(pdf_path: Path) -> list[dict]:
         # Chega aqui em dois casos:
         #   a) página sem texto extraível (PDF escaneado)
         #   b) página com marcador QUESTÃO mas parser falhou nas alternativas
+        if not usar_vision:
+            continue  # PDF digital — páginas sem texto são capas/imagens decorativas
+
         print(f"    Página {page_num+1}: usando Vision...")
         questoes_pagina = extrair_questoes_pagina_vision(doc, page_num)
         if questoes_pagina:

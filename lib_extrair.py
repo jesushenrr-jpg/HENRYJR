@@ -409,18 +409,27 @@ def extrair_questoes_pdf(pdf_path: Path) -> list[dict]:
     todas: list[dict] = []
     print(f"  Extraindo {pdf_path.name} ({len(doc)} páginas)...")
 
+    Q_MARKER = re.compile(r"(?:QUESTÃO|Questão)\s+\d+", re.IGNORECASE)
+
     for page_num in range(len(doc)):
         texto = extrair_texto_pagina(doc, page_num)
 
-        # Tentativa 1: parser de texto
+        # Tentativa 1: parser de texto (apenas se a página tem texto extraível)
         if pagina_tem_texto(texto):
             questoes_pagina = _parse_questoes_texto(texto)
             if questoes_pagina:
                 todas.extend(questoes_pagina)
                 print(f"    Página {page_num+1}: {len(questoes_pagina)} questões (texto)")
                 continue
+            # Tem texto mas sem questões: só tenta Vision se há marcador de questão
+            # (capa/instrução → pula; questão com alternativas na pág. seguinte → tenta)
+            if not Q_MARKER.search(texto):
+                continue  # página sem questões (capa, instrução, gabarito) — pular Vision
 
         # Tentativa 2: Vision (Groq → Gemini)
+        # Chega aqui em dois casos:
+        #   a) página sem texto extraível (PDF escaneado)
+        #   b) página com marcador QUESTÃO mas parser falhou nas alternativas
         print(f"    Página {page_num+1}: usando Vision...")
         questoes_pagina = extrair_questoes_pagina_vision(doc, page_num)
         if questoes_pagina:

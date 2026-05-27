@@ -15,7 +15,7 @@ Plataforma pública de estudos com questões do ENEM (2009–2024), simulados pr
 | IA para explicações | Groq API (LLaMA 3, gratuito) | ✅ Ativo |
 | Geração de PDF | Puppeteer + @sparticuz/chromium | ✅ Implementado (pausado) |
 | Correção por foto | FastAPI + OpenCV (microserviço Python) | ⏳ Fase 5.5 (pendente) |
-| Extração de dados | Python + PyMuPDF + Groq Vision | ✅ Concluído para ENEM, EXATO, UFT, ENEM_SIMULADOS |
+| Extração de dados | Python + PyMuPDF + parser de texto + Groq/Gemini Vision | ✅ Concluído para ENEM, EXATO, UFT, ENEM_SIMULADOS |
 
 ## Credenciais e Chaves (NUNCA commitar no GitHub)
 
@@ -24,9 +24,11 @@ Plataforma pública de estudos com questões do ENEM (2009–2024), simulados pr
 - **Supabase Anon Key**: ver `HENRYJR_CREDENCIAIS.txt`
 - **Supabase Service Role Key**: ver `HENRYJR_CREDENCIAIS.txt`
 - **Groq API Key**: ver `HENRYJR_CREDENCIAIS.txt` (chave atual criada em 26/05/2026)
+- **Gemini API Key**: obter em https://aistudio.google.com/apikey — adicionar em `HENRYJR_CREDENCIAIS.txt` quando disponível
 - **Google OAuth Client ID/Secret**: ver `HENRYJR_CREDENCIAIS.txt`
 
 > ⚠️ Duas chaves Groq já foram revogadas (22/05/2026 e 26/05/2026). A segunda foi exposta no arquivo de plano do git. Sempre criar chave nova após exposição.
+> ⚠️ Nunca rodar múltiplas instâncias simultâneas dos extratores no mesmo diretório — race condition sobrescreve arquivos bons (ocorreu em 26/05/2026 com bt30o2rbz vs brbcf6s0z).
 
 ## Estrutura de Pastas
 
@@ -136,7 +138,7 @@ frontend/
 ### Totais
 - **2.880 questões ENEM reais** (2009–2024, `fonte='ENEM'`, `tipo='PROVA'`, `dia='dia1'|'dia2'`)
 - **460 questões EXATO simulados** (`fonte='EXATO'`, `tipo='SIMULADO'`, `dia='exato'`, `ano=NULL`)
-- **UFT** — em extração (`fonte='UFT'`, `tipo='PROVA'`, `dia='exato'`, 2018–2024)
+- **UFT** — 182 questões extraídas (`fonte='UFT'`, `tipo='PROVA'`, `dia='exato'`, 2018–2024) — upload pendente
 - **EXATO provas** — em extração (`fonte='EXATO'`, `tipo='PROVA'`, `dia='exato'`, 2024–2025)
 - **ENEM simulados** — em extração (`fonte='ENEM'`, `tipo='SIMULADO'`, `dia='simu_dia1'|'simu_dia2'`)
 
@@ -156,7 +158,7 @@ frontend/
 | `provedor` | text\|null | null | 'BERNOULLI' etc. | null | null |
 | `competencia` | text\|null | H01–H30 ✅ | H01–H30 (pós-classif.) | NULL | NULL |
 | `pagina_pdf` | int | preenchido ✅ | preenchido | preenchido | preenchido |
-| `enunciado` | jsonb | preenchido ✅ | via Groq Vision | 104/460 (PDFs imagem) | via Groq Vision |
+| `enunciado` | jsonb | preenchido ✅ | via parser texto (~94%) + Vision | 104/460 (PDFs imagem) | via Vision |
 
 > **UNIQUE constraint**: `(ano, dia, numero, fonte)` — usar `dia='simu_dia1'/'simu_dia2'` para ENEM simulados evita colisão com questões reais do mesmo ano.
 
@@ -379,9 +381,21 @@ Marcadas com `anulada: true, gabarito: null` em todos os JSONs v2 e no Supabase.
 
 **Ferramentas locais**
 - `gerenciar_imagens.py --revisao`: modo de revisão de erros pendentes do `relatorio_erros.json`
-- `lib_extrair.py`: biblioteca Groq Vision para extração de qualquer fonte de PDF
+- `lib_extrair.py`: biblioteca de extração — parser de texto (zero API) + Groq Vision + Gemini Vision fallback
 - `extrair_uft.py` / `extrair_exato_provas.py` / `extrair_enem_simulados.py`: extratores por fonte
 - `upload_novas_questoes.py`: upload em lotes para Supabase com retry por questão
+
+**Frontend (novas fontes — 27/05/2026)**
+- `FiltroSidebar.tsx`: chips `[ENEM][EXATO][UFT]` substituíram as tabs; filtros condicionais por fonte+tipo
+- `lib/provas.ts`: adicionado UFT com `anos=[2018..2024]`; novos exports `DIA_LABEL`, `PROVEDOR_LABEL`, `EVENTO_LABEL` expandido
+- `questoes/page.tsx`: suporte a `?fonte=UFT` e `?provedor=...`
+- `simulado/page.tsx` + `api/simulado/criar/route.ts`: UFT disponível; TIPO só para ENEM; anos ocultos para EXATO
+
+**lib_extrair.py — arquitetura de extração (27/05/2026)**
+- `_parse_questoes_texto()`: parser sem API para PDFs digitais — detecta marcadores `Questão NN`, alternativas A-E com algoritmo de "última sequência válida"; ~94% das páginas de ENEM simulados sem Vision
+- `_chamar_gemini_json()`: cliente Gemini Vision — converte formato OpenAI→Gemini; free tier: 1500 RPD, 15 RPM
+- `_chamar_vision()`: orquestra Groq→Gemini automaticamente
+- Raiz do problema anterior: `urllib.request` não enviava `User-Agent` → Cloudflare retornava HTTP 403; fix: usar `requests`
 
 ### Pendente de revisão manual ⚠️
 
@@ -395,13 +409,17 @@ EXATO com enunciado vazio (questões em imagem):
 
 ### Próximos passos sugeridos
 
-1. **Classificar competências ENEM simulados** — rodar `classificar_competencias.py --fonte ENEM --tipo SIMULADO` após upload concluído
-2. **Verificar qualidade da extração UFT/EXATO_P/ENEM_SIM** — spot-check nos JSONs gerados; revisar manualmente questões com enunciado vazio
-3. **Fase 5 (PDF)** — retomar e verificar layout; habilitar botões na UI
-4. **Progresso por competência H01–H30** — página de progresso só mostra por área; adicionar breakdown por competência
-5. **Frases motivacionais das capas** — `frases_capa.txt` ainda não fornecido; `FRASES[]` em ImprimirClient.tsx usa placeholders
-6. **Enunciados EXATO simulados via OCR** — 356/460 questões sem enunciado (PDFs digitalizados)
-7. **Fase 5.5 (correção por foto)** — FastAPI + OpenCV; depende dos marcadores de registro na folha de respostas
+1. **Obter Gemini API Key** — https://aistudio.google.com/apikey — adicionar em `HENRYJR_CREDENCIAIS.txt` e definir `GEMINI_API_KEY=...` para extratores com PDFs escaneados (UFT re-extração, EXATO provas)
+2. **Finalizar extração ENEM simulados** — aguardar `extrair_enem_simulados.py` terminar; conferir total de questões
+3. **Rodar `extrair_exato_provas.py`** — PDFs escaneados, precisará de Gemini Vision
+4. **Re-rodar `extrair_uft.py`** com Gemini — PDFs escaneados de 2021-2024 ficaram com 0 questões por rate limit; Gemini resolve
+5. **Upload** — rodar `upload_novas_questoes.py` após todos os 3 extratores concluídos
+6. **Classificar competências ENEM simulados** — rodar `classificar_competencias.py --fonte ENEM --tipo SIMULADO` após upload
+7. **Verificar qualidade** — spot-check nos JSONs; questões com enunciado vazio são limitação dos PDFs escaneados
+8. **Fase 5 (PDF)** — retomar e verificar layout; habilitar botões na UI
+9. **Progresso por competência H01–H30** — adicionar breakdown por competência na página de progresso
+10. **Frases motivacionais das capas** — `frases_capa.txt` ainda não fornecido; `FRASES[]` em ImprimirClient.tsx usa placeholders
+11. **Fase 5.5 (correção por foto)** — FastAPI + OpenCV; depende dos marcadores de registro na folha de respostas
 
 ---
 
@@ -501,5 +519,8 @@ const pdf = await page.pdf({ format: 'A4', printBackground: true, displayHeaderF
 - **UFT**: filtrar por `fonte='UFT'`; usar `ano`, `turno`, `evento` (edição: '1_EDICAO'/'2_EDICAO')
 - **Provedor**: só ENEM simulados; valores: BERNOULLI, SAS, POLIEDRO, FARIAS_BRITO, SOMOS
 - **Extratores novos**: usar `export GROQ_API_KEY=...` (bash) ou `$env:GROQ_API_KEY=...` (PowerShell) — NÃO `set` CMD
+- **Gemini Vision**: ativar com `export GEMINI_API_KEY=...`; model padrão `gemini-1.5-flash`; sobrescrever com `GEMINI_MODEL=gemini-2.0-flash` se necessário
 - **Arquivo de credenciais**: `HENRYJR_CREDENCIAIS.txt` (não `chaves-projeto.txt`)
+- **Race condition extratores**: NUNCA rodar duas instâncias do mesmo extrator simultaneamente — sobrescreve arquivos bons com zeros
+- **lib_extrair.py — ordem de extração**: (1) parser de texto sem API → (2) Groq Vision → (3) Gemini Vision fallback
 - **Cores proibidas no frontend**: violeta `#7c6af7`, azul frio `#1a1a2e` — substituir sempre pelo dourado `#D4A853`

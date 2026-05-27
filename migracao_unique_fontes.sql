@@ -32,13 +32,15 @@
 -- 1. Remove constraint antiga (3 colunas sem fonte)
 ALTER TABLE questoes DROP CONSTRAINT IF EXISTS questoes_unique;
 
--- 2. Cria índice único funcional com 5 dimensões
+-- 2. Cria índice único funcional com 6 dimensões
 --    (usa COALESCE para evitar o comportamento NULL != NULL do PostgreSQL)
+--    Inclui 'evento' para distinguir SIM_01 vs SIM_02 do mesmo provedor no mesmo ano.
 CREATE UNIQUE INDEX questoes_unique
   ON questoes (
     fonte,
     COALESCE(ano, -1),
     dia,
     numero,
+    COALESCE(evento, ''),
     COALESCE(provedor, '')
   );

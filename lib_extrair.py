@@ -26,7 +26,7 @@ GROQ_API_KEY         = os.environ.get("GROQ_API_KEY", "")
 GROQ_VISION_MODEL    = "meta-llama/llama-4-scout-17b-16e-instruct"
 
 GEMINI_API_KEY       = os.environ.get("GEMINI_API_KEY", "")
-GEMINI_VISION_MODEL  = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_VISION_MODEL  = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")
 
 # ---------------------------------------------------------------------------
 # Mapeamento de áreas
@@ -468,7 +468,7 @@ def extrair_questoes_pdf(pdf_path: Path, usar_vision: bool = True) -> list[dict]
         if questoes_pagina:
             todas.extend(questoes_pagina)
             print(f"    Página {page_num+1}: {len(questoes_pagina)} questões (Vision)")
-        time.sleep(70)  # 70s entre chamadas Vision — mantém < 1 RPM (limite free tier gemini-2.5-flash = 10 RPM, mas na prática burst acumula 429)
+        time.sleep(3)   # Pequena pausa entre chamadas Vision (gemini-3.1-flash-lite suporta burst)
 
     doc.close()
     return todas

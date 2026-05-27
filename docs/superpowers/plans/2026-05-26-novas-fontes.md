@@ -50,7 +50,7 @@ DADOS/ENEM_SIMULADOS/
 ### Credenciais Groq
 Definir variável de ambiente antes de rodar os extratores:
 ```
-set GROQ_API_KEY=gsk_SEU_TOKEN_AQUI
+set GROQ_API_KEY=GROQ_API_KEY_REDACTED
 ```
 
 ### Credenciais Supabase
@@ -672,7 +672,7 @@ Salve em `C:\PROJETOS\HENRYJR\extrair_uft.py`.
 
 ```
 cd C:\PROJETOS\HENRYJR
-set GROQ_API_KEY=gsk_SEU_TOKEN_AQUI
+set GROQ_API_KEY=GROQ_API_KEY_REDACTED
 python extrair_uft.py --pasta "2024"
 ```
 
@@ -815,7 +815,7 @@ Salve em `C:\PROJETOS\HENRYJR\extrair_exato_provas.py`.
 - [ ] **Step 2: Rodar**
 
 ```
-set GROQ_API_KEY=gsk_SEU_TOKEN_AQUI
+set GROQ_API_KEY=GROQ_API_KEY_REDACTED
 python extrair_exato_provas.py
 ```
 
@@ -1047,7 +1047,7 @@ Salve em `C:\PROJETOS\HENRYJR\extrair_enem_simulados.py`.
 - [ ] **Step 2: Testar com um provider pequeno**
 
 ```
-set GROQ_API_KEY=gsk_SEU_TOKEN_AQUI
+set GROQ_API_KEY=GROQ_API_KEY_REDACTED
 python extrair_enem_simulados.py --provedor "Farias Brito 2023"
 ```
 
@@ -2317,7 +2317,7 @@ Este task é opcional mas recomendado — executar após o upload das questões 
 echo %GROQ_API_KEY%
 ```
 
-Se vazio: `set GROQ_API_KEY=gsk_SEU_TOKEN_AQUI`
+Se vazio: `set GROQ_API_KEY=GROQ_API_KEY_REDACTED`
 
 - [ ] **Step 2: Adaptar o script para questões ENEM_SIMULADOS**
 

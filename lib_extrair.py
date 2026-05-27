@@ -26,7 +26,7 @@ GROQ_API_KEY         = os.environ.get("GROQ_API_KEY", "")
 GROQ_VISION_MODEL    = "meta-llama/llama-4-scout-17b-16e-instruct"
 
 GEMINI_API_KEY       = os.environ.get("GEMINI_API_KEY", "")
-GEMINI_VISION_MODEL  = os.environ.get("GEMINI_MODEL", "gemini-1.5-flash")
+GEMINI_VISION_MODEL  = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite")
 
 # ---------------------------------------------------------------------------
 # Mapeamento de áreas
@@ -171,7 +171,12 @@ def _chamar_gemini_json(messages: list, max_tokens: int = 4096, tentativas: int 
 
     payload = {
         "contents": [{"role": "user", "parts": parts}],
-        "generationConfig": {"temperature": 0, "maxOutputTokens": max_tokens},
+        "generationConfig": {
+            "temperature": 0,
+            "maxOutputTokens": max_tokens,
+        },
+        # Desabilita thinking budget no Gemini 2.5 para maximizar tokens de saída
+        "thinkingConfig": {"thinkingBudget": 0},
     }
     endpoint = (
         f"https://generativelanguage.googleapis.com/v1beta/models/"
@@ -185,7 +190,11 @@ def _chamar_gemini_json(messages: list, max_tokens: int = 4096, tentativas: int 
                 data = r.json()
                 candidates = data.get("candidates", [])
                 if candidates:
-                    return candidates[0]["content"]["parts"][0]["text"].strip()
+                    # Acesso seguro — pode não ter 'content' se filtro de segurança bloqueou
+                    content = candidates[0].get("content", {})
+                    parts = content.get("parts", [])
+                    if parts:
+                        return parts[0].get("text", "").strip()
                 return None
             elif r.status_code == 429:
                 espera = 65 if t == 0 else 120

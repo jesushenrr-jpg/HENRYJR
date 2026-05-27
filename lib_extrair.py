@@ -435,7 +435,7 @@ def extrair_questoes_pdf(pdf_path: Path) -> list[dict]:
         if questoes_pagina:
             todas.extend(questoes_pagina)
             print(f"    Página {page_num+1}: {len(questoes_pagina)} questões (Vision)")
-        time.sleep(1)  # Cortesia de rate limit
+        time.sleep(5)  # Cortesia de rate limit — evita burst no Gemini free tier
 
     doc.close()
     return todas

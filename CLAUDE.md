@@ -24,7 +24,7 @@ Plataforma pública de estudos com questões do ENEM (2009–2024), simulados pr
 - **Supabase Anon Key**: ver `HENRYJR_CREDENCIAIS.txt`
 - **Supabase Service Role Key**: ver `HENRYJR_CREDENCIAIS.txt`
 - **Groq API Key**: ver `HENRYJR_CREDENCIAIS.txt` (chave atual criada em 26/05/2026)
-- **Gemini API Key**: obter em https://aistudio.google.com/apikey — adicionar em `HENRYJR_CREDENCIAIS.txt` quando disponível
+- **Gemini API Key**: `AIzaSyCct5xBRPpFdvCX5BGCTuGnHgBGwPqaLBE` — em `HENRYJR_CREDENCIAIS.txt` (adicionada 27/05/2026)
 - **Google OAuth Client ID/Secret**: ver `HENRYJR_CREDENCIAIS.txt`
 
 > ⚠️ Duas chaves Groq já foram revogadas (22/05/2026 e 26/05/2026). A segunda foi exposta no arquivo de plano do git. Sempre criar chave nova após exposição.

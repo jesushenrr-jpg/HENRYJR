@@ -139,7 +139,7 @@ def _chamar_groq_json(messages: list, max_tokens: int = 4096, tentativas: int = 
     return None
 
 
-def _chamar_gemini_json(messages: list, max_tokens: int = 4096, tentativas: int = 3) -> str | None:
+def _chamar_gemini_json(messages: list, max_tokens: int = 8192, tentativas: int = 3) -> str | None:
     """Chama a API Google Gemini Vision e retorna o texto da resposta.
 
     Converte o formato OpenAI (messages com content list) para o formato Gemini
@@ -175,8 +175,6 @@ def _chamar_gemini_json(messages: list, max_tokens: int = 4096, tentativas: int 
             "temperature": 0,
             "maxOutputTokens": max_tokens,
         },
-        # Desabilita thinking budget no Gemini 2.5 para maximizar tokens de saída
-        "thinkingConfig": {"thinkingBudget": 0},
     }
     endpoint = (
         f"https://generativelanguage.googleapis.com/v1beta/models/"
@@ -214,11 +212,11 @@ def _chamar_gemini_json(messages: list, max_tokens: int = 4096, tentativas: int 
     return None
 
 
-def _chamar_vision(messages: list, max_tokens: int = 4096) -> str | None:
+def _chamar_vision(messages: list, max_tokens: int = 8192) -> str | None:
     """Tenta Groq Vision; se falhar, tenta Gemini Vision como fallback."""
     resposta = _chamar_groq_json(messages, max_tokens=max_tokens)
     if not resposta and GEMINI_API_KEY:
-        print("    → Groq indisponível, tentando Gemini...")
+        print("    -> Groq indisponivel, tentando Gemini...")
         resposta = _chamar_gemini_json(messages, max_tokens=max_tokens)
     return resposta
 

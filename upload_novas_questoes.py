@@ -82,27 +82,34 @@ def upsert_lote(questoes: list[dict], dry_run: bool = False) -> tuple[int, int]:
         print(f"    [dry-run] {len(questoes)} questões NÃO inseridas")
         return len(questoes), 0
 
+    def _post_com_retry(url: str, payload: list, timeout: int, tentativas: int = 3) -> requests.Response | None:
+        """POST com retry em erros de rede (ConnectionError/Timeout). Retorna None após esgotar tentativas."""
+        for t in range(tentativas):
+            try:
+                return requests.post(url, headers=HDR, json=payload, timeout=timeout)
+            except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
+                if t < tentativas - 1:
+                    wait = 5 * (t + 1)
+                    print(f"    ↩ Erro de rede ({e.__class__.__name__}), aguardando {wait}s...")
+                    time.sleep(wait)
+                else:
+                    print(f"    ✗ Erro de rede após {tentativas} tentativas: {e}")
+        return None
+
     ok = erros = 0
+    url_questoes = f"{SUPABASE_URL}/rest/v1/questoes"
     for i in range(0, len(questoes), 50):
         lote = [_strip_nulls(q) for q in questoes[i:i + 50]]
-        r = requests.post(
-            f"{SUPABASE_URL}/rest/v1/questoes",
-            headers=HDR,
-            json=lote,
-            timeout=60,
-        )
-        if r.status_code in (200, 201):
+        r = _post_com_retry(url_questoes, lote, timeout=60)
+        if r is not None and r.status_code in (200, 201):
             ok += len(lote)
         else:
             # Batch falhou — tenta um a um para separar novos de duplicatas
             for q in lote:
-                r2 = requests.post(
-                    f"{SUPABASE_URL}/rest/v1/questoes",
-                    headers=HDR,
-                    json=[q],
-                    timeout=30,
-                )
-                if r2.status_code in (200, 201):
+                r2 = _post_com_retry(url_questoes, [q], timeout=30)
+                if r2 is None:
+                    erros += 1
+                elif r2.status_code in (200, 201):
                     ok += 1
                 elif _ja_existe(r2):
                     ok += 1  # 409/23505 = já existe no banco, não é erro

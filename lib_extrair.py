@@ -244,15 +244,26 @@ def _parse_bloco_questao(numero: int, bloco: str, area: str | None) -> dict | No
     """
     linhas = bloco.split("\n")
 
+    # Mapeamento de caracteres Unicode PUA usados por alguns provedores (ex.: SAS)
+    # como substitutos das letras A–E em PDFs com fontes customizadas.
+    PUA_MAP = {"": "A", "": "B", "": "C", "": "D", "": "E"}
+
+    def _normalize_alt_line(linha: str) -> str:
+        """Substitui caracteres PUA A-E por letras ASCII na linha."""
+        for pua, ascii_ch in PUA_MAP.items():
+            linha = linha.replace(pua, ascii_ch)
+        return linha
+
     # Linha começa com letra A-E seguida de separador: espaço(s), tab, ) ou .
     # Com 1 espaço, falsos positivos ("A bolinha...") são resolvidos pela
     # lógica de "última sequência válida A→E" mais abaixo.
     ALT_MARK = re.compile(r"^([A-E])(?:[ \t]+|\)\s*|\.\s+)(.+)")
 
-    # Coleta candidatos a linhas de alternativa
+    # Coleta candidatos a linhas de alternativa (normaliza PUA antes de testar)
     pot: list[tuple[int, str, str]] = []  # (line_idx, letra, texto_inicial)
     for i, linha in enumerate(linhas):
-        m = ALT_MARK.match(linha.strip())
+        normalizada = _normalize_alt_line(linha.strip())
+        m = ALT_MARK.match(normalizada)
         if m:
             pot.append((i, m.group(1), m.group(2).strip()))
 

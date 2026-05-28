@@ -70,7 +70,8 @@ C:\Projetos\henryjr\
 ├── ferramenta_recorte.py       # Ferramenta visual de recorte (Tkinter)
 ├── gerenciar_imagens.py        # Gerenciador visual de questões/imagens (Tkinter) — aceita --revisao
 ├── extrair_paginas_pdf.py      # Extrai campo pagina_pdf para todos os JSONs
-├── classificar_competencias.py # Auto-classifica H01–H30 via Groq
+├── classificar_competencias.py # Auto-classifica H01–H30 via Groq (ENEM real)
+├── classificar_competencias_fontes.py # Classifica H01–H30 via Groq para ENEM_SIM/UFT/PAES — batches por área
 ├── upload_provas_supabase.py   # Upload dos PDFs para Supabase Storage
 ├── upload_questoes_exato.py    # Upload das 460 questões EXATO para Supabase
 ├── corrigir_posicao_imagens.py # Adiciona campo posicao nas imagens (concluído)
@@ -84,7 +85,8 @@ C:\Projetos\henryjr\
 ├── extrair_uft.py              # Extrai vestibulares UFT → DADOS/json_uft/
 ├── extrair_exato_provas.py     # Extrai provas EXATO → DADOS/json_exato_provas/
 ├── extrair_enem_simulados.py   # Extrai simulados ENEM → DADOS/json_enem_simulados/
-├── upload_novas_questoes.py    # Upload UFT/EXATO_P/ENEM_SIM/PAES para Supabase
+├── upload_novas_questoes.py    # Upload UFT/EXATO_P/ENEM_SIM/PAES para Supabase com retry de rede
+├── restaurar_uft_do_supabase.py # Baixa UFT do Supabase e reconstrói JSONs locais corrompidos
 ├── classificar_competencias_fontes.py # Classifica H01–H30 para ENEM_SIM/UFT/PAES via Groq + PATCH Supabase
 ├── extrair_paes.py             # Extrai vestibulares PAES/UEMA → DADOS/json_paes/
 ├── migracao_provedor.sql       # SQL: ADD COLUMN provedor TEXT NULL + índice ✅ Executada
@@ -144,7 +146,7 @@ frontend/
 ### Totais
 - **2.880 questões ENEM reais** (2009–2024, `fonte='ENEM'`, `tipo='PROVA'`, `dia='dia1'|'dia2'`) ✅ no Supabase
 - **460 questões EXATO simulados** (`fonte='EXATO'`, `tipo='SIMULADO'`, `dia='exato'`, `ano=NULL`) ✅ no Supabase
-- **UFT** — 702 questões (`fonte='UFT'`, `tipo='PROVA'`, `dia='manha'|'tarde'`, 2018–2024) ✅ no Supabase
+- **UFT** — 639 questões (`fonte='UFT'`, `tipo='PROVA'`, `dia='manha'|'tarde'`, 2018–2024) ✅ no Supabase — contagem real após deduplicação (JSONs locais tinham números duplicados de páginas sobrepostas; UNIQUE index Supabase é a fonte autoritativa)
 - **EXATO provas** — 222 questões (`fonte='EXATO'`, `tipo='PROVA'`, `dia='exato_manha'|'exato_tarde'`, 2024–2025) ✅ no Supabase
 - **ENEM simulados** — 7.127 questões (`fonte='ENEM'`, `tipo='SIMULADO'`, `dia='simu_dia1'|'simu_dia2'`) ✅ no Supabase
 - **PAES** — 384 questões (`fonte='PAES'`, `tipo='PROVA'`, `dia='dia1'|'dia2'`, 2020–2025) ✅ no Supabase
@@ -369,7 +371,7 @@ Marcadas com `anulada: true, gabarito: null` em todos os JSONs v2 e no Supabase.
 - Alternativas recuperadas: 8/22 questões com alternativas em imagem
 - PDFs no Storage: 64/64 PDFs ENEM no bucket `provas-pdf`
 - EXATO: 460/460 questões extraídas e uploadadas com `fonte`, `evento`, `turno`, numeração contínua Q001–Q460
-- UFT: 692 questões (2018–2024) extraídas e uploadadas para Supabase ✅
+- UFT: 639 questões (2018–2024) no Supabase ✅ (real, após deduplicação de números repetidos nos JSONs locais)
 - EXATO provas: 222 questões (2024–2025) extraídas e uploadadas ✅
 - ENEM simulados: 7.127 questões (Bernoulli/SAS/Poliedro/Farias Brito/Somos, 2023–2024) uploadadas ✅
 - PAES/UEMA: 384 questões (2020–2025) extraídas via parser texto e uploadadas ✅; 2019 = PDF escaneado (pendente Vision)
@@ -428,12 +430,12 @@ EXATO com enunciado vazio (questões em imagem):
 1. ✅ ~~Obter Gemini API Key~~ — obtida em 27/05/2026; `GEMINI_API_KEY` configurado
 2. ✅ ~~Finalizar extração ENEM simulados~~ — 7.127 questões em `json_enem_simulados/`
 3. ✅ ~~Rodar `extrair_exato_provas.py`~~ — 222 questões em `json_exato_provas/`
-4. ✅ ~~Re-rodar `extrair_uft.py` com Gemini~~ — 702 questões em `json_uft/` (2018–2024)
+4. ✅ ~~Re-rodar `extrair_uft.py` com Gemini~~ — 639 questões únicas em Supabase (2018–2024); JSONs locais deduplicados (números repetidos por páginas sobrepostas)
 5. ✅ ~~Executar `migracao_unique_fontes.sql`~~ — índice 6-col ativo
-6. ✅ ~~Upload UFT/EXATO_P/ENEM_SIM/PAES~~ — todas as fontes no Supabase (702q UFT após re-extração)
+6. ✅ ~~Upload UFT/EXATO_P/ENEM_SIM/PAES~~ — todas as fontes no Supabase (639q UFT — contagem real após deduplicação)
 7. ✅ ~~Frontend PAES~~ — `FiltroSidebar.tsx`, `lib/provas.ts`, `questoes/page.tsx`, `simulado/page.tsx` atualizados
-8. ✅ ~~Re-extração UFT~~ — Supabase tem 702q corretos. Arquivos locais corrompidos (Gemini RPD exaurido em 27-28/05): 2022_manha_1(13q), 2022_tarde_1(9q), 2023_manha_1(4q), 2023_manha_2(0q), 2023_tarde_1(5q), 2023_tarde_2(8q), 2024_manha(0q), 2024_tarde(6q). Re-extrair amanha com Gemini resetado: `--pasta "2022 - 1"`, `--pasta "2023 - 1"`, `--pasta "2023 - 2"`, `--pasta "2024"`
-9. ⏳ ~~Classificar competências~~ — `classificar_competencias_fontes.py --fonte ENEM_SIM` rodando em background (~5h, 7127q); script suporta UFT/PAES também
+8. ✅ ~~Re-extração UFT~~ — JSONs locais restaurados do Supabase (`restaurar_uft_do_supabase.py`). Ainda faltam Q33+ em: 2022_manha_1(32q), 2022_manha_2(32q), 2023_manha_1(29q), 2023_manha_2(32q), 2024_manha(32q). Re-extrair quando Gemini RPD resetar: `python extrair_uft.py --pasta "2022 - 1"` etc.
+9. ⏳ **Classificar competências** — `classificar_competencias_fontes.py --fonte ENEM_SIM --batch 20`; Groq rate limit impede progresso (568/7127 classificadas); retomar quando limite diário resetar
 10. **PAES 2019** — PDF escaneado (0q); processar com Vision futuramente
 11. **Fase 5 (PDF)** — retomar e verificar layout; habilitar botões na UI
 12. **Progresso por competência H01–H30** — adicionar breakdown por competência na página de progresso

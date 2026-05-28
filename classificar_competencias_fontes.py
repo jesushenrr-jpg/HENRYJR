@@ -1,17 +1,18 @@
 """
 classificar_competencias_fontes.py
 Classifica questões com habilidades H01–H30 via Groq e atualiza Supabase.
-Suporta qualquer fonte: ENEM simulados, UFT, PAES, EXATO.
+Suporta qualquer fonte: ENEM simulados, UFT, PAES.
 
-Usa batch de N questões por chamada para minimizar tokens e contornar rate limits.
+Estratégia: batches de 20 questões por ÁREA — prompt ultra-curto (~50 tok/q).
+Isso maximiza throughput dentro do limite de TPM do Groq free tier.
 
 Uso:
     python classificar_competencias_fontes.py --fonte ENEM_SIM
     python classificar_competencias_fontes.py --fonte UFT
     python classificar_competencias_fontes.py --fonte PAES
-    python classificar_competencias_fontes.py --fonte ENEM_SIM --limite 200
+    python classificar_competencias_fontes.py --fonte ENEM_SIM --batch 20
     python classificar_competencias_fontes.py --fonte ENEM_SIM --dry-run
-    python classificar_competencias_fontes.py --fonte ENEM_SIM --batch 10
+    python classificar_competencias_fontes.py --fonte ENEM_SIM --reprocessar
 """
 
 import json
@@ -51,8 +52,8 @@ HDR_SB = {
     "Content-Type": "application/json",
 }
 
-GROQ_MODEL = "llama-3.1-8b-instant"
-DELAY_APOS_LOTE = 3.0   # s após cada lote (evita burst)
+GROQ_MODEL   = "llama-3.1-8b-instant"
+DELAY_LOTE   = 2.0   # s após cada lote bem-sucedido
 
 BASE = Path(r"C:\PROJETOS\HENRYJR\DADOS")
 
@@ -62,40 +63,50 @@ FONTES = {
     "PAES":     BASE / "json_paes",
 }
 
-# ── Prompt curto — sem lista completa de habilidades para economizar tokens ───
-# H01-H10 = Linguagens | H11-H20 = Ciências Humanas | H21-H30 = Natureza/Matemática
-PROMPT_SISTEMA = """Você classifica questões do ENEM com habilidades H01–H30.
-Regra rápida de área:
-- H01–H10: Linguagens, Códigos e Artes
-- H11–H20: Ciências Humanas (História, Geografia, Filosofia, Sociologia)
-- H21–H30: Ciências da Natureza (Física, Química, Biologia) e Matemática
+# ── Mapeamento de área para faixa de habilidades ──────────────────────────────
+AREA_FAIXA = {
+    "linguagens": ("H01", "H10", "H01–H10"),
+    "humanas":    ("H11", "H20", "H11–H20"),
+    "natureza":   ("H21", "H30", "H21–H30"),
+    "matematica": ("H21", "H30", "H21–H30"),
+}
 
-Retorne APENAS um array JSON com as habilidades na mesma ordem das questões.
-Exemplo para 3 questões: ["H05","H14","H23"]"""
-
-
-def montar_prompt_batch(questoes_batch: list[dict]) -> str:
-    partes = [PROMPT_SISTEMA, ""]
-    for i, q in enumerate(questoes_batch, 1):
-        enunciado = " ".join(q.get("enunciado") or [])[:400]
-        comando   = (q.get("comando") or "")[:150]
-        area      = (q.get("area") or "")
-        partes.append(f"Questão {i}:\nÁrea: {area}\nEnunciado: {enunciado}\nComando: {comando}")
-    partes.append(f'\nRetorne APENAS o array JSON com {len(questoes_batch)} habilidades.')
-    return "\n\n".join(partes)
+def faixa_da_area(area: str) -> tuple[str, str, str]:
+    area_l = (area or "").lower()
+    if "linguagen" in area_l or "codigo" in area_l or "artes" in area_l:
+        return AREA_FAIXA["linguagens"]
+    if "humana" in area_l:
+        return AREA_FAIXA["humanas"]
+    if "natureza" in area_l:
+        return AREA_FAIXA["natureza"]
+    if "matem" in area_l:
+        return AREA_FAIXA["matematica"]
+    return ("H01", "H30", "H01–H30")   # fallback: faixa completa
 
 
-def chamar_groq_batch(questoes_batch: list[dict], tentativas: int = 3) -> list[str] | None:
-    """Chama Groq com N questões de uma vez. Retorna lista de H-codes ou None."""
+def montar_prompt_area_batch(questoes: list[dict], faixa_label: str) -> str:
+    """Prompt ultra-curto: área já narrows down o espaço; só envia enunciado curto."""
+    linhas = [
+        f"Classifique as {len(questoes)} questões abaixo com habilidades ENEM na faixa {faixa_label}.",
+        "Retorne APENAS um array JSON com os códigos, ex: [\"H05\",\"H12\",\"H08\"]",
+        "",
+    ]
+    for i, q in enumerate(questoes, 1):
+        trecho = " ".join(q.get("enunciado") or [])[:300]
+        cmd    = (q.get("comando") or "")[:100]
+        linhas.append(f"Q{i}: {trecho} {cmd}".strip())
+    return "\n".join(linhas)
+
+
+def chamar_groq(prompt: str, n_esperado: int, tentativas: int = 3) -> list[str] | None:
     if not GROQ_KEY:
         print("✗ GROQ_API_KEY não definida.")
         return None
 
-    prompt = montar_prompt_batch(questoes_batch)
     payload = json.dumps({
         "model": GROQ_MODEL,
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": len(questoes_batch) * 8,  # ~8 tokens por habilidade
+        "max_tokens": n_esperado * 8,
         "temperature": 0,
     }).encode()
 
@@ -118,46 +129,45 @@ def chamar_groq_batch(questoes_batch: list[dict], tentativas: int = 3) -> list[s
                 continue
             resp.raise_for_status()
             texto = resp.json()["choices"][0]["message"]["content"].strip()
-            return _parse_habilidades(texto, len(questoes_batch))
+            return _parse_habs(texto, n_esperado)
         except requests.exceptions.RequestException as e:
             if t < tentativas - 1:
-                print(f"    ↩ Retry {t+1}/3 ({e.__class__.__name__}), aguardando 10s...")
-                time.sleep(10)
+                espera = 10 * (t + 1)
+                print(f"    ↩ Retry {t+1}/3 em {espera}s ({e.__class__.__name__})")
+                time.sleep(espera)
             else:
                 print(f"    ✗ Falha após {tentativas} tentativas: {e}")
     return None
 
 
-def _parse_habilidades(texto: str, esperado: int) -> list[str] | None:
-    """Extrai lista de H-codes do JSON retornado pelo modelo."""
-    # Tenta parsear como JSON direto
+def _parse_habs(texto: str, n_esperado: int) -> list[str] | None:
     try:
         dados = json.loads(texto)
         if isinstance(dados, list):
             habs = [str(h).upper().strip() for h in dados]
-            if all(re.match(r'^H([0-2]\d|30)$', h) for h in habs) and len(habs) == esperado:
+            if all(re.match(r'^H([0-2]\d|30)$', h) for h in habs) and len(habs) == n_esperado:
                 return habs
     except Exception:
         pass
-    # Fallback: extrai todos os H-codes do texto
-    habs = re.findall(r'\bH([0-2]\d|30)\b', texto.upper())
+    habs = re.findall(r'H([0-2]\d|30)\b', texto.upper())
     habs = [f"H{n}" for n in habs]
-    if len(habs) == esperado:
+    if len(habs) == n_esperado:
         return habs
+    # Tenta pegar qualquer quantidade e completar com fallback se próximo
+    if len(habs) >= n_esperado:
+        return habs[:n_esperado]
     return None
 
 
 def patch_supabase(q: dict, competencia: str) -> bool:
-    """Atualiza competência no Supabase via PATCH com filtro nos 6 campos únicos."""
     params = {
-        "fonte":  f"eq.{q['fonte']}",
-        "dia":    f"eq.{q['dia']}",
-        "numero": f"eq.{q['numero']}",
+        "fonte":   f"eq.{q['fonte']}",
+        "dia":     f"eq.{q['dia']}",
+        "numero":  f"eq.{q['numero']}",
     }
-    params["ano"] = f"eq.{q['ano']}" if q.get("ano") is not None else "is.null"
+    params["ano"]     = f"eq.{q['ano']}"     if q.get("ano")     is not None else "is.null"
     params["evento"]  = f"eq.{q['evento']}"  if q.get("evento")  else "is.null"
     params["provedor"] = f"eq.{q['provedor']}" if q.get("provedor") else "is.null"
-
     try:
         r = requests.patch(
             f"{SUPABASE_URL}/rest/v1/questoes",
@@ -168,27 +178,36 @@ def patch_supabase(q: dict, competencia: str) -> bool:
         )
         return r.status_code in (200, 204)
     except Exception as e:
-        print(f"    ⚠ Supabase PATCH falhou: {e}")
+        print(f"    ⚠ PATCH falhou: {e}")
         return False
+
+
+def patch_lote_supabase(questoes: list[dict], habs: list[str]) -> int:
+    """Atualiza um lote de questões no Supabase. Retorna contagem de sucesso."""
+    ok = 0
+    for q, hab in zip(questoes, habs):
+        if patch_supabase(q, hab):
+            ok += 1
+    return ok
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--fonte", required=True, choices=["ENEM_SIM", "UFT", "PAES"])
-    parser.add_argument("--limite",      type=int, default=0,  help="Máx questões (0=todas)")
-    parser.add_argument("--batch",       type=int, default=5,  help="Questões por chamada Groq")
+    parser.add_argument("--fonte",       required=True, choices=["ENEM_SIM", "UFT", "PAES"])
+    parser.add_argument("--limite",      type=int, default=0, help="Max questoes (0=todas)")
+    parser.add_argument("--batch",       type=int, default=20, help="Questoes por chamada Groq")
     parser.add_argument("--dry-run",     action="store_true")
     parser.add_argument("--reprocessar", action="store_true")
     args = parser.parse_args()
 
     pasta = FONTES[args.fonte]
     if not pasta.exists():
-        print(f"✗ Pasta não encontrada: {pasta}")
+        print(f"✗ Pasta nao encontrada: {pasta}")
         sys.exit(1)
 
     arquivos = sorted(pasta.glob("*.json"))
     print("=" * 60)
-    print(f"CLASSIFICAR COMPETÊNCIAS — {args.fonte} (batch={args.batch})")
+    print(f"CLASSIFICAR COMPETENCIAS — {args.fonte} (batch={args.batch})")
     print("=" * 60)
 
     total_ok = total_erros = 0
@@ -203,74 +222,78 @@ def main():
         ]
 
         if not pendentes:
-            print(f"  ✓ {arq.name}: sem pendências")
+            print(f"  ok {arq.name}")
             continue
 
-        print(f"\n📄 {arq.name} — {len(pendentes)} pendentes")
+        print(f"\n  {arq.name} — {len(pendentes)} pendentes")
         modificado = False
 
-        # Processar em batches
-        i = 0
-        while i < len(pendentes):
-            if args.limite and total_ok >= args.limite:
-                print(f"\n⏹ Limite de {args.limite} atingido.")
-                break
+        # Agrupar por área para batch mais eficiente
+        from collections import defaultdict
+        por_area: dict[str, list[dict]] = defaultdict(list)
+        for q in pendentes:
+            por_area[q.get("area") or ""].append(q)
 
-            lote = pendentes[i:i + args.batch]
+        for area, qs_area in por_area.items():
+            h_min, h_max, faixa_label = faixa_da_area(area)
 
-            if args.dry_run:
-                nums = [str(q.get('numero','?')) for q in lote]
-                print(f"  [dry] batch Q{','.join(nums)}")
-                total_ok += len(lote)
-                i += len(lote)
-                continue
+            i = 0
+            while i < len(qs_area):
+                if args.limite and total_ok >= args.limite:
+                    break
 
-            habs = chamar_groq_batch(lote)
+                lote = qs_area[i:i + args.batch]
 
-            if habs is None:
-                # Batch falhou — tenta um a um
-                print(f"  ⚠ Batch falhou, tentando 1 a 1...")
-                for q in lote:
-                    resp_solo = chamar_groq_batch([q])
-                    if resp_solo:
-                        hab = resp_solo[0]
-                        q["competencia"] = hab
-                        modificado = True
-                        total_ok += 1
-                        ok_sb = patch_supabase(q, hab)
-                        print(f"  Q{q.get('numero','?'):03} → {hab} {'✓' if ok_sb else '⚠sb'}")
+                if args.dry_run:
+                    print(f"    [dry] {len(lote)}q de '{area[:30]}' -> faixa {faixa_label}")
+                    total_ok += len(lote)
+                    i += len(lote)
+                    continue
+
+                prompt = montar_prompt_area_batch(lote, faixa_label)
+                habs = chamar_groq(prompt, len(lote))
+
+                if habs is None:
+                    # Reduz para metade e tenta de novo
+                    if len(lote) > 1:
+                        print(f"    ⚠ Batch de {len(lote)} falhou — reduzindo para {len(lote)//2}")
+                        args.batch = max(1, args.batch // 2)
+                        continue  # não avança i, tenta com batch menor
                     else:
                         total_erros += 1
-                        print(f"  ✗ Q{q.get('numero','?'):03} sem resposta")
-                    time.sleep(DELAY_APOS_LOTE)
+                        print(f"    ✗ Q{lote[0].get('numero','?')} sem resposta")
+                        i += 1
+                        time.sleep(DELAY_LOTE)
+                        continue
+
+                # Aplicar resultado
+                sb_ok = patch_lote_supabase(lote, habs)
+                for q, hab in zip(lote, habs):
+                    q["competencia"] = hab
+                    modificado = True
+                    total_ok += 1
+
+                nums = [str(q.get('numero','?')) for q in lote]
+                print(f"    {len(lote)}q [{faixa_label}] -> {habs[:3]}{'...' if len(habs)>3 else ''} (sb:{sb_ok}/{len(lote)})")
+
                 i += len(lote)
-                continue
+                time.sleep(DELAY_LOTE)
 
-            # Aplicar habilidades do batch
-            for q, hab in zip(lote, habs):
-                q["competencia"] = hab
-                modificado = True
-                total_ok += 1
-                ok_sb = patch_supabase(q, hab)
-                print(f"  Q{q.get('numero','?'):03} [{(q.get('area') or '')[:15]}] → {hab} {'✓' if ok_sb else '⚠sb'}")
-
-            i += len(lote)
-            time.sleep(DELAY_APOS_LOTE)
+            if args.limite and total_ok >= args.limite:
+                break
 
         if modificado and not args.dry_run:
             arq.write_text(json.dumps(questoes, ensure_ascii=False, indent=2), encoding="utf-8")
-            print(f"  💾 {arq.name} salvo")
+            print(f"    salvo -> {arq.name}")
 
         if args.limite and total_ok >= args.limite:
             break
 
     duracao = time.time() - inicio
-    print(f"\n{'=' * 60}")
-    print(f"✅  Classificadas: {total_ok}")
-    print(f"✗   Erros:        {total_erros}")
-    print(f"⏱   Tempo:        {duracao / 60:.1f} min")
+    print(f"\n{'='*60}")
+    print(f"Classificadas: {total_ok}  |  Erros: {total_erros}  |  Tempo: {duracao/60:.1f} min")
     if total_ok and not args.dry_run:
-        print(f"⚡  Média:        {duracao / total_ok:.2f}s/questão")
+        print(f"Media: {duracao/total_ok:.2f}s/questao")
 
 
 if __name__ == "__main__":

@@ -364,6 +364,25 @@ export default async function QuestoesPage({
                     </>
                   )
                 }
+                if (q.fonte === 'UNICAMP' || q.fonte === 'FUVEST') {
+                  return (
+                    <>
+                      <span className="text-[11px] text-[#9E9589]">{q.ano}</span>
+                      <span className="text-[#2C2820]">·</span>
+                      <span className="text-[11px] text-[#9E9589]">Q. {q.numero}</span>
+                    </>
+                  )
+                }
+                if (q.fonte === 'UNESP') {
+                  return (
+                    <>
+                      <span className="text-[11px] text-[#9E9589]">{q.ano}</span>
+                      {q.evento && <><span className="text-[#2C2820]">·</span><span className="text-[11px] text-[#9E9589]">{EVENTO_LABEL[q.evento] ?? q.evento}</span></>}
+                      <span className="text-[#2C2820]">·</span>
+                      <span className="text-[11px] text-[#9E9589]">Q. {q.numero}</span>
+                    </>
+                  )
+                }
                 // ENEM
                 return (
                   <>

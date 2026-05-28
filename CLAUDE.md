@@ -432,7 +432,7 @@ EXATO com enunciado vazio (questões em imagem):
 5. ✅ ~~Executar `migracao_unique_fontes.sql`~~ — índice 6-col ativo
 6. ✅ ~~Upload UFT/EXATO_P/ENEM_SIM/PAES~~ — todas as fontes no Supabase (702q UFT após re-extração)
 7. ✅ ~~Frontend PAES~~ — `FiltroSidebar.tsx`, `lib/provas.ts`, `questoes/page.tsx`, `simulado/page.tsx` atualizados
-8. ✅ ~~Re-extração UFT 2021-2ª/2022-1ª~~ — `uft_2021_tarde_2_EDICAO` (44q), `uft_2022_manha_1_EDICAO` (40q), `uft_2022_tarde_1_EDICAO` (44q) re-extraídos com Gemini Vision; upload diferencial concluído
+8. ✅ ~~Re-extração UFT~~ — Supabase tem 702q corretos. Arquivos locais corrompidos (Gemini RPD exaurido em 27-28/05): 2022_manha_1(13q), 2022_tarde_1(9q), 2023_manha_1(4q), 2023_manha_2(0q), 2023_tarde_1(5q), 2023_tarde_2(8q), 2024_manha(0q), 2024_tarde(6q). Re-extrair amanha com Gemini resetado: `--pasta "2022 - 1"`, `--pasta "2023 - 1"`, `--pasta "2023 - 2"`, `--pasta "2024"`
 9. ⏳ ~~Classificar competências~~ — `classificar_competencias_fontes.py --fonte ENEM_SIM` rodando em background (~5h, 7127q); script suporta UFT/PAES também
 10. **PAES 2019** — PDF escaneado (0q); processar com Vision futuramente
 11. **Fase 5 (PDF)** — retomar e verificar layout; habilitar botões na UI

@@ -39,7 +39,7 @@ HDR = {
     "Authorization": f"Bearer {SERVICE_KEY}",
     "apikey": SERVICE_KEY,
     "Content-Type": "application/json",
-    "Prefer": "resolution=ignore-duplicates,return=minimal",
+    # "Prefer" é definido em main() após parsear --merge
 }
 
 BASE = Path(r"C:\PROJETOS\HENRYJR\DADOS")
@@ -49,6 +49,9 @@ FONTES = {
     "EXATO_P":  BASE / "json_exato_provas",
     "ENEM_SIM": BASE / "json_enem_simulados",
     "PAES":     BASE / "json_paes",
+    "UNICAMP":  BASE / "json_unicamp",
+    "FUVEST":   BASE / "json_fuvest",
+    "UNESP":    BASE / "json_unesp",
 }
 
 
@@ -150,11 +153,20 @@ def verificar_coluna_provedor() -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description="Upload questões para Supabase")
-    parser.add_argument("--fonte", choices=["UFT", "EXATO_P", "ENEM_SIM", "PAES"],
+    parser.add_argument("--fonte", choices=["UFT", "EXATO_P", "ENEM_SIM", "PAES", "UNICAMP", "FUVEST", "UNESP"],
                         help="Processar só esta fonte (padrão: todas)")
     parser.add_argument("--dry-run", action="store_true",
                         help="Mostra o que seria inserido sem inserir de verdade")
+    parser.add_argument("--merge", action="store_true",
+                        help="Atualiza campos de questões existentes (resolution=merge-duplicates)")
     args = parser.parse_args()
+
+    # Definir Prefer header baseado em --merge
+    HDR["Prefer"] = (
+        "resolution=merge-duplicates,return=minimal"
+        if args.merge
+        else "resolution=ignore-duplicates,return=minimal"
+    )
 
     if not SUPABASE_URL or not SERVICE_KEY:
         print("✗ config.json não encontrado ou sem credenciais.")

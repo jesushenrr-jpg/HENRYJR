@@ -1,8 +1,8 @@
-# HenryJr — Banco de Questões ENEM + EXATO + UFT + PAES
+# HenryJr — Banco de Questões ENEM + EXATO + UFT + PAES + UNICAMP + FUVEST + UNESP
 
 ## Visão Geral do Projeto
 
-Plataforma pública de estudos com questões do ENEM (2009–2024), simulados preditivos ENEM (Bernoulli, SAS, Poliedro, Farias Brito, Somos), provas do vestibular UFT (2018–2024), provas do PAES/UEMA (2020–2025) e simulados/provas do EXATO (TESSAT), com simulados personalizados, progresso por competência, explicações com IA, caderno de erros ("Tira Teima") e correção automática de simulados por foto. Stack 100% gratuita. URL em produção: **https://henryjr.vercel.app**
+Plataforma pública de estudos com questões do ENEM (2009–2024), simulados preditivos ENEM (Bernoulli, SAS, Poliedro, Farias Brito, Somos), provas do vestibular UFT (2018–2024), provas do PAES/UEMA (2020–2025), simulados/provas do EXATO (TESSAT), 1ª Fase UNICAMP (2023–2026), 1ª Fase FUVEST (2023–2026) e 1ª Fase UNESP (2017–2026), com simulados personalizados, progresso por competência, explicações com IA, caderno de erros ("Tira Teima") e correção automática de simulados por foto. Stack 100% gratuita. URL em produção: **https://henryjr.vercel.app**
 
 ## Stack Tecnológica
 
@@ -15,7 +15,7 @@ Plataforma pública de estudos com questões do ENEM (2009–2024), simulados pr
 | IA para explicações | Groq API (LLaMA 3, gratuito) | ✅ Ativo |
 | Geração de PDF | Puppeteer + @sparticuz/chromium | ✅ Implementado (pausado) |
 | Correção por foto | FastAPI + OpenCV (microserviço Python) | ⏳ Fase 5.5 (pendente) |
-| Extração de dados | Python + PyMuPDF + parser de texto + Groq/Gemini Vision | ✅ Concluído para ENEM, EXATO, UFT, ENEM_SIMULADOS, PAES |
+| Extração de dados | Python + PyMuPDF + parser de texto + Groq/Gemini Vision | ✅ Concluído para ENEM, EXATO, UFT, ENEM_SIMULADOS, PAES, UNICAMP, FUVEST, UNESP |
 
 ## Credenciais e Chaves (NUNCA commitar no GitHub)
 
@@ -44,11 +44,17 @@ C:\Projetos\henryjr\
 │   ├── json_exato_provas\  # JSONs extraídos EXATO provas — exato_prova_{ano}_{turno}[_{edicao}].json
 │   ├── json_enem_simulados\ # JSONs simulados ENEM — {provedor}_{ano}_{evento}_{dia}.json
 │   ├── json_paes\          # JSONs extraídos PAES/UEMA — paes_{ano}_{dia}.json
+│   ├── json_unicamp\       # JSONs extraídos UNICAMP — unicamp_{ano}.json
+│   ├── json_fuvest\        # JSONs extraídos FUVEST — fuvest_{ano}.json
+│   ├── json_unesp\         # JSONs extraídos UNESP — unesp_{ano}[_{edicao}].json
 │   ├── UFT_PROVAS\         # PDFs do vestibular UFT (2018–2024, MANHÃ/TARDE/GAB por ano)
 │   ├── EXATO_PROVAS\       # PDFs das provas EXATO (2024, 2025 1ª e 2ª edição)
 │   ├── ENEM_SIMULADOS\     # PDFs simulados preditivos ENEM por provedor+ano
 │   ├── EXATO_SIMULADOS\    # PDFs dos simulados EXATO/TESSAT (antigo EXATO)
 │   ├── PAES_PROVAS\        # PDFs do vestibular PAES/UEMA (2019–2025, prova + gabarito)
+│   ├── UNICAMP_PROVAS\     # PDFs da 1ª Fase UNICAMP (2023, 2024, 2026)
+│   ├── FUVEST_PROVAS\      # PDFs da 1ª Fase FUVEST (2023–2026)
+│   ├── UNESP_PROVAS\       # PDFs da 1ª Fase UNESP (2017–2026, inclui subpastas de edição)
 │   ├── imagens\            # Imagens das questões por ano/dia (751 questões com imagem)
 │   ├── texto_bruto\        # Texto bruto extraído (intermediário)
 │   ├── EXATO_ORGANIZADO\   # PDFs e JSONs do EXATO organizados
@@ -85,10 +91,13 @@ C:\Projetos\henryjr\
 ├── extrair_uft.py              # Extrai vestibulares UFT → DADOS/json_uft/
 ├── extrair_exato_provas.py     # Extrai provas EXATO → DADOS/json_exato_provas/
 ├── extrair_enem_simulados.py   # Extrai simulados ENEM → DADOS/json_enem_simulados/
-├── upload_novas_questoes.py    # Upload UFT/EXATO_P/ENEM_SIM/PAES para Supabase com retry de rede
+├── upload_novas_questoes.py    # Upload UFT/EXATO_P/ENEM_SIM/PAES/UNICAMP/FUVEST/UNESP para Supabase; flag --merge
 ├── restaurar_uft_do_supabase.py # Baixa UFT do Supabase e reconstrói JSONs locais corrompidos
 ├── classificar_competencias_fontes.py # Classifica H01–H30 para ENEM_SIM/UFT/PAES via Groq + PATCH Supabase
 ├── extrair_paes.py             # Extrai vestibulares PAES/UEMA → DADOS/json_paes/
+├── extrair_unicamp.py          # Extrai 1ª Fase UNICAMP → DADOS/json_unicamp/
+├── extrair_fuvest.py           # Extrai 1ª Fase FUVEST → DADOS/json_fuvest/
+├── extrair_unesp.py            # Extrai 1ª Fase UNESP → DADOS/json_unesp/
 ├── migracao_provedor.sql       # SQL: ADD COLUMN provedor TEXT NULL + índice ✅ Executada
 ├── migracao_exato.sql          # SQL: adiciona colunas fonte/evento/turno na tabela questoes
 ├── migracao_unique_fontes.sql  # SQL: índice único 6-col (fonte,ano,dia,numero,evento,provedor) ✅ Executada
@@ -147,29 +156,35 @@ frontend/
 - **2.880 questões ENEM reais** (2009–2024, `fonte='ENEM'`, `tipo='PROVA'`, `dia='dia1'|'dia2'`) ✅ no Supabase
 - **460 questões EXATO simulados** (`fonte='EXATO'`, `tipo='SIMULADO'`, `dia='exato'`, `ano=NULL`) ✅ no Supabase
 - **UFT** — 639 questões (`fonte='UFT'`, `tipo='PROVA'`, `dia='manha'|'tarde'`, 2018–2024) ✅ no Supabase — contagem real após deduplicação (JSONs locais tinham números duplicados de páginas sobrepostas; UNIQUE index Supabase é a fonte autoritativa)
-- **EXATO provas** — 222 questões (`fonte='EXATO'`, `tipo='PROVA'`, `dia='exato_manha'|'exato_tarde'`, 2024–2025) ✅ no Supabase
+- **EXATO provas** — 204 questões (`fonte='EXATO'`, `tipo='PROVA'`, `dia='exato_manha'|'exato_tarde'`, 2024–2025) ✅ no Supabase — re-extraídas com gabaritos corrigidos (28/05/2026)
 - **ENEM simulados** — 7.127 questões (`fonte='ENEM'`, `tipo='SIMULADO'`, `dia='simu_dia1'|'simu_dia2'`) ✅ no Supabase
 - **PAES** — 384 questões (`fonte='PAES'`, `tipo='PROVA'`, `dia='dia1'|'dia2'`, 2020–2025) ✅ no Supabase
   - 2019: PDF escaneado (0q extraído) — precisará de Vision futuramente
   - 4 questões c/ alternativas em imagem (1 por ano em 2020/2021×2/2025) — limitação conhecida
+- **UNICAMP** — 205 questões (`fonte='UNICAMP'`, `tipo='PROVA'`, 2023/2024/2026) ✅ no Supabase
+  - Anos disponíveis: 2023 (69q), 2024 (68q), 2026 (68q) — 2015–2022 não disponíveis em PDF digital
+- **FUVEST** — 341 questões (`fonte='FUVEST'`, `tipo='PROVA'`, 2023–2026) ✅ no Supabase
+  - 2023 (83q), 2024 (83q), 2025 (86q), 2026 (89q)
+- **UNESP** — 940 questões (`fonte='UNESP'`, `tipo='PROVA'`, 2017–2026) ✅ no Supabase
+  - 2024 tem 2 edições (1ª + 2ª); 2025 tem 2 edições (1ª + 2ª Inverno); `evento` = '1_EDICAO'/'2_EDICAO' quando aplicável
 
 ### Tabela `questoes` — colunas relevantes
 
-| Coluna | Tipo | ENEM real | ENEM simulado | EXATO | UFT | PAES |
-|---|---|---|---|---|---|---|
-| `id` | int | auto | auto | auto | auto | auto |
-| `fonte` | text | 'ENEM' | 'ENEM' | 'EXATO' | 'UFT' | 'PAES' |
-| `tipo` | text | 'PROVA' | 'SIMULADO' | 'PROVA'\|'SIMULADO' | 'PROVA' | 'PROVA' |
-| `ano` | int\|null | 2009–2024 | 2023–2024 | **NULL** | 2018–2024 | 2020–2025 |
-| `dia` | text | 'dia1'\|'dia2' | 'simu_dia1'\|'simu_dia2' | simulado='exato' / prova='exato_manha'\|'exato_tarde' | 'manha'\|'tarde' | 'dia1'\|'dia2' |
-| `numero` | int | Q1–Q45 por prova | Q1–Qn por prova | Q1–Q460 global | Q1–Qn por prova | Q1–Q60 por prova |
-| `area` | text | 4 áreas | 4 áreas | 4 áreas | 4 áreas | 3 áreas |
-| `evento` | text\|null | null | 'SIM_00'…'SIM_08' | 'CICLO_ZERO' etc. | '1_EDICAO'\|null | null |
-| `turno` | text\|null | null | null | 'MANHA'\|'TARDE' | 'MANHA'\|'TARDE' | null |
-| `provedor` | text\|null | null | 'BERNOULLI' etc. | null | null | null |
-| `competencia` | text\|null | H01–H30 ✅ | H01–H30 (pós-classif.) | NULL | NULL | NULL |
-| `pagina_pdf` | int | preenchido ✅ | preenchido | preenchido | preenchido | preenchido |
-| `enunciado` | jsonb | preenchido ✅ | via parser texto (~94%) + Vision | 104/460 (PDFs imagem) | via Vision | via parser texto |
+| Coluna | Tipo | ENEM real | ENEM simulado | EXATO | UFT | PAES | UNICAMP/FUVEST | UNESP |
+|---|---|---|---|---|---|---|---|---|
+| `id` | int | auto | auto | auto | auto | auto | auto | auto |
+| `fonte` | text | 'ENEM' | 'ENEM' | 'EXATO' | 'UFT' | 'PAES' | 'UNICAMP'/'FUVEST' | 'UNESP' |
+| `tipo` | text | 'PROVA' | 'SIMULADO' | 'PROVA'\|'SIMULADO' | 'PROVA' | 'PROVA' | 'PROVA' | 'PROVA' |
+| `ano` | int\|null | 2009–2024 | 2023–2024 | **NULL** (sim) / 2024–2025 (prova) | 2018–2024 | 2020–2025 | 2023–2026 | 2017–2026 |
+| `dia` | text | 'dia1'\|'dia2' | 'simu_dia1'\|'simu_dia2' | simulado='exato' / prova='exato_manha'\|'exato_tarde' | 'manha'\|'tarde' | 'dia1'\|'dia2' | 'unico' | 'unico' |
+| `numero` | int | Q1–Q45 | Q1–Qn | Q1–Q460 global | Q1–Qn | Q1–Q60 | Q1–Qn | Q1–Qn |
+| `area` | text | 4 áreas | 4 áreas | 4 áreas | 4 áreas | 3 áreas | 4 áreas | 4 áreas |
+| `evento` | text\|null | null | 'SIM_00'…'SIM_08' | 'CICLO_ZERO' etc. | '1_EDICAO'\|null | null | null | '1_EDICAO'\|'2_EDICAO'\|null |
+| `turno` | text\|null | null | null | 'MANHA'\|'TARDE' | 'MANHA'\|'TARDE' | null | null | null |
+| `provedor` | text\|null | null | 'BERNOULLI' etc. | null | null | null | null | null |
+| `competencia` | text\|null | H01–H30 ✅ | H01–H30 (pós-classif.) | NULL | NULL | NULL | NULL | NULL |
+| `pagina_pdf` | int | preenchido ✅ | preenchido | preenchido | preenchido | preenchido | preenchido | preenchido |
+| `enunciado` | jsonb | preenchido ✅ | ~94% parser + Vision | 2024=PDFs imagem (Vision); 2025=texto | via Vision | via parser texto | via parser texto | via parser texto |
 
 > **UNIQUE constraint**: índice funcional 6 colunas: `(fonte, COALESCE(ano,-1), dia, numero, COALESCE(evento,''), COALESCE(provedor,''))` — ver `migracao_unique_fontes.sql`. O campo `dia` codifica o turno: UFT usa 'manha'/'tarde'; EXATO provas usa 'exato_manha'/'exato_tarde'; ENEM simulados usa 'simu_dia1'/'simu_dia2'.
 
@@ -240,14 +255,17 @@ O frontend usa `fonte='EXATO'` como ponto de entrada. Filtros disponíveis:
 
 ### Separação por prova
 - `lib/provas.ts` — registro central; adicionar nova prova = inserir um objeto no array `PROVAS`
-- `FiltroSidebar.tsx` — chips de fonte `[ENEM][EXATO][UFT]` substituíram as tabs; filtros condicionais por fonte+tipo:
+- `FiltroSidebar.tsx` — chips de fonte `[ENEM][EXATO][UFT][PAES][UNICAMP][FUVEST][UNESP]`; filtros condicionais por fonte+tipo:
   - ENEM + PROVA: Área / Ano / Dia / Competência H01–H30
   - ENEM + SIMULADO: Área / Elaborador / Ano / Dia
   - EXATO: Evento / Turno / Área
   - UFT: Área / Ano / Turno / Edição
-- `questoes/page.tsx`: suporta `?fonte=ENEM|EXATO|UFT` + `?provedor=BERNOULLI|...`
-- `simulado/page.tsx`: ENEM, EXATO e UFT disponíveis; Tipo apenas para ENEM; anos ocultos para EXATO
-- **Nunca filtrar por `ano` para EXATO** — campo é `NULL` intencionalmente
+  - PAES: Área / Ano / Dia
+  - UNICAMP / FUVEST: Área / Ano
+  - UNESP: Área / Ano / Edição (evento='1_EDICAO'|'2_EDICAO')
+- `questoes/page.tsx`: suporta `?fonte=ENEM|EXATO|UFT|PAES|UNICAMP|FUVEST|UNESP` + `?provedor=BERNOULLI|...`
+- `simulado/page.tsx`: todas as 7 fontes disponíveis; Tipo apenas para ENEM; anos ocultos para EXATO
+- **Nunca filtrar por `ano` para EXATO simulados** — campo é `NULL` intencionalmente
 
 ---
 
@@ -372,10 +390,13 @@ Marcadas com `anulada: true, gabarito: null` em todos os JSONs v2 e no Supabase.
 - PDFs no Storage: 64/64 PDFs ENEM no bucket `provas-pdf`
 - EXATO: 460/460 questões extraídas e uploadadas com `fonte`, `evento`, `turno`, numeração contínua Q001–Q460
 - UFT: 639 questões (2018–2024) no Supabase ✅ (real, após deduplicação de números repetidos nos JSONs locais)
-- EXATO provas: 222 questões (2024–2025) extraídas e uploadadas ✅
+- EXATO provas: 204 questões (2024–2025) re-extraídas com gabaritos corrigidos e uploadadas ✅ (28/05/2026; anteriormente 222 — merge sobrescreveu com contagem correta)
 - ENEM simulados: 7.127 questões (Bernoulli/SAS/Poliedro/Farias Brito/Somos, 2023–2024) uploadadas ✅
 - PAES/UEMA: 384 questões (2020–2025) extraídas via parser texto e uploadadas ✅; 2019 = PDF escaneado (pendente Vision)
 - `migracao_unique_fontes.sql` executada: índice funcional 6-col no lugar do antigo UNIQUE ✅
+- UNICAMP: 205 questões (2023/2024/2026) extraídas via parser texto e uploadadas ✅ (28/05/2026)
+- FUVEST: 341 questões (2023–2026) extraídas via parser texto e uploadadas ✅ (28/05/2026)
+- UNESP: 940 questões (2017–2026, inclui edições 2024.1/2025.1/2025.2) extraídas via parser texto e uploadadas ✅ (28/05/2026)
 
 **Frontend**
 - Redesign completo "Biblioteca Cálida" (paleta quente, tipografia editorial)
@@ -400,13 +421,24 @@ Marcadas com `anulada: true, gabarito: null` em todos os JSONs v2 e no Supabase.
 - `gerenciar_imagens.py --revisao`: modo de revisão de erros pendentes do `relatorio_erros.json`
 - `lib_extrair.py`: biblioteca de extração — parser de texto (zero API) + Groq Vision + Gemini Vision fallback
 - `extrair_uft.py` / `extrair_exato_provas.py` / `extrair_enem_simulados.py` / `extrair_paes.py`: extratores por fonte
-- `upload_novas_questoes.py`: upload em lotes para Supabase com retry por questão (suporta UFT/EXATO_P/ENEM_SIM/PAES)
+- `upload_novas_questoes.py`: upload em lotes para Supabase com retry por questão (suporta UFT/EXATO_P/ENEM_SIM/PAES/UNICAMP/FUVEST/UNESP); flag `--merge` para re-uploads idempotentes
 
 **Frontend (novas fontes — 27/05/2026)**
 - `FiltroSidebar.tsx`: chips `[ENEM][EXATO][UFT]` substituíram as tabs; filtros condicionais por fonte+tipo
 - `lib/provas.ts`: adicionado UFT com `anos=[2018..2024]`; novos exports `DIA_LABEL`, `PROVEDOR_LABEL`, `EVENTO_LABEL` expandido
 - `questoes/page.tsx`: suporte a `?fonte=UFT` e `?provedor=...`
 - `simulado/page.tsx` + `api/simulado/criar/route.ts`: UFT disponível; TIPO só para ENEM; anos ocultos para EXATO
+
+**Frontend (UNICAMP + FUVEST + UNESP — 28/05/2026)**
+- `lib/provas.ts`: adicionados UNICAMP (`cor=#8B5CF6`), FUVEST (`cor=#0EA5E9`), UNESP (`cor=#F97316`) ao array `PROVAS`
+- `FiltroSidebar.tsx`: chips expandidos para 7 fontes; filtros Área+Ano para UNICAMP/FUVEST; Área+Ano+Edição para UNESP
+- `questoes/page.tsx`: tipos e filtros para `isUnicamp`, `isFuvest`, `isUnesp`; `paginaUrl` com branches para novas fontes; `paginaActiveBg` com cores por fonte; hidden inputs no form de busca para PAES/UNICAMP/FUVEST/UNESP
+- `simulado/page.tsx`: UNICAMP/FUVEST/UNESP disponíveis com anos corretos; `ANOS_POR_FONTE` record central
+
+**Extratores UNICAMP/FUVEST/UNESP (28/05/2026)**
+- `extrair_unicamp.py`: detecta `QUEST.O\s+(\d{1,2})\b` (maiúsculas c/ possível char UTF); gabarito no próprio PDF após `Gabarito`; 205q totais (2023/2024/2026)
+- `extrair_fuvest.py`: detecta `\n\{?(\d{2})\}? *\n` (número isolado na linha, com possível `{01}` no 2025); gabarito em PDF separado; 341q totais (2023–2026)
+- `extrair_unesp.py`: detecta `Quest[ãa]o\s+(\d{1,2})\b`; gabarito formato `1  -  D` (dash + espaços); `coletar_pastas()` expande subpastas de edição (`2024.1`, `2025.1`, `2025.2`); busca PDF recursiva (`**/*.pdf`); 940q totais (2017–2026)
 
 **lib_extrair.py — arquitetura de extração (27/05/2026)**
 - `_parse_questoes_texto()`: parser sem API para PDFs digitais — detecta marcadores `Questão NN`, alternativas A-E com algoritmo de "última sequência válida"; ~94% das páginas de ENEM simulados sem Vision
@@ -429,18 +461,20 @@ EXATO com enunciado vazio (questões em imagem):
 
 1. ✅ ~~Obter Gemini API Key~~ — obtida em 27/05/2026; `GEMINI_API_KEY` configurado
 2. ✅ ~~Finalizar extração ENEM simulados~~ — 7.127 questões em `json_enem_simulados/`
-3. ✅ ~~Rodar `extrair_exato_provas.py`~~ — 222 questões em `json_exato_provas/`
-4. ✅ ~~Re-rodar `extrair_uft.py` com Gemini~~ — 639 questões únicas em Supabase (2018–2024); JSONs locais deduplicados (números repetidos por páginas sobrepostas)
+3. ✅ ~~Rodar `extrair_exato_provas.py`~~ — 204 questões re-extraídas com gabaritos corrigidos
+4. ✅ ~~Re-rodar `extrair_uft.py` com Gemini~~ — 639 questões únicas em Supabase (2018–2024)
 5. ✅ ~~Executar `migracao_unique_fontes.sql`~~ — índice 6-col ativo
-6. ✅ ~~Upload UFT/EXATO_P/ENEM_SIM/PAES~~ — todas as fontes no Supabase (639q UFT — contagem real após deduplicação)
+6. ✅ ~~Upload UFT/EXATO_P/ENEM_SIM/PAES~~ — todas as fontes no Supabase
 7. ✅ ~~Frontend PAES~~ — `FiltroSidebar.tsx`, `lib/provas.ts`, `questoes/page.tsx`, `simulado/page.tsx` atualizados
-8. ✅ ~~Re-extração UFT~~ — JSONs locais restaurados do Supabase (`restaurar_uft_do_supabase.py`). Ainda faltam Q33+ em: 2022_manha_1(32q), 2022_manha_2(32q), 2023_manha_1(29q), 2023_manha_2(32q), 2024_manha(32q). Re-extrair quando Gemini RPD resetar: `python extrair_uft.py --pasta "2022 - 1"` etc.
-9. ⏳ **Classificar competências** — `classificar_competencias_fontes.py --fonte ENEM_SIM --batch 20`; Groq rate limit impede progresso (568/7127 classificadas); retomar quando limite diário resetar
-10. **PAES 2019** — PDF escaneado (0q); processar com Vision futuramente
-11. **Fase 5 (PDF)** — retomar e verificar layout; habilitar botões na UI
-12. **Progresso por competência H01–H30** — adicionar breakdown por competência na página de progresso
-13. **Frases motivacionais das capas** — `frases_capa.txt` ainda não fornecido; `FRASES[]` em ImprimirClient.tsx usa placeholders
-14. **Fase 5.5 (correção por foto)** — FastAPI + OpenCV; depende dos marcadores de registro na folha de respostas
+8. ✅ ~~Re-extração UFT~~ — JSONs locais restaurados do Supabase. Ainda faltam Q33+ em alguns arquivos; re-extrair quando Gemini RPD resetar: `python extrair_uft.py --pasta "2022 - 1"` etc.
+9. ✅ ~~Criar extratores e fazer upload UNICAMP/FUVEST/UNESP~~ — 205+341+940 = 1.486 novas questões no Supabase (28/05/2026)
+10. ✅ ~~Frontend UNICAMP/FUVEST/UNESP~~ — `lib/provas.ts`, `FiltroSidebar.tsx`, `questoes/page.tsx`, `simulado/page.tsx` atualizados
+11. ⏳ **Classificar competências** — `classificar_competencias_fontes.py --fonte ENEM_SIM --batch 20`; Groq rate limit impede progresso (568/7127 classificadas); retomar quando limite diário resetar
+12. **PAES 2019** — PDF escaneado (0q); processar com Vision futuramente
+13. **Fase 5 (PDF)** — retomar e verificar layout; habilitar botões na UI
+14. **Progresso por competência H01–H30** — adicionar breakdown por competência na página de progresso
+15. **Frases motivacionais das capas** — `frases_capa.txt` ainda não fornecido; `FRASES[]` em ImprimirClient.tsx usa placeholders
+16. **Fase 5.5 (correção por foto)** — FastAPI + OpenCV; depende dos marcadores de registro na folha de respostas
 
 ---
 
@@ -540,6 +574,9 @@ const pdf = await page.pdf({ format: 'A4', printBackground: true, displayHeaderF
 - **UFT**: filtrar por `fonte='UFT'`; usar `ano`, `turno`, `evento` (edição: '1_EDICAO'/'2_EDICAO'); campo `dia='manha'|'tarde'` (turno codificado)
 - **EXATO provas**: filtrar por `fonte='EXATO'`, `tipo='PROVA'`; campo `dia='exato_manha'|'exato_tarde'` (turno codificado); `ano` preenchido (2024/2025)
 - **PAES/UEMA**: filtrar por `fonte='PAES'`; usar `ano` (2020–2025) e `dia` ('dia1'/'dia2'); 2021 tem dia1+dia2 (44q cada); Q16-Q20 = Língua Inglesa (canônico); áreas: Linguagens/Ciências Humanas/Ciências da Natureza
+- **UNICAMP**: filtrar por `fonte='UNICAMP'`; usar `ano` (2023/2024/2026); `dia='unico'`; 4 áreas ENEM-compatíveis
+- **FUVEST**: filtrar por `fonte='FUVEST'`; usar `ano` (2023–2026); `dia='unico'`; 4 áreas ENEM-compatíveis
+- **UNESP**: filtrar por `fonte='UNESP'`; usar `ano` (2017–2026) e `evento` ('1_EDICAO'|'2_EDICAO'|null); `dia='unico'`; 4 áreas ENEM-compatíveis; 2024 e 2025 têm 2 edições cada
 - **Provedor**: só ENEM simulados; valores: BERNOULLI, SAS, POLIEDRO, FARIAS_BRITO, SOMOS
 - **Extratores novos**: usar `export GROQ_API_KEY=...` (bash) ou `$env:GROQ_API_KEY=...` (PowerShell) — NÃO `set` CMD
 - **Gemini Vision**: ativar com `export GEMINI_API_KEY=...`; model padrão `gemini-3.1-flash-lite` (via v1beta, sem rate limit em burst); sobrescrever com `GEMINI_MODEL=...` se necessário

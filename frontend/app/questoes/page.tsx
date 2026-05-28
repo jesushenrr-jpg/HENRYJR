@@ -31,18 +31,24 @@ const AREA_INFO: Record<string, { label: string; bg: string; text: string; borde
 
 // Badge por fonte
 const FONTE_BADGE: Record<string, { bg: string; text: string; border: string }> = {
-  ENEM:  { bg: 'bg-blue-500/10',    text: 'text-blue-400',    border: 'border-blue-500/20' },
-  EXATO: { bg: 'bg-amber-500/10',   text: 'text-amber-400',   border: 'border-amber-500/20' },
-  UFT:   { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
-  PAES:  { bg: 'bg-rose-500/10',    text: 'text-rose-400',    border: 'border-rose-500/20' },
+  ENEM:    { bg: 'bg-blue-500/10',    text: 'text-blue-400',    border: 'border-blue-500/20' },
+  EXATO:   { bg: 'bg-amber-500/10',   text: 'text-amber-400',   border: 'border-amber-500/20' },
+  UFT:     { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
+  PAES:    { bg: 'bg-rose-500/10',    text: 'text-rose-400',    border: 'border-rose-500/20' },
+  UNICAMP: { bg: 'bg-violet-500/10',  text: 'text-violet-400',  border: 'border-violet-500/20' },
+  FUVEST:  { bg: 'bg-sky-500/10',     text: 'text-sky-400',     border: 'border-sky-500/20' },
+  UNESP:   { bg: 'bg-orange-500/10',  text: 'text-orange-400',  border: 'border-orange-500/20' },
 }
 
 // Cor de hover por fonte
 const FONTE_HOVER: Record<string, string> = {
-  ENEM:  'hover:border-blue-500/30',
-  EXATO: 'hover:border-amber-500/30',
-  UFT:   'hover:border-emerald-500/30',
-  PAES:  'hover:border-rose-500/30',
+  ENEM:    'hover:border-blue-500/30',
+  EXATO:   'hover:border-amber-500/30',
+  UFT:     'hover:border-emerald-500/30',
+  PAES:    'hover:border-rose-500/30',
+  UNICAMP: 'hover:border-violet-500/30',
+  FUVEST:  'hover:border-sky-500/30',
+  UNESP:   'hover:border-orange-500/30',
 }
 
 const AREAS = Object.keys(AREA_INFO)
@@ -56,11 +62,15 @@ export default async function QuestoesPage({
   const params   = await searchParams
   const supabase = await createClient()
 
-  const fonte    = (params.fonte ?? 'ENEM') as 'ENEM' | 'EXATO' | 'UFT' | 'PAES'
-  const isExato  = fonte === 'EXATO'
-  const isUFT    = fonte === 'UFT'
-  const isEnem   = fonte === 'ENEM'
-  const isPaes   = fonte === 'PAES'
+  const fonte      = (params.fonte ?? 'ENEM') as 'ENEM' | 'EXATO' | 'UFT' | 'PAES' | 'UNICAMP' | 'FUVEST' | 'UNESP'
+  const isExato    = fonte === 'EXATO'
+  const isUFT      = fonte === 'UFT'
+  const isEnem     = fonte === 'ENEM'
+  const isPaes     = fonte === 'PAES'
+  const isUnicamp  = fonte === 'UNICAMP'
+  const isFuvest   = fonte === 'FUVEST'
+  const isUnesp    = fonte === 'UNESP'
+  const hasAnos    = isEnem || isUFT || isPaes || isUnicamp || isFuvest || isUnesp
 
   const ano         = params.ano ? parseInt(params.ano) : undefined
   const dia         = params.dia
@@ -134,6 +144,17 @@ export default async function QuestoesPage({
     if (dia) query = query.eq('dia', dia)
   }
 
+  // Filtros UNICAMP / FUVEST (só ano e área)
+  if (isUnicamp || isFuvest) {
+    if (ano) query = query.eq('ano', ano)
+  }
+
+  // Filtros UNESP (ano + edição via evento)
+  if (isUnesp) {
+    if (ano)    query = query.eq('ano', ano)
+    if (evento) query = query.eq('evento', evento)
+  }
+
   // Filtros comuns
   if (area)  query = query.eq('area', area)
   if (tipo)  query = query.eq('tipo', tipo)
@@ -167,6 +188,11 @@ export default async function QuestoesPage({
     } else if (isPaes) {
       if (ano) sp.set('ano', String(ano))
       if (dia) sp.set('dia', dia)
+    } else if (isUnicamp || isFuvest) {
+      if (ano) sp.set('ano', String(ano))
+    } else if (isUnesp) {
+      if (ano)    sp.set('ano', String(ano))
+      if (evento) sp.set('evento', evento)
     }
     if (area)     sp.set('area', area)
     if (buscaRaw) sp.set('busca', buscaRaw)
@@ -184,6 +210,12 @@ export default async function QuestoesPage({
     ? 'bg-[#10B981] shadow-[#10B981]/20'
     : fonte === 'PAES'
     ? 'bg-[#F43F5E] shadow-[#F43F5E]/20'
+    : fonte === 'UNICAMP'
+    ? 'bg-[#8B5CF6] shadow-[#8B5CF6]/20'
+    : fonte === 'FUVEST'
+    ? 'bg-[#0EA5E9] shadow-[#0EA5E9]/20'
+    : fonte === 'UNESP'
+    ? 'bg-[#F97316] shadow-[#F97316]/20'
     : 'bg-[#3B82F6] shadow-[#3B82F6]/20'
 
   return (
@@ -248,6 +280,11 @@ export default async function QuestoesPage({
               {isUFT && ano          && <input type="hidden" name="ano"         value={ano} />}
               {isUFT && turno        && <input type="hidden" name="turno"       value={turno} />}
               {isUFT && evento       && <input type="hidden" name="evento"      value={evento} />}
+              {isPaes && ano         && <input type="hidden" name="ano"         value={ano} />}
+              {isPaes && dia         && <input type="hidden" name="dia"         value={dia} />}
+              {(isUnicamp || isFuvest) && ano && <input type="hidden" name="ano" value={ano} />}
+              {isUnesp && ano        && <input type="hidden" name="ano"         value={ano} />}
+              {isUnesp && evento     && <input type="hidden" name="evento"      value={evento} />}
               {area && <input type="hidden" name="area" value={area} />}
               {tipo && <input type="hidden" name="tipo" value={tipo} />}
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="absolute left-3 top-1/2 -translate-y-1/2 text-[#635D56] pointer-events-none">

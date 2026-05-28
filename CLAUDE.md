@@ -85,6 +85,7 @@ C:\Projetos\henryjr\
 ├── extrair_exato_provas.py     # Extrai provas EXATO → DADOS/json_exato_provas/
 ├── extrair_enem_simulados.py   # Extrai simulados ENEM → DADOS/json_enem_simulados/
 ├── upload_novas_questoes.py    # Upload UFT/EXATO_P/ENEM_SIM/PAES para Supabase
+├── classificar_competencias_fontes.py # Classifica H01–H30 para ENEM_SIM/UFT/PAES via Groq + PATCH Supabase
 ├── extrair_paes.py             # Extrai vestibulares PAES/UEMA → DADOS/json_paes/
 ├── migracao_provedor.sql       # SQL: ADD COLUMN provedor TEXT NULL + índice ✅ Executada
 ├── migracao_exato.sql          # SQL: adiciona colunas fonte/evento/turno na tabela questoes
@@ -432,7 +433,7 @@ EXATO com enunciado vazio (questões em imagem):
 6. ✅ ~~Upload UFT/EXATO_P/ENEM_SIM/PAES~~ — todas as fontes no Supabase (702q UFT após re-extração)
 7. ✅ ~~Frontend PAES~~ — `FiltroSidebar.tsx`, `lib/provas.ts`, `questoes/page.tsx`, `simulado/page.tsx` atualizados
 8. ✅ ~~Re-extração UFT 2021-2ª/2022-1ª~~ — `uft_2021_tarde_2_EDICAO` (44q), `uft_2022_manha_1_EDICAO` (40q), `uft_2022_tarde_1_EDICAO` (44q) re-extraídos com Gemini Vision; upload diferencial concluído
-9. **Classificar competências** — rodar `classificar_competencias.py --fonte ENEM --tipo SIMULADO` (ENEM simulados) e idealmente UFT/PAES também
+9. ⏳ ~~Classificar competências~~ — `classificar_competencias_fontes.py --fonte ENEM_SIM` rodando em background (~5h, 7127q); script suporta UFT/PAES também
 10. **PAES 2019** — PDF escaneado (0q); processar com Vision futuramente
 11. **Fase 5 (PDF)** — retomar e verificar layout; habilitar botões na UI
 12. **Progresso por competência H01–H30** — adicionar breakdown por competência na página de progresso

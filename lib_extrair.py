@@ -78,8 +78,12 @@ def pagina_tem_texto(texto: str, min_chars: int = 150) -> bool:
 
 
 def extrair_texto_pagina(doc: fitz.Document, page_num: int) -> str:
-    """Extrai texto de uma página específica."""
-    return doc[page_num].get_text()
+    """Extrai texto de uma página específica.
+    Remove C1 control characters (U+0080–U+009F) que fontes customizadas
+    (ex.: UFT) intercalam em caracteres Unicode compostos como QUESTÃO,
+    causando false-negative no regex Q_RE e fallback desnecessário para Vision."""
+    texto = doc[page_num].get_text()
+    return re.sub(r'[\x80-\x9f]', '', texto)
 
 
 def renderizar_pagina_base64(doc: fitz.Document, page_num: int, dpi: int = 72) -> str:
@@ -253,8 +257,8 @@ def _parse_bloco_questao(numero: int, bloco: str, area: str | None) -> dict | No
         return linha
 
     # Pré-processamento: mescla "A.\n<texto>" em "A. <texto>" para PDFs onde o
-    # marcador de alternativa (ex.: "A.") fica sozinho numa linha e o texto vem na próxima.
-    STANDALONE_ALT = re.compile(r"^([A-E])[.)]\s*$")
+    # marcador de alternativa (ex.: "A." ou "(A)") fica sozinho numa linha e o texto vem na próxima.
+    STANDALONE_ALT = re.compile(r"^\(?([A-E])\)?[.)]\s*$")
     raw_linhas = bloco.split("\n")
     merged: list[str] = []
     i_raw = 0
@@ -270,10 +274,11 @@ def _parse_bloco_questao(numero: int, bloco: str, area: str | None) -> dict | No
         i_raw += 1
     linhas = merged
 
-    # Linha começa com letra A-E seguida de separador: espaço(s), tab, ) ou .
-    # Com 1 espaço, falsos positivos ("A bolinha...") são resolvidos pela
-    # lógica de "última sequência válida A→E" mais abaixo.
-    ALT_MARK = re.compile(r"^([A-E])(?:[ \t]+|\)\s*|\.\s+)(.+)")
+    # Linha começa com letra A-E (opcionalmente com parêntese: "(A)" ou "A)") seguida
+    # de separador: espaço(s), tab, ) ou .
+    # Suporta formatos: "A) texto", "(A) texto", "A. texto", "A  texto"
+    # Falsos positivos são resolvidos pela lógica de "última sequência válida A→E" mais abaixo.
+    ALT_MARK = re.compile(r"^\(?([A-E])\)?(?:[.)]\s*|[ \t]{1,3})(.+)")
 
     # Coleta candidatos a linhas de alternativa (normaliza PUA antes de testar)
     pot: list[tuple[int, str, str]] = []  # (line_idx, letra, texto_inicial)

@@ -44,11 +44,19 @@ dados/imagens_teste*/
 dados/imagens_teste_v*/
 dados/texto_bruto/
 dados/*.bak*
+# O projeto usa `DADOS/` em maiúsculas no Windows; PDFs brutos permanecem locais.
+DADOS/**/*.pdf
+DADOS/imagens/
+DADOS/imagens_teste*/
+DADOS/pendentes_imagens/
+DADOS/teste_imgs/
+DADOS/test_*.png
 # Nota: dados/json/ e dados/json_v2/ SIM entram no git
 
 # Frontend — build e dependências
 frontend/.next/
 frontend/node_modules/
+node_modules/
 frontend/.env.local
 frontend/.env*.local
 !frontend/.env.example
@@ -59,6 +67,26 @@ migrar_questoes_erradas.py
 # Logs
 logs_classificacao.txt
 *.log
+
+# Áreas de trabalho e artefatos locais do Codex
+.codex-clean-publish/
+.codex-worktrees/
+
+# Artefatos de inspeção/extração regeneráveis
+_imgs_b64.json
+_imgs_b64.py
+demo_questoes.html
+test-results/
+playwright-report/
+tmp/
+
+# Relatórios de auditoria contêm snapshots grandes e backups locais.
+# Apenas resumos Markdown revisados devem ser versionados.
+reports/*.json
+
+# Caminhos acidentalmente materializados por ferramentas Windows
+C*/
+CTemp*
 
 # PyInstaller — build artifacts (NÃO commitar o .exe)
 dist/

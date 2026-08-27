@@ -114,8 +114,8 @@ print(re.search(r"(?:QUESTÃO|Questão)\s+(\d+)", texto_limpo, re.IGNORECASE))
 
 Configurar API key antes:
 ```powershell
-$env:GROQ_API_KEY = "GROQ_API_KEY_REDACTED"
-$env:GEMINI_API_KEY = "AIzaSyCct5xBRPpFdvCX5BGCTuGnHgBGwPqaLBE"
+$env:GROQ_API_KEY = "<ROTACIONAR_E_DEFINIR_NO_AMBIENTE>"
+$env:GEMINI_API_KEY = "<ROTACIONAR_E_DEFINIR_NO_AMBIENTE>"
 ```
 
 Re-extrair em sequência (cada `--pasta` processa MANHÃ + TARDE daquela edição):
@@ -275,7 +275,7 @@ O `import parse_gabarito` pode ser mantido (usado em outros extratores) ou remov
 - [ ] **Step 4: Re-extrair todas as pastas EXATO Provas**
 
 ```powershell
-$env:GEMINI_API_KEY = "AIzaSyCct5xBRPpFdvCX5BGCTuGnHgBGwPqaLBE"
+$env:GEMINI_API_KEY = "<ROTACIONAR_E_DEFINIR_NO_AMBIENTE>"
 python extrair_exato_provas.py
 ```
 

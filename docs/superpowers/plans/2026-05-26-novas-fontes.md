@@ -143,7 +143,7 @@ import fitz  # PyMuPDF: pip install pymupdf
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GROQ_VISION_MODEL = "meta-llama/llama-4-scout-17b-16e-instruct"
-GROQ_TEXT_MODEL   = "llama-3.1-8b-instant"
+GROQ_TEXT_MODEL   = "openai/gpt-oss-20b"
 
 AREA_ALIASES: dict[str, str] = {
     "linguagens": "Linguagens, Codigos e suas Tecnologias",

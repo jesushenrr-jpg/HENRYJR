@@ -20,6 +20,17 @@ interface SearchParams {
   provedor?: string
 }
 
+type QuestaoLista = Pick<Questao,
+  'id' | 'numero' | 'ano' | 'area' | 'competencia' | 'enunciado' |
+  'gabarito' | 'tem_imagem' | 'anulada'
+> & {
+  dia: string
+  fonte: string
+  evento: string | null
+  turno: string | null
+  provedor: string | null
+}
+
 const POR_PAGINA = 12
 
 const AREA_INFO: Record<string, { label: string; bg: string; text: string; border: string }> = {
@@ -70,7 +81,6 @@ export default async function QuestoesPage({
   const isUnicamp  = fonte === 'UNICAMP'
   const isFuvest   = fonte === 'FUVEST'
   const isUnesp    = fonte === 'UNESP'
-  const hasAnos    = isEnem || isUFT || isPaes || isUnicamp || isFuvest || isUnesp
 
   const ano         = params.ano ? parseInt(params.ano) : undefined
   const dia         = params.dia
@@ -88,7 +98,7 @@ export default async function QuestoesPage({
 
   // Busca respostas do usuário (para badges)
   const { data: { user } } = await supabase.auth.getUser()
-  let respostasMapa: Record<string, boolean> = {}
+  const respostasMapa: Record<string, boolean> = {}
   if (user) {
     const { data: respostas } = await supabase
       .from('questoes_erradas')
@@ -324,7 +334,7 @@ export default async function QuestoesPage({
               </div>
             )}
 
-            {questoes?.map((q: any) => {
+            {(questoes as QuestaoLista[] | null)?.map((q) => {
               const info    = AREA_INFO[q.area]
               const badge   = FONTE_BADGE[q.fonte] ?? FONTE_BADGE.ENEM
               const chave   = `${q.ano}-${q.dia}-${q.numero}`

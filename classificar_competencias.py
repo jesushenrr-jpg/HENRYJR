@@ -20,7 +20,7 @@ if sys.platform == "win32":
 
 # ── Configuração ────────────────────────────────────────────────────────────
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")  # definir via variável de ambiente
-GROQ_MODEL   = "llama-3.1-8b-instant"   # 14.400 req/dia (free) — suficiente para 2890 questões
+GROQ_MODEL   = os.getenv("GROQ_TEXT_MODEL", "openai/gpt-oss-20b")
 PASTA_JSON   = Path("dados/json_v2")
 DELAY_ENTRE_CHAMADAS = 2.5  # segundos (~24 req/min, abaixo do limite de 30 RPM)
 

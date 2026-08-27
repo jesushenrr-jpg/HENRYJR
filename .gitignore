@@ -5,6 +5,8 @@ chaves-projeto.txt
 *.secret
 .env
 .env.*
+!.env.example
+config.json
 
 # Dados grandes - ficam no Supabase Storage
 dados/PROVAS/
@@ -49,6 +51,7 @@ frontend/.next/
 frontend/node_modules/
 frontend/.env.local
 frontend/.env*.local
+!frontend/.env.example
 
 # Arquivos de migração com credenciais embutidas
 migrar_questoes_erradas.py

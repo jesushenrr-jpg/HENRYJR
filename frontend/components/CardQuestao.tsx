@@ -73,7 +73,6 @@ export default function CardQuestao({ questao, idAnterior, idProximo, respostaAn
         numero:           questao.numero,
         area:             questao.area,
         resposta_usuario: resposta,
-        gabarito:         questao.gabarito,
       }),
     }).catch(() => {})
   }

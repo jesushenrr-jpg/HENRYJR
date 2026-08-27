@@ -52,7 +52,7 @@ HDR_SB = {
     "Content-Type": "application/json",
 }
 
-GROQ_MODEL   = "llama-3.1-8b-instant"
+GROQ_MODEL   = os.getenv("GROQ_TEXT_MODEL", "openai/gpt-oss-20b")
 DELAY_LOTE   = 2.0   # s após cada lote bem-sucedido
 
 BASE = Path(r"C:\PROJETOS\HENRYJR\DADOS")

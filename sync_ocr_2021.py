@@ -1,9 +1,9 @@
 """Sincroniza questões de 2021 com OCR extraído para o Supabase (sem campo ocr)."""
-import json, requests, time
+import json, requests, time, os
 
 BASE     = "C:/PROJETOS/HENRYJR/DADOS"
-SUPA_URL = "https://bmhudlpihwxvaelokugh.supabase.co"
-SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJtaHVkbHBpaHd4dmFlbG9rdWdoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjMwNDAzOSwiZXhwIjoyMDkxODgwMDM5fQ.KucpbBiIhjPKQCEBIdV8sGuDw_F5CZdXWlZy39h-I7M"
+SUPA_URL = os.environ["SUPABASE_URL"]
+SUPA_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
 
 HEADERS = {
     "apikey": SUPA_KEY,

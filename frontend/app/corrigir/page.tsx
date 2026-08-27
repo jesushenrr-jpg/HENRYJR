@@ -16,8 +16,8 @@ export default async function CorrigirPage({ searchParams }: Props) {
 
   // Se simulado_id fornecido, busca os dados
   let sim: { id: number; total_questoes: number } | null = null
-  let questaoIds: number[] = []
-  let gabarito: Record<number, string> = {}
+  const questaoIds: number[] = []
+  const gabarito: Record<number, string> = {}
 
   if (simStr) {
     const simId = parseInt(simStr, 10)

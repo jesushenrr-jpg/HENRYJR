@@ -72,7 +72,7 @@ export default function SimuladoConfig() {
     setErro('')
     setLoading(true)
     try {
-      const body: Record<string, any> = {
+      const body: Record<string, string | number | undefined> = {
         fonte,
         area:      area || undefined,
         quantidade,

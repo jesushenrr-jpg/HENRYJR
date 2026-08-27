@@ -29,7 +29,7 @@ Explique por que a alternativa ${gabarito} √© a correta e por que as demais est√
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',
+      model: process.env.GROQ_EXPLAIN_MODEL ?? 'openai/gpt-oss-120b',
       messages: [{ role: 'user', content: prompt }],
       stream: true,
       temperature: 0.3,

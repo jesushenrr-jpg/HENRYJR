@@ -37,7 +37,7 @@ Busca "questões de física sobre ondas" → {"termos":["onda","frequência","co
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'llama-3.1-8b-instant',
+      model: process.env.GROQ_SEARCH_MODEL ?? 'openai/gpt-oss-20b',
       messages: [{ role: 'user', content: prompt }],
       max_tokens: 150,
       temperature: 0.1,

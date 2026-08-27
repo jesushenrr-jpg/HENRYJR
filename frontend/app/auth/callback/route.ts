@@ -4,9 +4,13 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {
-  const { searchParams, origin } = new URL(request.url)
+  const { searchParams } = new URL(request.url)
   const code = searchParams.get('code')
-  const next = searchParams.get('next') ?? '/'
+  const nextParam = searchParams.get('next') ?? '/'
+  const next = nextParam.startsWith('/') && !nextParam.startsWith('//') ? nextParam : '/'
+  const siteUrl = request.nextUrl.hostname === 'localhost'
+    ? request.nextUrl.origin
+    : 'https://henryjr.vercel.app'
 
   if (code) {
     const cookieStore = await cookies()
@@ -26,9 +30,9 @@ export async function GET(request: NextRequest) {
     )
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`)
+      return NextResponse.redirect(`${siteUrl}${next}`)
     }
   }
 
-  return NextResponse.redirect(`${origin}/auth/login?error=auth`)
+  return NextResponse.redirect(`${siteUrl}/auth/login?error=auth`)
 }

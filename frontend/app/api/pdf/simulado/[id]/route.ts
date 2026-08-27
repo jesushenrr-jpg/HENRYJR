@@ -6,7 +6,7 @@
  * função serverless do Vercel (bundle ≈ 50 MB, timeout máx. 60 s).
  *
  * Variáveis de ambiente (Vercel Dashboard → Settings → Environment Variables):
- *   NEXT_PUBLIC_SITE_URL  – URL canônica do site (ex.: https://frontend-two-khaki-40.vercel.app)
+ *   NEXT_PUBLIC_SITE_URL  – URL canônica do site (ex.: https://henryjr.vercel.app)
  *                           Se não definida, usa VERCEL_URL (injetado automaticamente pelo Vercel).
  *
  * Em desenvolvimento local:

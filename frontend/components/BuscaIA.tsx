@@ -31,13 +31,17 @@ export default function BuscaIA() {
         competencia: string | null
       }
 
-      setPreview({ termos, area, competencia })
+      const semAcentos = q.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      const termosBusca = Array.from(new Set([q, semAcentos, ...termos])).slice(0, 5)
+
+      setPreview({ termos: termosBusca, area, competencia })
 
       const sp = new URLSearchParams()
-      sp.set('busca', termos.join(','))
+      sp.set('fonte', 'ENEM')
+      sp.set('busca', termosBusca.join(','))
       sp.set('ia', '1')
-      if (area)        sp.set('area', area)
-      if (competencia) sp.set('competencia', competencia)
+      // Área e competência aparecem como contexto, mas não restringem a consulta:
+      // a classificação histórica é incompleta e poderia zerar resultados relevantes.
       router.push(`/questoes?${sp}`)
     } catch (e: unknown) {
       setErro(e instanceof Error ? e.message : 'Erro ao buscar')

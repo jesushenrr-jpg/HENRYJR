@@ -399,6 +399,10 @@ Marcadas com `anulada: true, gabarito: null` em todos os JSONs v2 e no Supabase.
 - UNESP: 940 questões (2017–2026, inclui edições 2024.1/2025.1/2025.2) extraídas via parser texto e uploadadas ✅ (28/05/2026)
 
 **Frontend**
+- Domínio canônico: `https://henryjr.vercel.app`; o domínio automático antigo redireciona com HTTP 308 para evitar sessões OAuth duplicadas
+- OAuth: callbacks, login e logout sempre retornam ao domínio canônico (localhost preservado em desenvolvimento)
+- Busca IA: consulta JSONB pelos primeiros blocos do enunciado + comando, inclui variante sem acentos e não restringe por competência incompleta
+- Explicação IA: GPT-OSS com reasoning baixo, estrutura objetiva de 250–400 palavras e limite suficiente para conclusão completa
 - Redesign completo "Biblioteca Cálida" (paleta quente, tipografia editorial)
 - `FiltroSidebar.tsx`: chips de fonte ENEM/EXATO/UFT (substituiu tabs); filtros condicionais por fonte+tipo; combo Elaborador para ENEM simulados
 - Card de questão: tesoura, revelar gabarito, Explicar com IA (streaming + Markdown), Ver PDF, Reportar Erro

@@ -28,25 +28,44 @@ Siga rigorosamente esta estrutura, em 250 a 400 palavras:
 
 Não repita a conclusão, não crie perguntas retóricas, não acrescente uma nova seção depois de "Para lembrar" e encerre a resposta completamente.`
 
-  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: process.env.GROQ_EXPLAIN_MODEL ?? 'openai/gpt-oss-120b',
-      messages: [{ role: 'user', content: prompt }],
-      stream: true,
-      temperature: 0.3,
-      reasoning_effort: 'low',
-      reasoning_format: 'hidden',
-      max_completion_tokens: 1800,
-    }),
-  })
+  const apiKey = process.env.GROQ_API_KEY?.trim()
+  if (!apiKey) {
+    console.error('[explicar] GROQ_API_KEY ausente no ambiente do deploy')
+    return new Response('Serviço de IA não configurado no servidor.', { status: 503 })
+  }
 
-  if (!res.ok || !res.body) {
-    return new Response('Erro ao conectar com a IA.', { status: 500 })
+  let res: Response
+  try {
+    res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: process.env.GROQ_EXPLAIN_MODEL?.trim() || 'openai/gpt-oss-120b',
+        messages: [{ role: 'user', content: prompt }],
+        stream: true,
+        temperature: 0.3,
+        reasoning_effort: 'low',
+        reasoning_format: 'hidden',
+        max_completion_tokens: 1800,
+      }),
+    })
+  } catch (error) {
+    console.error('[explicar] falha de rede ao chamar Groq', error)
+    return new Response('Não foi possível acessar o serviço de IA.', { status: 502 })
+  }
+
+  if (!res.ok) {
+    const detalhe = (await res.text()).slice(0, 1000)
+    console.error(`[explicar] Groq respondeu HTTP ${res.status}: ${detalhe}`)
+    return new Response(`Serviço de IA indisponível (Groq HTTP ${res.status}).`, { status: 502 })
+  }
+
+  if (!res.body) {
+    console.error('[explicar] Groq respondeu sem corpo de streaming')
+    return new Response('O serviço de IA respondeu sem conteúdo.', { status: 502 })
   }
 
   const encoder = new TextEncoder()

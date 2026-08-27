@@ -30,24 +30,38 @@ Busca "fotossíntese" → {"termos":["fotossíntese","cloroplasto","luz solar"],
 Busca "revolução industrial" → {"termos":["revolução industrial","industrialização","fábrica"],"area":"Ciencias Humanas e suas Tecnologias","competencia":null}
 Busca "questões de física sobre ondas" → {"termos":["onda","frequência","comprimento de onda"],"area":"Ciencias da Natureza e suas Tecnologias","competencia":null}`
 
-  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: process.env.GROQ_SEARCH_MODEL ?? 'openai/gpt-oss-20b',
-      messages: [{ role: 'user', content: prompt }],
-      max_completion_tokens: 300,
-      reasoning_effort: 'low',
-      temperature: 0.1,
-      response_format: { type: 'json_object' },
-    }),
-  })
+  const apiKey = process.env.GROQ_API_KEY?.trim()
+  if (!apiKey) {
+    console.error('[busca-ia] GROQ_API_KEY ausente no ambiente do deploy')
+    return NextResponse.json({ termos: [query.trim()], area: null, competencia: null, fallback: true })
+  }
+
+  let res: Response
+  try {
+    res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: process.env.GROQ_SEARCH_MODEL?.trim() || 'openai/gpt-oss-20b',
+        messages: [{ role: 'user', content: prompt }],
+        max_completion_tokens: 300,
+        reasoning_effort: 'low',
+        temperature: 0.1,
+        response_format: { type: 'json_object' },
+      }),
+    })
+  } catch (error) {
+    console.error('[busca-ia] falha de rede ao chamar Groq', error)
+    return NextResponse.json({ termos: [query.trim()], area: null, competencia: null, fallback: true })
+  }
 
   if (!res.ok) {
-    return NextResponse.json({ error: 'Erro ao consultar IA' }, { status: 502 })
+    const detalhe = (await res.text()).slice(0, 1000)
+    console.error(`[busca-ia] Groq respondeu HTTP ${res.status}: ${detalhe}`)
+    return NextResponse.json({ termos: [query.trim()], area: null, competencia: null, fallback: true })
   }
 
   const data = await res.json()

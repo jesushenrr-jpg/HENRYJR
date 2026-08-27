@@ -1,8 +1,11 @@
 import { NextRequest } from 'next/server'
+import { logEvent, requestId } from '@/lib/observability'
 
 export const runtime = 'edge'
 
 export async function POST(req: NextRequest) {
+  const startedAt = Date.now()
+  const id = requestId(req)
   const { enunciado, comando, alternativas, gabarito, ano, numero } = await req.json()
 
   const prompt = `Você é um professor especialista em vestibulares. Produza uma resolução detalhada, mas objetiva, para um estudante revisando a questão.
@@ -30,7 +33,7 @@ Não repita a conclusão, não crie perguntas retóricas, não acrescente uma no
 
   const apiKey = process.env.GROQ_API_KEY?.trim()
   if (!apiKey) {
-    console.error('[explicar] GROQ_API_KEY ausente no ambiente do deploy')
+    logEvent('error', 'ai.explain.config_missing', { request_id: id })
     return new Response('Serviço de IA não configurado no servidor.', { status: 503 })
   }
 
@@ -53,18 +56,31 @@ Não repita a conclusão, não crie perguntas retóricas, não acrescente uma no
       }),
     })
   } catch (error) {
-    console.error('[explicar] falha de rede ao chamar Groq', error)
+    logEvent('error', 'ai.explain.network_error', {
+      request_id: id,
+      duration_ms: Date.now() - startedAt,
+      error: error instanceof Error ? error.name : 'unknown',
+    })
     return new Response('Não foi possível acessar o serviço de IA.', { status: 502 })
   }
 
   if (!res.ok) {
     const detalhe = (await res.text()).slice(0, 1000)
-    console.error(`[explicar] Groq respondeu HTTP ${res.status}: ${detalhe}`)
+    logEvent('error', 'ai.explain.provider_error', {
+      request_id: id,
+      provider: 'groq',
+      provider_status: res.status,
+      duration_ms: Date.now() - startedAt,
+      detail: detalhe,
+    })
     return new Response(`Serviço de IA indisponível (Groq HTTP ${res.status}).`, { status: 502 })
   }
 
   if (!res.body) {
-    console.error('[explicar] Groq respondeu sem corpo de streaming')
+    logEvent('error', 'ai.explain.empty_stream', {
+      request_id: id,
+      duration_ms: Date.now() - startedAt,
+    })
     return new Response('O serviço de IA respondeu sem conteúdo.', { status: 502 })
   }
 
@@ -121,7 +137,15 @@ Não repita a conclusão, não crie perguntas retóricas, não acrescente uma no
     },
   })
 
+  logEvent('info', 'ai.explain.stream_started', {
+    request_id: id,
+    provider: 'groq',
+    duration_ms: Date.now() - startedAt,
+  })
   return new Response(stream, {
-    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'X-Request-Id': id,
+    },
   })
 }

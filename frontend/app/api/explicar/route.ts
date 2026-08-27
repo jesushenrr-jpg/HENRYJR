@@ -5,7 +5,7 @@ export const runtime = 'edge'
 export async function POST(req: NextRequest) {
   const { enunciado, comando, alternativas, gabarito, ano, numero } = await req.json()
 
-  const prompt = `Você é um professor especialista em ENEM. Explique de forma clara e didática a solução da seguinte questão.
+  const prompt = `Você é um professor especialista em vestibulares. Produza uma resolução detalhada, mas objetiva, para um estudante revisando a questão.
 
 **ENEM ${ano} — Questão ${numero}**
 
@@ -20,7 +20,13 @@ ${Object.entries(alternativas as Record<string, string>)
 
 **Gabarito: ${gabarito}**
 
-Explique por que a alternativa ${gabarito} é a correta e por que as demais estão erradas. Seja objetivo e didático.`
+Siga rigorosamente esta estrutura, em 250 a 400 palavras:
+1. **Ideia central** — conceito necessário em 2 ou 3 frases.
+2. **Aplicação à questão** — raciocínio direto até o gabarito, sem repetir todo o enunciado.
+3. **Alternativas** — uma frase curta para a correta e uma frase curta para cada distrator.
+4. **Para lembrar** — uma única frase de revisão.
+
+Não repita a conclusão, não crie perguntas retóricas, não acrescente uma nova seção depois de "Para lembrar" e encerre a resposta completamente.`
 
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
@@ -33,7 +39,9 @@ Explique por que a alternativa ${gabarito} é a correta e por que as demais est�
       messages: [{ role: 'user', content: prompt }],
       stream: true,
       temperature: 0.3,
-      max_tokens: 1024,
+      reasoning_effort: 'low',
+      reasoning_format: 'hidden',
+      max_completion_tokens: 1800,
     }),
   })
 

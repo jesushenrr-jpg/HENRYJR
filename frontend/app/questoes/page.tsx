@@ -92,7 +92,9 @@ export default async function QuestoesPage({
   const provedor    = params.provedor
   const buscaRaw    = params.busca?.trim()
   const isIA        = params.ia === '1'
-  const termosBusca = buscaRaw ? buscaRaw.split(',').map(t => t.trim()).filter(Boolean) : []
+  const termosBusca = buscaRaw
+    ? buscaRaw.split(',').map(t => t.trim().replace(/[,()%]/g, '').slice(0, 80)).filter(Boolean)
+    : []
   const pagina      = params.pagina ? parseInt(params.pagina) : 1
   const offset      = (pagina - 1) * POR_PAGINA
 
@@ -171,12 +173,18 @@ export default async function QuestoesPage({
 
   if (termosBusca.length > 0) {
     const orFilter = termosBusca
-      .flatMap(t => [`enunciado.ilike.%${t}%`, `comando.ilike.%${t}%`])
+      .flatMap(t => [
+        `enunciado->>0.ilike.%${t}%`,
+        `enunciado->>1.ilike.%${t}%`,
+        `enunciado->>2.ilike.%${t}%`,
+        `comando.ilike.%${t}%`,
+      ])
       .join(',')
     query = query.or(orFilter)
   }
 
-  const { data: questoes, count } = await query
+  const { data: questoes, count, error: queryError } = await query
+  if (queryError) console.error('questoes query error:', queryError.message)
   const total        = count ?? 0
   const totalPaginas = Math.ceil(total / POR_PAGINA)
 

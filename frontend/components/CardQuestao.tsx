@@ -93,6 +93,10 @@ export default function CardQuestao({ questao, idAnterior, idProximo, respostaAn
           numero:       questao.numero,
         }),
       })
+      if (!res.ok) {
+        const mensagem = await res.text()
+        throw new Error(mensagem || 'Erro ao buscar explicação')
+      }
       const reader = res.body?.getReader()
       const decoder = new TextDecoder()
       if (!reader) return

@@ -17,6 +17,12 @@ export default function LoginPage() {
   const [msg, setMsg]             = useState<{ texto: string; tipo: 'erro' | 'ok' } | null>(null)
   const supabase = createClient()
 
+  function getSiteUrl() {
+    return window.location.hostname === 'localhost'
+      ? window.location.origin
+      : 'https://henryjr.vercel.app'
+  }
+
   async function handleEmail(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
@@ -28,7 +34,7 @@ export default function LoginPage() {
           email,
           password: senha,
           options: {
-            emailRedirectTo: `${location.origin}/auth/callback`,
+            emailRedirectTo: `${getSiteUrl()}/auth/callback`,
             data: { full_name: nome || email.split('@')[0] },
           },
         })
@@ -49,7 +55,7 @@ export default function LoginPage() {
     setGoogleLoading(true)
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: `${location.origin}/auth/callback` },
+      options: { redirectTo: `${getSiteUrl()}/auth/callback` },
     })
   }
 
@@ -186,7 +192,7 @@ export default function LoginPage() {
                   onClick={async () => {
                     if (!email) { setMsg({ texto: 'Digite seu e-mail primeiro.', tipo: 'erro' }); return }
                     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-                      redirectTo: `${location.origin}/auth/callback?next=/auth/reset-password`,
+                      redirectTo: `${getSiteUrl()}/auth/callback?next=/auth/reset-password`,
                     })
                     setMsg(error
                       ? { texto: 'Erro ao enviar e-mail.', tipo: 'erro' }

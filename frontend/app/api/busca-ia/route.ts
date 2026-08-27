@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 O usuário quer encontrar questões sobre: "${query}"
 
 Retorne APENAS um JSON válido com:
-- "termos": array de 1 a 3 palavras-chave em português para busca textual (termos que provavelmente aparecem nos textos das questões)
+- "termos": array de 2 a 4 palavras-chave curtas em português para busca textual. Inclua o termo original e sinônimos amplos que provavelmente aparecem literalmente nos textos das questões.
 - "area": exatamente uma das opções ou null — "Linguagens, Codigos e suas Tecnologias" | "Ciencias Humanas e suas Tecnologias" | "Ciencias da Natureza e suas Tecnologias" | "Matematica e suas Tecnologias"
 - "competencia": código H01–H30 se claramente identificável, ou null
 
@@ -39,7 +39,8 @@ Busca "questões de física sobre ondas" → {"termos":["onda","frequência","co
     body: JSON.stringify({
       model: process.env.GROQ_SEARCH_MODEL ?? 'openai/gpt-oss-20b',
       messages: [{ role: 'user', content: prompt }],
-      max_tokens: 150,
+      max_completion_tokens: 300,
+      reasoning_effort: 'low',
       temperature: 0.1,
       response_format: { type: 'json_object' },
     }),

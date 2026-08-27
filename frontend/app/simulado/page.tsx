@@ -5,24 +5,13 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 const PROVAS = [
-  {
-    key:   'ENEM' as const,
-    label: 'ENEM',
-    icon:  '📝',
-    desc:  '2009–2024 · 2.880+ questões',
-  },
-  {
-    key:   'EXATO' as const,
-    label: 'EXATO',
-    icon:  '🎓',
-    desc:  'Provas e simulados TESSAT',
-  },
-  {
-    key:   'UFT' as const,
-    label: 'UFT',
-    icon:  '🏛️',
-    desc:  'Vestibular 2018–2024',
-  },
+  { key: 'ENEM'    as const, label: 'ENEM',    icon: '📝', desc: '2009–2024 · 2.880+ questões' },
+  { key: 'EXATO'   as const, label: 'EXATO',   icon: '🎓', desc: 'Provas e simulados TESSAT'    },
+  { key: 'UFT'     as const, label: 'UFT',     icon: '🏛️', desc: 'Vestibular 2018–2024'         },
+  { key: 'PAES'    as const, label: 'PAES',    icon: '🎯', desc: 'UEMA 2020–2025'               },
+  { key: 'UNICAMP' as const, label: 'UNICAMP', icon: '🏫', desc: '1ª Fase 2023–2026'            },
+  { key: 'FUVEST'  as const, label: 'FUVEST',  icon: '📚', desc: '1ª Fase 2023–2026'            },
+  { key: 'UNESP'   as const, label: 'UNESP',   icon: '⚡', desc: '1ª Fase 2017–2026'            },
 ]
 
 const AREAS = [
@@ -34,10 +23,24 @@ const AREAS = [
 
 const QTDS = [10, 20, 30, 45]
 
-const ANOS_ENEM = Array.from({ length: 16 }, (_, i) => 2009 + i)
-const ANOS_UFT  = Array.from({ length: 7  }, (_, i) => 2018 + i)
+const ANOS_ENEM    = Array.from({ length: 16 }, (_, i) => 2009 + i)
+const ANOS_UFT     = Array.from({ length: 7  }, (_, i) => 2018 + i)
+const ANOS_PAES    = [2020, 2021, 2022, 2023, 2024, 2025]
+const ANOS_UNICAMP = [2023, 2024, 2026]
+const ANOS_FUVEST  = [2023, 2024, 2025, 2026]
+const ANOS_UNESP   = Array.from({ length: 10 }, (_, i) => 2017 + i)
 
-type Fonte = 'ENEM' | 'EXATO' | 'UFT'
+type Fonte = 'ENEM' | 'EXATO' | 'UFT' | 'PAES' | 'UNICAMP' | 'FUVEST' | 'UNESP'
+
+const ANOS_POR_FONTE: Record<Fonte, number[]> = {
+  ENEM:    ANOS_ENEM,
+  EXATO:   [],
+  UFT:     ANOS_UFT,
+  PAES:    ANOS_PAES,
+  UNICAMP: ANOS_UNICAMP,
+  FUVEST:  ANOS_FUVEST,
+  UNESP:   ANOS_UNESP,
+}
 
 export default function SimuladoConfig() {
   const router = useRouter()
@@ -52,17 +55,15 @@ export default function SimuladoConfig() {
   const [tipo,       setTipo]      = useState<'' | 'PROVA' | 'SIMULADO'>('')
   const [simuladoId, setSimuladoId] = useState<number | null>(null)
 
-  const anosDisponiveis = fonte === 'UFT' ? ANOS_UFT : ANOS_ENEM
-  const mostraAnos = fonte !== 'EXATO'
+  const anosDisponiveis = ANOS_POR_FONTE[fonte] ?? ANOS_ENEM
+  const mostraAnos      = fonte !== 'EXATO'
 
   function selectFonte(f: Fonte) {
     setFonte(f)
-    if (f === 'UFT') {
-      setAnoInicio(2018)
-      setAnoFim(2024)
-    } else {
-      setAnoInicio(2009)
-      setAnoFim(2024)
+    const anos = ANOS_POR_FONTE[f]
+    if (anos && anos.length > 0) {
+      setAnoInicio(anos[0])
+      setAnoFim(anos[anos.length - 1])
     }
     setTipo('')
   }
@@ -71,7 +72,7 @@ export default function SimuladoConfig() {
     setErro('')
     setLoading(true)
     try {
-      const body: Record<string, any> = {
+      const body: Record<string, string | number | undefined> = {
         fonte,
         area:      area || undefined,
         quantidade,
@@ -163,7 +164,7 @@ export default function SimuladoConfig() {
       {/* Prova */}
       <section className="mb-7">
         <h2 className="text-[11px] uppercase tracking-wider text-white/45 mb-3">Prova</h2>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-2">
           {PROVAS.map(p => (
             <button
               key={p.key}

@@ -13,7 +13,8 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from lib_extrair import extrair_questoes_pdf, parse_gabarito, normalizar_questao_banco
+import fitz
+from lib_extrair import extrair_questoes_pdf, normalizar_questao_banco
 
 BASE       = Path(r"C:\PROJETOS\HENRYJR")
 INPUT_DIR  = BASE / "DADOS" / "EXATO_PROVAS"
@@ -34,16 +35,119 @@ def parse_pasta(nome: str) -> tuple[int, str | None]:
     return ano, edicao
 
 
+def parse_gabarito_exato_provas(gab_pdf: Path) -> tuple[dict, dict]:
+    """
+    Extrai gabaritos MANHÃ e TARDE do GAB.pdf das provas EXATO.
+
+    Formato real do PDF:
+        PROVA MANHÃ
+        01
+        02
+        ...
+        10
+        C
+        B
+        ...
+        B
+        11
+        ...
+        PROVA TARDE
+        01
+        02
+        ...
+
+    Estratégia:
+    1. Dividir o texto nas seções MANHÃ / TARDE
+    2. Para cada seção: ler linhas e agrupar números (NN) e respostas ([A-E]|ANULADA)
+       alternando em blocos de 10
+    """
+    doc = fitz.open(str(gab_pdf))
+    texto = "\n".join(doc[i].get_text() for i in range(len(doc)))
+    doc.close()
+    texto = re.sub(r'[\x80-\x9f]', '', texto)
+
+    def _parsear_secao(bloco: str) -> dict[int, str | None]:
+        """Parseia uma seção (MANHÃ ou TARDE) do gabarito."""
+        linhas = [l.strip() for l in bloco.split('\n') if l.strip()]
+        numeros: list[int] = []
+        respostas: list[str | None] = []
+
+        for linha in linhas:
+            if re.match(r'^\d{1,2}$', linha):
+                n = int(linha)
+                if 1 <= n <= 60:
+                    numeros.append(n)
+            elif re.match(r'^[A-Ea-e]$', linha):
+                respostas.append(linha.upper())
+            elif re.match(r'^ANULADA$', linha, re.IGNORECASE):
+                respostas.append(None)
+
+        # Parear: os primeiros len(respostas) números com as respostas
+        resultado: dict[int, str | None] = {}
+        for i, resp in enumerate(respostas):
+            if i < len(numeros):
+                resultado[numeros[i]] = resp
+
+        return resultado
+
+    # Dividir nas seções MANHÃ e TARDE
+    manh_re = re.compile(r'PROVA\s+MANH[Ãa]', re.IGNORECASE)
+    tard_re  = re.compile(r'PROVA\s+TARDE',    re.IGNORECASE)
+
+    m_manh = manh_re.search(texto)
+    m_tard = tard_re.search(texto)
+
+    if m_manh and m_tard:
+        if m_manh.start() < m_tard.start():
+            bloco_manh = texto[m_manh.end():m_tard.start()]
+            bloco_tard = texto[m_tard.end():]
+        else:
+            bloco_tard = texto[m_tard.end():m_manh.start()]
+            bloco_manh = texto[m_manh.end():]
+    elif m_manh:
+        bloco_manh = texto[m_manh.end():]
+        bloco_tard = ""
+    elif m_tard:
+        bloco_tard = texto[m_tard.end():]
+        bloco_manh = ""
+    else:
+        # Sem cabeçalhos — tentar parsear tudo como MANHÃ
+        bloco_manh = texto
+        bloco_tard = ""
+
+    gab_manh = _parsear_secao(bloco_manh)
+    gab_tard = _parsear_secao(bloco_tard) if bloco_tard else {}
+
+    return gab_manh, gab_tard
+
+
 def processar_pasta(pasta: Path) -> list[dict]:
     ano, edicao = parse_pasta(pasta.name)
     if not ano:
         print(f"  ⚠ Não foi possível detectar ano em: {pasta.name}")
         return []
 
+    # Gabarito: aceita GAB.pdf, GAB PROVISÓRIO.pdf, GAB PROVISORIO.pdf
+    gab_pdf = None
+    for nome_gab in ["GAB.pdf", "GAB PROVISÓRIO.pdf", "GAB PROVISORIO.pdf",
+                     "GAB PROVISÓRIO.pdf"]:
+        p = pasta / nome_gab
+        if p.exists():
+            gab_pdf = p
+            break
+
+    # Ler gabaritos separados por turno
+    if gab_pdf:
+        gab_manh, gab_tard = parse_gabarito_exato_provas(gab_pdf)
+        print(f"  Gabarito: {gab_pdf.name} | MANHÃ={len(gab_manh)}q | TARDE={len(gab_tard)}q")
+    else:
+        gab_manh, gab_tard = {}, {}
+        print(f"  ⚠ Gabarito não encontrado em {pasta.name}")
+
     resultado = []
-    for turno_variantes, turno_val in [
-        (["MANHÃ.pdf", "MANHÃ.PDF", "MANHA.pdf", "MANHA.PDF"], "MANHA"),
-        (["TARDE.pdf", "TARDE.PDF", "TARDE.pdf", "tarde.pdf"],  "TARDE"),
+    for turno_variantes, turno_val, gabarito_map in [
+        (["MANHÃ.pdf", "MANHÃ.PDF", "MANHA.pdf", "MANHA.PDF"], "MANHA", gab_manh),
+        (["TARDE.pdf", "TARDE.PDF", "tarde.pdf"],                "TARDE", gab_tard),
     ]:
         prova_pdf = None
         for nome in turno_variantes:
@@ -56,18 +160,10 @@ def processar_pasta(pasta: Path) -> list[dict]:
             print(f"  ⚠ Não encontrado turno {turno_val} em {pasta.name}")
             continue
 
-        # Gabarito: aceita GAB.pdf ou GAB PROVISÓRIO.pdf
-        gab_pdf = None
-        for nome_gab in ["GAB.pdf", "GAB PROVISÓRIO.pdf", "GAB PROVISORIO.pdf"]:
-            p = pasta / nome_gab
-            if p.exists():
-                gab_pdf = p
-                break
-
         print(f"\n  [{pasta.name}] {turno_val}")
         questoes_brutas = extrair_questoes_pdf(prova_pdf)
-        gabarito_map    = parse_gabarito(gab_pdf) if gab_pdf else {}
-        print(f"    → {len(questoes_brutas)} questões | {len(gabarito_map)} gabaritos")
+        n_gab = sum(1 for v in gabarito_map.values() if v is not None)
+        print(f"    → {len(questoes_brutas)} questões | {len(gabarito_map)} gabaritos ({n_gab} com letra)")
 
         questoes_turno = []
         for idx, q in enumerate(questoes_brutas):
@@ -78,9 +174,9 @@ def processar_pasta(pasta: Path) -> list[dict]:
                 tipo="PROVA",
                 ano=ano,
                 turno=turno_val,
-                evento=None,      # EXATO provas não têm evento (diferente dos simulados)
+                evento=None,
                 provedor=None,
-                dia="exato",
+                dia=f"exato_{turno_val.lower()}",
                 gabarito_map=gabarito_map,
                 numero_global=numero_local,
             )
@@ -98,7 +194,7 @@ def processar_pasta(pasta: Path) -> list[dict]:
 def main():
     if not INPUT_DIR.exists():
         print(f"✗ Pasta não encontrada: {INPUT_DIR}")
-        import sys; sys.exit(1)
+        sys.exit(1)
 
     pastas = sorted(INPUT_DIR.iterdir())
     print(f"EXATO_PROVAS — {len(pastas)} pastas")

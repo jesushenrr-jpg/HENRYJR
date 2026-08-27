@@ -3,8 +3,10 @@
 import { createClient } from '@/lib/supabase/client'
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
+  const router = useRouter()
   const [email, setEmail]         = useState('')
   const [senha, setSenha]         = useState('')
   const [nome, setNome]           = useState('')
@@ -37,7 +39,8 @@ export default function LoginPage() {
     } else if (modo === 'cadastro') {
       setMsg({ texto: 'Verifique seu e-mail para confirmar o cadastro.', tipo: 'ok' })
     } else {
-      window.location.href = '/'
+      router.push('/')
+      router.refresh()
     }
     setLoading(false)
   }

@@ -39,7 +39,7 @@ HDR = {
     "Authorization": f"Bearer {SERVICE_KEY}",
     "apikey": SERVICE_KEY,
     "Content-Type": "application/json",
-    "Prefer": "resolution=merge-duplicates,return=minimal",
+    # "Prefer" é definido em main() após parsear --merge
 }
 
 BASE = Path(r"C:\PROJETOS\HENRYJR\DADOS")
@@ -48,6 +48,10 @@ FONTES = {
     "UFT":      BASE / "json_uft",
     "EXATO_P":  BASE / "json_exato_provas",
     "ENEM_SIM": BASE / "json_enem_simulados",
+    "PAES":     BASE / "json_paes",
+    "UNICAMP":  BASE / "json_unicamp",
+    "FUVEST":   BASE / "json_fuvest",
+    "UNESP":    BASE / "json_unesp",
 }
 
 
@@ -62,34 +66,56 @@ def _strip_nulls(obj):
     return obj
 
 
+def _ja_existe(r) -> bool:
+    """Retorna True se HTTP 409 com code 23505 (unique violation = já existe no banco)."""
+    if r.status_code != 409:
+        return False
+    try:
+        return r.json().get("code") == "23505"
+    except Exception:
+        return False
+
+
 def upsert_lote(questoes: list[dict], dry_run: bool = False) -> tuple[int, int]:
-    """Faz upsert em lotes de 50. Retorna (ok, erros)."""
+    """Faz upsert em lotes de 50. Retorna (ok, erros).
+    Nota: Supabase/PostgREST nesta instância ignora 'resolution=ignore-duplicates'
+    e retorna 409 para conflitos. Tratamos 409/23505 como 'já existe' (não é erro).
+    """
     if dry_run:
         print(f"    [dry-run] {len(questoes)} questões NÃO inseridas")
         return len(questoes), 0
 
+    def _post_com_retry(url: str, payload: list, timeout: int, tentativas: int = 3) -> requests.Response | None:
+        """POST com retry em erros de rede (ConnectionError/Timeout). Retorna None após esgotar tentativas."""
+        for t in range(tentativas):
+            try:
+                return requests.post(url, headers=HDR, json=payload, timeout=timeout)
+            except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
+                if t < tentativas - 1:
+                    wait = 5 * (t + 1)
+                    print(f"    ↩ Erro de rede ({e.__class__.__name__}), aguardando {wait}s...")
+                    time.sleep(wait)
+                else:
+                    print(f"    ✗ Erro de rede após {tentativas} tentativas: {e}")
+        return None
+
     ok = erros = 0
+    url_questoes = f"{SUPABASE_URL}/rest/v1/questoes"
     for i in range(0, len(questoes), 50):
         lote = [_strip_nulls(q) for q in questoes[i:i + 50]]
-        r = requests.post(
-            f"{SUPABASE_URL}/rest/v1/questoes",
-            headers=HDR,
-            json=lote,
-            timeout=60,
-        )
-        if r.status_code in (200, 201):
+        r = _post_com_retry(url_questoes, lote, timeout=60)
+        if r is not None and r.status_code in (200, 201):
             ok += len(lote)
         else:
-            # Tenta um a um para identificar o problema
+            # Batch falhou — tenta um a um para separar novos de duplicatas
             for q in lote:
-                r2 = requests.post(
-                    f"{SUPABASE_URL}/rest/v1/questoes",
-                    headers=HDR,
-                    json=[q],
-                    timeout=30,
-                )
-                if r2.status_code in (200, 201):
+                r2 = _post_com_retry(url_questoes, [q], timeout=30)
+                if r2 is None:
+                    erros += 1
+                elif r2.status_code in (200, 201):
                     ok += 1
+                elif _ja_existe(r2):
+                    ok += 1  # 409/23505 = já existe no banco, não é erro
                 else:
                     erros += 1
                     print(f"    ✗ Q{q.get('numero')} {q.get('fonte')}/{q.get('provedor','')}: "
@@ -127,11 +153,20 @@ def verificar_coluna_provedor() -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description="Upload questões para Supabase")
-    parser.add_argument("--fonte", choices=["UFT", "EXATO_P", "ENEM_SIM"],
+    parser.add_argument("--fonte", choices=["UFT", "EXATO_P", "ENEM_SIM", "PAES", "UNICAMP", "FUVEST", "UNESP"],
                         help="Processar só esta fonte (padrão: todas)")
     parser.add_argument("--dry-run", action="store_true",
                         help="Mostra o que seria inserido sem inserir de verdade")
+    parser.add_argument("--merge", action="store_true",
+                        help="Atualiza campos de questões existentes (resolution=merge-duplicates)")
     args = parser.parse_args()
+
+    # Definir Prefer header baseado em --merge
+    HDR["Prefer"] = (
+        "resolution=merge-duplicates,return=minimal"
+        if args.merge
+        else "resolution=ignore-duplicates,return=minimal"
+    )
 
     if not SUPABASE_URL or not SERVICE_KEY:
         print("✗ config.json não encontrado ou sem credenciais.")

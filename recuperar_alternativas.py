@@ -16,8 +16,8 @@ from PIL import Image
 import pytesseract
 
 BASE     = "C:/PROJETOS/HENRYJR/DADOS"
-SUPA_URL = "https://bmhudlpihwxvaelokugh.supabase.co"
-SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJtaHVkbHBpaHd4dmFlbG9rdWdoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjMwNDAzOSwiZXhwIjoyMDkxODgwMDM5fQ.KucpbBiIhjPKQCEBIdV8sGuDw_F5CZdXWlZy39h-I7M"
+SUPA_URL = os.environ["SUPABASE_URL"]
+SUPA_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = r'C:\Users\FACIMP\tessdata'

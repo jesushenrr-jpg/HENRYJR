@@ -154,7 +154,7 @@ def processar_subpasta(subpasta: Path, provedor: str, ano: int, evento: str) -> 
             continue
 
         print(f"\n    [{subpasta.name}] {dia_val}")
-        questoes_brutas = extrair_questoes_pdf(prova_pdf)
+        questoes_brutas = extrair_questoes_pdf(prova_pdf, usar_vision=False)
         gabarito_map    = parse_gabarito(gab_pdf) if gab_pdf else {}
         print(f"      → {len(questoes_brutas)} questões | {len(gabarito_map)} gabaritos")
 

@@ -26,7 +26,7 @@ GROQ_API_KEY         = os.environ.get("GROQ_API_KEY", "")
 GROQ_VISION_MODEL    = "meta-llama/llama-4-scout-17b-16e-instruct"
 
 GEMINI_API_KEY       = os.environ.get("GEMINI_API_KEY", "")
-GEMINI_VISION_MODEL  = os.environ.get("GEMINI_MODEL", "gemini-1.5-flash")
+GEMINI_VISION_MODEL  = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")
 
 # ---------------------------------------------------------------------------
 # Mapeamento de áreas
@@ -78,8 +78,12 @@ def pagina_tem_texto(texto: str, min_chars: int = 150) -> bool:
 
 
 def extrair_texto_pagina(doc: fitz.Document, page_num: int) -> str:
-    """Extrai texto de uma página específica."""
-    return doc[page_num].get_text()
+    """Extrai texto de uma página específica.
+    Remove C1 control characters (U+0080–U+009F) que fontes customizadas
+    (ex.: UFT) intercalam em caracteres Unicode compostos como QUESTÃO,
+    causando false-negative no regex Q_RE e fallback desnecessário para Vision."""
+    texto = doc[page_num].get_text()
+    return re.sub(r'[\x80-\x9f]', '', texto)
 
 
 def renderizar_pagina_base64(doc: fitz.Document, page_num: int, dpi: int = 72) -> str:
@@ -139,7 +143,7 @@ def _chamar_groq_json(messages: list, max_tokens: int = 4096, tentativas: int = 
     return None
 
 
-def _chamar_gemini_json(messages: list, max_tokens: int = 4096, tentativas: int = 3) -> str | None:
+def _chamar_gemini_json(messages: list, max_tokens: int = 8192, tentativas: int = 3) -> str | None:
     """Chama a API Google Gemini Vision e retorna o texto da resposta.
 
     Converte o formato OpenAI (messages com content list) para o formato Gemini
@@ -171,7 +175,10 @@ def _chamar_gemini_json(messages: list, max_tokens: int = 4096, tentativas: int 
 
     payload = {
         "contents": [{"role": "user", "parts": parts}],
-        "generationConfig": {"temperature": 0, "maxOutputTokens": max_tokens},
+        "generationConfig": {
+            "temperature": 0,
+            "maxOutputTokens": max_tokens,
+        },
     }
     endpoint = (
         f"https://generativelanguage.googleapis.com/v1beta/models/"
@@ -185,7 +192,11 @@ def _chamar_gemini_json(messages: list, max_tokens: int = 4096, tentativas: int 
                 data = r.json()
                 candidates = data.get("candidates", [])
                 if candidates:
-                    return candidates[0]["content"]["parts"][0]["text"].strip()
+                    # Acesso seguro — pode não ter 'content' se filtro de segurança bloqueou
+                    content = candidates[0].get("content", {})
+                    parts = content.get("parts", [])
+                    if parts:
+                        return parts[0].get("text", "").strip()
                 return None
             elif r.status_code == 429:
                 espera = 65 if t == 0 else 120
@@ -205,11 +216,11 @@ def _chamar_gemini_json(messages: list, max_tokens: int = 4096, tentativas: int 
     return None
 
 
-def _chamar_vision(messages: list, max_tokens: int = 4096) -> str | None:
+def _chamar_vision(messages: list, max_tokens: int = 8192) -> str | None:
     """Tenta Groq Vision; se falhar, tenta Gemini Vision como fallback."""
     resposta = _chamar_groq_json(messages, max_tokens=max_tokens)
     if not resposta and GEMINI_API_KEY:
-        print("    → Groq indisponível, tentando Gemini...")
+        print("    -> Groq indisponivel, tentando Gemini...")
         resposta = _chamar_gemini_json(messages, max_tokens=max_tokens)
     return resposta
 
@@ -235,17 +246,45 @@ def _parse_bloco_questao(numero: int, bloco: str, area: str | None) -> dict | No
     o que resolve falsos positivos onde "A " aparece no início de frases normais.
     Exige ao menos 4 alternativas para aceitar o resultado.
     """
-    linhas = bloco.split("\n")
+    # Mapeamento de caracteres Unicode PUA usados por alguns provedores (ex.: SAS)
+    # como substitutos das letras A–E em PDFs com fontes customizadas.
+    PUA_MAP = {"": "A", "": "B", "": "C", "": "D", "": "E"}
 
-    # Linha começa com letra A-E seguida de separador: espaço(s), tab, ) ou .
-    # Com 1 espaço, falsos positivos ("A bolinha...") são resolvidos pela
-    # lógica de "última sequência válida A→E" mais abaixo.
-    ALT_MARK = re.compile(r"^([A-E])(?:[ \t]+|\)\s*|\.\s+)(.+)")
+    def _normalize_alt_line(linha: str) -> str:
+        """Substitui caracteres PUA A-E por letras ASCII na linha."""
+        for pua, ascii_ch in PUA_MAP.items():
+            linha = linha.replace(pua, ascii_ch)
+        return linha
 
-    # Coleta candidatos a linhas de alternativa
+    # Pré-processamento: mescla "A.\n<texto>" em "A. <texto>" para PDFs onde o
+    # marcador de alternativa (ex.: "A." ou "(A)") fica sozinho numa linha e o texto vem na próxima.
+    STANDALONE_ALT = re.compile(r"^\(?([A-E])\)?[.)]\s*$")
+    raw_linhas = bloco.split("\n")
+    merged: list[str] = []
+    i_raw = 0
+    while i_raw < len(raw_linhas):
+        linha_atual = raw_linhas[i_raw].strip()
+        if STANDALONE_ALT.match(linha_atual) and i_raw + 1 < len(raw_linhas):
+            proxima = raw_linhas[i_raw + 1].strip()
+            if proxima and not STANDALONE_ALT.match(proxima):
+                merged.append(f"{linha_atual[0]}. {proxima}")
+                i_raw += 2
+                continue
+        merged.append(linha_atual)
+        i_raw += 1
+    linhas = merged
+
+    # Linha começa com letra A-E (opcionalmente com parêntese: "(A)" ou "A)") seguida
+    # de separador: espaço(s), tab, ) ou .
+    # Suporta formatos: "A) texto", "(A) texto", "A. texto", "A  texto"
+    # Falsos positivos são resolvidos pela lógica de "última sequência válida A→E" mais abaixo.
+    ALT_MARK = re.compile(r"^\(?([A-E])\)?(?:[.)]\s*|[ \t]{1,3})(.+)")
+
+    # Coleta candidatos a linhas de alternativa (normaliza PUA antes de testar)
     pot: list[tuple[int, str, str]] = []  # (line_idx, letra, texto_inicial)
     for i, linha in enumerate(linhas):
-        m = ALT_MARK.match(linha.strip())
+        normalizada = _normalize_alt_line(linha.strip())
+        m = ALT_MARK.match(normalizada)
         if m:
             pot.append((i, m.group(1), m.group(2).strip()))
 
@@ -386,13 +425,16 @@ def extrair_questoes_pagina_vision(doc: fitz.Document, page_num: int) -> list[di
         return []
 
 
-def extrair_questoes_pdf(pdf_path: Path) -> list[dict]:
+def extrair_questoes_pdf(pdf_path: Path, usar_vision: bool = True) -> list[dict]:
     """
     Extrai questões de um PDF.
     Ordem de tentativas por página:
       1. Parser de texto (sem API) — para PDFs digitais
-      2. Vision (Groq → Gemini) — para PDFs escaneados ou quando o parser falha
-    Retorna lista de questões brutas (sem gabarito).
+      2. Vision (Groq → Gemini) — apenas se usar_vision=True; para PDFs escaneados ou
+         quando o parser falha em página com marcador QUESTÃO
+
+    usar_vision=False é indicado para PDFs sabidamente digitais (ex.: ENEM simulados)
+    onde páginas sem texto são capas/decorativas, não questões.
     """
     if not pdf_path.exists():
         print(f"  ✗ PDF não encontrado: {pdf_path}")
@@ -402,24 +444,36 @@ def extrair_questoes_pdf(pdf_path: Path) -> list[dict]:
     todas: list[dict] = []
     print(f"  Extraindo {pdf_path.name} ({len(doc)} páginas)...")
 
+    Q_MARKER = re.compile(r"(?:QUESTÃO|Questão)\s+\d+", re.IGNORECASE)
+
     for page_num in range(len(doc)):
         texto = extrair_texto_pagina(doc, page_num)
 
-        # Tentativa 1: parser de texto
+        # Tentativa 1: parser de texto (apenas se a página tem texto extraível)
         if pagina_tem_texto(texto):
             questoes_pagina = _parse_questoes_texto(texto)
             if questoes_pagina:
                 todas.extend(questoes_pagina)
                 print(f"    Página {page_num+1}: {len(questoes_pagina)} questões (texto)")
                 continue
+            # Tem texto mas sem questões: só tenta Vision se há marcador de questão
+            # (capa/instrução → pula; questão com alternativas na pág. seguinte → tenta)
+            if not Q_MARKER.search(texto):
+                continue  # página sem questões (capa, instrução, gabarito) — pular Vision
 
         # Tentativa 2: Vision (Groq → Gemini)
+        # Chega aqui em dois casos:
+        #   a) página sem texto extraível (PDF escaneado)
+        #   b) página com marcador QUESTÃO mas parser falhou nas alternativas
+        if not usar_vision:
+            continue  # PDF digital — páginas sem texto são capas/imagens decorativas
+
         print(f"    Página {page_num+1}: usando Vision...")
         questoes_pagina = extrair_questoes_pagina_vision(doc, page_num)
         if questoes_pagina:
             todas.extend(questoes_pagina)
             print(f"    Página {page_num+1}: {len(questoes_pagina)} questões (Vision)")
-        time.sleep(1)  # Cortesia de rate limit
+        time.sleep(3)   # Pequena pausa entre chamadas Vision (gemini-3.1-flash-lite suporta burst)
 
     doc.close()
     return todas

@@ -59,12 +59,6 @@ export default function SimuladoPlayer({ simuladoId, questoes, totalQuestoes }: 
     return () => clearInterval(t)
   }, [])
 
-  // Auto-submit quando timer zera
-  useEffect(() => {
-    if (secs === 0) submeter()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [secs])
-
   function marcar(letra: string) {
     setResps(prev => {
       const next = { ...prev }
@@ -101,6 +95,13 @@ export default function SimuladoPlayer({ simuladoId, questoes, totalQuestoes }: 
       setSub(false)
     }
   }, [simuladoId, resps, submitting, router])
+
+  // Auto-submit quando timer zera
+  useEffect(() => {
+    if (secs !== 0) return
+    const timeout = window.setTimeout(() => void submeter(), 0)
+    return () => window.clearTimeout(timeout)
+  }, [secs, submeter])
 
   const respondidas = Object.keys(resps).length
   const pct = Math.round((respondidas / totalQuestoes) * 100)

@@ -85,7 +85,7 @@ def processar_pasta(pasta: Path) -> list[dict]:
                 turno=turno_val,
                 evento=evento,
                 provedor=None,
-                dia="exato",
+                dia=turno_val.lower(),   # 'manha' ou 'tarde' — codifica turno no dia para unicidade na constraint
                 gabarito_map=gabarito_map,
                 numero_global=numero_local,
             )

@@ -83,6 +83,7 @@ tmp/
 # Relatórios de auditoria contêm snapshots grandes e backups locais.
 # Apenas resumos Markdown revisados devem ser versionados.
 reports/*.json
+reports/*.jsonl
 
 # Caminhos acidentalmente materializados por ferramentas Windows
 C*/

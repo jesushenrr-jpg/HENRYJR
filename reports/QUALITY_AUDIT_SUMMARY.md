@@ -14,6 +14,7 @@ Data da execução: 27/08/2026.
 - 3 questões ENEM receberam o texto compartilhado ausente, confirmado pelo cabeçalho da página oficial.
 - 12 questões ENEM tiveram cinco alternativas restauradas; cada transcrição integral foi confirmada no texto do PDF.
 - 150 questões PAES tiveram cabeçalhos, rodapés, números de página, marcas do espelho e conteúdo de página seguinte removidos dos campos exibidos.
+- 1 questão ENEM adicional (2010, questão 139) teve o enunciado recuperado após conferência visual e concordância literal com a extração local do PDF.
 - Todas as gravações foram feitas por ID. Os dados brutos locais permanecem disponíveis para reconstrução, e os lotes finais também geraram snapshots locais para rollback.
 
 ## Barreiras de precisão
@@ -29,8 +30,16 @@ Data da execução: 27/08/2026.
 - 6.349 questões de simulados ENEM sem gabarito.
 - 547 questões UFT sem gabarito.
 - 1.486 questões UNICAMP/FUVEST/UNESP sem área normalizada.
-- 820 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
+- 819 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
 - 293 registros com menos alternativas textuais do que o esperado; muitos têm alternativas gráficas.
 - 8.208 registros sem referência de página do PDF, concentrados nas fontes importadas e simulados.
 
 Esses grupos exigem revisão por lote com fontes oficiais, OCR/visão local ou autorização explícita para processamento externo. Não devem ser corrigidos por heurística sem conferência.
+
+## Processamento visual externo
+
+- Autorizado pelo responsável em 27/08/2026 para páginas e textos das provas.
+- O utilitário `tools/propose_ai_pdf_repairs.py` usa visão de página completa, controle de taxa, retentativas e checkpoint.
+- A etapa externa somente produz propostas: não contém operação de gravação no Supabase.
+- O aplicador separado só corrige campos ainda defeituosos, exige confirmação e gera backup antes do PATCH.
+- O piloto confirmou bloqueio local da Groq com `urllib`, funcionamento via `curl`, chave Gemini inválida e limite `429` da Groq; por isso o intervalo padrão foi elevado para 65 segundos.

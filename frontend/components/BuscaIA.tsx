@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function BuscaIA() {
   const [query, setQuery]       = useState('')
@@ -9,6 +9,7 @@ export default function BuscaIA() {
   const [erro, setErro]         = useState<string | null>(null)
   const [preview, setPreview]   = useState<{ termos: string[]; area: string | null; competencia: string | null } | null>(null)
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   async function buscar() {
     const q = query.trim()
@@ -36,12 +37,13 @@ export default function BuscaIA() {
 
       setPreview({ termos: termosBusca, area, competencia })
 
-      const sp = new URLSearchParams()
-      sp.set('fonte', 'ENEM')
+      // Parte dos filtros que o estudante já selecionou. A busca por IA
+      // complementa a consulta textual, em vez de abrir uma busca geral nova.
+      const sp = new URLSearchParams(searchParams.toString())
+      if (!sp.has('fonte')) sp.set('fonte', 'ENEM')
       sp.set('busca', termosBusca.join(','))
       sp.set('ia', '1')
-      // Área e competência aparecem como contexto, mas não restringem a consulta:
-      // a classificação histórica é incompleta e poderia zerar resultados relevantes.
+      sp.delete('pagina')
       router.push(`/questoes?${sp}`)
     } catch (e: unknown) {
       setErro(e instanceof Error ? e.message : 'Erro ao buscar')
@@ -67,7 +69,7 @@ export default function BuscaIA() {
               Busca inteligente
               <span className="text-[9px] font-bold bg-gradient-to-r from-[#D4A853] to-amber-600 px-1.5 py-0.5 rounded tracking-wider text-[#0E0D0B]">IA</span>
             </div>
-            <div className="text-[11px] text-white/50">Descreva um tema e a IA encontra questões relacionadas</div>
+            <div className="text-[11px] text-white/50">Descreva um tema; prova, área e demais filtros selecionados serão preservados</div>
           </div>
         </div>
 

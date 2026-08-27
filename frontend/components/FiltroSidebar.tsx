@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { COMPETENCIAS, TODAS_HABILIDADES } from '@/lib/competencias'
 import { EVENTO_LABEL, PROVA_MAP, PROVEDOR_LABEL } from '@/lib/provas'
@@ -40,6 +40,7 @@ export default function FiltroSidebar({
   const [compExpandido,  setCompExpandido] = useState(false)
   const pathname = usePathname()
   const router   = useRouter()
+  const searchParams = useSearchParams()
   const [, startTransition] = useTransition()
 
   const isExato    = fonteAtiva === 'EXATO'
@@ -62,6 +63,9 @@ export default function FiltroSidebar({
     if (turnoAtivo)       p.turno       = turnoAtivo
     if (tipoAtivo)        p.tipo        = tipoAtivo
     if (provedorAtivo)    p.provedor    = provedorAtivo
+    const buscaAtiva = searchParams.get('busca')
+    if (buscaAtiva)       p.busca       = buscaAtiva
+    if (searchParams.get('ia') === '1') p.ia = '1'
     for (const [k, v] of Object.entries(overrides)) {
       if (v === undefined) delete p[k]
       else p[k] = v
@@ -76,6 +80,10 @@ export default function FiltroSidebar({
   function switchFonte(fonte: string) {
     const params: Record<string, string> = { fonte }
     if (tipoAtivo) params.tipo = tipoAtivo
+    if (areaAtiva) params.area = areaAtiva
+    const buscaAtiva = searchParams.get('busca')
+    if (buscaAtiva) params.busca = buscaAtiva
+    if (searchParams.get('ia') === '1') params.ia = '1'
     startTransition(() => router.push(`${pathname}?${new URLSearchParams(params)}`))
   }
 

@@ -188,6 +188,20 @@ export default async function QuestoesPage({
   const total        = count ?? 0
   const totalPaginas = Math.ceil(total / POR_PAGINA)
 
+  function limparBuscaIaUrl() {
+    const sp = new URLSearchParams()
+    sp.set('fonte', fonte)
+    if (ano)         sp.set('ano', String(ano))
+    if (dia)         sp.set('dia', dia)
+    if (area)        sp.set('area', area)
+    if (competencia) sp.set('competencia', competencia)
+    if (evento)      sp.set('evento', evento)
+    if (turno)       sp.set('turno', turno)
+    if (tipo)        sp.set('tipo', tipo)
+    if (provedor)    sp.set('provedor', provedor)
+    return `/questoes?${sp}`
+  }
+
   function paginaUrl(p: number) {
     const sp = new URLSearchParams()
     sp.set('fonte', fonte)
@@ -279,8 +293,8 @@ export default async function QuestoesPage({
                   {t}
                 </span>
               ))}
-              <Link href={`/questoes?fonte=${fonte}`} className="ml-auto text-[10px] text-[#635D56] hover:text-rose-400 transition">
-                ✕ limpar
+              <Link href={limparBuscaIaUrl()} className="ml-auto text-[10px] text-[#635D56] hover:text-rose-400 transition">
+                ✕ limpar busca
               </Link>
             </div>
           )}

@@ -14,13 +14,14 @@ Data da execução: 27/08/2026.
 - 3 questões ENEM receberam o texto compartilhado ausente, confirmado pelo cabeçalho da página oficial.
 - 12 questões ENEM tiveram cinco alternativas restauradas; cada transcrição integral foi confirmada no texto do PDF.
 - 150 questões PAES tiveram cabeçalhos, rodapés, números de página, marcas do espelho e conteúdo de página seguinte removidos dos campos exibidos.
-- 12 questões ENEM adicionais tiveram campos textuais recuperados: 3 pelos pilotos de IA e 9 pelo primeiro lote manual revisado. O lote manual também realinhou integralmente comando e alternativas de 10 registros.
+- 22 questões ENEM adicionais tiveram campos textuais recuperados: 3 pelos pilotos de IA, 9 pelo primeiro lote manual revisado e 10 pelo segundo lote manual. Os lotes também realinharam integralmente comando e alternativas de 20 registros.
 - A charge compartilhada pelas questões ENEM 2011 nº 133 e 134 foi recortada da página oficial, conferida e vinculada às duas questões no Storage.
+- O segundo lote restaurou os cinco gráficos da questão ENEM 2012 nº 60 como alternativas visuais independentes e vinculou os diagramas oficiais das questões 149/2012 e 136/2013.
 - Todas as gravações foram feitas por ID. Os dados brutos locais permanecem disponíveis para reconstrução, e os lotes finais também geraram snapshots locais para rollback.
 
 ## Barreiras de precisão
 
-- Candidatos com alternativas gráficas foram descartados.
+- Alternativas exclusivamente gráficas só são aceitas quando cada opção é recortada da página oficial e vinculada à respectiva letra.
 - Texto criptografado ou com caracteres de controle foi descartado.
 - Transcrições que continham rodapé ou não apareciam integralmente no PDF foram descartadas.
 - 4.678 gabaritos potenciais de simulados foram retidos porque nenhum arquivo atingiu a validação mínima de 98% contra respostas conhecidas.
@@ -31,8 +32,8 @@ Data da execução: 27/08/2026.
 - 6.349 questões de simulados ENEM sem gabarito.
 - 547 questões UFT sem gabarito.
 - 1.486 questões UNICAMP/FUVEST/UNESP sem área normalizada.
-- 808 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
-- 293 registros com menos alternativas textuais do que o esperado; muitos têm alternativas gráficas.
+- 798 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
+- 291 registros com menos alternativas textuais ou visuais do que o esperado.
 - 8.208 registros sem referência de página do PDF, concentrados nas fontes importadas e simulados.
 
 Esses grupos exigem revisão por lote com fontes oficiais, OCR/visão local ou autorização explícita para processamento externo. Não devem ser corrigidos por heurística sem conferência.
@@ -47,4 +48,6 @@ Esses grupos exigem revisão por lote com fontes oficiais, OCR/visão local ou a
 - Após a rotação da chave Gemini, um lote direcionado a `statement_missing` aprovou 2 reparos e rejeitou automaticamente 4 propostas divergentes.
 - O gerador `tools/build_manual_extraction_batch.py` cria lotes ZIP com PDFs, PNGs das páginas-alvo, manifesto e prompt para revisão assistida no ChatGPT.
 - O primeiro resultado manual trouxe os 10 IDs esperados sem duplicidade; todos foram conferidos nas páginas oficiais, uma flexão verbal foi corrigida e o lote foi aplicado com backup.
+- O segundo resultado manual também trouxe os 10 IDs exatos. Todos foram conferidos nas páginas oficiais; 10 textos foram aplicados, sete imagens oficiais foram recortadas e vinculadas, e um novo backup foi criado antes da gravação.
 - A auditoria deixou de classificar `EDUCAÇÃO` como mojibake e passou a aceitar alternativas oficiais de um caractere, como C, N e P.
+- A auditoria agora considera uma alternativa representada quando há imagem oficial associada à letra, evitando falso positivo em questões integralmente gráficas.

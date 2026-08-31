@@ -109,22 +109,24 @@ def inspect(row: dict[str, Any]) -> list[dict[str, str]]:
     elif len(normalized(command)) < 8:
         found.append(issue("command_too_short", "medium", command[:100]))
 
+    alt_images = row.get("imagens_alternativas") if isinstance(row.get("imagens_alternativas"), dict) else {}
     expected_min = 4 if source in {"UFT", "PAES"} else 5
     populated = {k: v for k, v in alternatives.items() if k in LETTERS and v}
-    if len(populated) < expected_min:
-        found.append(issue("alternatives_incomplete", "critical", f"{len(populated)} preenchidas"))
+    represented = set(populated) | {str(key).upper() for key, value in alt_images.items() if value}
+    if len(represented) < expected_min:
+        found.append(issue("alternatives_incomplete", "critical", f"{len(represented)} representadas"))
     invalid_keys = sorted(set(alternatives) - LETTERS)
     if invalid_keys:
         found.append(issue("alternative_keys_invalid", "high", ", ".join(invalid_keys)))
     for letter, text in populated.items():
-        if len(normalized(text)) < 2 and not re.fullmatch(r"[A-Za-z0-9]", text.strip()):
+        if len(normalized(text)) < 2 and not re.fullmatch(r"\w[.,;:]?", text.strip(), re.UNICODE):
             found.append(issue("alternative_too_short", "high", f"{letter}: {text!r}"))
 
     answer = str(row.get("gabarito") or "").upper()
     annulled = bool(row.get("anulada"))
     if not annulled and answer not in LETTERS:
         found.append(issue("answer_missing", "critical", f"gabarito={answer or 'null'}"))
-    elif answer and answer not in populated:
+    elif answer and answer not in represented:
         found.append(issue("answer_without_alternative", "critical", answer))
 
     if row.get("area") not in VALID_AREAS:
@@ -136,7 +138,6 @@ def inspect(row: dict[str, Any]) -> list[dict[str, str]]:
         found.append(issue("pdf_page_missing", "medium", "sem referência de página"))
 
     images = row.get("imagens") if isinstance(row.get("imagens"), list) else []
-    alt_images = row.get("imagens_alternativas") if isinstance(row.get("imagens_alternativas"), dict) else {}
     has_images = bool(images or alt_images)
     if bool(row.get("tem_imagem")) != has_images:
         found.append(issue("image_flag_mismatch", "high", f"flag={row.get('tem_imagem')}, refs={has_images}"))

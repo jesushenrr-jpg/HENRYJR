@@ -14,7 +14,8 @@ Data da execução: 27/08/2026.
 - 3 questões ENEM receberam o texto compartilhado ausente, confirmado pelo cabeçalho da página oficial.
 - 12 questões ENEM tiveram cinco alternativas restauradas; cada transcrição integral foi confirmada no texto do PDF.
 - 150 questões PAES tiveram cabeçalhos, rodapés, números de página, marcas do espelho e conteúdo de página seguinte removidos dos campos exibidos.
-- 3 questões ENEM adicionais (2010, questões 139, 153 e 154) tiveram campos textuais recuperados após conferência visual e concordância literal com a extração local do PDF.
+- 12 questões ENEM adicionais tiveram campos textuais recuperados: 3 pelos pilotos de IA e 9 pelo primeiro lote manual revisado. O lote manual também realinhou integralmente comando e alternativas de 10 registros.
+- A charge compartilhada pelas questões ENEM 2011 nº 133 e 134 foi recortada da página oficial, conferida e vinculada às duas questões no Storage.
 - Todas as gravações foram feitas por ID. Os dados brutos locais permanecem disponíveis para reconstrução, e os lotes finais também geraram snapshots locais para rollback.
 
 ## Barreiras de precisão
@@ -30,7 +31,7 @@ Data da execução: 27/08/2026.
 - 6.349 questões de simulados ENEM sem gabarito.
 - 547 questões UFT sem gabarito.
 - 1.486 questões UNICAMP/FUVEST/UNESP sem área normalizada.
-- 817 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
+- 808 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
 - 293 registros com menos alternativas textuais do que o esperado; muitos têm alternativas gráficas.
 - 8.208 registros sem referência de página do PDF, concentrados nas fontes importadas e simulados.
 
@@ -45,3 +46,5 @@ Esses grupos exigem revisão por lote com fontes oficiais, OCR/visão local ou a
 - O piloto confirmou bloqueio local da Groq com `urllib`, funcionamento via `curl`, chave Gemini inválida e limite `429` da Groq; por isso o intervalo padrão foi elevado para 65 segundos.
 - Após a rotação da chave Gemini, um lote direcionado a `statement_missing` aprovou 2 reparos e rejeitou automaticamente 4 propostas divergentes.
 - O gerador `tools/build_manual_extraction_batch.py` cria lotes ZIP com PDFs, PNGs das páginas-alvo, manifesto e prompt para revisão assistida no ChatGPT.
+- O primeiro resultado manual trouxe os 10 IDs esperados sem duplicidade; todos foram conferidos nas páginas oficiais, uma flexão verbal foi corrigida e o lote foi aplicado com backup.
+- A auditoria deixou de classificar `EDUCAÇÃO` como mojibake e passou a aceitar alternativas oficiais de um caractere, como C, N e P.

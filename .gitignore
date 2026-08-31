@@ -84,6 +84,7 @@ tmp/
 # Apenas resumos Markdown revisados devem ser versionados.
 reports/*.json
 reports/*.jsonl
+output/quality_batches/
 
 # Caminhos acidentalmente materializados por ferramentas Windows
 C*/

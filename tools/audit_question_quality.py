@@ -31,7 +31,7 @@ VALID_AREAS = {
     "Ciencias da Natureza e suas Tecnologias",
     "Matematica e suas Tecnologias",
 }
-MOJIBAKE = re.compile(r"(?:Ã.|Â.|�|\uFFFD)")
+MOJIBAKE = re.compile(r"(?:Ã[\u0080-\u00bf]|Â[\u0080-\u00bf]|â[\u0080-\u00bf]|�|\uFFFD)")
 PLACEHOLDER = re.compile(
     r"(?:texto indispon[ií]vel|enunciado n[aã]o dispon[ií]vel|quest[aã]o ileg[ií]vel|"
     r"n[aã]o foi poss[ií]vel extrair|consultar pdf|ver no pdf|^\s*⚠)", re.I
@@ -117,7 +117,7 @@ def inspect(row: dict[str, Any]) -> list[dict[str, str]]:
     if invalid_keys:
         found.append(issue("alternative_keys_invalid", "high", ", ".join(invalid_keys)))
     for letter, text in populated.items():
-        if len(normalized(text)) < 2:
+        if len(normalized(text)) < 2 and not re.fullmatch(r"[A-Za-z0-9]", text.strip()):
             found.append(issue("alternative_too_short", "high", f"{letter}: {text!r}"))
 
     answer = str(row.get("gabarito") or "").upper()

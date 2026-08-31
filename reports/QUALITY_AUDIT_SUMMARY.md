@@ -14,7 +14,7 @@ Data da execução: 27/08/2026.
 - 3 questões ENEM receberam o texto compartilhado ausente, confirmado pelo cabeçalho da página oficial.
 - 12 questões ENEM tiveram cinco alternativas restauradas; cada transcrição integral foi confirmada no texto do PDF.
 - 150 questões PAES tiveram cabeçalhos, rodapés, números de página, marcas do espelho e conteúdo de página seguinte removidos dos campos exibidos.
-- 22 questões ENEM adicionais tiveram campos textuais recuperados: 3 pelos pilotos de IA, 9 pelo primeiro lote manual revisado e 10 pelo segundo lote manual. Os lotes também realinharam integralmente comando e alternativas de 20 registros.
+- 32 questões ENEM adicionais tiveram campos textuais recuperados: 3 pelos pilotos de IA, 9 pelo primeiro lote manual revisado e 20 pelos dois lotes manuais seguintes. Os lotes também realinharam integralmente comando e alternativas de 30 registros.
 - A charge compartilhada pelas questões ENEM 2011 nº 133 e 134 foi recortada da página oficial, conferida e vinculada às duas questões no Storage.
 - O segundo lote restaurou os cinco gráficos da questão ENEM 2012 nº 60 como alternativas visuais independentes e vinculou os diagramas oficiais das questões 149/2012 e 136/2013.
 - Todas as gravações foram feitas por ID. Os dados brutos locais permanecem disponíveis para reconstrução, e os lotes finais também geraram snapshots locais para rollback.
@@ -32,7 +32,7 @@ Data da execução: 27/08/2026.
 - 6.349 questões de simulados ENEM sem gabarito.
 - 547 questões UFT sem gabarito.
 - 1.486 questões UNICAMP/FUVEST/UNESP sem área normalizada.
-- 798 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
+- 788 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
 - 291 registros com menos alternativas textuais ou visuais do que o esperado.
 - 8.208 registros sem referência de página do PDF, concentrados nas fontes importadas e simulados.
 
@@ -49,5 +49,6 @@ Esses grupos exigem revisão por lote com fontes oficiais, OCR/visão local ou a
 - O gerador `tools/build_manual_extraction_batch.py` cria lotes ZIP com PDFs, PNGs das páginas-alvo, manifesto e prompt para revisão assistida no ChatGPT.
 - O primeiro resultado manual trouxe os 10 IDs esperados sem duplicidade; todos foram conferidos nas páginas oficiais, uma flexão verbal foi corrigida e o lote foi aplicado com backup.
 - O segundo resultado manual também trouxe os 10 IDs exatos. Todos foram conferidos nas páginas oficiais; 10 textos foram aplicados, sete imagens oficiais foram recortadas e vinculadas, e um novo backup foi criado antes da gravação.
+- O terceiro resultado manual trouxe os 10 IDs exatos e foi conferido integralmente nas provas de 2014 e 2015. Os textos foram restaurados sem substituir os mapas, fotografias, captura de site e calendário já armazenados.
 - A auditoria deixou de classificar `EDUCAÇÃO` como mojibake e passou a aceitar alternativas oficiais de um caractere, como C, N e P.
 - A auditoria agora considera uma alternativa representada quando há imagem oficial associada à letra, evitando falso positivo em questões integralmente gráficas.

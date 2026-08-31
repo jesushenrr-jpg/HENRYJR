@@ -45,10 +45,12 @@ def pdf_for(row: dict[str, Any]) -> Path | None:
     return None
 
 
-def candidates() -> list[dict[str, Any]]:
+def candidates(required_issue: str | None = None) -> list[dict[str, Any]]:
     selected = []
     for row in fetch_questions():
         codes = {item["code"] for item in inspect(row)}
+        if required_issue and required_issue not in codes:
+            continue
         if not codes.intersection({"statement_missing", "statement_placeholder", "alternatives_incomplete", "alternatives_duplicate"}):
             continue
         path = pdf_for(row)
@@ -229,6 +231,7 @@ def main() -> int:
     parser.add_argument("--max-items", type=int, default=5)
     parser.add_argument("--delay", type=float, default=65)
     parser.add_argument("--provider", choices=("gemini", "groq"), default="gemini")
+    parser.add_argument("--issue", help="processa somente registros que contenham este código de auditoria")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     if args.max_items < 1 or args.max_items > 100:
@@ -244,7 +247,7 @@ def main() -> int:
                 already.add(json.loads(line)["id"])
             except (json.JSONDecodeError, KeyError):
                 pass
-    rows = [row for row in candidates() if row["id"] not in already][:args.max_items]
+    rows = [row for row in candidates(args.issue) if row["id"] not in already][:args.max_items]
     selected_model = GEMINI_MODEL if args.provider == "gemini" else MODEL
     print(f"Candidatos selecionados: {len(rows)}; modelo: {selected_model}")
     for index, row in enumerate(rows, 1):

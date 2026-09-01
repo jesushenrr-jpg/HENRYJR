@@ -27,9 +27,26 @@ def pdf_for(row: dict[str, Any]) -> Path | None:
     return None
 
 
-def select(limit: int) -> list[dict[str, Any]]:
+def existing_batch_ids() -> set[int]:
+    ids: set[int] = set()
+    stage_root = ROOT / "tmp" / "manual_extraction"
+    if not stage_root.exists():
+        return ids
+    for manifest_path in stage_root.glob("*/manifest.json"):
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            ids.update(int(item["id"]) for item in manifest.get("items", []))
+        except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError):
+            continue
+    return ids
+
+
+def select(limit: int, excluded_ids: set[int] | None = None) -> list[dict[str, Any]]:
+    excluded_ids = excluded_ids or set()
     result = []
     for row in fetch_questions():
+        if int(row["id"]) in excluded_ids:
+            continue
         if "statement_missing" not in {item["code"] for item in inspect(row)}:
             continue
         pdf = pdf_for(row)
@@ -85,10 +102,15 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument("--batch", default="batch_001")
+    parser.add_argument(
+        "--include-existing-batches", action="store_true",
+        help="permite repetir IDs que já constam de manifestos locais",
+    )
     args = parser.parse_args()
     if not 1 <= args.limit <= 20:
         raise SystemExit("--limit deve estar entre 1 e 20")
-    rows = select(args.limit)
+    excluded_ids = set() if args.include_existing_batches else existing_batch_ids()
+    rows = select(args.limit, excluded_ids)
     output_root = ROOT / "output" / "quality_batches"
     stage = ROOT / "tmp" / "manual_extraction" / args.batch
     if stage.exists():

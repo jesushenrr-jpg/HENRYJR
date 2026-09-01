@@ -1,6 +1,6 @@
 # Auditoria de qualidade das questões
 
-Data da execução: 27/08/2026.
+Data da execução: 01/09/2026.
 
 ## Escopo
 
@@ -14,7 +14,7 @@ Data da execução: 27/08/2026.
 - 3 questões ENEM receberam o texto compartilhado ausente, confirmado pelo cabeçalho da página oficial.
 - 12 questões ENEM tiveram cinco alternativas restauradas; cada transcrição integral foi confirmada no texto do PDF.
 - 150 questões PAES tiveram cabeçalhos, rodapés, números de página, marcas do espelho e conteúdo de página seguinte removidos dos campos exibidos.
-- 42 questões ENEM adicionais tiveram campos textuais recuperados: 3 pelos pilotos de IA, 9 pelo primeiro lote manual revisado e 30 pelos três lotes manuais seguintes. Os lotes também realinharam integralmente comando e alternativas de 40 registros.
+- 72 questões ENEM adicionais tiveram campos textuais recuperados: 3 pelos pilotos de IA, 9 pelo primeiro lote manual revisado e 60 pelos seis lotes manuais seguintes. Os sete lotes manuais também realinharam integralmente comando e alternativas de 70 registros.
 - A charge compartilhada pelas questões ENEM 2011 nº 133 e 134 foi recortada da página oficial, conferida e vinculada às duas questões no Storage.
 - O segundo lote restaurou os cinco gráficos da questão ENEM 2012 nº 60 como alternativas visuais independentes e vinculou os diagramas oficiais das questões 149/2012 e 136/2013.
 - Todas as gravações foram feitas por ID. Os dados brutos locais permanecem disponíveis para reconstrução, e os lotes finais também geraram snapshots locais para rollback.
@@ -32,7 +32,7 @@ Data da execução: 27/08/2026.
 - 6.349 questões de simulados ENEM sem gabarito.
 - 547 questões UFT sem gabarito.
 - 1.486 questões UNICAMP/FUVEST/UNESP sem área normalizada.
-- 778 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
+- 748 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
 - 290 registros com menos alternativas textuais ou visuais do que o esperado.
 - 8.208 registros sem referência de página do PDF, concentrados nas fontes importadas e simulados.
 
@@ -51,5 +51,7 @@ Esses grupos exigem revisão por lote com fontes oficiais, OCR/visão local ou a
 - O segundo resultado manual também trouxe os 10 IDs exatos. Todos foram conferidos nas páginas oficiais; 10 textos foram aplicados, sete imagens oficiais foram recortadas e vinculadas, e um novo backup foi criado antes da gravação.
 - O terceiro resultado manual trouxe os 10 IDs exatos e foi conferido integralmente nas provas de 2014 e 2015. Os textos foram restaurados sem substituir os mapas, fotografias, captura de site e calendário já armazenados.
 - O quarto resultado manual trouxe os 10 IDs exatos e foi conferido nas provas de 2015 e 2016. A questão 49/2016 recebeu o diagrama do enunciado e cinco alternativas gráficas oficiais recortadas separadamente.
+- Os resultados manuais 005, 006 e 007 foram processados em conjunto: 30 IDs e metadados coincidiram com os manifestos, todo o conteúdo foi comparado às páginas oficiais e os 30 registros passaram na auditoria individual após a gravação.
+- As figuras já armazenadas de cinco questões visuais foram preservadas. A questão 86/2016 recebeu o diagrama da onda estacionária e a questão 114/2017 recebeu a equação com fórmulas estruturais, ambos recortados das páginas oficiais.
 - A auditoria deixou de classificar `EDUCAÇÃO` como mojibake e passou a aceitar alternativas oficiais de um caractere, como C, N e P.
 - A auditoria agora considera uma alternativa representada quando há imagem oficial associada à letra, evitando falso positivo em questões integralmente gráficas.

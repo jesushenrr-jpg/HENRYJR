@@ -37,6 +37,8 @@ REVIEWED_IMAGE_ASSETS = {
             letter: f"2016/dia1/q049_alt_{letter}.jpg" for letter in "ABCDE"
         },
     },
+    1127: {"question_image": "2016/dia1/q086_1.jpg"},
+    1335: {"question_image": "2017/dia2/q114_1.jpg"},
 }
 
 

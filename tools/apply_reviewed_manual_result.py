@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tools.audit_question_quality import fetch_questions, load_env, normalized  # noqa: E402
 
-GRAPHICAL_ALTERNATIVE_IDS = {381, 1090}
+GRAPHICAL_ALTERNATIVE_IDS = {381, 1090, 1744, 2215}
 REVIEWED_IMAGE_ASSETS = {
     381: {
         "alternative_images": {
@@ -39,6 +39,21 @@ REVIEWED_IMAGE_ASSETS = {
     },
     1127: {"question_image": "2016/dia1/q086_1.jpg"},
     1335: {"question_image": "2017/dia2/q114_1.jpg"},
+    1604: {"question_image": "2019/dia1/q023_1.jpg"},
+    1640: {"question_image": "2019/dia1/q059_1.jpg"},
+    1744: {
+        "alternative_images": {
+            letter: f"2019/dia2/q163_alt_{letter}.jpg" for letter in "ABCDE"
+        },
+    },
+    1783: {"question_image": "2020/dia1/q022_1.jpg"},
+    1787: {"question_image": "2020/dia1/q026_1.jpg"},
+    2215: {
+        "question_image": "2022/dia2/q118_1.jpg",
+        "alternative_images": {
+            letter: f"2022/dia2/q118_alt_{letter}.jpg" for letter in "ABCDE"
+        },
+    },
 }
 
 

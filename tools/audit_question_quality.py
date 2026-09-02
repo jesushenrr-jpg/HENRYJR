@@ -148,7 +148,13 @@ def inspect(row: dict[str, Any]) -> list[dict[str, str]]:
     if len(all_text) > 25_000:
         found.append(issue("text_excessive", "medium", f"{len(all_text)} caracteres"))
 
-    normalized_alts = [normalized(v) for v in populated.values()]
+    # Operadores carregam significado em alternativas matemáticas. O
+    # normalizador textual remove pontuação, portanto eles precisam integrar
+    # explicitamente a impressão usada apenas para detectar duplicidade.
+    normalized_alts = [
+        f"{normalized(v)}|{''.join(re.findall(r'[<>=≤≥]', v))}"
+        for v in populated.values()
+    ]
     if len(normalized_alts) != len(set(normalized_alts)):
         found.append(issue("alternatives_duplicate", "critical", "alternativas idênticas"))
     return found

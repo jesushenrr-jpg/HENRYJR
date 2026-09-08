@@ -1,6 +1,6 @@
 # Auditoria de qualidade das questões
 
-Data da execução: 02/09/2026.
+Data da execução: 08/09/2026.
 
 ## Escopo
 
@@ -14,7 +14,7 @@ Data da execução: 02/09/2026.
 - 3 questões ENEM receberam o texto compartilhado ausente, confirmado pelo cabeçalho da página oficial.
 - 12 questões ENEM tiveram cinco alternativas restauradas; cada transcrição integral foi confirmada no texto do PDF.
 - 150 questões PAES tiveram cabeçalhos, rodapés, números de página, marcas do espelho e conteúdo de página seguinte removidos dos campos exibidos.
-- 102 questões ENEM adicionais tiveram campos textuais recuperados: 3 pelos pilotos de IA, 9 pelo primeiro lote manual revisado e 90 pelos nove lotes manuais seguintes. Os dez lotes manuais também realinharam integralmente comando e alternativas de 100 registros.
+- 119 questões ENEM adicionais tiveram campos textuais recuperados: 3 pelos pilotos de IA, 9 pelo primeiro lote manual revisado e 107 pelos onze lotes manuais seguintes. Os doze lotes manuais também realinharam integralmente comando e alternativas de 117 registros.
 - A charge compartilhada pelas questões ENEM 2011 nº 133 e 134 foi recortada da página oficial, conferida e vinculada às duas questões no Storage.
 - O segundo lote restaurou os cinco gráficos da questão ENEM 2012 nº 60 como alternativas visuais independentes e vinculou os diagramas oficiais das questões 149/2012 e 136/2013.
 - Todas as gravações foram feitas por ID. Os dados brutos locais permanecem disponíveis para reconstrução, e os lotes finais também geraram snapshots locais para rollback.
@@ -32,8 +32,8 @@ Data da execução: 02/09/2026.
 - 6.349 questões de simulados ENEM sem gabarito.
 - 547 questões UFT sem gabarito.
 - 1.486 questões UNICAMP/FUVEST/UNESP sem área normalizada.
-- 718 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
-- 288 registros com menos alternativas textuais ou visuais do que o esperado.
+- 701 registros ainda detectados com enunciado textual vazio; parte deles depende de imagem ou texto compartilhado.
+- 285 registros com menos alternativas textuais ou visuais do que o esperado.
 - 8.208 registros sem referência de página do PDF, concentrados nas fontes importadas e simulados.
 
 Esses grupos exigem revisão por lote com fontes oficiais, OCR/visão local ou autorização explícita para processamento externo. Não devem ser corrigidos por heurística sem conferência.
@@ -54,6 +54,8 @@ Esses grupos exigem revisão por lote com fontes oficiais, OCR/visão local ou a
 - Os resultados manuais 005, 006 e 007 foram processados em conjunto: 30 IDs e metadados coincidiram com os manifestos, todo o conteúdo foi comparado às páginas oficiais e os 30 registros passaram na auditoria individual após a gravação.
 - As figuras já armazenadas de cinco questões visuais foram preservadas. A questão 86/2016 recebeu o diagrama da onda estacionária e a questão 114/2017 recebeu a equação com fórmulas estruturais, ambos recortados das páginas oficiais.
 - Os resultados manuais 008, 009 e 010 acrescentaram outros 30 registros conferidos nas provas de 2019, 2020 e 2022. Seis imagens de enunciado ausentes e dez alternativas exclusivamente gráficas foram recortadas e vinculadas por ID e letra.
-- A detecção de alternativas duplicadas passou a preservar os operadores matemáticos `<`, `>` e `=`, eliminando falsos positivos em opções que diferem apenas pela relação entre grandezas.
+- Os resultados manuais 011 e 012 completaram mais 17 registros conferidos nas provas de 2010, 2020, 2023 e 2024. Dez gráficos das alternativas das questões 161 e 168 de 2024 foram recortados e vinculados individualmente; os 17 IDs ficaram sem alertas na auditoria.
+- A detecção de alternativas duplicadas passou a preservar operadores relacionais e aritméticos, eliminando falsos positivos em opções matemáticas que têm os mesmos operandos, mas operações diferentes.
+- Sequências alfabéticas legítimas, como a tabela usada na questão sobre a Cifra de César, deixaram de ser classificadas como ruído de OCR.
 - A auditoria deixou de classificar `EDUCAÇÃO` como mojibake e passou a aceitar alternativas oficiais de um caractere, como C, N e P.
 - A auditoria agora considera uma alternativa representada quando há imagem oficial associada à letra, evitando falso positivo em questões integralmente gráficas.

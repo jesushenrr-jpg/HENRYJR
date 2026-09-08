@@ -37,6 +37,9 @@ PLACEHOLDER = re.compile(
     r"n[aã]o foi poss[ií]vel extrair|consultar pdf|ver no pdf|^\s*⚠)", re.I
 )
 OCR_NOISE = re.compile(r"(?:\|{3,}|_{4,}|\.{5,}|[■□◆]{2,}|(?:\b[A-Z]\s){6,})")
+ALPHABET_SEQUENCE = re.compile(
+    r"(?:^|\s)(?:A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)(?:\s|$)"
+)
 
 
 def load_env() -> None:
@@ -143,7 +146,10 @@ def inspect(row: dict[str, Any]) -> list[dict[str, str]]:
         found.append(issue("image_flag_mismatch", "high", f"flag={row.get('tem_imagem')}, refs={has_images}"))
     if MOJIBAKE.search(all_text):
         found.append(issue("encoding_mojibake", "high", "sequência de encoding inválida"))
-    if OCR_NOISE.search(all_text):
+    # Sequências alfabéticas espaçadas podem ser conteúdo legítimo (por
+    # exemplo, tabelas de cifra), e não devem ser confundidas com OCR fragmentado.
+    ocr_probe = ALPHABET_SEQUENCE.sub(" ", all_text)
+    if OCR_NOISE.search(ocr_probe):
         found.append(issue("ocr_noise", "medium", "padrão forte de ruído OCR"))
     if len(all_text) > 25_000:
         found.append(issue("text_excessive", "medium", f"{len(all_text)} caracteres"))
@@ -152,7 +158,7 @@ def inspect(row: dict[str, Any]) -> list[dict[str, str]]:
     # normalizador textual remove pontuação, portanto eles precisam integrar
     # explicitamente a impressão usada apenas para detectar duplicidade.
     normalized_alts = [
-        f"{normalized(v)}|{''.join(re.findall(r'[<>=≤≥]', v))}"
+        f"{normalized(v)}|{''.join(re.findall(r'[+\-\u2212×*/÷<>=≤≥]', v))}"
         for v in populated.values()
     ]
     if len(normalized_alts) != len(set(normalized_alts)):

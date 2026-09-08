@@ -41,13 +41,17 @@ def existing_batch_ids() -> set[int]:
     return ids
 
 
-def select(limit: int, excluded_ids: set[int] | None = None) -> list[dict[str, Any]]:
+def select(
+    limit: int,
+    excluded_ids: set[int] | None = None,
+    required_issue: str = "statement_missing",
+) -> list[dict[str, Any]]:
     excluded_ids = excluded_ids or set()
     result = []
     for row in fetch_questions():
         if int(row["id"]) in excluded_ids:
             continue
-        if "statement_missing" not in {item["code"] for item in inspect(row)}:
+        if required_issue not in {item["code"] for item in inspect(row)}:
             continue
         pdf = pdf_for(row)
         if not pdf or not isinstance(row.get("pagina_pdf"), int):
@@ -103,6 +107,12 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument("--batch", default="batch_001")
     parser.add_argument(
+        "--issue",
+        choices=("statement_missing", "alternatives_incomplete"),
+        default="statement_missing",
+        help="problema de qualidade usado para selecionar as questões",
+    )
+    parser.add_argument(
         "--include-existing-batches", action="store_true",
         help="permite repetir IDs que já constam de manifestos locais",
     )
@@ -110,7 +120,7 @@ def main() -> int:
     if not 1 <= args.limit <= 20:
         raise SystemExit("--limit deve estar entre 1 e 20")
     excluded_ids = set() if args.include_existing_batches else existing_batch_ids()
-    rows = select(args.limit, excluded_ids)
+    rows = select(args.limit, excluded_ids, args.issue)
     output_root = ROOT / "output" / "quality_batches"
     stage = ROOT / "tmp" / "manual_extraction" / args.batch
     if stage.exists():
@@ -140,7 +150,12 @@ def main() -> int:
             "pdf": f"pdfs/{pdf_names[pdf]}", "pagina_renderizada": f"pages/{page_name}",
             "problemas": [item["code"] for item in inspect(row)],
         })
-    manifest = {"schema_version": "henryjr-manifest-v1", "count": len(items), "items": items}
+    manifest = {
+        "schema_version": "henryjr-manifest-v1",
+        "required_issue": args.issue,
+        "count": len(items),
+        "items": items,
+    }
     (stage / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     (stage / "PROMPT_CHATGPT.txt").write_text(prompt_text(), encoding="utf-8")
     output_root.mkdir(parents=True, exist_ok=True)
